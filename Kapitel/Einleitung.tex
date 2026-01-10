@@ -1,0 +1,46 @@
+\chapter{Einleitung} \label{chpt:Einleitung_Main}
+
+\section{Motivation} \label{sec:Einleitung_Motivation}
+
+% Test \cite{StatistischesBundesamtWiesbaden.}.
+% Test \cite{PaperKoehler1.}.
+% Test \cite{machinelearning.}.
+% Test \cite{dropout.}.
+
+	% \begin{figure}[ht]
+	% 	\centering
+	% 	\includegraphics[scale=0.30]{Bilder/Neural_Network.jpg}
+	% 	\caption{Beispielbild}
+	% 	\label{fig: Neural_Network_Fig}
+	% \end{figure}
+
+
+
+In dieser Arbeit soll ein RISC-V CPU um Anweisung zur Durchführung von Matrix Multiplikationen erweitert werden.
+
+RISC-V ist eine lizenzfreie Beschreibung eines Processors und der Anweisungen, die der Processor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant für den kommerziellen Einsatz. Die Firma Qualcomm als eines der weltweit, führendes Unternehmen auf dem Gebiet der Halbleiter und der Telekommunikation hat eine RISC-V Erweiterung namens Xqci für RISC-V und auch zu den Compiler-Framework LLVM beigesteuert \cite{phoronix_xqci}. Qualcomm führt auch Käufe von Firmen mit RISC-V Wissen durch. Dies deutet daraufhin, dass Qualcomm den Einsatz von RISC-V in Produkten ernsthaft in Erwägung zieht.
+
+Matrix-Multiplikation ist die Grundlage für perspektivische Projektionen, Rotationen und Bewegung von Objekten in der 3D Computer-Grafik. Dort ist es notwendig 4x4 Matrizen zu verwenden und mathematischen Berechnungen so schnell wie möglich auf diesen Matrizen ausführen zu können. Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem kulturellen Alltag aber auch jeglicher Art von Bildgebung nicht mehr wegzudenken.
+
+Getrieben durch den Erfolg von Large Language Models kann sich eine Spezifikation für CPUs nicht mehr durchsetzen, wenn Sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. In einem späteren Kapitel wird ein Hinweis darauf gegeben, wie auch die Berechnung von Neuronalen Netze hauptsächlich auf die Berechnung von Matrizen zurückgeführt werden kann. Die CPUs der Firmen AMD und Intel besitzen die Erweiterungen AMX (Advanced Matrix Extensions), AVX2 (Advanced Vector Extensions 2) and FMA (Fused Multiply Add, https://de.wikipedia.org/wiki/FMA_x86).
+
+All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsatz von RISC-V und den Einsatz von Matrix-Multiplikation innerhalb eines RISC-V CPU.
+
+\section{Aufgabenstellung} \label{sec:Einleitung_Aufgabenstellung}
+
+Der NEORV32 RISC-V CPU wird um Anweisungen erweitert, die die Matrix-Multiplikation ermöglichen. Dabei orientieren sich die Anweisungen von der Kleinteiligekeit her an den Anweisungen, wie sie bereits für die RVV-Vektor-Extension ratifiziert worden sind. Im speziellen wird das Konzept des Strip-Mining ermöglicht.
+
+Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardwarebeschreibung vorgenommen werden können. Es wird im speziellen eine Erweiterung des bereits existierenden NEORV32 Core (TODO: Link einfügen) vorgenommen. Aus diesem Grund ergibt sich die Einschränkung, dass sich die Erweiterung in das existierende Design NEORV32 Core einfügen muss.
+
+% \lipsum[40]
+
+\section{Struktur der Arbeit} \label{sec:Einleitung_Struktur_der_Arbeit}
+
+%    \begin{equation}
+%       E=m c^2
+%    \end{equation}
+%    \myequations{Test}
+
+%    \lipsum[41][2-9]
+
+%    Normaler text \ac{KDE}

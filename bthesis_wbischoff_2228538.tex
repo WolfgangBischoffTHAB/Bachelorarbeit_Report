@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Einbinden des Seiten Layouts
+\input{setup/page}
+
+% Einbinden eigener Kommandos
+\input{setup/commands}
+
+% Einbinden der Packages
+\input{setup/packages}
+\input{setup/listofequations.tex}
+
+% Einbinden eigener Makros
+\input{setup/macros}
+
+% Einbinden eigner Pakete
+\input{setup/custom_packages}
+
+% Daten die automatisch Verwendet werden
+\author{Wolfgang Bischoff}
+\title{Extension of a RISC-V Core with Custom Matrix Multiplication instructions}
+%\subject{Extension of a RISC-V Core with Custom Matrix Multiplication instructions}
+\thesisType{Bachelorarbeit}
+\faculty{Fakultät Ingenieurswissenschaften}
+\erstpruefer{Prof. Dr. Christian Jakob HDA}
+%\zweitpruefer{Prof. Dr. Christian Jakob HDA}
+\matrikelnummer{2228538}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                          Dokumentanfang                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+   % Dokument erstmalig initialisieren (Front Matter)
+   \frontmatter
+   \pagestyle{plain}
+
+   % Leeres Deckblatt
+   \input{Seiten/Deckblaetter}
+
+   % Vorwort
+   \input{Seiten/Vorwort.tex}
+   \pagestyle{empty}
+
+   % Inhaltsverzeichnis einfügen
+   \setcounter{secnumdepth}{3}                        % Tiefe des Inhaltsverzeichnisses festlegen
+   \setcounter{tocdepth}{2}
+   \pagestyle{empty}
+   \tableofcontents                                   % Inhaltsverzeichnis erzeugen
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \newpage \phantomsection
+   \addtotoc{Abbildungsverzeichnis}
+   \listoffigures
+
+   % Tabellenverzeichnis
+   \listoftables
+   \newpage \phantomsection \addtotoc{Tabellenverzeichnis}
+
+   % Abkürzungsverzeichnis
+   \addtotoc{Abkürzungsverzeichnis}
+   \input{Seiten/Acronyme}
+
+   % Formelverzeichnis
+   \listoftoc{equation}
+   \addtotoc{Formelverzeichnis}
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   % Dokument initialisieren
+   \mainmatter
+   \pagestyle{empty}
+
+   % Kapitel einbinden
+   \input{Kapitel/Einleitung}
+   \input{Kapitel/StandTechnik}
+   \input{Kapitel/TheoretischeGrundlagen}
+   \input{Kapitel/DurchfuehrungArbeit}
+   \input{Kapitel/AuswertungundErgebnisse}
+   \input{Kapitel/ZusammenfassungundAusblick}
+   \input{Seiten/Anhang}
+   \bibliographystyle{natdin}
+   \bibliography{Literatur/Literatur}        % Bibliographie erzeugen
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                           Dokumentende                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
