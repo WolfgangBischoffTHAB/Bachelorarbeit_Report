@@ -79,3 +79,37 @@ return C
 # Glossaries
 
 https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/glossaries/glossariesbegin.pdf
+
+
+bthesis_wbischoff_2228538.tex contains the command that outputs the glossary:
+
+```
+\printunsrtglossaries % list all entries
+```
+
+setup\packages.tex contains the import for the glossary package:
+
+```
+\usepackage[sort=none,nogroupskip]{glossaries-extra}
+```
+
+setup\packages.tex contains the individual entries for the glossary:
+
+```
+\newglossaryentry{RVV}{name={RVV}, description={RISC-V Vector Extensions}}
+\newglossaryentry{SISD}{name={SISD}, description={Single Instruction Single Data}}
+\newglossaryentry{SIMD}{name={SIMD}, description={Single Instruction Multiple Data}}
+\newglossaryentry{XLEN}{name={XLEN}, description={Standardregisterlänge in Bits}}
+\newglossaryentry{VLEN}{name={VLEN}, description={Vector-Registerlänge in Bits}}
+\newglossaryentry{MLEN}{name={MLEN}, description={Matrix-Registerlänge in Bits}}
+```
+
+
+
+
+
+bthesis_wbischoff_2228538.tex
+
+```
+/c/texlive/2025/bin/windows/latexmk -pdf -outdir=out -M -MP -MF bthesis_wbischoff_2228538.d bthesis_wbischoff_2228538
+```

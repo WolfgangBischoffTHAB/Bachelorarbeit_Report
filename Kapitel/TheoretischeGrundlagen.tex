@@ -4,7 +4,7 @@ Dieses Kapitel beschreibt Vektoren und Matrizen aus der Mathematik und deren Ber
 
 Bei der Berechnung ist auf die Geschwindigkeit zu achten. Ausgehend von dem naiven Berechnungsverfahren werden die Schwächen dieses Verfahrens diskutiert und beschrieben, welche Antworten das RISC-V Ökosystem auf diese Probleme hat.
 
-Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISV-V Vektor \gls{SIMD} unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
+Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISC-V Vektor \gls{SIMD} unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
 
 Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
@@ -68,15 +68,15 @@ Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, d
 
 \section{Matrixmultiplikation mit Strip-Mining und \gls{SIMD}} \label{sec:matrix_mul_simd}
 
-Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu Minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereit stellt.
+Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereit stellt.
 
 Des weiteren erlaubt das Strip-Mining auch Datenobjekte zu verarbeiten, die so groß sind, dass sie nicht als Ganzes in die Register der CPU passen.
 
-Beim Strip-Mining wird von einer Resourcen-Hierarchie ausgegangen. Die Resourcen sind dabei die Register und der Speicher eine CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, desto teurer ist der Speicher und daher kleiner in der verfügbaren Größe aber gleichzeitig auch um einiges schneller als weiter entfernt liegender Speicher.
+Beim Strip-Mining wird von einer Resourcen-Hierarchie ausgegangen. Die Resourcen sind dabei die Register und der Speicher einer CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, das dessen Preis steigt und daher kleiner in der verfügbaren Größe ausfallen muss, aber gleichzeitig auch um einiges schneller als weiter entfernt liegender Speicher ist. Die Hierarchie besteht aus den Register, gefolgt von einem oder mehreren Cache-Leveln und schießlich den RAM Bausteinen.
 
-Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweiße kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht als darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielweiße ist es ineffizient ständing im Speicher hin- und her zu springen. Ein lineares Laden ist effizienter um die lokalität der Daten innerhalb des Cache auszunutzen.
+Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweiße kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht also darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielweiße ist es ineffizient ständing im Speicher hin- und her zu springen. Ein lineares Laden ist effizienter um die lokalität der Daten innerhalb des Cache auszunutzen.
 
-Eine Cache-Hierarchy legt nahe, Vektoren nlockweiße zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
+Eine Cache-Hierarchy legt nahe, Vektoren blockweiße zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
 
 Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
 
@@ -85,16 +85,63 @@ Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum
 \newacronym{usb}{USB}{Universal Serial Bus} % Define acronym
 \newacronym{pdf}{PDF}{Portable Document Format}
 
-Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (\gls{RVV}) \cite{rvv_specification} erstellt und ratifiziert. Die Vektor Extension ist für die diese Arbeit relevant, das sie zwar Vektoren verarbeitet aber die Grundlage für die Verarbeitung von Matrizen legt.
+Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (\gls{RVV}) \cite{rvv_specification} erstellt und ratifiziert. Die Vektor Extension ist für diese Arbeit relevant, obwohl sie zwar Vektoren verarbeitet aber damit die Grundlage für die Verarbeitung von Matrizen legt.
+
+
+
 
 \section{Die RISC-V Vector Extension} \label{sec:riscv_rvv_extension}
 
-Die RVV erweitert einen RISC-V CPU um Vektor Register. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. Die RVV Spezifikation \cite{rvv_specification} macht die Vorgabe:
+Ein RISC-V CPU besitzt die sogenannte X-Register-File. Es handelt sich damit um alle Register, die ein RISC-V CPU standardmäßig, ohne Extensions hat. Dies könnten beispielsweiße die Register x0 bis x31 sein. Die Länge der Register in bits wird durch die Konstante XLEN festgelegt.
+
+Die RVV erweitert einen RISC-V CPU um zusätzliche Vektor Register v0 bis v31. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} (in Anlehnung an die Konstakte \gls{XLEN}) vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. \gls{VLEN} stellt somit eine Eigenschaft des CPU dar. Die \gls{RVV} Spezifikation \cite{rvv_specification} macht die Vorgabe:
 
 ``The number of bits in a single vector register, \(VLEN \geq ELEN\), which must be a power of 2, and must be no greater than \(2^{16}\)''.
 
-TODO: die RVV Register können für Matrizen wiederverwendet werden.
+Das besondere an den Vector Registern ist, dass sie konfiguriert werden können. Es lässt sich festlegen, welcher Datentyp in den Registern erwartet wird, also 8-bit Bytes, 16-bit Halbwörter oder 32- oder 64-bit Wörter. Zusätzlich lassen sich die Vektor-Register Gruppieren, also aneinanderhängen um noch größere Register zu bilden.
 
-Here's my \gls{RVV} term.a
+Der Vorteil ist, dass man beispielsweiße 8-bit bytes als Datentyp festlegen kann und dann vier Vektor-Register gruppieren kann. Unter der Annahme das ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweiße 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektor-Addition all dieser Elemente mit nur einer einzigen Instruktion erfolgen! Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
+
+Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleuningung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne Optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
+
+Dies lässt sich testen, indem man den naiven Matrix Multiplikations Algorithmus in godbolt eingibt und die neuste Version des GCC auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder!
+
+Das Hardware-Software Co-Design sieht das iterative Vorgehen Strip-Mining vor, bei dem die Software die Hardware in jeder Iteration aufs neue konfiguriert und dann Daten zur parallelen Verarbeitung durchführt.
+
+Die Schritte sind:
+
+\begin{enumerate}
+
+    \item The first iteration of strip mining begins. This effectively means that the application starts the for loop that it has to implement for strip mining.
+
+    \item The application may check if it is cheaper to compute the operation with or without the vector engine. Imagine that only one or two elements of the large vector are left at this point, then it might be cheaper to just use the ALU once or twice instead of loading the vector engine.
+
+    \item If the application decides to use the Vector Engine instead of the ALU, then it continues the strip-mining loop. Otherwise it will jump to an end-label. (Optimizing compilers will structure for-loops in a different manner but the concept of terminating a loop is applied in all cases at this point).
+
+    \item The application specifies the remaining amount of elements in the vector/vectors that need processing. This value is called Application Vector Length (AVL). In the first iteration of strip-mining, AVL is the total length of the vector. As strip-mining processes batches, the AVL will get smaller and smaller by the batch-size each iteration until the vector is processed and the strip-mining loop terminates.
+
+    \item Aside from the AVL, the application also specifies the size/datatype of the elements (= Selected Element Width, SEW) in the vector and how it wants the vector engine to group the elements into the vector registers (= group modifier, LMUL).
+
+    \item The vector engine takes the request of AVL, SEW and LMUL from the application (which issues a set(i)vli instruction each iteration of the strip-mining loop) and computes the batch size. This is the hardware part of the hardware-software co-design. The vector engine now makes a decision on how many of it's vector registers it needs to combine in order to fit SEW into CPU hardware given the user-requests grouping (l-multiplier, LMUL). Also it needs to keep track of home many ALU-nodes it has available for vector processing. Given all hardware constraints, the vector engine will determine the batch size that it can actually commit to. This batch size is (very confusingly) called vector length (vl). The vl is returned in the destination register to the call of the vsetvli instruction and also stored in the vl register.
+
+    \item The application receives the vl value from the destination register. It now knows what the batch size is. It will execute vector load instructions (vle8, vle16, ...) to load data from a specific address in memory. And it will uptdate the pointers to memory in order to keep track of where to read data for the next batch from. In advances the pointers acording to the batch size returned by the vector engine. The application only specifies the address to load from. It does not specify the amount of elements! The amount of elements was agreed upon by the succesfull setivli instruction. The application has communicated how the data type looks like and the vector engine has commited to a certain vl. This means the amount of elements that are transferred from memory into the CPU registers is implicitly agreed upon!
+
+    \item The vector engine will process the load instruction (vle8, vle16, ...) and load it's internal vector registers. To load data from memory it will use the agreed upon vl value implicitly.
+
+    \item The application executes a vector/vector or vector/scalar operation (vadd, vsub, ...). The application implicitly knows that this operation is only executed on the current batch and not on all vector elements in total.
+
+    \item The vector engine performs the operation on all loaded elements in parallel by applying all the ALU-nodes that it has reserved for this step of strip-mining meaning, the current batch of elements.
+
+    \item The application executes a store call to transfer the result data out of the CPU registers back into memory.
+
+    \item The vector engine will execute the store command and transfer the elements
+
+    \item The application has alread updated it's pointers or if not it will update the pointers at this point in the loop, advancing them by the batch size (vl). Now the current iteration of strip mining is done and the next for loop iteration for strip-mining can commence.
+
+\end{enumerate}
+
+
+
+TODO: die RVV Register können für Matrizen wiederverwendet werden.
 
 TODO: Erkläre FPGA

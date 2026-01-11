@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 16:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 18:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1421,19 +1421,19 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 69.
 
 [7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-[8]) (./Kapitel/DurchfuehrungArbeit.tex [9]
+[8] [9] [10]) (./Kapitel/DurchfuehrungArbeit.tex [11]
 chapter 4.
-) (./Kapitel/AuswertungundErgebnisse.tex [10
+) (./Kapitel/AuswertungundErgebnisse.tex [12
 
 
 ]
 chapter 5.
-) (./Kapitel/ZusammenfassungundAusblick.tex [11
+) (./Kapitel/ZusammenfassungundAusblick.tex [13
 
 
 ]
 chapter 6.
-) (./Seiten/Anhang.tex [12
+) (./Seiten/Anhang.tex [14
 
 
 ]) (out/bthesis_wbischoff_2228538.bbl
@@ -1457,7 +1457,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--42
 1400 /
  []
 
-) [13
+) [15
 
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
@@ -1468,11 +1468,11 @@ L3 programming layer <2025-12-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 39964 strings out of 467538
- 816797 string characters out of 5423725
- 1742455 words of memory out of 5000000
- 68155 multiletter control sequences out of 15000+600000
- 711118 words of font info for 149 fonts, out of 8000000 for 9000
+ 40019 strings out of 467538
+ 817546 string characters out of 5423725
+ 1742678 words of memory out of 5000000
+ 68193 multiletter control sequences out of 15000+600000
+ 711196 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  112i,9n,120p,11246b,1370s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb><c:/tex
@@ -1486,10 +1486,10 @@ tt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/
 texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/te
 xmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (24 pages, 273890 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (26 pages, 279944 bytes).
 PDF statistics:
- 362 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 391 PDF objects out of 1000 (max. 8388607)
+ 332 compressed objects within 4 object streams
+ 93 named destinations out of 1000 (max. 500000)
  44190 words of extra memory for PDF output out of 51595 (max. 10000000)
 

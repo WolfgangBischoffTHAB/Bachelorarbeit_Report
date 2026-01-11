@@ -543,12 +543,12 @@ INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-t1.vf
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-t1--base.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
+INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
 INPUT ./Kapitel/DurchfuehrungArbeit.tex
 INPUT ./Kapitel/DurchfuehrungArbeit.tex
 INPUT ./Kapitel/DurchfuehrungArbeit.tex
 INPUT ./Kapitel/DurchfuehrungArbeit.tex
 INPUT Kapitel/DurchfuehrungArbeit.tex
-INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
 INPUT ./Kapitel/AuswertungundErgebnisse.tex
 INPUT ./Kapitel/AuswertungundErgebnisse.tex
 INPUT ./Kapitel/AuswertungundErgebnisse.tex
