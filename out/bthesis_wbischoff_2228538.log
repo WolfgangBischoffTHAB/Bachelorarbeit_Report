@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 18:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 19:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1421,7 +1421,31 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 69.
 
 [7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-[8] [9] [10]) (./Kapitel/DurchfuehrungArbeit.tex [11]
+[8] [9]
+Underfull \hbox (badness 2027) in paragraph at lines 129--130
+\T1/Roboto-LF/regular/n/10 ver-ar-bei-tet wer-den müs-sen. Die-ser Wert wird Ap
+-p-li-ca-ti-on Vec-tor
+ []
+
+
+Underfull \hbox (badness 1226) in paragraph at lines 137--138
+\T1/Roboto-LF/regular/n/10 Hier kommt der Hardware-Teil des hardware-software c
+o-designs
+ []
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 137--138
+\T1/Roboto-LF/regular/n/10 müs-sen ent-schei-den, wie vie-le Ele-men-te jetzt t
+at-säch-lich par-al-lel
+ []
+
+[10]
+Underfull \hbox (badness 3568) in paragraph at lines 145--146
+[]\T1/Roboto-LF/regular/n/10 die Vector-Engine ver-ar-bei-tet die Vector-Load A
+n-wei-sun-gen und
+ []
+
+) (./Kapitel/DurchfuehrungArbeit.tex [11]
 chapter 4.
 ) (./Kapitel/AuswertungundErgebnisse.tex [12
 
@@ -1468,13 +1492,13 @@ L3 programming layer <2025-12-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 40019 strings out of 467538
- 817546 string characters out of 5423725
- 1742678 words of memory out of 5000000
- 68193 multiletter control sequences out of 15000+600000
+ 40159 strings out of 467538
+ 819514 string characters out of 5423725
+ 1743330 words of memory out of 5000000
+ 68329 multiletter control sequences out of 15000+600000
  711196 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 112i,9n,120p,11246b,1370s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 112i,9n,120p,11246b,1380s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb><c:/texlive/20
 25/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb><c:/texlive/2025/tex
@@ -1486,10 +1510,10 @@ tt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/
 texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/te
 xmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (26 pages, 279944 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (26 pages, 280527 bytes).
 PDF statistics:
- 391 PDF objects out of 1000 (max. 8388607)
- 332 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
+ 404 PDF objects out of 1000 (max. 8388607)
+ 345 compressed objects within 4 object streams
+ 97 named destinations out of 1000 (max. 500000)
  44190 words of extra memory for PDF output out of 51595 (max. 10000000)
 

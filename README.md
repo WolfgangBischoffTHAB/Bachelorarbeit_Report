@@ -104,7 +104,13 @@ setup\packages.tex contains the individual entries for the glossary:
 \newglossaryentry{MLEN}{name={MLEN}, description={Matrix-Registerlänge in Bits}}
 ```
 
+Im Fließtext kann auf einen Eintrag verwießen werden:
 
+```
+\gls{RVV}
+```
+
+Der Verweis wird dann zu einem Link auf den Glossar.
 
 
 

@@ -102,7 +102,7 @@ Das besondere an den Vector Registern ist, dass sie konfiguriert werden können.
 
 Der Vorteil ist, dass man beispielsweiße 8-bit bytes als Datentyp festlegen kann und dann vier Vektor-Register gruppieren kann. Unter der Annahme das ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweiße 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektor-Addition all dieser Elemente mit nur einer einzigen Instruktion erfolgen! Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
 
-Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleuningung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne Optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
+Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleuningung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
 
 Dies lässt sich testen, indem man den naiven Matrix Multiplikations Algorithmus in godbolt eingibt und die neuste Version des GCC auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder!
 
@@ -112,31 +112,57 @@ Die Schritte sind:
 
 \begin{enumerate}
 
-    \item The first iteration of strip mining begins. This effectively means that the application starts the for loop that it has to implement for strip mining.
+    %\item The first iteration of strip mining begins. This effectively means that the application starts the for loop that it has to implement for strip mining.
 
-    \item The application may check if it is cheaper to compute the operation with or without the vector engine. Imagine that only one or two elements of the large vector are left at this point, then it might be cheaper to just use the ALU once or twice instead of loading the vector engine.
+    \item Die erste bzw. nächste Iteration beginnt.
 
-    \item If the application decides to use the Vector Engine instead of the ALU, then it continues the strip-mining loop. Otherwise it will jump to an end-label. (Optimizing compilers will structure for-loops in a different manner but the concept of terminating a loop is applied in all cases at this point).
+    %\item The application may check if it is cheaper to compute the operation with or without the vector engine. Imagine that only one or two elements of the large vector are left at this point, then it might be cheaper to just use the ALU once or twice instead of loading the vector engine.
 
-    \item The application specifies the remaining amount of elements in the vector/vectors that need processing. This value is called Application Vector Length (AVL). In the first iteration of strip-mining, AVL is the total length of the vector. As strip-mining processes batches, the AVL will get smaller and smaller by the batch-size each iteration until the vector is processed and the strip-mining loop terminates.
+    \item Die Applikation entscheidet, ob es effizienter ist die Vektor Operation mit oder ohne Vektor-Erweiterung auszuführen. Wenn die Vektorlänge beispielsweiße nur aus zwei Elementen besteht ist es schneller diese beiden Element einfach so zu verrechnen.
 
-    \item Aside from the AVL, the application also specifies the size/datatype of the elements (= Selected Element Width, SEW) in the vector and how it wants the vector engine to group the elements into the vector registers (= group modifier, LMUL).
+    %\item If the application decides to use the Vector Engine instead of the ALU, then it continues the strip-mining loop. Otherwise it will jump to an end-label. (Optimizing compilers will structure for-loops in a different manner but the concept of terminating a loop is applied in all cases at this point).
 
-    \item The vector engine takes the request of AVL, SEW and LMUL from the application (which issues a set(i)vli instruction each iteration of the strip-mining loop) and computes the batch size. This is the hardware part of the hardware-software co-design. The vector engine now makes a decision on how many of it's vector registers it needs to combine in order to fit SEW into CPU hardware given the user-requests grouping (l-multiplier, LMUL). Also it needs to keep track of home many ALU-nodes it has available for vector processing. Given all hardware constraints, the vector engine will determine the batch size that it can actually commit to. This batch size is (very confusingly) called vector length (vl). The vl is returned in the destination register to the call of the vsetvli instruction and also stored in the vl register.
+    \item Wenn sich die Anwendung dazu entscheidet die Vektor-Extension zu verwenden, dann beginnt die Strip-Mining Schleife. Wenn es zu wenige Elemente gibt, dann springt die Anwendung zu einem Label, dass die Verarbeitung terminiert und berechnet den Rest der Element dort manuell ohne Hardwarebeschleunigungen.
 
-    \item The application receives the vl value from the destination register. It now knows what the batch size is. It will execute vector load instructions (vle8, vle16, ...) to load data from a specific address in memory. And it will uptdate the pointers to memory in order to keep track of where to read data for the next batch from. In advances the pointers acording to the batch size returned by the vector engine. The application only specifies the address to load from. It does not specify the amount of elements! The amount of elements was agreed upon by the succesfull setivli instruction. The application has communicated how the data type looks like and the vector engine has commited to a certain vl. This means the amount of elements that are transferred from memory into the CPU registers is implicitly agreed upon!
+    %\item The application specifies the remaining amount of elements in the vector/vectors that need processing. This value is called Application Vector Length (AVL). In the first iteration of strip-mining, AVL is the total length of the vector. As strip-mining processes batches, the AVL will get smaller and smaller by the batch-size each iteration until the vector is processed and the strip-mining loop terminates.
 
-    \item The vector engine will process the load instruction (vle8, vle16, ...) and load it's internal vector registers. To load data from memory it will use the agreed upon vl value implicitly.
+    \item Die Anwendung bestimmt den Anteil der Vektor-Elemente, die noch verarbeitet werden müssen. Dieser Wert wird Application Vector Length (AVL) genannt. Beispielsweiße entspricht die \gls{AVL} in der ersten Iteration der gesamten Länge des Vektors. Mit jedem Schleifendurchlauf werden Teile des Vektors verarbeitet und die AVL nimmt immer mehr ab bis schließlich keine Elemente zur Verarbeitung mehr übrig sind und das Verfahren terminiert.
 
-    \item The application executes a vector/vector or vector/scalar operation (vadd, vsub, ...). The application implicitly knows that this operation is only executed on the current batch and not on all vector elements in total.
+    %\item Aside from the AVL, the application also specifies the size/datatype of the elements (= Selected Element Width, SEW) in the vector and how it wants the vector engine to group the elements into the vector registers (= group modifier, LMUL).
 
-    \item The vector engine performs the operation on all loaded elements in parallel by applying all the ALU-nodes that it has reserved for this step of strip-mining meaning, the current batch of elements.
+    \item Neben der \gls{AVL} muss die Anwendung auch in jeder Iteration den Datentyp bzw. die Größe der einzelnen Vektorelemente konfigurieren. Die Größe wird (= Selected Element Width, SEW) genannt. Es wird auch bestimmt, wie die Vektorelement in den Registern angeordnet werden und wie die Vektor-Register gruppiert werden. Diese Konfiguration wird Group Modifier oder LMUL genannt. Um die Konfiguration vorzunehmen ruft die Anwendung die Instruktion set(i)vli auf.
 
-    \item The application executes a store call to transfer the result data out of the CPU registers back into memory.
+    % \item The vector engine takes the request of AVL, SEW and LMUL from the application (which issues a set(i)vli instruction each iteration of the strip-mining loop) and computes the batch size. This is the hardware part of the hardware-software co-design. The vector engine now makes a decision on how many of it's vector registers it needs to combine in order to fit SEW into CPU hardware given the user-requests grouping (l-multiplier, LMUL). Also it needs to keep track of home many ALU-nodes it has available for vector processing. Given all hardware constraints, the vector engine will determine the batch size that it can actually commit to. This batch size is (very confusingly) called vector length (vl). The vl is returned in the destination register to the call of the vsetvli instruction and also stored in the vl register.
 
-    \item The vector engine will execute the store command and transfer the elements
+    \item Die Vector Engine verwendet die konfigurierten Werte \gls{AVL}, \gls{SEW} und \gls{LMUL} und berechnet die batch Größe. Ein Batch ist die Menge an Vektor-Elementen die in einer einzigen Operation verrechnet werden. Hier kommt der Hardware-Teil des hardware-software co-designs zum tragen, denn der RISC-V CPU und die enthaltene Vector-Engine müssen entscheiden, wie viele Elemente jetzt tatsächlich parallel verarbeitet werden können. Dabei berücksichtigt die Vector-Engine wieviele Rechenknoten sie zur Verfügung hat um parallel zu rechnen. Die ermittelte Anzahl an Elementen wird vector length (VL) genannt und von der Hardware an die Anwendung zurückgegeben. Dazu gibt die Instruktion set(i)vli diesen Wert in ein Rückgaberegister aus, aus dem sich die Anwendung den Wert holen kann.
 
-    \item The application has alread updated it's pointers or if not it will update the pointers at this point in the loop, advancing them by the batch size (vl). Now the current iteration of strip mining is done and the next for loop iteration for strip-mining can commence.
+    %\item The application receives the vl value from the destination register. It now knows what the batch size is. It will execute vector load instructions (vle8, vle16, ...) to load data from a specific address in memory. And it will uptdate the pointers to memory in order to keep track of where to read data for the next batch from. In advances the pointers acording to the batch size returned by the vector engine. The application only specifies the address to load from. It does not specify the amount of elements! The amount of elements was agreed upon by the succesfull setivli instruction. The application has communicated how the data type looks like and the vector engine has commited to a certain vl. This means the amount of elements that are transferred from memory into the CPU registers is implicitly agreed upon!
+
+    \item Die Anwendung kennt jetzt die \gls{VL}, die für diese Iteration gilt. Damit kennt die Software die Batch-Size. Die Software wird nun die Vector-Load Instructionen (vle8, vle16, ...) verwenden um einen Anteil des Vektors oder der Vektoren, der genau der \gls{VL} entspricht in die Vektor-Register zu laden. Die Anwendung wird auch einen Zeiger nach vorne verschieben, um sich zu merken von welcher Stelle in der nächsten Iteration geladen werden muss.
+
+    %\item The vector engine will process the load instruction (vle8, vle16, ...) and load it's internal vector registers. To load data from memory it will use the agreed upon vl value implicitly.
+
+    \item Die Vector-Engine verarbeitet die Vector-Load Anweisungen und schreibt die geladenen Daten in die Vektor-Register.
+
+    %\item The application executes a vector/vector or vector/scalar operation (vadd, vsub, ...). The application implicitly knows that this operation is only executed on the current batch and not on all vector elements in total.
+
+    \item Die Anwendung führt nun eine Instruktion aus um die Vektoren zu verrechnen. Es können beispielsweiße eine elementweiße Addition, Subtraktion, Multiplikation oder sonstige Operationen ausgeführt werden.
+
+    %\item The vector engine performs the operation on all loaded elements in parallel by applying all the ALU-nodes that it has reserved for this step of strip-mining meaning, the current batch of elements.
+
+    \item Die Vektor-Engine führt nun die Instruktion auf allen Elementen parallel aus. Es handelt sich also um eine \gls{SIMD}-Operation, bei der mehrere Daten aufgrund einer einzigen Anweisung verarbeitet werden. Damit ist der aktuelle Batch der Iteration abgearbeitet.
+
+    %\item The application executes a store call to transfer the result data out of the CPU registers back into memory.
+
+    \item Die Anwendung führt eine Store-Anweisung aus um die Ergebnisdaten aus dem Ergebnisregister in den Speicher zurückzuschreiben und Platz für neue Ergebnisdaten zu schaffen.
+
+    %\item The vector engine will execute the store command and transfer the elements
+
+    \item Die Vektor-Engine verarbeitet die Store-Anweisung und die Daten werden in den Cache bzw. den RAM übertragen.
+
+    %\item The application has alread updated it's pointers or if not it will update the pointers at this point in the loop, advancing them by the batch size (vl). Now the current iteration of strip mining is done and the next for loop iteration for strip-mining can commence.
+
+    \item Die nächste Iteration beginnt. Im Grunde springt die Anwendung von hier zurück zum ersten Punkt dieser Auflistung.
 
 \end{enumerate}
 
