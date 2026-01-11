@@ -8,7 +8,6 @@ out/bthesis_wbischoff_2228538.pdf :\
     Kapitel/StandTechnik.tex\
     Kapitel/TheoretischeGrundlagen.tex\
     Kapitel/ZusammenfassungundAusblick.tex\
-    Seiten/Acronyme.tex\
     Seiten/Anhang.tex\
     Seiten/Deckblaetter.tex\
     Seiten/Vorwort.tex\
@@ -102,13 +101,11 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty\
     c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty\
     c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty\
+    c:/texlive/2025/texmf-dist/tex/generic/tracklang/tracklang.tex\
     c:/texlive/2025/texmf-dist/tex/generic/ulem/ulem.sty\
     c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty\
     c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex\
     c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex\
-    c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.sty\
-    c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.tex\
-    c:/texlive/2025/texmf-dist/tex/latex/acronym/acronym.sty\
     c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty\
     c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty\
     c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty\
@@ -117,18 +114,24 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty\
     c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty\
     c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty\
     c:/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty\
     c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty\
-    c:/texlive/2025/texmf-dist/tex/latex/bigfoot/suffix.sty\
     c:/texlive/2025/texmf-dist/tex/latex/bookmark/bkm-pdftex.def\
     c:/texlive/2025/texmf-dist/tex/latex/bookmark/bookmark.sty\
     c:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty\
     c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty\
     c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty\
     c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty\
     c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.cfg\
     c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.def\
     c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/datatool-english/datatool-english-utf8.ldf\
+    c:/texlive/2025/texmf-dist/tex/latex/datatool-english/datatool-english.ldf\
+    c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-base.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-l3fp.def\
+    c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-utf8.ldf\
     c:/texlive/2025/texmf-dist/tex/latex/diagbox/diagbox.sty\
     c:/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty\
     c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty\
@@ -139,6 +142,16 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/latex/fontaxes/fontaxes.sty\
     c:/texlive/2025/texmf-dist/tex/latex/footmisc/footmisc.sty\
     c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries-english/glossaries-english.ldf\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries-extra/glossaries-extra-abbrstyles.def\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries-extra/glossaries-extra.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries-german/glossaries-german.ldf\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/base/glossaries.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty\
     c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg\
     c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg\
     c:/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def\
@@ -176,6 +189,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty\
     c:/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty\
     c:/texlive/2025/texmf-dist/tex/latex/mathcomp/mathcomp.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty\
     c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype-pdftex.def\
     c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.cfg\
     c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.sty\
@@ -207,10 +221,13 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/latex/scrhack/scrhack.sty\
     c:/texlive/2025/texmf-dist/tex/latex/siunitx/siunitx.sty\
     c:/texlive/2025/texmf-dist/tex/latex/stdclsdv/stdclsdv.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/supertabular/supertabular.sty\
     c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty\
     c:/texlive/2025/texmf-dist/tex/latex/tools/calc.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty\
     c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty\
     c:/texlive/2025/texmf-dist/tex/latex/tools/varioref.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/tracklang/tracklang.sty\
     c:/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl\
     c:/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-dictionary-german.trsl\
     c:/texlive/2025/texmf-dist/tex/latex/translations/translations.sty\
@@ -219,6 +236,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/tex/latex/xcolor/svgnam.def\
     c:/texlive/2025/texmf-dist/tex/latex/xcolor/x11nam.def\
     c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty\
+    c:/texlive/2025/texmf-dist/tex/latex/xfor/xfor.sty\
     c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty\
     c:/texlive/2025/texmf-dist/web2c/texmf.cnf\
     c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map\
@@ -249,8 +267,6 @@ Kapitel/StandTechnik.tex :
 Kapitel/TheoretischeGrundlagen.tex :
 
 Kapitel/ZusammenfassungundAusblick.tex :
-
-Seiten/Acronyme.tex :
 
 Seiten/Anhang.tex :
 
@@ -438,6 +454,8 @@ c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty :
 
 c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty :
 
+c:/texlive/2025/texmf-dist/tex/generic/tracklang/tracklang.tex :
+
 c:/texlive/2025/texmf-dist/tex/generic/ulem/ulem.sty :
 
 c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty :
@@ -445,12 +463,6 @@ c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty :
 c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex :
 
 c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex :
-
-c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.sty :
-
-c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.tex :
-
-c:/texlive/2025/texmf-dist/tex/latex/acronym/acronym.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty :
 
@@ -468,11 +480,11 @@ c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty :
 
+c:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty :
+
 c:/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty :
-
-c:/texlive/2025/texmf-dist/tex/latex/bigfoot/suffix.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/bookmark/bkm-pdftex.def :
 
@@ -484,6 +496,8 @@ c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty :
 
+c:/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty :
+
 c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.cfg :
@@ -491,6 +505,16 @@ c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.cfg :
 c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.def :
 
 c:/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/datatool-english/datatool-english-utf8.ldf :
+
+c:/texlive/2025/texmf-dist/tex/latex/datatool-english/datatool-english.ldf :
+
+c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-base.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-l3fp.def :
+
+c:/texlive/2025/texmf-dist/tex/latex/datatool/datatool-utf8.ldf :
 
 c:/texlive/2025/texmf-dist/tex/latex/diagbox/diagbox.sty :
 
@@ -511,6 +535,26 @@ c:/texlive/2025/texmf-dist/tex/latex/fontaxes/fontaxes.sty :
 c:/texlive/2025/texmf-dist/tex/latex/footmisc/footmisc.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries-english/glossaries-english.ldf :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries-extra/glossaries-extra-abbrstyles.def :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries-extra/glossaries-extra.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries-german/glossaries-german.ldf :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/base/glossaries.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg :
 
@@ -586,6 +630,8 @@ c:/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/mathcomp/mathcomp.sty :
 
+c:/texlive/2025/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty :
+
 c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype-pdftex.def :
 
 c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.cfg :
@@ -648,13 +694,19 @@ c:/texlive/2025/texmf-dist/tex/latex/siunitx/siunitx.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/stdclsdv/stdclsdv.sty :
 
+c:/texlive/2025/texmf-dist/tex/latex/supertabular/supertabular.sty :
+
 c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/tools/calc.sty :
 
+c:/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty :
+
 c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/tools/varioref.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/tracklang/tracklang.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl :
 
@@ -671,6 +723,8 @@ c:/texlive/2025/texmf-dist/tex/latex/xcolor/svgnam.def :
 c:/texlive/2025/texmf-dist/tex/latex/xcolor/x11nam.def :
 
 c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty :
+
+c:/texlive/2025/texmf-dist/tex/latex/xfor/xfor.sty :
 
 c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty :
 

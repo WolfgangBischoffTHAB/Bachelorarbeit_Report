@@ -116,6 +116,7 @@
 %\usepackage{cancel}             % Durchstreicehn in Mathematikumgebung
 \usepackage{listings}
 
+
 % Title format Anpassen
 \makeatletter
 \renewcommand{\chapterlinesformat}[3]{\@hangfrom{\bfseries{#2}}\mdseries{#3}}
@@ -140,9 +141,20 @@
    }
 
 
-\usepackage[
-   printonlyused
-   ]{acronym}
+%\usepackage{acro}
+
+%\usepackage[printonlyused]{acronym}
+%\usepackage{acronym}
+%\usepackage{glossaries}
+%\usepackage[symbols,sort=none,nogroupskip]{glossaries-extra}
+\usepackage[sort=none,nogroupskip]{glossaries-extra}
+
+%\newglossaryentry{ex}{name={sample}, description={an example}}
+\newglossaryentry{RVV}{name={RVV}, description={RISC-V Vector Extensions}}
+\newglossaryentry{SISD}{name={SISD}, description={Single Instruction Single Data}}
+\newglossaryentry{SIMD}{name={SIMD}, description={Single Instruction Multiple Data}}
+\newglossaryentry{VLEN}{name={VLEN}, description={Vector Register Length}}
+\newglossaryentry{MLEN}{name={MLEN}, description={Matrix Register Length}}
 
 \usepackage{upgreek}
 

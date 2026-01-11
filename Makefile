@@ -1,5 +1,6 @@
 LATEX_HOME = /c/texlive/2025/bin/windows
 LATEXMK = $(LATEX_HOME)/latexmk
+MAKEGLOSSARIES = $(LATEX_HOME)/makeglossaries
 PDFLATEX = $(LATEX_HOME)/pdflatex
 DOCNAME = bthesis_wbischoff_2228538
 

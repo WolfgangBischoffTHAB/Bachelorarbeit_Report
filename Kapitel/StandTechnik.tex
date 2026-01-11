@@ -12,7 +12,7 @@ Diese zwei Abläufe (Cache-Frame laden und Register laden) werden dann solange w
 
 Die Alternative zum Hardware unterstützen Strip-Mining wäre es, jedes einzelne Vektor-Element einzeln in ein Register des CPU zu laden und dann mit einem Element des zweiten Vektors zu verrechnen. Dabei wird für jedes Element ein Laden und Speicher aus dem Speicher notwendig und man bezahlt mit einen hohen Verlust an Geschwindigkeit für die Einfache Implementierung.
 
-Der Vorteil der RISC-V Vector Extension Register ist es, dass diese Register mehrere Elemente parallel auf einen CPU-Takt hin zusammenrechnen können. Der CPU verfährt dann in einem echten SIMD-Betriebsmodus (Single Instruction, Multiple Data) und spart eine vielfaches an Taktzyklen.
+Der Vorteil der RISC-V Vector Extension Register ist es, dass diese Register mehrere Elemente parallel auf einen CPU-Takt hin zusammenrechnen können. Der CPU verfährt dann in einem echten \gls{SIMD}-Betriebsmodus (Single Instruction, Multiple Data) und spart eine vielfaches an Taktzyklen.
 
 Es sind auch komplett neuartige Designs denkbar. Wenn der Cache-Speicher über mehrere Kanäle an den CPU angebunden ist, könnte der CPU die Vektor-Register auch parallel über alle Kanäle befüllen, mehrer Register parallel verrechnen und die Ergebnisse parallel wieder in den Cache zurückliefern.
 

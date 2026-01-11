@@ -55,7 +55,27 @@ Into packages.tex import the package listings
 \usepackage{listings}
 ```
 
-Then in a Latex file, insert a listing.
+Then in a Latex file, insert a listing. (DO NOT INSERT GERMAN UMLAUTS!)
 
 ```
+\begin{lstlisting}
+function matmult(A,B,l,m,n)
+
+// Ergebnismatrix C mit Nullen initialisieren
+C = zeroes(l,n)
+
+for i = 1 to l  // Schleife ueber die Zeilen von C
+  for k = 1 to n  // Schleife ueber die Spalten von C
+    for j = 1 to m  // Schleife ueber die Spalten von A / Zeilen von B
+      C(i,k) = C(i,k) + A(i,j) * B(j,k)
+    end
+  end
+end
+
+return C
+\end{lstlisting}
 ```
+
+# Glossaries
+
+https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/glossaries/glossariesbegin.pdf

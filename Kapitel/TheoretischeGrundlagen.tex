@@ -4,7 +4,7 @@ Dieses Kapitel beschreibt Vektoren und Matrizen aus der Mathematik und deren Ber
 
 Bei der Berechnung ist auf die Geschwindigkeit zu achten. Ausgehend von dem naiven Berechnungsverfahren werden die Schwächen dieses Verfahrens diskutiert und beschrieben, welche Antworten das RISC-V Ökosystem auf diese Probleme hat.
 
-Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISV-V Vektor SIMD unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
+Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISV-V Vektor \gls{SIMD} unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
 
 Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
@@ -35,7 +35,7 @@ muss zur Berechnung eine Zelle der Matrix C ein Skalarprodukt aus einer Zeile vo
 
 Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
-\section{Matrixmultiplikation mit SISD} \label{sec:matrix_mul_sisd}
+\section{Matrixmultiplikation mit \gls{SISD}} \label{sec:matrix_mul_sisd}
 
 Laut https://de.wikipedia.org/wiki/Matrizenmultiplikation verwendet eine naive Implementierung in Software drei For-Schleifen.
 
@@ -58,7 +58,7 @@ return C
 
 % Diese Implementierung wird gegen Online-Matrizen berechnet gegengeprüft. Sobald diese naive Implementierung funktioniert, dient sie als Benchmark zur Verifizierung von Algorithmen zur Matrix-Multiplikation, die auf dem FPGA verwendet werden. Im Zuge dieser Arbeit wird ein Java-Program geschrieben, dass diese Matrix-Multiplikation in naiver Form ausführt.
 
-Der Nachteil an diesem naiven Verfahren ist nicht sichtbar, wenn man sich den Pseudo-Code oder eine Implementierung in einer realen, höheren Programmiersprache ansieht. Diese naive Implementierung beschränkt sich auf SISD (Single Instruction Single Data) Anweisungen. Wenn der Compiler das Optimierungspotential nicht erkennt, generiert er SISD Anweisungen, die jede Multiplikation und Addition einzeln ausführen.
+Der Nachteil an diesem naiven Verfahren ist nicht sichtbar, wenn man sich den Pseudo-Code oder eine Implementierung in einer realen, höheren Programmiersprache ansieht. Diese naive Implementierung beschränkt sich auf \gls{SISD} (Single Instruction Single Data) Anweisungen. Wenn der Compiler das Optimierungspotential nicht erkennt, generiert er \gls{SISD} Anweisungen, die jede Multiplikation und Addition einzeln ausführen.
 
 In beiden Architekturen Van-Neumann und Harvard gilt, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
 
@@ -66,9 +66,9 @@ Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, d
 
 % TODO eventuel Assemler listing zeigen
 
-\section{Matrixmultiplikation mit Strip-Mining und SIMD} \label{sec:matrix_mul_simd}
+\section{Matrixmultiplikation mit Strip-Mining und \gls{SIMD}} \label{sec:matrix_mul_simd}
 
-Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu Minimieren, ist das Strip-Mining in Kombination mit der Verwendung von SIMD. SIMD (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für SIMD Anweisungen, wenn der CPU die passende Hardware bereit stellt.
+Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu Minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereit stellt.
 
 Des weiteren erlaubt das Strip-Mining auch Datenobjekte zu verarbeiten, die so groß sind, dass sie nicht als Ganzes in die Register der CPU passen.
 
@@ -82,12 +82,19 @@ Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annah
 
 Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Registers verfügbar ist. Der CPU Antwortet mit der Registerbeite.
 
-Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (RVV) \cite{rvv_specification} erstellt und ratifiziert. Die Vektor Extension ist für die diese Arbeit relevant, das sie zwar Vektoren verarbeitet aber die Grundlage für die Verarbeitung von Matrizen legt.
+\newacronym{usb}{USB}{Universal Serial Bus} % Define acronym
+\newacronym{pdf}{PDF}{Portable Document Format}
+
+Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (\gls{RVV}) \cite{rvv_specification} erstellt und ratifiziert. Die Vektor Extension ist für die diese Arbeit relevant, das sie zwar Vektoren verarbeitet aber die Grundlage für die Verarbeitung von Matrizen legt.
 
 \section{Die RISC-V Vector Extension} \label{sec:riscv_rvv_extension}
 
-Die RVV erweitert einen RISC-V CPU um Vektor Register.
+Die RVV erweitert einen RISC-V CPU um Vektor Register. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. Die RVV Spezifikation \cite{rvv_specification} macht die Vorgabe:
+
+``The number of bits in a single vector register, \(VLEN \geq ELEN\), which must be a power of 2, and must be no greater than \(2^{16}\)''.
 
 TODO: die RVV Register können für Matrizen wiederverwendet werden.
+
+Here's my \gls{RVV} term.a
 
 TODO: Erkläre FPGA
