@@ -6,19 +6,13 @@ RISC-V wurde durch die bereits ratifizierte RISC-V Vector Extension (RVV) um Reg
 
 %Diese führte dazu, dass bereits Versuche unternommen worden sind, kleine lokale Large-Language-Modelle auf RISC-V CPUs auszuführen. Dabei zeigt sich, dass sich kleine LLMs tatsächlich mit ? Token pro Sekunde unterhalten können.
 
-In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das Konzept des Strip-Mining beschrieben und hervorgehoben. Beim Strip-Mining wird von einer Resourcen-Hierarchie ausgegangen. Die Resourcen sind dabei die Register und der Speicher eine CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, desto teurer ist der Speicher und daher kleiner in der verfügbaren Größe aber gleichzeitig auch um einiges schneller als weiter entfernt liegender Speicher.
-
-Die Vektor-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweiße kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunste besteht als darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielweiße ist es ineffizient ständing im Speicher hin- und her zu springen. Ein lineares laden ist effizienter um die lokalität der Daten innerhalb des Cache auszunutzen.
-
-Eine Cache-Hierarchy legt nahe, Vektoren Block-weiße zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
-
-Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
-
-Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Registers verfügbar ist. Der CPU Antwortet mit der Registerbeite. Die Software lädt den Cache mit einem Teil des Vektors voll und beginnt den Cache dann abzuarbeiten, in dem der Teil des Vektors dann wiederum teilweiße in den CPU geladen, verarbeitet und danach wieder aus dem CPU zurück in den Speicher übertragen wird.
+In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das Konzept des Strip-Mining beschrieben und hervorgehoben. Die Software lädt den Cache mit einem Teil des Vektors voll und beginnt den Cache dann abzuarbeiten, in dem der Teil des Vektors dann wiederum teilweiße in den CPU geladen, verarbeitet und danach wieder aus dem CPU zurück in den Speicher übertragen wird. Das Stip-Mining wiederholt diese Abläufe, bis die Aufgabe erledigt ist.
 
 Diese zwei Abläufe (Cache-Frame laden und Register laden) werden dann solange wiederholt, bis der gesammte Vektor abgearbeitet ist. Ein Hinweis auf dieses Strip-Mining Vorgehen findet sich in der RISC-V Vector Extension Spezifikation. Dort gibt es das Beispiel in Kapitel "6.4. Example of stripmining and changes to SEW" zum Strip-Mining.
 
-Die Alternative zum Hardware unterstützen Strip-Mining wäre es, jedes einzelne Vektor-Element einzeln in ein Register des CPU zu laden und dann mit einem Element des zweiten Vektors zu verrechnen. Der Vorteil der RISC-V Vector Extension Register ist es, dass diese Register mehrere Elemente parallel auf einen CPU-Takt hin zusammenrechnen können. Der CPU verfährt dann in einem echten SIMD-Betriebsmodus (Single Instruction, Multiple Data) und spart eine vielfaches an Taktzyklen.
+Die Alternative zum Hardware unterstützen Strip-Mining wäre es, jedes einzelne Vektor-Element einzeln in ein Register des CPU zu laden und dann mit einem Element des zweiten Vektors zu verrechnen. Dabei wird für jedes Element ein Laden und Speicher aus dem Speicher notwendig und man bezahlt mit einen hohen Verlust an Geschwindigkeit für die Einfache Implementierung.
+
+Der Vorteil der RISC-V Vector Extension Register ist es, dass diese Register mehrere Elemente parallel auf einen CPU-Takt hin zusammenrechnen können. Der CPU verfährt dann in einem echten SIMD-Betriebsmodus (Single Instruction, Multiple Data) und spart eine vielfaches an Taktzyklen.
 
 Es sind auch komplett neuartige Designs denkbar. Wenn der Cache-Speicher über mehrere Kanäle an den CPU angebunden ist, könnte der CPU die Vektor-Register auch parallel über alle Kanäle befüllen, mehrer Register parallel verrechnen und die Ergebnisse parallel wieder in den Cache zurückliefern.
 
@@ -30,9 +24,9 @@ blis verwendet den Begriff kernel oder microkernel. Ein kernel ist Code, der auf
 
 blis dokumentiert die Matrix-Multiplikation unter dem Stichwort GEMM. GEMM steht für General Matrix Multiply. Der gemm kernel wird für die GEMM Algorithmen verwendet.
 
-Sollte blis für RISC-V portiert werden, ist es sinnvoll sich an das Prinzip des strip-mining und der kernel innerhalb eines Cache-Frames zu halten. Dies wurde für die RISC-V Vektor Extension getan.
+Sollte blis für RISC-V portiert werden, ist es sinnvoll, dass sich RISC-V an das Prinzip des strip-mining und der kernel innerhalb eines Cache-Frames hält und das Strip-Mining ermöglicht. Dies wurde für die RISC-V Vector Extension bereits getan.
 
-Für die RISC-V Matrix-Berechnung gibt es zum jetzigen Zeitpunkt keine ratifizierte Extension. Innerhalb der RISC-V Arbeitsgruppen werden unterschiedliche Ansätze diskutiert.
+Für die RISC-V Matrix-Berechnung gibt es zum jetzigen Zeitpunkt keine ratifizierte Extension. Innerhalb der RISC-V Arbeitsgruppen werden unterschiedliche Ansätze diskutiert. Die Ansätze werden im Kapitel zu den theoretischen Grundlagen beschrieben.
 
 % TODO: gehe auf die Ansätze ein.
 

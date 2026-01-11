@@ -1,12 +1,93 @@
 \chapter{Theoretische Grundlagen} \label{chpt:Theoretische_Grundlagen_Main}
 
-\begin{table}[ht]
-   \begin{tabular}{|c|c|}
-      test & test \\
-      kekse & Kürbis
-   \end{tabular}
-   \caption{Halt ne Tabelle}
-   \label{Tabelle}
-\end{table}
+Dieses Kapitel beschreibt Vektoren und Matrizen aus der Mathematik und deren Berechnung durch ein Computersystem.
 
-\lipsum[37-38]
+Bei der Berechnung ist auf die Geschwindigkeit zu achten. Ausgehend von dem naiven Berechnungsverfahren werden die Schwächen dieses Verfahrens diskutiert und beschrieben, welche Antworten das RISC-V Ökosystem auf diese Probleme hat.
+
+Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISV-V Vektor SIMD unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
+
+Der in dieser Arbeit gewählte Ansatz wird beschrieben.
+
+\section{Vektoren und Matrizen} \label{sec:vectors_and_matrices}
+
+Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen statt findet. Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
+
+Eine Matrix wird in \cite{Mathematik_Arens} als rechteckiges Zahlenschemata mit m Zeilen und n Spalten beschrieben.
+
+\[
+\begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & \dots  & a_{1n} \\
+    a_{21} & a_{22} & a_{23} & \dots  & a_{2n} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{d1} & a_{d2} & a_{d3} & \dots  & a_{dn}
+\end{bmatrix}
+\]
+
+Die Multiplikation zwischen zwei Matrizen A und B ist nicht kommutativ und nur definiert, wenn die inneren Dimensionen der Matrizen übereinstimmen, wenn also die Spaltenzahl der ersten Matrix mit der Zeilenzahl der zweiten Matrix übereinstimmt.
+
+Zur Berechnung der Matrix-Multiplikation
+
+\begin{equation}
+    C = A * B
+\end{equation}
+
+muss zur Berechnung eine Zelle der Matrix C ein Skalarprodukt aus einer Zeile von A und einer Spalte von B berechnet werden. Dabei wird zunächst aus der Spalte von B durch Transponieren eine Zeile gemacht und dann der Zeilenvektor aus A mit dem Zeilenvektor aus B durch das Skalarprodukt in einen Skalar umgerechnet. Dieser Skalar wird dann in die Matrix C eingesetzt.
+
+Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
+
+\section{Matrixmultiplikation mit SISD} \label{sec:matrix_mul_sisd}
+
+Laut https://de.wikipedia.org/wiki/Matrizenmultiplikation verwendet eine naive Implementierung in Software drei For-Schleifen.
+
+\begin{lstlisting}
+function matmult(A,B,l,m,n)
+
+// Ergebnismatrix C mit Nullen initialisieren
+C = zeroes(l,n)
+
+for i = 1 to l  // Schleife ueber die Zeilen von C
+  for k = 1 to n  // Schleife ueber die Spalten von C
+    for j = 1 to m  // Schleife ueber die Spalten von A / Zeilen von B
+      C(i,k) = C(i,k) + A(i,j) * B(j,k)
+    end
+  end
+end
+
+return C
+\end{lstlisting}
+
+% Diese Implementierung wird gegen Online-Matrizen berechnet gegengeprüft. Sobald diese naive Implementierung funktioniert, dient sie als Benchmark zur Verifizierung von Algorithmen zur Matrix-Multiplikation, die auf dem FPGA verwendet werden. Im Zuge dieser Arbeit wird ein Java-Program geschrieben, dass diese Matrix-Multiplikation in naiver Form ausführt.
+
+Der Nachteil an diesem naiven Verfahren ist nicht sichtbar, wenn man sich den Pseudo-Code oder eine Implementierung in einer realen, höheren Programmiersprache ansieht. Diese naive Implementierung beschränkt sich auf SISD (Single Instruction Single Data) Anweisungen. Wenn der Compiler das Optimierungspotential nicht erkennt, generiert er SISD Anweisungen, die jede Multiplikation und Addition einzeln ausführen.
+
+In beiden Architekturen Van-Neumann und Harvard gilt, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
+
+Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern des CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
+
+% TODO eventuel Assemler listing zeigen
+
+\section{Matrixmultiplikation mit Strip-Mining und SIMD} \label{sec:matrix_mul_simd}
+
+Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu Minimieren, ist das Strip-Mining in Kombination mit der Verwendung von SIMD. SIMD (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für SIMD Anweisungen, wenn der CPU die passende Hardware bereit stellt.
+
+Des weiteren erlaubt das Strip-Mining auch Datenobjekte zu verarbeiten, die so groß sind, dass sie nicht als Ganzes in die Register der CPU passen.
+
+Beim Strip-Mining wird von einer Resourcen-Hierarchie ausgegangen. Die Resourcen sind dabei die Register und der Speicher eine CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, desto teurer ist der Speicher und daher kleiner in der verfügbaren Größe aber gleichzeitig auch um einiges schneller als weiter entfernt liegender Speicher.
+
+Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweiße kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht als darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielweiße ist es ineffizient ständing im Speicher hin- und her zu springen. Ein lineares Laden ist effizienter um die lokalität der Daten innerhalb des Cache auszunutzen.
+
+Eine Cache-Hierarchy legt nahe, Vektoren nlockweiße zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
+
+Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
+
+Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Registers verfügbar ist. Der CPU Antwortet mit der Registerbeite.
+
+Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (RVV) \cite{rvv_specification} erstellt und ratifiziert. Die Vektor Extension ist für die diese Arbeit relevant, das sie zwar Vektoren verarbeitet aber die Grundlage für die Verarbeitung von Matrizen legt.
+
+\section{Die RISC-V Vector Extension} \label{sec:riscv_rvv_extension}
+
+Die RVV erweitert einen RISC-V CPU um Vektor Register.
+
+TODO: die RVV Register können für Matrizen wiederverwendet werden.
+
+TODO: Erkläre FPGA

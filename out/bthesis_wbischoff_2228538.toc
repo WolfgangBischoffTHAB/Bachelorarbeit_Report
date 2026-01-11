@@ -10,9 +10,13 @@
 \contentsline {section}{\numberline {1.3}Struktur der Arbeit}{2}{section.12}%
 \contentsline {chapter}{\numberline {2}Stand der Technik}{3}{chapter.13}%
 \contentsline {chapter}{\numberline {3}Theoretische Grundlagen}{6}{chapter.14}%
-\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{7}{chapter.16}%
-\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{9}{chapter.17}%
-\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{14}{chapter.18}%
-\contentsline {chapter}{Anhang}{16}{section*.19}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{16}{chapter*.20}%
+\contentsline {section}{\numberline {3.1}Vektoren und Matrizen}{6}{section.15}%
+\contentsline {section}{\numberline {3.2}Matrixmultiplikation mit SISD}{7}{section.17}%
+\contentsline {section}{\numberline {3.3}Matrixmultiplikation mit Strip-Mining und SIMD}{8}{section.33}%
+\contentsline {section}{\numberline {3.4}Die RISC-V Vector Extension}{9}{section.34}%
+\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{10}{chapter.35}%
+\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{11}{chapter.36}%
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{16}{chapter.37}%
+\contentsline {chapter}{Anhang}{17}{section*.38}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{17}{chapter*.39}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -23,3 +23,39 @@ If you want to build using the provided Makefile. You need GNU Make. The easiest
 cd /c/Users/lapto/Documents/Aschaffenburg/BachelorArbeit/Bachelorarbeit_Report
 make
 ```
+
+# Equations
+
+```
+\begin{equation}
+    E=m c^2
+\end{equation}
+```
+
+# Matrix
+
+https://tex.stackexchange.com/questions/204621/matrix-in-latex
+
+```
+\[
+\begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & \dots  & a_{1n} \\
+    a_{21} & a_{22} & a_{23} & \dots  & a_{2n} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a_{d1} & a_{d2} & a_{d3} & \dots  & a_{dn}
+\end{bmatrix}
+\]
+```
+
+# Code Listing
+
+Into packages.tex import the package listings
+
+```
+\usepackage{listings}
+```
+
+Then in a Latex file, insert a listing.
+
+```
+```

@@ -24,6 +24,8 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplr7t.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Bold-lf-t1--base.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Bold-lf-t1.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Italic-lf-t1--base.tfm\
@@ -33,6 +35,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-t1--base.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-t1.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm\
@@ -41,7 +44,13 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm7.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmex10.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr10.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/fplmri.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/zplmr7m.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/zplmr7t.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/zplmr7v.tfm\
@@ -49,15 +58,26 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb\
     c:/texlive/2025/texmf-dist/fonts/vf/adobe/helvetic/phvb8t.vf\
     c:/texlive/2025/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf\
+    c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf\
     c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Bold-lf-t1.vf\
     c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Italic-lf-t1.vf\
     c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-sc-t1.vf\
     c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-t1.vf\
+    c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7m.vf\
+    c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf\
+    c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7v.vf\
+    c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf\
     c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii\
     c:/texlive/2025/texmf-dist/tex/generic/babel-english/english.ldf\
     c:/texlive/2025/texmf-dist/tex/generic/babel-german/ngerman.ldf\
@@ -262,6 +282,10 @@ c:/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplr7t.tfm :
 
+c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm :
+
 c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Bold-lf-t1--base.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Bold-lf-t1.tfm :
@@ -280,6 +304,8 @@ c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-t1.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm :
 
+c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm :
+
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm :
@@ -296,7 +322,19 @@ c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm :
 
+c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmex10.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr10.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm :
+
 c:/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/fplmri.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/public/mathpazo/zplmr7m.tfm :
 
@@ -312,15 +350,29 @@ c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb :
 
 c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb :
 
+c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb :
+
+c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb :
+
+c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb :
+
+c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb :
+
 c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb :
 
 c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb :
 
 c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb :
 
+c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb :
+
+c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb :
+
 c:/texlive/2025/texmf-dist/fonts/vf/adobe/helvetic/phvb8t.vf :
 
 c:/texlive/2025/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf :
+
+c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf :
 
 c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Bold-lf-t1.vf :
 
@@ -329,6 +381,14 @@ c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Italic-lf-t1.vf :
 c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-sc-t1.vf :
 
 c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-t1.vf :
+
+c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7m.vf :
+
+c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf :
+
+c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7v.vf :
+
+c:/texlive/2025/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf :
 
 c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii :
 

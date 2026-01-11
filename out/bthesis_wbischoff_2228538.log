@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 09:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  11 JAN 2026 15:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -730,8 +730,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip78
 )
-Package hyperref Info: Option `plainpages' set `false' on input line 139.
-Package hyperref Info: Option `hypertexnames' set `false' on input line 139.
+Package hyperref Info: Option `plainpages' set `false' on input line 140.
+Package hyperref Info: Option `hypertexnames' set `false' on input line 140.
 
 (c:/texlive/2025/texmf-dist/tex/latex/acronym/acronym.sty
 Package: acronym 2025/01/17 v1.50 Support for acronyms (Tobias Oetiker)
@@ -1220,47 +1220,46 @@ chapter 2.
 [3
 
 
-] [4]) (./Kapitel/TheoretischeGrundlagen.tex [5]
+]) (./Kapitel/TheoretischeGrundlagen.tex [4] [5]
 chapter 3.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 9.0pt on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
-(Font)              `T1/Roboto-LF/bold/n' on input line 8.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 9.0pt on input line 8.
-) (./Kapitel/DurchfuehrungArbeit.tex [6
+[6
 
 
 ]
+Underfull \hbox (badness 1371) in paragraph at lines 40--41
+\T1/Roboto-LF/regular/n/10 Laut htt-ps://de.wikipedia.org/wiki/Matrizenmultipli
+kation ver-wen-det ei-ne
+ []
+
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 42.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 9.0pt on input line 42.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 42.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 8.0pt on input line 42.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+[7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+[8]) (./Kapitel/DurchfuehrungArbeit.tex [9]
 chapter 4.
-)
-Underfull \hbox (badness 1997) in paragraph at lines 79--79
-\T1/Roboto-LF/regular/n/10 pel-len-tes-que ante. Pha-sel-lus adi-pi-scing sem-p
-er elit. Proin fer-men-tum
- []
-
-[7
+) (./Kapitel/AuswertungundErgebnisse.tex [10
 
 
-] (./Kapitel/AuswertungundErgebnisse.tex [8]
+]
 chapter 5.
-) [9
+) [11
 
 
-] [10] [11] [12] (./Kapitel/ZusammenfassungundAusblick.tex [13]
+] [12] [13] [14] (./Kapitel/ZusammenfassungundAusblick.tex [15]
 chapter 6.
-)
-Underfull \hbox (badness 1997) in paragraph at lines 81--81
-\T1/Roboto-LF/regular/n/10 pel-len-tes-que ante. Pha-sel-lus adi-pi-scing sem-p
-er elit. Proin fer-men-tum
- []
-
-(./Seiten/Anhang.tex [14
+) (./Seiten/Anhang.tex [16
 
 
-] [15]) (out/bthesis_wbischoff_2228538.bbl
+]) (out/bthesis_wbischoff_2228538.bbl
 chapter without number
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/sc' aliased to
 (Font)              `T1/Roboto-LF/regular/sc' on input line 16.
@@ -1269,27 +1268,22 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/sc' will be
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/Roboto-LF/regular/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--36
+Underfull \hbox (badness 10000) in paragraph at lines 37--42
 []\T1/Roboto-LF/regular/sc/10 Killian\T1/Roboto-LF/regular/n/10 , Earl A.:  |  
  []   |   []   |   [].  []$\T1/cmtt/m/n/10 https : / /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--36
+Underfull \hbox (badness 10000) in paragraph at lines 37--42
 \T1/cmtt/m/n/10 riscv . atlassian . net / wiki / download / attachments / 66378
 1400 /
  []
 
-) [16
+) [17
 
 
-{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}{c:/texlive/
-2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
 (out/bthesis_wbischoff_2228538.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -1297,23 +1291,28 @@ L3 programming layer <2025-12-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 30372 strings out of 467538
- 593304 string characters out of 5423725
- 1284467 words of memory out of 5000000
- 58673 multiletter control sequences out of 15000+600000
- 705579 words of font info for 131 fonts, out of 8000000 for 9000
+ 30717 strings out of 467538
+ 596229 string characters out of 5423725
+ 1363467 words of memory out of 5000000
+ 58978 multiletter control sequences out of 15000+600000
+ 710962 words of font info for 147 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 112i,8n,120p,11246b,1279s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 112i,9n,120p,11246b,1279s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb><c:/texlive/20
 25/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb><c:/texlive/2025/tex
-mf-dist/fonts/type1/public/cm-super/sftt1000.pfb><c:/texlive/2025/texmf-dist/fo
-nts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/h
-elvetic/uhvr8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (27 pages, 200848 bytes).
+mf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/c
+m-super/sftt0800.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sf
+tt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/
+texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/te
+xmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/
+type1/urw/palatino/uplri8a.pfb>
+Output written on out/bthesis_wbischoff_2228538.pdf (28 pages, 281053 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 39550 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 296 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 42142 words of extra memory for PDF output out of 42996 (max. 10000000)
 
