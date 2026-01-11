@@ -146,7 +146,7 @@ Die Schritte sind:
 
     %\item The application executes a vector/vector or vector/scalar operation (vadd, vsub, ...). The application implicitly knows that this operation is only executed on the current batch and not on all vector elements in total.
 
-    \item Die Anwendung führt nun eine Instruktion aus um die Vektoren zu verrechnen. Es können beispielsweiße eine elementweiße Addition, Subtraktion, Multiplikation oder sonstige Operationen ausgeführt werden.
+    \item Die Anwendung führt nun eine Instruktion aus um die Vektoren zu verrechnen. Es können beispielsweiße eine elementweiße Addition (vadd), Subtraktion (vsub), Multiplikation oder sonstige Operationen ausgeführt werden.
 
     %\item The vector engine performs the operation on all loaded elements in parallel by applying all the ALU-nodes that it has reserved for this step of strip-mining meaning, the current batch of elements.
 
@@ -165,6 +165,78 @@ Die Schritte sind:
     \item Die nächste Iteration beginnt. Im Grunde springt die Anwendung von hier zurück zum ersten Punkt dieser Auflistung.
 
 \end{enumerate}
+
+Hier alles in Form von Quellcode:
+
+Now that the basic idea and principle has been described in natural language, lets look at code that implements the strip-mining hardware-software co-design.
+
+```
+# vector-vector add routine of 32-bit integers
+#
+# void vvaddint32(size_t n, const int*x, const int*y, int*z)
+# {
+#	for (size_t i=0; i<n; i++)
+#   {
+#      z[i] = x[i] + y[i];
+#   }
+# }
+#
+# Mapping parameters to argument register (a0 .. a7)
+# a0 = n, a1 = x, a2 = y, a3 = z
+#
+# Non-vector instructions are indented
+vvaddint32:
+	vsetvli t0, a0, e32, ta, ma 	# Set vector length based on 32-bit vectors. t0 contains the amount of elements that will be processed
+
+	vle32.v v0, (a1) 				# Load for first vector
+
+		# can I move these two instructions up over vle32.v ???
+		sub a0, a0, t0 				# Decrement number of elements that still need processing.
+									# t0 is the result of vsetvli. It is the amount of elements processed this iteration
+		slli t0, t0, 2 				# Multiply number done by 4 bytes (= 32 bit integer) because of SEW=e32
+
+		add a1, a1, t0 				# Increment/Advance pointer for first vector
+
+	vle32.v v1, (a2) 				# Load for second vector
+		add a2, a2, t0 				# Increment/Advance pointer for second vector
+
+	vadd.vv v2, v0, v1 			    # Sum vectors
+
+	vse32.v v2, (a3) 				# Store result back to memory
+		add a3, a3, t0 				# Increment/Advance pointer for destination
+
+		bnez a0, vvaddint32 		# Loop back to the beginning of the for loop
+                                    # if the element count is not zero. Otherwise
+                                    # continue with the ret instruction
+
+		ret 						# Finished with the function
+```
+
+Jetzt, da die Wirkungsweiße der RVV Extension beschrieben worden ist, kann nachvollzogen werden, in welchem Spannungsfeld die RISC-V Gremien entscheidungen treffen müssen, wenn es um den Schritt hin zu einer Matrix-Extension geht.
+
+Da die RVV Extension ratifiziert worden ist, gibt es bereits Chips die auf dem Markt verfügbar sind, und die die RVV implementieren. Ein Beispiel ist der OrangePi RV2 Single Board Computer, der einen SpaceMit RISC-V chip verwendet.
+
+Das bedeutet, Firmen haben bereits Designs erstellt und Investitionen in die RISC-V RVV Strategie investiert. Wenn eine Matrix Extension Register wiederverwenden würden, hätten solche Firmen einen Vorteil. Auf der anderen Seite möchte man das bestmögliche Verfahren ermöglichen unm effizient mit Matrizen rechnen zu können und sich damit von der Konkurenz abzuheben. Eventuel ist der Ansatz der für Vektoren gewählt wurde für Matrizen nicht optimal.
+
+Es gibt daher drei große Strömungen innerhalb der Arbeit an einer Extension für Matrizen.
+
+TODO:  beschriebe alle drei vorgehen.
+
+AME - C:\Users\lapto\Downloads\AME-20250324.pdf
+
+VME - C:\Users\lapto\Downloads\DesignConsiderationsForVME (1).pdf
+
+https://riscv.atlassian.net/wiki/spaces/IMEX/pages/714604588/Option+A+Draft+Spec
+
+file:///C:/Users/lapto/Downloads/VME%20TG%20slides%20for%20Meetings%20%231-%2311.pdf
+
+https://www.youtube.com/watch?v=2kdhMMQ6eZU
+
+https://riscv-europe.org/summit/2025/media/proceedings/2025-05-13-RISC-V-Summit-Europe-11h30-ASANOVI%C4%86-slides.pdf
+
+
+
+
 
 
 
