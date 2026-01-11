@@ -35,15 +35,16 @@ Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardwarebeschrei
 
 Die Matrizenberechnungen erfolgen im ersten Schritt auf Matrizen deren Dimensionen ein vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur die ganzahlige Multiplikationen ohne Vorzeichen durchgeführt. Da es viele Ansätze gibt Matrizen zu multiplizieren, wurde eine Einschränkung getroffen. Die Multiplikation erfolgt mit dem Outer-Produkt Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
 
-% \lipsum[40]
+
 
 \section{Struktur der Arbeit} \label{sec:Einleitung_Struktur_der_Arbeit}
 
-%    \begin{equation}
-%       E=m c^2
-%    \end{equation}
-%    \myequations{Test}
+Zunächst wird im Kapitel Theoretische Grundlagen die Matrix-Multiplikation beschrieben. Es wird detailiert, dass sich die Matrix-Multiplikation in Teile aufteilen und damit Schrittweiße abarbeiten lässt.
 
-%    \lipsum[41][2-9]
+Nachdem die Matrix-Multiplikation beschrieben ist, wird ihre Relevanz in den Anwendungsbegieten der Neuronalen Netze und der 3D-Computergrafik dargestellt.
 
-%    Normaler text \ac{KDE}
+Danach werden die momentan ablaufenden Anstrengungen des RISC-V Gremiums zur Erstellung einer Extension zur Matrix-Multiplikation beschrieben. Dabei gibt es drei Ansätze. Der in dieser Bachelorarbeit untersuchte Ansatz wird zusammen mit den anderen Ansätzen vorgestellt. Dabei wird der Strip-Mining Ansatz erläutert und es wird eine Softwareanwendung besprochen, die diesen Ansatz als Computerprogramm implementiert.
+
+Nachdem der Ansatz beschrieben ist, wird der NEORV32 CPU als das Ziel der Implementierung beschrieben. Das Design wird herausgearbeitet und es wird disktutiert welche Änderungen an welchen Stellen vorgenommen werden um den CPU um Matrix-Befehle zu erweitern.
+
+Schließlich wird das Ergebnis bewertet.
