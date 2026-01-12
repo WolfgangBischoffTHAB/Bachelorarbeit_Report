@@ -119,3 +119,22 @@ bthesis_wbischoff_2228538.tex
 ```
 /c/texlive/2025/bin/windows/latexmk -pdf -outdir=out -M -MP -MF bthesis_wbischoff_2228538.d bthesis_wbischoff_2228538
 ```
+
+## Abbildungen einfügen
+
+https://www.heise.de/tipps-tricks/LaTeX-Bilder-einfuegen-so-geht-s-4404598.html
+
+```
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.5]{tippstricks}
+\caption{Meine Grafik}
+\label{fig:meine-grafik}
+\end{figure}
+```
+
+Auf die Grafik kann im Fließtext verwießen werden:
+
+```
+\label{fig:meine-grafik}
+```

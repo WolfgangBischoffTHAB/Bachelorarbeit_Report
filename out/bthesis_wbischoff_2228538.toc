@@ -14,9 +14,11 @@
 \contentsline {section}{\numberline {3.2}Matrixmultiplikation mit \gls {SISD}}{7}{section.18}%
 \contentsline {section}{\numberline {3.3}Matrixmultiplikation mit Strip-Mining und \gls {SIMD}}{8}{section.34}%
 \contentsline {section}{\numberline {3.4}Die RISC-V Vector Extension}{9}{section.35}%
-\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{12}{chapter.49}%
-\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{13}{chapter.50}%
-\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{14}{chapter.51}%
-\contentsline {chapter}{Anhang}{15}{section*.52}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{15}{chapter*.53}%
+\contentsline {section}{\numberline {3.5}Blockweiße Matrix Multiplikation}{14}{section.111}%
+\contentsline {section}{\numberline {3.6}Outer-Produkt}{15}{section.116}%
+\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{17}{chapter.118}%
+\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{18}{chapter.119}%
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{19}{chapter.120}%
+\contentsline {chapter}{Anhang}{20}{section*.121}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{20}{chapter*.122}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

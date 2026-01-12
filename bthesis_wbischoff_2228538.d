@@ -1,6 +1,12 @@
 #===Dependents, and related info, for bthesis_wbischoff_2228538:
 out/bthesis_wbischoff_2228538.pdf :\
     ./Literatur/Literatur.bib\
+    Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png\
+    Bilder/MAC_MatrixAccumulator.png\
+    Bilder/MatrixMult_1.png\
+    Bilder/MatrixMult_2.png\
+    Bilder/MatrixMult_3.png\
+    Bilder/MatrixMult_4.png\
     Bilder/thab_logo.png\
     Kapitel/AuswertungundErgebnisse.tex\
     Kapitel/DurchfuehrungArbeit.tex\
@@ -253,6 +259,18 @@ out/bthesis_wbischoff_2228538.pdf :\
 #===Phony rules for bthesis_wbischoff_2228538:
 
 ./Literatur/Literatur.bib :
+
+Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png :
+
+Bilder/MAC_MatrixAccumulator.png :
+
+Bilder/MatrixMult_1.png :
+
+Bilder/MatrixMult_2.png :
+
+Bilder/MatrixMult_3.png :
+
+Bilder/MatrixMult_4.png :
 
 Bilder/thab_logo.png :
 
