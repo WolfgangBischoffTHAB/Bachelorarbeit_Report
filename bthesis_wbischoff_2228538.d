@@ -42,10 +42,12 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0500.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm10.tfm\
+    c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm5.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm7.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm\
     c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm\
@@ -342,6 +344,8 @@ c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt0800.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm :
 
+c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0500.tfm :
+
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm :
@@ -349,6 +353,8 @@ c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm :
 c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm10.tfm :
+
+c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm5.tfm :
 
 c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm7.tfm :
 

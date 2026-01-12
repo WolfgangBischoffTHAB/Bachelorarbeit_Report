@@ -1,1 +1,27 @@
 \chapter{Durchführung und Methodik} \label{chpt:Methodik_Main}
+
+Das Ziel ist beschrieben. Es geht um die Erweiterung eine RISC-V Kerns um eine hardware beschleunigte Matrix-Multiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden. Die theoretischen Grundlagen wurden aufgezeigt.
+
+In diesem Kapitel soll es um die praktische Umsetzung der bis hierher erarbeiteten Punkte gehen. Dazu wird der RISC-V Kern analysiert. Wenn die Bestandteile beschrieben sind, dann werden die möglichen Punkte an denen eine Anpassung erfolgen könnte bestimmt und durch Abhwägungen bestimmt, wo die Änderungen tatsächlich eingebracht werden.
+
+Es soll auch beschrieben werden, wie Software für das Hardware- Software-Co-Design erstellt wird. Da die Matrix-Multiplikation kein absolut triviales Programm darstellt, ist die Aufgabe der Software-Entwicklung nicht zu vernachlässigt.
+
+\section{Der NEORV32 Core und dessen Einsatz} \label{sec:neorv32_core}
+
+Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting und anderen Programmierern \footnote{https://github.com/stnolting/neorv32/graphs/contributors}, welches als Open-Source Projekt unter der BSD-3 Lizenz veröffentlicht ist \cite{NEORV32_github}. Es gibt es sehr gute Dokumentation zu dem Projekt in Form von textueller Dokumentation, dem sogenannten Datenblatt \cite{NEORV32_DataSheet}. Zudem ist auch der Quellcode selbst sehr gut dokumentiert und sogar einheitlich formatiert und somit gut lesbar.
+
+Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
+
+Zur Durchführung wird der Quellcode zunächst durch einen Simulator evaluiert. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweiße für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingebdaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
+
+Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weiter gegangen werden. Das Design wird nun Synthetisiert statt Evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von Abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
+
+Um die Synthese-Werkzeuge einzusetzen gibt es ein Parallelprojekt zum NEORV32 namens, neorv32-setups. Innerhalb dieses Projekts, befindet sich ein TCL-Script. Dieses TCL-Script kann in der Entwicklungsumgebung Vivado ausgeführt weren und erzeugt dann ein Vivado-Projekt. Wenn dieses Vivado-Projekt dann schließlich in Vivado geöffnet wird, dann kann das Projekt übersetzt werden. Dabei führt Vivado seine gesamte Synthese Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die bitstream-Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB Verbindung auf den FPGA übetragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er in Silikon gegossen worden wäre.
+
+Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32-Design einzubringen und zu simulieren, bis die Simulation erfolgreich ist. Danach erfolgt die Synthese mit Vivado. Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan.
+
+TODO: Execution Engine, Erweiterung um neue Pfade für Matrix Engine
+
+TODO: LSU und Cache
+
+TODO: Softwareerstellung (Intrinsics)
