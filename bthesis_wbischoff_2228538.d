@@ -13,6 +13,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Kapitel/AuswertungundErgebnisse.tex\
     Kapitel/DurchfuehrungArbeit.tex\
     Kapitel/Einleitung.tex\
+    Kapitel/Erweiterung.tex\
     Kapitel/StandTechnik.tex\
     Kapitel/TheoretischeGrundlagen.tex\
     Kapitel/ZusammenfassungundAusblick.tex\
@@ -287,6 +288,8 @@ Kapitel/AuswertungundErgebnisse.tex :
 Kapitel/DurchfuehrungArbeit.tex :
 
 Kapitel/Einleitung.tex :
+
+Kapitel/Erweiterung.tex :
 
 Kapitel/StandTechnik.tex :
 

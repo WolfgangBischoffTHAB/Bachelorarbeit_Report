@@ -1,0 +1,261 @@
+\chapter{Erweiterung des NEORV32-CPU} \label{chpt:Extending_the_NEORV32}
+
+In diesem Kapitel werden die Erweiterungen an den Entitäten des vorgegebenen Designs beschrieben, die gemacht wurden um die Matrix-Multiplikation zu ermöglichen.
+
+
+
+
+\section{Die Matrix-Register} \label{sec:neorv32-matrix-registers}
+
+TODO: erkläre die Erweiterung im die Matrix-Register.
+
+
+
+\section{Die Instruktionen} \label{sec:neorv32-custom-instructions}
+
+Um die Matrix-Multiplikation durchzuführen sollen neue Instruktionen hinzugefügt werden, die es noch nicht bereits in anderen Extensions für RISC-V gibt. Die Instruktionen sollen das Strip-Mining ermöglichen und sich damit an der RVV-Extension orientieren.
+
+Bei der Diskusion des Strip-Mining bei der RVV-Extension wurde die Instruktion set(i)vli besprochen, mit der die Vektor-Engine um Datentypen und gewünschte Datenlängen konfiguriert wurde. Des weiteren wurden die Instruktionen vle32.v, vadd.vv und vse32.v im Rahmen des Beispiel-Codes verwendet. vle32.v lädt Daten aus dem Daten-Speicher in die Vector-Register (Load-Operation), vadd.vv ist die SIMD Instruktion, die zwei Vektoren elementweiße parallel miteinander addiert hat und vse32.v speichert die Daten schließlich in den Daten-Speicher zurück (Store-Operation)
+
+Für die Matrix-Extension werden die Instruktion mle32, mmul32 und mse32 hinzugefügt. Dabei ist mle32 die Load-Operation, mmul32 ide SIMD-Instruktion und mse32 die Store-Operation. Ein Äquivalent zur set(i)vli ist nicht vorgesehen, da die Matrix-Engine zum jetzigen Stand keine Konfigurationsmöglichkeiten anbietet.
+
+Der NEORV32 besitzt eine Menge an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
+
+Ein Beispiel dafür sind die Intrinsics the X-Window Systems \cite{XToolkitIntrinsics}. Hier wird eine einfach zu verwendende Schnittstelle zur Softwareentwicklung mit dem X-Window System für die Programmiersprache erstellt.
+
+Die Intrinsics des NEORV32 sind eine Erweiterung der Programmiersprache C um RISC-V Instruktionen aus C-Quellcode heraus auszugeben. Ein Beispiel für die Verwendung ist das folgende Test-Programm.
+
+\begin{lstlisting}
+#include <neorv32.h>
+
+uint32_t matrix_a[16]
+  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+uint32_t matrix_b[16]
+  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+int main() {
+
+  uint32_t *matrix_a_addr = &matrix_a[0];
+  uint32_t *matrix_b_addr = &matrix_b[0];
+
+  uint32_t matrix_unit_a = 0;
+  uint32_t matrix_unit_b = 0;
+
+  matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b010, 0b1011011);
+  matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b010, 0b1011011);
+
+  uint32_t matrix_mul = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b100, 0b1011011);
+
+  matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b001, 0b1011011);
+  matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b001, 0b1011011);
+
+  for (int i = 0; i < 16; i++) {
+    neorv32_uart0_printf("After Matrix A %d\r\n", matrix_a_addr[i]);
+  }
+  for (int i = 0; i < 16; i++) {
+    neorv32_uart0_printf("After Matrix B %d\r\n", matrix_b_addr[i]);
+  }
+
+  return 0;
+}
+\end{lstlisting}
+
+In der Zeile 17 ff wird as Intrinsic ``CUSTOM\_INSTR\_I\_TYPE'' für I-Type RISC-V Instruktionen verwendet. Aus jeder Zeile mit einem ``CUSTOM\_INSTR\_I\_TYPE'' Aufruf wird eine RISC-V Assembler Instruktion generiert.
+
+Die Verwendung ist schwer zu verstehen, daher wird jetzt beschrieben, wie die Parameter zum Intrinsic zu interpretieren, sind. Der letzte Parameter ist der Op-Code. Für die Matrix-Extension wurde in dieser Arbeit der Op-Code 0b1011011 gewählt. Innerhalb dieses Opcodes werden dann durch den vorletzten Parameter die drei Anweisungen mle32, mmul32 und mse32 kodiert.
+
+Es ist noch abschließend zu erklären, weshalb Intrinsics verwendet werden müssen. Der grundsätzliche Ablauf bei der Verwendung der Programmiersprache C ist, dass ein Compiler den Quellcode der höheren Programmiersprache in Eigenregie in Assembler-Code übersetzt. Dabei wählt er die Anweisungen selbst aus. Optimierende Compiler führen diese Aufgabe in vielen Fällen besser aus, als es ein Mensch könnte. Im Fall dieser Arbeit ist dieses Vorgehen nicht möglich. Der C-Compiler kennt die neu definierten Instruktionen mle32, mmul32 und mse32 schlicht nicht und wird sie daher nur ausgeben, wenn man den Compiler explizit dazu anweist. Diese explizite Anweisung passiert durch die Intrinsics.
+
+Intern sind die Intrinsics durch Inline Assembly implementiert. Das bedeutet, dass dem C-Compiler exakt vorgegben wird, welchen inline assembly Code er auszugeben hat. Im Beispiel-Code werden die Instruktionen mle32, mmul32 und mse32 per Opcode generiert.
+
+Im Anhang dieser Arbeit wird die Erstellung eines Compilers beschrieben, der im Zuge dieser Arbeit erstellt worden ist und auch dazu verwendet werden kann, die neuen Instruktionen auszugeben. Der im Anhang beschriebene Compiler wurde verwendet, bis der Weg über die Intrinsics gefunden wurde. Die Intrinsics erlauben es State-of-the-Art Compiler wie den GCC zu verwenden. Dies ist sehr viel komfortabler als einen eignenen Compiler zu pflegen.
+
+
+
+
+\section{Erweiterung der Execution-Engine} \label{sec:neorv32-extending-execution-engine}
+
+Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktionen vor, welches in den NEORV32 CPU geladen und ausgeführt werden kann.
+
+In diesem Abschnitt wird die Execution-Engine erweitert, so dass sie die neuen Instruktion auch ausführt, wenn sie von dem Frontend präsentiert werden.
+
+Als erstes wird der neue Matrix-Opcode aus der Erkennung illegaler Opcodes ausgeschlossen.
+
+\begin{lstlisting}
+-- MATRIX EXTENSION
+when opcode_matrix_c =>
+    illegal_cmd <= '0';
+\end{lstlisting}
+
+Der ALU wird beigebracht, dass sie den Operand B als immediate verwenden muss, sobald sie den Matrix-Extension Opcode sieht. Der Grund ist, dass die Load- und Store-Matrix-Anweisungen die Register-Id als immediate Wert verwenden um zu ermitteln, welches Matrix-Register Sie lesen und schreiben sollen. Damit muss die ALU diesen Immediate-Wert weitergeben, sonst ist er verloren und kann nicht mehr verwendet werden.
+
+\begin{lstlisting}
+-- ALU operand B: is immediate? --
+case opcode is
+    -- WBI: added matrix opcode here because the mle32, mse32 instructions contain an immediate
+    -- that needs to be added to the register encoded in the instruction
+    when opcode_matrix_c | opcode_alui_c | opcode_lui_c ...
+        ctrl_nxt.alu_opb_mux <= '1';
+    when others =>
+        ctrl_nxt.alu_opb_mux <= '0';
+end case;
+\end{lstlisting}
+
+Im EX\_DISPATCH Zustand wird die Matrix Multiplikation gestoppt.
+
+\begin{lstlisting}
+matrix_mul_o <= '0';
+\end{lstlisting}
+
+Der EX\_EXECUTE Zustand wird um die Behandlung der Matrix-Instruktionen erweitert.
+
+\begin{lstlisting}
+-- Matrix Extension --
+when opcode_matrix_c =>
+
+case funct3_v is
+
+    -- load from memory into matrix unit --
+    when funct3_mle32_c =>
+        -- go to the specific states for the matrix extension.
+        -- The states are inserted in order to load all the elements of a matrix in a loop
+        exe_engine_nxt.state <= EX_MATRIX_MEM_REQ;
+
+    when funct3_mse32_c =>
+        exe_engine_nxt.state <= EX_MATRIX_MEM_REQ;
+
+    when funct3_mmul32_c =>
+        -- go to the state that process matrix operations
+        exe_engine_nxt.state <= EX_MATRIX_OPERATION_REQ;
+
+    when others => -- undefined
+
+end case;
+\end{lstlisting}
+
+Für die drei Instruktionen mle32, mse32 und mmul32 weren neue Zustände in die Execution Engine eingefügt, so dass diese Zustände aus EX\_EXECUTE angesprungen werden können.
+
+Für die Matrix Load- und Store--Instruktionen wird der Zustand EX\_MATRIX\_MEM\_REQ hinzugefügt.
+
+\begin{lstlisting}
+-- trigger a loop of memory requests for the matrix
+when EX_MATRIX_MEM_REQ =>
+
+    -- tell the matrix unit to come online and process the request
+    ctrl_nxt.lsu_m_en    <= '1';
+
+    if (or_reduce_f(trap_ctrl.exc_buf(exc_ialign_c downto exc_iaccess_c)) = '0') then
+
+        -- memory request if no instruction exception
+
+        -- tell the load store unit to process a request
+        ctrl_nxt.lsu_req     <= '1';
+
+        -- forward the immediate from the instruction
+        matrix_immediate_o <= immediate;
+
+        -- rs1 (source register 1) carries the address to load from / store to
+        matrix_mar_load_store_o <= rf_rs1_i;
+
+        exe_engine_nxt.state <= EX_MATRIX_MEM_RSP;
+
+    else
+        -- On Error
+        exe_engine_nxt.state <= EX_DISPATCH;
+    end if;
+\end{lstlisting}
+
+Im Zustand EX\_MATRIX\_MEM\_RSP wird auf die Rückmeldung gewartet. Wenn die Rückmeldung anhand des Signals ``lsu\_wait\_i'' refolgt ist, dann wird der geladene Wert über das write--back signal (wb) in die Register--File (RF) geschrieben. Dann wird die Matrix-Engine deaktiviert.
+
+\begin{lstlisting}
+when EX_MATRIX_MEM_RSP => -- wait for memory response
+
+    if (lsu_wait_i = '0') then
+
+        -- write-back to RF if read operation (won't happen in case of exception)
+        ctrl_nxt.rf_wb_en    <= (not ctrl.lsu_rw) or ctrl.lsu_rvs or ctrl.lsu_rmw;
+
+        -- tell the matrix unit to stay offline
+        ctrl_nxt.lsu_m_en    <= '0';
+
+        exe_engine_nxt.state <= EX_DISPATCH;
+
+    end if;
+\end{lstlisting}
+
+Für Matrix Operationen gibt es die beiden neuen States EX\_MATRIX\_OPERATION\_REQ und EX\_MATRIX\_OPERATION\_RSP. Mit Matrix Operationen ist die Matrix-Multiplikation gemeint. Da die Matrix-Multiplikation nicht in einem einzigen Schritt ausgeführt ist, muss die Execution-Engine auf die Matrix-Engine warten. Daher ergibt sich die Notwendigkeit für einen Request-- und einen Response--State.
+
+\begin{lstlisting}
+when EX_MATRIX_OPERATION_REQ => -- matrix add operation
+
+    if (or_reduce_f(trap_ctrl.exc_buf(exc_ialign_c downto exc_iaccess_c)) = '0') then
+
+        matrix_mul_o <= '0';
+
+        case funct3_v is
+
+            when funct3_mmul32_c =>
+                matrix_mul_o <= '1';
+
+            when others => -- undefined
+
+        end case;
+
+        matrix_immediate_o <= immediate;
+
+        -- next state
+        exe_engine_nxt.state <= EX_MATRIX_OPERATION_RSP;
+
+    else
+        exe_engine_nxt.state <= EX_DISPATCH;
+    end if;
+
+when EX_MATRIX_OPERATION_RSP =>
+
+    -- next state
+    if (matrix_operation_wait_i = '0') then
+
+        matrix_mul_o <= '0';
+
+        exe_engine_nxt.state <= EX_DISPATCH;
+
+    end if;
+\end{lstlisting}
+
+Diese beiden Zustände sind sehr simple. Im Request--State wird das Signal matrix\_mul\_o aktiviert und in en Response--State übergegangen. Im Response--State wird auf das Signal matrix\_operation\_wait\_i gewartet und dann die Matrix Multiplikation deaktiviert.
+
+
+
+
+\section{Erweiterung der Load--Store--Unit} \label{sec:neorv32-extending-LSU}
+
+Der nächste Schritt ist die Erweiterung der Load--Store--Unit. Die Load--Store--Unit ist innerhalb der CPU-Entity definiert.
+
+Die Aufgabe besteht darin, Daten aus dem Datenspeicher in die neuen Matrix-Register zu laden. Hier wäre es möglich die Matrix-Engine als eigenen Bus-Teilnehmer an den Bus zu binden. Die Matrix-Engine hätte dann die Möglichkeit Daten aus dem Datenspeicher über den Bus zu laden.
+
+Der Nachteil daran ist, dass die Matrix-Engine dann Daten lädt, die die Load-Store Unit dann nicht in ihrem Cache geladen hat. Die Load--Store--Unit ist verantwortlich für den Rest des CPU. Damit hätte der CPU dann insgesammt veraltete Daten. Nach Ausführung einer Matrix- Load--Store--Operation müsste die Load--Store--Unit ihren Cache invalidieren, da dieser veraltete Daten enthalten könnte. Daraufhin muss sich der Cache erst wieder aufwärmen und die Performance leidet folglich.
+
+Aus diesem Grund wurde das Laden der Matrix-Engine in die LSU integriert. Wenn eine Matrix Operation eine Matrix berechnet hat und diese Daten dann wieder in den Datenspeicher übertragen werden, dann durchlaufen die Daten den Cache der LSU und wärmen den Cache damit für den Rest des CPU mit aktuellen Daten. Das bedeutet, dass der Rest der ausgeführten Anwendung dann direkt auf die gecachte Matrix zugreifen kann anstelle die Matrix erst wieder aus dem Datenspeicher laden zu müssen.
+
+Damit werden Daten über die Load--Store--Unit geladen, damit die Daten im Cache landen. Die Load--Store--Unit erzeugt Bus--Anfragen, wenn Sie Daten laden und speichern soll. Da ein Matrix-Register aus 16 Elementen besteht, werden beide Prozess, für Load und für Store erweitert.
+
+Der Load-Prozess wird für Matrix--Load--Anweisungen um eine State--Machine erweitert. Der State ML\_IDLE deaktiviert die Load--Operation. Der Zustand ML\_INIT setzt den Zähler auf 0 und geht in den ML\_PROCESS Status über. Im ML\_Process Status erfolgen 16 Load Operationen um das Matrix-Register zu füllen. Alle 16-Operation durchlaufen den Cache was positiv ist. Der ML\_INCREMENT wird abwechselnd mit ML\_PROCESS ausgeführt und zählt den Zähler nach oben.
+
+Sind die 16 Operationen ausgeführt, geht die State--Machine zurück nach ML\_IDLE.
+
+Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählte, welche 16 Element zurückschreiben muss.
+
+Eine wirkliche Neuerung ist, dass ein neuer Prozess eingefügt wird. Es handelt sich um den PROC\_RAM Prozess. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuer und gibt entweder Daten für ein Load zurück oder speichert Daten für eine Store--Anweisung. Die Daten kommen aus dem Daten--Speicher und durchlaufen den Cache.
+
+
+
+
+TODO: Diagram zur besseren Veranschaulichung
+
+TODO: Überblick über die neuen Register geben.
+
+TODO: Die eigentlich Matrix-Multiplikation beschreiben.
+TODO: Beschreiben, dass man wirklich 16 Elemente pro matrix verarbeitet.
+
+TODO: matrix\_operation\_wait\_i signal to sensitivity list
