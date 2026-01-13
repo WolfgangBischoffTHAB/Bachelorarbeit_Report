@@ -17,9 +17,10 @@
 \contentsline {section}{\numberline {3.5}Blockweiße Matrix Multiplikation}{14}{section.111}%
 \contentsline {section}{\numberline {3.6}Outer-Produkt}{15}{section.116}%
 \contentsline {chapter}{\numberline {4}Durchführung und Methodik}{17}{chapter.118}%
-\contentsline {section}{\numberline {4.1}Der NEORV32 Core}{17}{section.119}%
-\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{18}{chapter.121}%
-\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{19}{chapter.122}%
-\contentsline {chapter}{Anhang}{20}{section*.123}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{20}{chapter*.124}%
+\contentsline {section}{\numberline {4.1}Der NEORV32 Core und dessen Einsatz}{17}{section.119}%
+\contentsline {section}{\numberline {4.2}Architektur des NEORV32 Core}{18}{section.121}%
+\contentsline {chapter}{\numberline {5}Auswertung und Evaluierung}{20}{chapter.124}%
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{21}{chapter.125}%
+\contentsline {chapter}{Anhang}{22}{section*.126}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{22}{chapter*.127}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

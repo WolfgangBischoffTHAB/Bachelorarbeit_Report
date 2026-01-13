@@ -1,22 +1,24 @@
 # Fdb version 4
-["bibtex out/bthesis_wbischoff_2228538"] 1768246525.60372 "out/bthesis_wbischoff_2228538.aux" "out/bthesis_wbischoff_2228538.bbl" "out/bthesis_wbischoff_2228538" 1768246533.06853 0
+["bibtex out/bthesis_wbischoff_2228538"] 1768320997.88976 "out/bthesis_wbischoff_2228538.aux" "out/bthesis_wbischoff_2228538.bbl" "out/bthesis_wbischoff_2228538" 1768321047.03603 0
   "./Literatur/Literatur.bib" 1768246402 4364 75f5fc3f7116d7347c9bde9b4942f400 ""
   "c:/texlive/2025/texmf-dist/bibtex/bst/din1505/natdin.bst" 1768044513 56373 839a1cb71aed1a75234c001a8d1308cf ""
-  "out/bthesis_wbischoff_2228538.aux" 1768246531 15797 168e11591bb93837307604a56dab7a38 "pdflatex"
+  "out/bthesis_wbischoff_2228538.aux" 1768321045 17123 c8df9033a9f5aa8d9a6d0b06c49e3f84 "pdflatex"
   (generated)
   "out/bthesis_wbischoff_2228538.bbl"
   "out/bthesis_wbischoff_2228538.blg"
   (rewritten before read)
-["pdflatex"] 1768246526.18908 "bthesis_wbischoff_2228538.tex" "out/bthesis_wbischoff_2228538.pdf" "bthesis_wbischoff_2228538" 1768246533.06945 0
+["pdflatex"] 1768321039.67883 "bthesis_wbischoff_2228538.tex" "out/bthesis_wbischoff_2228538.pdf" "bthesis_wbischoff_2228538" 1768321047.03723 0
   "Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png" 1768233781 228169 626adf27aee454a09fea0190976691a2 ""
   "Bilder/MAC_MatrixAccumulator.png" 1768243934 75985 b4b373688b485d194d99688616723f75 ""
   "Bilder/MatrixMult_1.png" 1768239803 10049 b8c5d2a823680c9c2cd9c9bf80763908 ""
   "Bilder/MatrixMult_2.png" 1768240902 6132 26101a75d342e1180434ce3fbae1a97d ""
   "Bilder/MatrixMult_3.png" 1768242988 13022 2a1dd8802908a0d1f2902653b6750be7 ""
   "Bilder/MatrixMult_4.png" 1768241549 4803 846f97b634c936772f1e6625364bdf00 ""
+  "Bilder/neorv32_cpu_architecture.png" 1768319897 69153 eccc5162e9486ecfb967aa990c4404ba ""
+  "Bilder/neorv32_debugging_instructions.png" 1768320382 174623 c847906cb1f1b9ab4c84392c50eddd9f ""
   "Bilder/thab_logo.png" 1768042264 49450 c8cca33fb7bda8843580bbc83ce7ca80 ""
   "Kapitel/AuswertungundErgebnisse.tex" 1768141973 82 b4e4c0fbd8d7361d8ee5b12462326688 ""
-  "Kapitel/DurchfuehrungArbeit.tex" 1768246516 1574 bf526118e0b7ddfb38663617692a956f ""
+  "Kapitel/DurchfuehrungArbeit.tex" 1768321036 5683 94bd888dd38f0f8ce1a29e72feea4c3d ""
   "Kapitel/Einleitung.tex" 1768132992 5180 7e06548b74b029636ec356f09b21233b ""
   "Kapitel/StandTechnik.tex" 1768146912 6479 cf71c520b9559d9bf2cf257d515865ad ""
   "Kapitel/TheoretischeGrundlagen.tex" 1768245093 30957 e66022c1a32d51695d0306f838450c28 ""
@@ -256,12 +258,12 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1768049274 5587484 30eee748fa419a911c40b0c750dd21ba ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1768049659 3635709 a1f44dfe00c3066b43581817995bf4ae ""
   "c:/texlive/2025/texmf.cnf" 1768049248 713 e69b156964470283e0530f5060668171 ""
-  "out/bthesis_wbischoff_2228538.aux" 1768246531 15797 168e11591bb93837307604a56dab7a38 "pdflatex"
-  "out/bthesis_wbischoff_2228538.bbl" 1768246526 3852 8e748f25bd1ef330f1f24a9c3399dfc0 "bibtex out/bthesis_wbischoff_2228538"
-  "out/bthesis_wbischoff_2228538.equation" 1768246531 321 6996e35ee506ac3e1f56a83d2a4c0077 "pdflatex"
-  "out/bthesis_wbischoff_2228538.lof" 1768246531 1021 7d1e3b8d6cae04a23d7165ec8194d0ca "pdflatex"
-  "out/bthesis_wbischoff_2228538.lot" 1768246531 321 6996e35ee506ac3e1f56a83d2a4c0077 "pdflatex"
-  "out/bthesis_wbischoff_2228538.toc" 1768246531 1807 4e64bd15d5caa036a9a4d0f66fe5d8ff "pdflatex"
+  "out/bthesis_wbischoff_2228538.aux" 1768321045 17123 c8df9033a9f5aa8d9a6d0b06c49e3f84 "pdflatex"
+  "out/bthesis_wbischoff_2228538.bbl" 1768320998 3852 8e748f25bd1ef330f1f24a9c3399dfc0 "bibtex out/bthesis_wbischoff_2228538"
+  "out/bthesis_wbischoff_2228538.equation" 1768321045 321 6996e35ee506ac3e1f56a83d2a4c0077 "pdflatex"
+  "out/bthesis_wbischoff_2228538.lof" 1768321045 1234 fe1534ebb0e2fb2a3e4840195a8bfd07 "pdflatex"
+  "out/bthesis_wbischoff_2228538.lot" 1768321045 321 6996e35ee506ac3e1f56a83d2a4c0077 "pdflatex"
+  "out/bthesis_wbischoff_2228538.toc" 1768321045 1915 0144b90c193a809f8b9b5b97a16358d2 "pdflatex"
   "setup/commands.tex" 1768054900 4164 5b9af460a17695888dca4d5dca7d2552 ""
   "setup/custom_packages.tex" 1768042264 47 221d6ace41230e4dcc96d3398cbaa07d ""
   "setup/listofequations.tex" 1768042264 215 d3a2d3022be8954b839d2db46c3647df ""

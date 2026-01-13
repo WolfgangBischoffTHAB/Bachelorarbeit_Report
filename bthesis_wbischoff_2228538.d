@@ -7,6 +7,8 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/MatrixMult_2.png\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
+    Bilder/neorv32_cpu_architecture.png\
+    Bilder/neorv32_debugging_instructions.png\
     Bilder/thab_logo.png\
     Kapitel/AuswertungundErgebnisse.tex\
     Kapitel/DurchfuehrungArbeit.tex\
@@ -273,6 +275,10 @@ Bilder/MatrixMult_2.png :
 Bilder/MatrixMult_3.png :
 
 Bilder/MatrixMult_4.png :
+
+Bilder/neorv32_cpu_architecture.png :
+
+Bilder/neorv32_debugging_instructions.png :
 
 Bilder/thab_logo.png :
 

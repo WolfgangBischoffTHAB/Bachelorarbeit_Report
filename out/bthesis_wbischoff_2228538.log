@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  12 JAN 2026 20:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  13 JAN 2026 17:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1073,6 +1073,9 @@ LaTeX Warning: Label `fig:Matrix-Extension-Optionen' multiply defined.
 
 LaTeX Warning: Label `fig:Matrix_Multiplikation_Blockwise' multiply defined.
 
+
+LaTeX Warning: Label `sec:neorv32_core' multiply defined.
+
 )
 \openout1 = `bthesis_wbischoff_2228538.aux'.
 
@@ -1451,7 +1454,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
 (Font)              scaled to size 5.0pt on input line 181.
 [11]
-<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=283, 717.17938pt x 391.9643
+<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=289, 717.17938pt x 391.9643
 7pt>
 File: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png Graphic file (type png)
 <use Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>
@@ -1473,7 +1476,7 @@ lgt, der sich vom Architectured-|
  []
 
 [13 <./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>]
-<Bilder/MatrixMult_1.png, id=348, 514.42188pt x 77.25414pt>
+<Bilder/MatrixMult_1.png, id=354, 514.42188pt x 77.25414pt>
 File: Bilder/MatrixMult_1.png Graphic file (type png)
 <use Bilder/MatrixMult_1.png>
 Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 305.
@@ -1483,7 +1486,7 @@ Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 305.
 LaTeX Warning: Reference `fig:Matri_Multiplikation_Ergebnis' on page 14 undefin
 ed on input line 312.
 
-<Bilder/MatrixMult_2.png, id=349, 257.46187pt x 51.33662pt>
+<Bilder/MatrixMult_2.png, id=355, 257.46187pt x 51.33662pt>
 File: Bilder/MatrixMult_2.png Graphic file (type png)
 <use Bilder/MatrixMult_2.png>
 Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 316.
@@ -1491,20 +1494,20 @@ Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 316.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Bilder/MatrixMult_4.png, id=351, 450.18187pt x 38.61pt>
+<Bilder/MatrixMult_4.png, id=357, 450.18187pt x 38.61pt>
 File: Bilder/MatrixMult_4.png Graphic file (type png)
 <use Bilder/MatrixMult_4.png>
 Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 325.
 (pdftex.def)             Requested size: 270.1112pt x 23.16617pt.
 [14 <./Bilder/MatrixMult_1.png>]
-<Bilder/MatrixMult_3.png, id=359, 514.42188pt x 141.0511pt>
+<Bilder/MatrixMult_3.png, id=365, 514.42188pt x 141.0511pt>
 File: Bilder/MatrixMult_3.png Graphic file (type png)
 <use Bilder/MatrixMult_3.png>
 Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 336.
 (pdftex.def)             Requested size: 308.6555pt x 84.6313pt.
  [15 <./Bilder/MatrixMult_2.png> <./Bilder/MatrixMult_4.png> <./Bilder/MatrixMu
 lt_3.png>]
-<Bilder/MAC_MatrixAccumulator.png, id=372, 432.11438pt x 405.515pt>
+<Bilder/MAC_MatrixAccumulator.png, id=378, 432.11438pt x 405.515pt>
 File: Bilder/MAC_MatrixAccumulator.png Graphic file (type png)
 <use Bilder/MAC_MatrixAccumulator.png>
 Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 3
@@ -1529,17 +1532,38 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
 (Font)              `T1/Roboto-LF/regular/n' on input line 11.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
 (Font)              scaled to size 6.0pt on input line 11.
-) (./Kapitel/AuswertungundErgebnisse.tex [17
+[17
 
 
 ]
+Underfull \hbox (badness 1460) in paragraph at lines 19--20
+\T1/Roboto-LF/regular/n/10 NEORV32 na-mens, neorv32-setups. In-ner-halb die-ses
+ Pro-jekts, be-fin-det
+ []
+
+<Bilder/neorv32_cpu_architecture.png, id=400, 828.09375pt x 391.4625pt>
+File: Bilder/neorv32_cpu_architecture.png Graphic file (type png)
+<use Bilder/neorv32_cpu_architecture.png>
+Package pdftex.def Info: Bilder/neorv32_cpu_architecture.png  used on input lin
+e 29.
+(pdftex.def)             Requested size: 264.9954pt x 125.27055pt.
+[18 <./Bilder/neorv32_cpu_architecture.png>]
+<Bilder/neorv32_debugging_instructions.png, id=407, 962.59625pt x 248.42813pt>
+File: Bilder/neorv32_debugging_instructions.png Graphic file (type png)
+<use Bilder/neorv32_debugging_instructions.png>
+Package pdftex.def Info: Bilder/neorv32_debugging_instructions.png  used on inp
+ut line 40.
+(pdftex.def)             Requested size: 308.0371pt x 79.49861pt.
+)
+(./Kapitel/AuswertungundErgebnisse.tex [19 <./Bilder/neorv32_debugging_instruct
+ions.png>]
 chapter 5.
-) (./Kapitel/ZusammenfassungundAusblick.tex [18
+) (./Kapitel/ZusammenfassungundAusblick.tex [20
 
 
 ]
 chapter 6.
-) (./Seiten/Anhang.tex [19
+) (./Seiten/Anhang.tex [21
 
 
 ]) (out/bthesis_wbischoff_2228538.bbl
@@ -1605,7 +1629,7 @@ Underfull \hbox (badness 3557) in paragraph at lines 65--69
   [].  []$\T1/cmtt/m/n/10 https : / / github . com / stnolting /
  []
 
-) [20
+) [22
 
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
@@ -1623,10 +1647,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 40643 strings out of 467538
- 827724 string characters out of 5423725
+ 40671 strings out of 467538
+ 828714 string characters out of 5423725
  1820020 words of memory out of 5000000
- 68714 multiletter control sequences out of 15000+600000
+ 68737 multiletter control sequences out of 15000+600000
  738074 words of font info for 180 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  112i,9n,120p,11246b,2674s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1641,10 +1665,10 @@ tt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/
 texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/te
 xmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (31 pages, 528387 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (33 pages, 684526 bytes).
 PDF statistics:
- 594 PDF objects out of 1000 (max. 8388607)
- 516 compressed objects within 6 object streams
- 181 named destinations out of 1000 (max. 500000)
- 51924 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 617 PDF objects out of 1000 (max. 8388607)
+ 533 compressed objects within 6 object streams
+ 186 named destinations out of 1000 (max. 500000)
+ 51942 words of extra memory for PDF output out of 61914 (max. 10000000)
 
