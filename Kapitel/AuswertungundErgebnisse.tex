@@ -1,1 +1,124 @@
 \chapter{Auswertung und Evaluierung} \label{chpt:Auswertung_und_Evaluierung_Main}
+
+\section{Testdaten} \label{sec:testdata}
+
+Um eine Vergleichbarkeit der Verfahren und eine Überprüfung der Korrektheit zu erzielen, werden Testdaten mit erwartetem Ergebnis vorgegeben. In diesem Fall handelt es sich um zwei Matrizen A und B von denen das Ergebnis der Multiplikation bekannt ist und durch Matrix C dokumentiert wird.
+
+Es wird eine 4x4 Matrixmultiplikation mit den beiden Matrizen A und B durchgeführt, für die das Ergebnis bekannt ist.
+
+\begin{equation}
+    C = A * B
+\end{equation}
+
+\[ \begin{bmatrix}
+         a_{11} & a_{12} & \cdots & a_{1n}\\
+         a_{21} & a_{22} & \cdots & a_{2n}\\
+         \vdots & \vdots & \ddots & \vdots\\
+         a_{m1} & a_{m2} & \cdots & a_{mn}
+     \end{bmatrix}
+     \times
+     \begin{bmatrix}
+         b_{11} & b_{12} & \cdots & b_{1p}\\
+         b_{21} & b_{22} & \cdots & b_{2p}\\
+         \vdots & \vdots & \ddots & \vdots\\
+         b_{n1} & b_{n2} & \cdots & b_{np}
+     \end{bmatrix} \]
+
+\[ \begin{bmatrix}
+         90 & 100 & 110 & 120\\
+         202 & 228 & 254 & 280\\
+         314 & 356  & 398 & 440\\
+         426 & 484 & 542 & 600
+     \end{bmatrix}
+     =
+\begin{bmatrix}
+         1 & 2 & 3 & 4\\
+         5 & 6 & 7 & 8\\
+         9 & 10 & 11 & 12\\
+         13 & 14 & 15 & 16
+     \end{bmatrix}
+     \times
+     \begin{bmatrix}
+         1 & 2 & 3 & 4\\
+         5 & 6 & 7 & 8\\
+         9 & 10 & 11 & 12\\
+         13 & 14 & 15 & 16
+     \end{bmatrix} \]
+
+     \[ \begin{bmatrix}
+         5A & 64 & 6E & 78\\
+         CA & E4 & FE & 118\\
+         13A & 164 & 18E & 1B8\\
+         1AA & 1E4 & 21E & 258
+     \end{bmatrix}
+     =
+     \begin{bmatrix}
+         90 & 100 & 110 & 120\\
+         202 & 228 & 254 & 280\\
+         314 & 356  & 398 & 440\\
+         426 & 484 & 542 & 600
+     \end{bmatrix}  \]
+
+Zur einfacheren Vergleichbarkeit der Matrix C mit der Waveform der Simulation wurde die Matrix C noch in hexadezimaler Schreibweiße angegeben, da die Waveform zahlen hexadezimal darstellt.
+
+\section{Prüfung mit Matrix-Erweiterung} \label{sec:eval_with_matrix_extension}
+
+Für die Prüfung mit Hardwarebeschleunigung, enthält das ausgeführte Anwendungsprogram die mle32, mmul32 und mse32 Anweisungen als Intrinsics.
+
+Die Matrix A und die Matrix B werden aus dem CPU-Ram in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
+
+\begin{lstlisting}
+#include <neorv32.h>
+
+uint32_t matrix_a[16]
+  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+uint32_t matrix_b[16]
+  = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+int main() {
+
+  uint32_t *matrix_a_addr = &matrix_a[0];
+  uint32_t *matrix_b_addr = &matrix_b[0];
+
+  uint32_t matrix_unit_a = 0;
+  uint32_t matrix_unit_b = 0;
+
+  matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b010, 0b1011011);
+  matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b010, 0b1011011);
+
+  uint32_t matrix_mul = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b100, 0b1011011);
+
+  matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b001, 0b1011011);
+  matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b001, 0b1011011);
+
+  return 0;
+}
+\end{lstlisting}
+
+Zunächst wird über den WaveForm Viewer visuell geprüft, ob die korrekten Steuersignal ausgegeben werden. Dazu wird Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} betrachtet.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikationInstruktions.png"}
+\caption{Steuersignale der Matrix-Multiplikation}
+\label{fig:Waveforms-Matrix-Mult-ControlSignals}
+\end{figure}
+
+Die schnellste Art Informationen aus der Ansicht zu ziehen ist es, sich auf die Signale ``load'', ``matrix\_mul\_o'' und ``store'' zu konzentrieren. Diese Signale entsprechen der Abarbeitung der Instruktionen mle32, mmul32 und mse32 in genau dieser Reihenfolge. In der Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} kann man sehen, dass die Signale in genau der gewünschten Reihenfolge und auch Häufigkeit auf den Wert eins springen. Es wird zwei mal geladen und gespeichert, da die Testanwendung die Matrizen A und B lädt und speichert. Die Operation mmul32, angedeutet durch das Signal ``matrix\_mul\_o'', wird nur einmalig ausgeführt, wie erwartet.
+
+Danach wird geprüft, ob die Matrix-Multiplikation in der Simulation mit den richtigen Daten abgearbeitet wird und ob die richtigen Werte in der Matrix C abgelegt werden.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikation.png"}
+\caption{Waveforms der Matrix-Multiplikation}
+\label{fig:Waveforms-Matrix-Mult}
+\end{figure}
+
+In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer-Produkt multipliziert und auf die Accumulator-Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
+
+Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrix-Multiplikation mit dem erstellten Design funktioniert wie geplant.
+
+
+\section{Prüfung ohne Matrix-Erweiterung} \label{sec:eval_without_matrix_extension}

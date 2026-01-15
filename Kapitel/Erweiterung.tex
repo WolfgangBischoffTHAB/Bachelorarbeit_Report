@@ -65,9 +65,11 @@ In der Zeile 17 ff wird as Intrinsic ``CUSTOM\_INSTR\_I\_TYPE'' für I-Type RISC
 
 Die Verwendung ist schwer zu verstehen, daher wird jetzt beschrieben, wie die Parameter zum Intrinsic zu interpretieren, sind. Der letzte Parameter ist der Op-Code. Für die Matrix-Extension wurde in dieser Arbeit der Op-Code 0b1011011 gewählt. Innerhalb dieses Opcodes werden dann durch den vorletzten Parameter die drei Anweisungen mle32, mmul32 und mse32 kodiert.
 
-Es ist noch abschließend zu erklären, weshalb Intrinsics verwendet werden müssen. Der grundsätzliche Ablauf bei der Verwendung der Programmiersprache C ist, dass ein Compiler den Quellcode der höheren Programmiersprache in Eigenregie in Assembler-Code übersetzt. Dabei wählt er die Anweisungen selbst aus. Optimierende Compiler führen diese Aufgabe in vielen Fällen besser aus, als es ein Mensch könnte. Im Fall dieser Arbeit ist dieses Vorgehen nicht möglich. Der C-Compiler kennt die neu definierten Instruktionen mle32, mmul32 und mse32 schlicht nicht und wird sie daher nur ausgeben, wenn man den Compiler explizit dazu anweist. Diese explizite Anweisung passiert durch die Intrinsics.
+Es ist noch abschließend zu erklären, weshalb Intrinsics verwendet werden müssen. Der grundsätzliche Ablauf bei der Verwendung der Programmiersprache C ist, dass ein Compiler den Quellcode der höheren Programmiersprache in Eigenregie in Assembler-Code übersetzt. Dabei wählt er die Anweisungen selbst aus. Optimierende Compiler führen diese Aufgabe in vielen Fällen besser aus, als es ein Mensch könnte.
 
-Intern sind die Intrinsics durch Inline Assembly implementiert. Das bedeutet, dass dem C-Compiler exakt vorgegben wird, welchen inline assembly Code er auszugeben hat. Im Beispiel-Code werden die Instruktionen mle32, mmul32 und mse32 per Opcode generiert.
+Im Fall dieser Arbeit ist dieses Vorgehen nicht möglich. Der C-Compiler kennt die neu definierten Instruktionen mle32, mmul32 und mse32 schlicht nicht und wird sie daher nur ausgeben, wenn man den Compiler explizit dazu anweist. Diese explizite Anweisung passiert durch die Intrinsics.
+
+Intern sind die Intrinsics durch Inline Assembly implementiert. Das bedeutet, dass dem C-Compiler exakt vorgegeben wird, welchen inline assembly Code er auszugeben hat. Im Beispiel-Code werden die Instruktionen mle32, mmul32 und mse32 per Opcode generiert.
 
 Im Anhang dieser Arbeit wird die Erstellung eines Compilers beschrieben, der im Zuge dieser Arbeit erstellt worden ist und auch dazu verwendet werden kann, die neuen Instruktionen auszugeben. Der im Anhang beschriebene Compiler wurde verwendet, bis der Weg über die Intrinsics gefunden wurde. Die Intrinsics erlauben es State-of-the-Art Compiler wie den GCC zu verwenden. Dies ist sehr viel komfortabler als einen eignenen Compiler zu pflegen.
 
@@ -184,7 +186,7 @@ when EX_MATRIX_MEM_RSP => -- wait for memory response
     end if;
 \end{lstlisting}
 
-Für Matrix Operationen gibt es die beiden neuen States EX\_MATRIX\_OPERATION\_REQ und EX\_MATRIX\_OPERATION\_RSP. Mit Matrix Operationen ist die Matrix-Multiplikation gemeint. Da die Matrix-Multiplikation nicht in einem einzigen Schritt ausgeführt ist, muss die Execution-Engine auf die Matrix-Engine warten. Daher ergibt sich die Notwendigkeit für einen Request-- und einen Response--State.
+Für Matrixoperationen gibt es die beiden neuen Zustände EX\_MATRIX\_OPERATION\_REQ und EX\_MATRIX\_OPERATION\_RSP. Mit Matrix Operationen ist die Matrix-Multiplikation gemeint. Da die Matrix-Multiplikation nicht in einem einzigen Schritt ausgeführt ist, muss die Execution-Engine auf die Matrix-Engine warten. Daher ergibt sich die Notwendigkeit für einen Request-- und einen Response--State.
 
 \begin{lstlisting}
 when EX_MATRIX_OPERATION_REQ => -- matrix add operation
@@ -244,12 +246,150 @@ Der Load-Prozess wird für Matrix--Load--Anweisungen um eine State--Machine erwe
 
 Sind die 16 Operationen ausgeführt, geht die State--Machine zurück nach ML\_IDLE.
 
-Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählte, welche 16 Element zurückschreiben muss.
+Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählt, welche 16 Element zurückschreiben muss.
 
 Eine wirkliche Neuerung ist, dass ein neuer Prozess eingefügt wird. Es handelt sich um den PROC\_RAM Prozess. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuer und gibt entweder Daten für ein Load zurück oder speichert Daten für eine Store--Anweisung. Die Daten kommen aus dem Daten--Speicher und durchlaufen den Cache.
 
 
 
+
+\section{Matrix-Engine} \label{sec:neorv32-extending-LSU}
+
+In die Datei ``neorv32\_cpu.vhd'' wird die Matrix-Engine eingebaut.
+
+Die Engine besteht zunächst aus dem PROC\_RAM Prozess.
+
+\begin{lstlisting}
+PROC_RAM : process(clk_i)
+  variable l : line;
+begin
+  if (rstn_i = '0') then
+      ...
+  elsif rising_edge(clk_i) then
+    if (transfer = '1') then
+      -- store the c temporaries into the second matrix engine register
+      matrix_ram_0(0) <= std_ulogic_vector(c11(31 downto 0));
+      matrix_ram_0(1) <= std_ulogic_vector(c12(31 downto 0));
+      ...
+      matrix_ram_0(15) <= std_ulogic_vector(c44(31 downto 0));
+
+      -- store the c temporaries into the second matrix engine register
+      matrix_ram_1(0) <= std_ulogic_vector(c11(31 downto 0));
+      matrix_ram_1(1) <= std_ulogic_vector(c12(31 downto 0));
+      ...
+      matrix_ram_1(15) <= std_ulogic_vector(c44(31 downto 0));
+    end if;
+    if (load = '1') then
+      -- data_out is the output of the LoadStoreUnit (LSU) and it contains the RAM/cache value
+      -- which is loaded into the MatrixEngine
+      if (to_integer(unsigned(matrix_immediate)) = 0) then
+        matrix_ram_0(head) <= data_out;
+      else
+        matrix_ram_1(head) <= data_out;
+      end if;
+    end if;
+    if (store = '1') then
+      if (to_integer(unsigned(matrix_immediate)) = 0) then
+        data_in <= matrix_ram_0(tail);
+      else
+        data_in <= matrix_ram_1(tail);
+      end if;
+    end if;
+    if (matrix_add = '1') then
+      for i in 0 to 15 loop
+        matrix_ram_0(i) <= std_ulogic_vector(unsigned(matrix_ram_0(i)) + unsigned(matrix_immediate));
+      end loop;
+    end if;
+  end if;
+end process PROC_RAM;
+\end{lstlisting}
+
+Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrix-Multiplikation in das Zielmatrixregister zu übertragen (transfer). Es wäre auch möglich weitere Operationen wie ein elementweißes Addieren eine Konstante in diesem Prozess zu implementieren.
+
+Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit Elementen und sind nicht für andere Datentypen konfiguierbar und nicht für größere Längen miteinander kombinierbar. Ein Register ist wie folgt definiert.
+
+\begin{lstlisting}
+  type ram_type is array (0 to MLEN-1) of std_ulogic_vector(XLEN-1 downto 0);
+  subtype matrix_ram_addr is integer range 0 to MLEN-1;
+
+  signal matrix_ram_0 : ram_type;
+  signal matrix_ram_1 : ram_type;
+  signal matrix_ram_2 : ram_type;
+\end{lstlisting}
+
+Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der LSU ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
+
+Wenn die LSU Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der LSU mit dem PROC\_RAM Prozess geschieht über die Signale hail und tail.
+
+Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer-Product. Dazu sind bei 16 Elementen pro Matrixregister und damit mit 4x4 Matrizen vier Schritte notwendig. In den vier Schritten werden Zeilen aus der Matrix A und Spalten aus der Matrix B miteinander verrechnet. Mit vier Zeile und vier Spalten müssen also vier Berechnungen ausgeführt werden.
+
+Um die Berechnung auszuführen wird eine State--Machine verwendet. Die State--Machine durchläuft die Zustände MM\_RESET, MM\_INIT\_1, MM\_PROCESS\_1, ..., MM\_INIT\_4, MM\_PROCESS\_4, MM\_STORE, MM\_DONE.
+
+Der MM\_RESET Zustand setzt die Matrixregister auf 0, wenn das matrix\_mul Signal auf 1 gesetzt wird. Solange matrix\_mul auf 0 steht, verbleibt der Wert der letzten durchgeführt Matrixmultiplikation in den Matrix Register stehen. Der Grund ist, dass man die Werte in den Register halten muss um sie in den RAM zurückschreiben zu können und dies einige CPU-Zyklen dauert. Das matrix\_mul Signal wird von der Kontrollogik des CPU gesetzt, wenn ein mmul32 Befehl ausgeführt wird und steht ansonsten auf 0.
+
+Wenn das matrix\_mul Signal gesetzt wird, werden die Matrixregiser mit 0 überschrieben und die State Machine geht in den nächsten Zustand über. Es folgen vier Schritte, die jeweils aus einem INIT und einem PROCESS Schritt bestehen. Alle vier Schritte sind äquivalent, es wird daher nur ein Schritt beschrieben.
+
+Im INIT Schritt wird eine Zeile aus der A-Matrix und eine Spalte aus der B-Matrix in extra Signale geladen:
+
+\begin{lstlisting}
+when MM_INIT_1 =>
+  a11 <= unsigned(matrix_ram_0(0));
+  a21 <= unsigned(matrix_ram_0(4));
+  a31 <= unsigned(matrix_ram_0(8));
+  a41 <= unsigned(matrix_ram_0(12));
+
+  b11 <= unsigned(matrix_ram_1(0));
+  b12 <= unsigned(matrix_ram_1(1));
+  b13 <= unsigned(matrix_ram_1(2));
+  b14 <= unsigned(matrix_ram_1(3));
+
+  mat_mul_engine_state <= MM_PROCESS_1;
+\end{lstlisting}
+
+Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply-Accumulate-Operation oder kurz MAC. Mit Multiply-Accumuate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer-Produkten zusammengesetzt. Die Outer-Produkte werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
+
+\begin{lstlisting}
+when MM_PROCESS_1 =>
+
+  c11 <= c11 + (a11 * b11);
+  c12 <= c12 + (a11 * b12);
+  c13 <= c13 + (a11 * b13);
+  c14 <= c14 + (a11 * b14);
+
+  c21 <= c21 + (a21 * b11);
+  c22 <= c22 + (a21 * b12);
+  c23 <= c23 + (a21 * b13);
+  c24 <= c24 + (a21 * b14);
+
+  c31 <= c31 + (a31 * b11);
+  c32 <= c32 + (a31 * b12);
+  c33 <= c33 + (a31 * b13);
+  c34 <= c34 + (a31 * b14);
+
+  c41 <= c41 + (a41 * b11);
+  c42 <= c42 + (a41 * b12);
+  c43 <= c43 + (a41 * b13);
+  c44 <= c44 + (a41 * b14);
+
+  -- next state
+  mat_mul_engine_state <= MM_INIT_2;
+\end{lstlisting}
+
+Nach vier MM\_INIT und vier MM\_PROCESS Zuständen ist die Matrix-Multiplikation durchgeführt und wird schließlich im MM\_STORE Schritt in das Zielregister übertragen. Dazu wird das Signal ``transfer'' auf 1 gesetzt.
+
+\begin{lstlisting}
+when MM_STORE =>
+  -- enable transfer in the RAM part
+  transfer <= '1';
+\end{lstlisting}
+
+Das ``transfer'' signal wird im PROC\_RAM Prozess gelesen und führt dort dazu, dass die Speicherzellen c11 bis c44 in das Ziel-Matrixregister kopiert werden. Dieser Sachverhalt wurde bereits weiter oben bei der Beschreibung des PROC\_RAM Prozesses beschrieben.
+
+Es soll an dieser Stelle kurz bewertet werden, ob die Berechnung der vier Outer-Produkte auf diese Weiße sinnvoll ist oder nicht. Als erstes ist diese Lösung funktional und diese Qualität ist sicherlich sehr wichtig. Ein VHDL Design zu erstellen, dass auch wirklich nach der Synthese auf einem FPGA funktioniert ist speziell für Anfänger immer ein großer Erfolg. Als zweites ist der Quellcode vom Standpunkt der VHDL-Synthese aus zu betrachten. Aus Sicht einer höheren Programmiersprache ist die Implementierung nicht sehr sinnvoll, da man beispielsweiße durch das Strassen-Verfahren einen Geschwindigkeitsvorteil erzielen kann. VHDL ist aber keine höhere Programmiersprache sondern eine Hardwarebeschrebungssprache. Dinge können in Hardware tatsächlich parallel ablaufen, wenn Elemente mehrfach synthetisiert werden.
+
+Die 16 Multiplikationen pro MM\_PROCESS Zustand werden hoffentlich von der Toolchain auf Hardware-Blöcke innerhalb des FPGA abgebildet und laufen damit effizient und wirklich parallel ab. Wenn der FPGA mehrere Hardware-Blöcke für die Multiplikation hat, dann können diese Multiplikationen tatsächlich parallel ausgeführt werden.
+
+Zusätzlich wäre es denkbar die vier MM\_INIT und MM\_PROCESS Schritte nicht sequentiell an eine State-Machine zu binden sondern sich über die parallele Ausführung der vier Schritte gedanken zu machen. Dazu muss die Aufgabe gelöst sein eine Parallele Akkumulation der Teilergebnisse in die Speicher c11 bis c44 zu bewerkstelligen. Ein vierfaches, gleichzeitiges Schreiben in die Zellen ist ohne Synchronisation vermutlich nicht möglich. Aus diesem Grund wurde im ersten Schritt das sequentielle Vorgehen gewählt. Hier kann weiter optimiert werden.
 
 TODO: Diagram zur besseren Veranschaulichung
 

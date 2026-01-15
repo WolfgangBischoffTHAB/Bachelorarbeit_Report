@@ -1,10 +1,11 @@
 \chapter{Durchführung und Methodik} \label{chpt:Methodik_Main}
 
-Das Ziel ist beschrieben. Es geht um die Erweiterung eine RISC-V Kerns um eine hardware beschleunigte Matrix-Multiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden. Die theoretischen Grundlagen wurden aufgezeigt.
+Das Ziel ist beschrieben. Es geht um die Erweiterung eines RISC-V Kerns um eine hardware-beschleunigte Matrix-Multiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden. Auch die theoretischen Grundlagen wurden aufgezeigt.
 
-In diesem Kapitel soll es um die praktische Umsetzung der bis hierher erarbeiteten Punkte gehen. Dazu wird der RISC-V Kern analysiert. Wenn die Bestandteile beschrieben sind, dann werden die möglichen Punkte an denen eine Anpassung erfolgen könnte bestimmt und durch Abhwägungen bestimmt, wo die Änderungen tatsächlich eingebracht werden.
+In diesem Kapitel wird beschrieben welches Vorgehen gewählt wird um die Arbeit durchzuführen.
 
-Es soll auch beschrieben werden, wie Software für das Hardware- Software-Co-Design erstellt wird. Da die Matrix-Multiplikation kein absolut triviales Programm darstellt, ist die Aufgabe der Software-Entwicklung nicht zu vernachlässigt.
+
+
 
 \section{Der NEORV32 Core und dessen Einsatz} \label{sec:neorv32_core}
 
@@ -12,82 +13,77 @@ Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting u
 
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
-Zur Durchführung wird der Quellcode zunächst durch einen Simulator evaluiert. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweiße für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingebdaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
+Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Es kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweiße für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingebdaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
 
-Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weiter gegangen werden. Das Design wird nun Synthetisiert statt Evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von Abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
+Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weiter gegangen werden. Das Design wird nun synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
 
-Um die Synthese-Werkzeuge einzusetzen gibt es ein Parallelprojekt zum NEORV32 namens, neorv32--setups. Innerhalb dieses Projekts, befindet sich ein TCL--Script. Dieses TCL--Script kann in der Entwicklungsumgebung Vivado ausgeführt weren und erzeugt dann ein Vivado--Projekt. Wenn dieses Vivado--Projekt dann schließlich in Vivado geöffnet wird, dann kann das Projekt übersetzt werden. Dabei führt Vivado seine gesamte Synthese Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB Verbindung auf den FPGA übetragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er in Silikon gegossen worden wäre.
+Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekts enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wierum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
-Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation erfolgreich ist. Danach erfolgt die Synthese mit Vivado. Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan.
+Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er auf einem Wafer produziert worden wäre.
 
-\section{Architektur des NEORV32 Core} \label{sec:neorv32_core_architecture}
+Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
 
-Der NEORV32 besitzt folgenden, in Abbildung \ref{fig:NEORV32_Architecture} dargestellten Aufbau.
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.32]{"neorv32_cpu_architecture.png"}
-\caption{NEORV32 Architektur}
-\label{fig:NEORV32_Architecture}
-\end{figure}
-
-Er ist im groben aus einem Frontend und einem Backend aufgebaut. Das Frontend ermittelt die nächste Anweisung und das Backend führt diese Anweisung dann aus. Beide Teile arbeiten in gewisser Weiße unabhängig voneinander. Damit kann das Frontend bereits Instruktionen puffern während das Backend Abarbeitungen macht. Im Falle von Sprüngen kann sich der Puffer dann mit den neuen Anweisungen am Sprungziel füllen, während das Backend parallel arbeitet.
-
-\section{Die Fetch-Engine} \label{sec:neorv32-fetch-engine}
-
-Die Fetch-Engine steht am Anfang der Abarbeitung einer Anweisung. Sie ist für das Laden der Anweisung aus dem Speicher zuständig und lädt von der Adresse, die momentan in Program Counter--Register steht. Die Fetch Engine arbeitet unabhängig vom Rest des CPU. Sie implementiert intern eine State--Machine, die Anweisungen puffern kann und sie kann intern Anweisungen laden ohne, dass die Anweisungen akut vom Rest des Systems gebraucht wird.
-
-Aus diesem Grund gibt es ein weiteres Signal, welches in Abbildung \ref{fig:NEORV32_valid_instruction} als ``debug\_valid\_i'' sichtbar gemacht wurde und angibt, ob die geladene Instruktion gültig ist und verwendet werden sollte oder nicht.
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.32]{"neorv32_debugging_instructions.png"}
-\caption{NEORV32 Gültige Instruktion}
-\label{fig:NEORV32_valid_instruction}
-\end{figure}
-
-Dieses Wissen ist wichtig, wenn man das Verhalten des CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das vom CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
-
-Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache verfügt wenn dies konfiguriert wird. In der Standardkonfiguration ist kein Cache für Instruktionen konfiguriert, wie in der Abbildung \ref{fig:NEORV32_Architecture} dargestellt. Die Fetch Engine greift direkt auf den Speicher zu.
-
-\section{CPU--Control und Execution-Engine} \label{sec:neorv32-execution-engine}
-
-Die Entität ``CPU--Control'' enthält die Kontrollogik des CPU. Die CPU--Control enthält den Program-Counter der auf die nächste Anweisung zeigt, die ``Configuration and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
-
-Bei einigen CPU--Designs für FPGAs findet man eine Kontrollogik vor. Die Kontrollogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrollogik Teile des CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
-
-Der NEORV32 CPU ist an dieser Stelle eine Ausnahme. Er besitzt anstatt kombinatorischer Logik eine State--Machine, die Execution--Engine genannt wird, um den CPU zu kontrollieren. Die Execution--Engine ist im inneren eines VHDL Prozesse definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielweiße muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf diesen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
-
-Der Start-Zustand ist EX\_RESTART state. Aus dem Reset geht die State-Machine in EX\_BRANCHED und erst dann in den Leerlaufzustand EX\_DISPATCH über. Der Umweg über EX\_BRANCHED erlaubt es auf die ein Instruction Fetch zu warten.
-
-Im Leerlaufzustand EX\_DISPATCH, wartet die Execution Engine bis ein Trap oder eine Exception eintritt oder bis das Frontend eine gültige Instruktion meldet, die dann abgearbeitet werden muss. Für normale Anweisungen wir der Zustand EX\_EXECUTE betreten.
-
-In EX\_EXECUTE wird der nächste Zustand abhängig von der Art der Anweisung gewählt. Das heißt EX\_EXECUTE ist ein Switch-State der in mehrere Äste der State--Machine verzweigen kann. Es gibt Zweige für ALU-Operationen, Sprünge und Speicherzugriffe (Load und Store).
-
-Für länger laufende Befehle muss die Execution--Engine auf den Abschluss der Operation warten. Daher sind lange laufende Operationen jewils durch ein Paar aus Request und Response Zuständen modeliert. Der Request Zustand wird direkt in Richtiung Response--Zustand verlassen. Der Response--Zustand wird erst in Richtung EX\_DISPATCH verlasssen, wenn das eingehende Response--Signal aus der Sensitivitätsliste aktiviert worden ist. Im Response--Zustand werden die erzeugte Daten betrachtet und Signale zurückgesetzt.
+Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan. Die Umgestaltung des Designs nach der Simulation bis zur Funktion nach der Synthese wird nochmals als eigener Arbeitsschritt bei der Durchführung dieser Arbeit antizipiert.
 
 
 
 
+\section{Test-Software} \label{sec:testsoftware}
 
-\section{Die Load-Store-Engine} \label{sec:neorv32-load-store-engine}
+Um zu Evaluieren, ob das Design wirklich funktioniert, muss der CPU mit einer Anwengungssoftware betrieben werden, die die neuen Instruktionen wirklich ausführt.
 
-neorv32\_cpu.vhd.
+Die Anwendung muss in Form von Maschinencode, also kodierten Befehlen vorliegen. Eine Anweisung ist bei RISC-V eine 32-bit Zahl oder eine 16-bit Zahl, wenn komprimierte Anweisungen unterstützt werden. Die Software kann durch einen Assembler in Maschinencode übersetzt werden. Tatsächlich ist die Kodierung für RISC-V nicht kompliziert und dazu auch gut dokumentiert.
 
-Die State--Machine der Execution--Engine produziert eine Vielzahl an Signalen, die andere Entitäten des VHDL--Designs aktivieren und mit Eingabedaten versorgen. Ein wichtiger Teil des Designs ist die sogenannte Load--Store Unit. Die Load--Store Unit hat zur Aufgabe Bus--Requests zu erstellen und Bus--Responses zu verarbeiten.
+Trotzdem wurde der Einsatz eines Assemblers für das Vorgehen bei dieser Arbeit nicht gewählt, da das Erstellen eines Assembler Programms ziemlich kompliziert ist. Es bestand die Furcht davor viel Zeit zu verlieren, wenn das Assemblerprogramm angepasst werden muss oder wenn mehr als eine Testsoftware erstellt werden soll. Dann ist für jede Anpassung wieder Assemblerentwicklung notwendig. Direkte Assembler-Entwicklung wird daher nicht verwendet.
 
-Die Bus--Requests werden auf dem Bus innerhalb des NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load--Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store--Anweisungen geschrieben. Die Aufgabe der Load--Store--Unit besteht darin die Signale der Execution--Engine in passende Bus--Requests für Load-- oder Store Anweisungen zu übersetzen.
+Der erste Ansatz an ein lauffähiges Program zu kommen, war es einen C-Compiler für eine Untermenge der Programmiersprache C zu erstellen. Der Vorteil der sich aus diesem Ansatz ergibt ist es zum einen volle Kontrolle darüber zu haben, welche RISC-V Anweisungen der Compiler ausgibt. Damit lässt sich ein RISC-V Programm erstellen, das tatsächlich auf dem NEORV32 CPU ausgeführt werden kann, wenn man nur Anweisungen generiert, die der NEORV32 auch unterstützt.
 
-Dabei ist folgende Besonderheit zu beachten. Die Bus--Requests, die von der Load--Store--Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data--Cache verbunden. Damit unterstützt der NEORV32 CPU eine Cache--Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load--Store--Unit immer zunächst in den Cache. Wenn ein Cache--Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.
+Zum anderen lassen sich in den Compiler dann auch neue Anweisungen einpflegen, die im RISC-V Standard noch nicht definiert sind. Zwangsweiße kennt ein GCC Compiler diese Anweisungen folglich auch nicht. Die Erweiterung des GCC Compiler ist um ein vielfaches komplizierter als die Erweiterung eines simplen, selbsterstellten Compilers. Die Unterstützung eigener Anweisungen wird in dieser Arbeit benötigt um die Matrix-Anweisungen verwenden zu können, die im Zuge dieser Arbeit hinzugefügt werden und daher von GCC nicht unterstützt werden.
+
+Da die C Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Untestützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen aber keine if-Anweisung. Bei der Arbeit an der Testanwendung wurde festgestellt, dass interessanterweiße für die Matrix-Multiplikation mit Strip-Mining keine if-Anweisungen benötigt werden. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp.
+
+Es gibt außerdem einen simplen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann. Der Compiler erzeugt ein Listing aus Assembler-Befehlen, die dann von einem Assembler in Maschinen-Code übersetzt werden müssen. Es gibt keine Ausgabe von Objekt-Dateien und keine Linker-Infrastruktur und damit auch keine Bibliotheken. Alle Programme müssen komplett in Form von Quellcode vorliegen und können nicht aus vorübersetzten Bibliotheken stammen.
+
+Es wurde ein beträchlicher Zeitaufwand in diesen Compiler gesteckt und die Teilaufgabe wurde tatsächlich gelöst. Eine Testsoftware zur Matrixmultiplikation lässt sich mit dem Compiler aus der Untermenge von C in RISC-V Assembler übersetzen. Die Erstellung neuer Testsoftware ist effizient möglich.
+
+Zu einem späteren Zeitpunkt wurde zusätzlich auch das Verfahren von Stephan Nolting angewandt. Stephan Nolting hat das Problem von neuartigen Anweisungen auch unter Verwendung des bestehenden GCC Compilers gelöst, indem er Inline-Assembly verwendet um damit Maschinen-Code direkt aus dem Compiler ausgeben zu können. Damit hat er die Möglichkeit geschaffen auch Anweisungen mit dem GCC verwenden zu können, die der GCC an sich nicht kennt.
+
+Der Nachteil ist, dass die Verwendung etwas kryptisch ist und viel Erfahrung mit dem GCC voraussetzt. Ein weiterer Nachteil des Inline-Assembly Ansatzes ist, dass der Compiler jetzt nicht mehr autonom arbeiten kann, sondern von einem Menschen gesteuert wird. Damit wird der Compiler davon abgehalten den Quellcode zu optimieren. Für Testfälle ist das Vorgehen zielführend. Für einen industriellen Einsatz muss der Compiler jedoch auf längere Sicht um die Instruktionen erweitert werden um die Optimierung wieder zu ermöglichen.
+
+Das geplante Vorgehen wird sein, die Matrix-Erweiterung mit einer kleinen Testanwendung zu testen, die mit der Strategie von Stephan Nolting und dem GCC übersetzt wird. Sobald das Design funktioniert und noch Zeit zur Verfügung steht, wird die größere Testanwendung aus dem selbsterstellten Compiler ausgeführt, sollte diese Anwendung in den NEORV32-Instruktionsspeicher passen.
 
 
 
-TODO: Execution Engine, Erweiterung um neue Pfade für Matrix Engine
 
-TODO: LSU und Cache
+\section{Evaluierung der Performance} \label{sec:eval_performance}
 
-TODO: Softwareerstellung (Intrinsics)
+Die Hardware-beschleunigte Matrix-Berechnung ergibt nur Sinn, wenn sich ein Vorteil gegenüber einer Matrix-Multiplikation ohne die Beschleunigung ergibt. Um zu bestimmen, ob sich die Matrix-Erweiterung positiv auswirkt, soll ein Vergleich zwischen zwei Anwendungen durchgeführt werden.
+
+Die Anwendung A berechnet eine Matrix-Multiplikation unter Verwendung von drei For-Schleifen. Die Anwendung B führt dieselbe Matrix-Multiplikation unter Verwendung der neu hinzugefügten Anweisungen aus. Für beide Anwendungen wird gezählt wieviele CPU-Zyklen die Ausführung benötigt. Es wird selbstverständlich erwartet, dass die Anwendung B die Aufgabe mit weniger CPU-Zyklen erledigt.
+
+Die Voraussetzungen für dieses Vorgehen ist, dass sowohl Anwendung A als auch Anwendung B in den Instruktions-Speicher des NEORV32 passen.
 
 
 
 
+\section{Schrittweißes Vorgehen} \label{sec:steps}
+
+Abschließend werden also folgende Schritte geplant:
+
+\begin{enumerate}
+
+    \item Analyse der theoretischen Grundlagen zur Matrix-Multiplikation. Es soll eine Möglichkeit gefunden werden, die die Berechnung auf einem FPGA ermöglicht und mit VHDL beschrieben werden kann.
+
+    \item Analyse des NEORV32 CPU. Es sollen die Komponenten des CPU identifiziert werden mit dem Ziel die Stellen zu finden, die geändert bzw. Erweitert werden müssen.
+
+    \item Die Änderungen werden eingebracht.
+
+    \item Das geänderte Design wird simuliert bis die gewünschten Signale vorliegen.
+
+    \item Das geänderte Design wird synthetisiert und auf dem FPGA ausgeführt. Das Design wird angepasst, bis es auf dem FPGA funktioniert.
+
+    \item Ein Compiler (selbsterstellt oder der GCC Compiler) wird verwendet um Testprogramme zu übersetzen.
+
+    \item Die Testprogramme werden ausgeführt. Die Zyklenzahl wird gemessen und verglichen.
+
+\end{enumerate}

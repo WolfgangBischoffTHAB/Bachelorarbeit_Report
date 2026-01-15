@@ -1,3 +1,32 @@
 \chapter{Zusammenfassung und Ausblick} \label{chpt:Zusammenfassung_und_Ausblick_Main}
 
-test
+
+
+
+\section{Zusammenfassung} \label{sec:summary}
+
+
+
+
+
+\section{Ausblick} \label{sec:outlook}
+
+Am Ende dieser Arbeit drängt sich eine grundlegende Frage auf. In welchen Szenarion ist es sinnvoll Hardwarebeschleuniger in ein bestehendes RISC-V Design einzupflegen und ab wann sollte sich ein Unternehmen für die Erstellung eines komplett neuen Designs entscheiden.
+
+Im Zuge dieser Arbeit wurde ein bestehendes Design erweitert. Der Zugriff auf den Speicher über die Load-Store-Unit und den am Bus angeschlossenen Speicher wurde wiederverwendet. Der Vorteil ist es sicherlich Kosten und Zeit sparen zu können da existiernde Komponenten wiederverwendet werden. Ein Nachteil ist eventuell, dass existierende Komponenten auf Anforderungen hin erstellt und optimiert wurden, die in der Vergangenheit maßgebend waren aber neue Erweiterungen nicht effizient unterstützen.
+
+Die Alternative wäre es, ein neues Design zu beginnen welches dann die neuen Anforderungen, wie beispielsweiße mehr als einen Speicher-Zugriff parallel ermöglicht. Die Hardware für die Outer-Produkt Berechnung könnte mehrmals synthetisiert werden. Jede Instanz der Outer-Produkt Berechnung könnte möglicherweiße über ihren eigenen Zugriff auf den Speicher verfügen. Wenn der Speicher echt-parallel Daten liefern kann, wird eine Matrix-Berechnung parallel sagt sequentiel ausgeführt.
+
+Ein Nachteil eines solch spezialisierten Designs ist es, dass es seine Allgemeinheit verliert. Ein RISC-V CPU soll eine allgemeine Rechenmaschine bleiben.
+
+Es ist fallabhängig, welchen Weg ein Unternehmen wählen sollte. Ein finanzstarkes Unternehmen kann sich für die Erstellung von Anwendungsspezifischen Chips entscheiden, wie man es im Falle von Amazon und dem Trainium Chip sehen kann \footnote{https://aws.amazon.com/de/ai/machine-learning/trainium/}. Unternehmen wie NVIDIA erstellen Beschleunigerkarten, die für High-Performance Computing im Sinne von großer Parallelität eingesetzt werden können und damit ein großeres Feld abdecken. CPU Designs von Intel und AMD sind um Instruktionserweiterungen wie AVX2, AMX und FMA für die Vektor- und Matrixberechnung erweitert worden. In Zukunft wird RISC-V diesen Weg mit einer Matrix-Extension auch gehen und hat mit der RVV bereits begonnen.
+
+Wahrscheinlich ist es aus wirtschaftlicher Sicht notwendig zu wissen, was der Markt fordert und Hardware erstellen zu können die die Anforderung des Marktes erfüllt. Aus akademischer Sicht ist interessant die Zusammenarbeit mit Firmen aus der Industrie zu suchen um innovative Lösungen für die zukünftigen Entwicklungen zu finden.
+
+Als nächste Schritte zur Fortführung dieser Arbeit ist es notwendig die Matrix-Extension intelligenter und damit performanter zu gestalten. Der Vergleich mit anderen Designs wie z.B. \cite{DBLP:journals/corr/abs-2104-03142} und \cite{scoss} führt zu neuen Erkenntnissen und Erfahrungsgewinn.
+
+Zusätzlich ist das System um weitere Datentypen zu ergänzen. Es gibt traditionelle Datentype wie beispielsweiße 8-, 16-, 32- und 64-bit ganzzahlige Datentype mit und ohne Vorzeichen und auch 32- und 64-bit Gleitkommadatentypen. Dazu kommen neuartige Aufteilungen von Daten, wie sie für Large Language Models verwendet werden. Ein Beispiel ist hier NF4 was für normalized float mit 4-Bit steht. Sobald die Matrix-Extension mit unterschiedlichen Datentype verwendet werden können soll ist über die Konvertierung zwischen den Datentypen nachzudenken. Es müssen ebenfalls dazu passende Instruktionen ergänzt werden. Die set(i)vli Instruktion aus der RVV-Extension benötigt dann ein Äquivalent in der Matrix-Extension um die Matrix-Extension für Datentype zu konfigurieren.
+
+Es ist zu prüfen, welche Ergebnisse das Lowering hervorgebracht hat. Wurden wirklich Hardware-Bausteine innerhalb des FPGA verwendet oder sind Anteil unnötigerweiße durch Logikzellen synthetisiert worden? Hier lässt sich in kleinstarbeit noch eine Optimierung durchführen, falls Logikzellen anstatt von vorhandener Hardware verwendet werden.
+
+Ein weiterer Schritt ist es sicherlich eine Umgebung für die Validierung des Systems bereitzustellen. Aufgrund zeitlicher Beschränkungen wurde das Design nur visuell mit einem Waveform-Viewer geprüft. Die Sprache System-Verilog beispeilsweiße bietet weitrechendere Möglichkeiten zur Validierung. Für VHDL könnte die UVVM \footnote{https://www.uvvm.org/} oder cocotb \footnote{https://www.cocotb.org/} eingesetzt werden.

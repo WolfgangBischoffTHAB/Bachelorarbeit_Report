@@ -3,17 +3,20 @@
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Ansätze zur Matrix-Extension}}{13}{figure.caption.110}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Matrix Multiplikation blockweiße}}{14}{figure.caption.112}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Matrix Multiplikation Ergebnis}}{15}{figure.caption.113}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Matrix Multiplikation Berechnungsvorschrift}}{15}{figure.caption.114}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{15}{figure.caption.115}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{16}{figure.caption.117}%
-\addvspace {\baselineskip }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32 Architektur}}{18}{figure.caption.122}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{19}{figure.caption.124}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Ansätze zur Matrix-Extension}}{14}{figure.caption.111}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Matrix Multiplikation blockweiße}}{15}{figure.caption.113}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Matrix Multiplikation Ergebnis}}{16}{figure.caption.114}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Matrix Multiplikation Berechnungsvorschrift}}{16}{figure.caption.115}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{16}{figure.caption.116}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{17}{figure.caption.118}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces NEORV32 Architektur}}{23}{figure.caption.134}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces NEORV32 Gültige Instruktion}}{24}{figure.caption.136}%
+\addvspace {\baselineskip }
+\addvspace {\baselineskip }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Steuersignale der Matrix-Multiplikation}}{40}{figure.caption.415}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Waveforms der Matrix-Multiplikation}}{40}{figure.caption.416}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

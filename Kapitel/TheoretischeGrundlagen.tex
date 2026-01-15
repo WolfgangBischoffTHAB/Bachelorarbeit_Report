@@ -8,6 +8,9 @@ Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Ve
 
 Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
+
+
+
 \section{Vektoren und Matrizen} \label{sec:vectors_and_matrices}
 
 Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen statt findet. Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
@@ -35,9 +38,19 @@ muss zur Berechnung eine Zelle der Matrix C ein Skalarprodukt aus einer Zeile vo
 
 Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
+
+
+
 \section{Matrixmultiplikation mit \gls{SISD}} \label{sec:matrix_mul_sisd}
 
 Laut https://de.wikipedia.org/wiki/Matrizenmultiplikation verwendet eine naive Implementierung in Software drei For-Schleifen.
+
+\lstset{numbers=left,
+        numberstyle=\tiny,
+        breaklines=true,
+        numbersep=5pt,
+        xleftmargin=.25in,
+        xrightmargin=.25in}
 
 \begin{lstlisting}
 function matmult(A,B,l,m,n)
@@ -65,6 +78,9 @@ In beiden Architekturen Van-Neumann und Harvard gilt, dass eine Berechnung nicht
 Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern des CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
 
 % TODO eventuel Assemler listing zeigen
+
+
+
 
 \section{Matrixmultiplikation mit Strip-Mining und \gls{SIMD}} \label{sec:matrix_mul_simd}
 
@@ -170,12 +186,6 @@ Hier alles in Form von Quellcode:
 
 Now that the basic idea and principle has been described in natural language, lets look at code that implements the strip-mining hardware-software co-design.
 
-\lstset{numbers=right,
-        numberstyle=\tiny,
-        breaklines=true,
-        numbersep=5pt,
-        xleftmargin=.25in,
-        xrightmargin=.25in}
 
 \begin{lstlisting}
 # vector-vector add routine of 32-bit integers
