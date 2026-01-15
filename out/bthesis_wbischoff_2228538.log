@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  15 JAN 2026 11:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  15 JAN 2026 21:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1482,7 +1482,7 @@ n-wei-sun-gen und
  []
 
 [12]
-<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=340, 717.17938pt x 391.9643
+<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=342, 717.17938pt x 391.9643
 7pt>
 File: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png Graphic file (type png)
 <use Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>
@@ -1504,7 +1504,7 @@ lgt, der sich vom Architectured-|
  []
 
 [14 <./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>]
-<Bilder/MatrixMult_1.png, id=407, 514.42188pt x 77.25414pt>
+<Bilder/MatrixMult_1.png, id=409, 514.42188pt x 77.25414pt>
 File: Bilder/MatrixMult_1.png Graphic file (type png)
 <use Bilder/MatrixMult_1.png>
 Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 315.
@@ -1514,7 +1514,7 @@ Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 315.
 LaTeX Warning: Reference `fig:Matri_Multiplikation_Ergebnis' on page 15 undefin
 ed on input line 322.
 
-<Bilder/MatrixMult_2.png, id=408, 257.46187pt x 51.33662pt>
+<Bilder/MatrixMult_2.png, id=410, 257.46187pt x 51.33662pt>
 File: Bilder/MatrixMult_2.png Graphic file (type png)
 <use Bilder/MatrixMult_2.png>
 Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 326.
@@ -1522,20 +1522,20 @@ Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 326.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Bilder/MatrixMult_4.png, id=410, 450.18187pt x 38.61pt>
+<Bilder/MatrixMult_4.png, id=412, 450.18187pt x 38.61pt>
 File: Bilder/MatrixMult_4.png Graphic file (type png)
 <use Bilder/MatrixMult_4.png>
 Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 335.
 (pdftex.def)             Requested size: 270.1112pt x 23.16617pt.
 [15 <./Bilder/MatrixMult_1.png>]
-<Bilder/MatrixMult_3.png, id=417, 514.42188pt x 141.0511pt>
+<Bilder/MatrixMult_3.png, id=419, 514.42188pt x 141.0511pt>
 File: Bilder/MatrixMult_3.png Graphic file (type png)
 <use Bilder/MatrixMult_3.png>
 Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 346.
 (pdftex.def)             Requested size: 308.6555pt x 84.6313pt.
  [16 <./Bilder/MatrixMult_2.png> <./Bilder/MatrixMult_4.png> <./Bilder/MatrixMu
 lt_3.png>]
-<Bilder/MAC_MatrixAccumulator.png, id=430, 432.11438pt x 405.515pt>
+<Bilder/MAC_MatrixAccumulator.png, id=432, 432.11438pt x 405.515pt>
 File: Bilder/MAC_MatrixAccumulator.png Graphic file (type png)
 <use Bilder/MAC_MatrixAccumulator.png>
 Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 3
@@ -1549,7 +1549,7 @@ chapter 4.
 
 ] [19] [20] [21]) (./Kapitel/Analyse.tex [22]
 chapter 5.
-<Bilder/neorv32_cpu_architecture.png, id=475, 828.09375pt x 391.4625pt>
+<Bilder/neorv32_cpu_architecture.png, id=477, 828.09375pt x 391.4625pt>
 File: Bilder/neorv32_cpu_architecture.png Graphic file (type png)
 <use Bilder/neorv32_cpu_architecture.png>
 Package pdftex.def Info: Bilder/neorv32_cpu_architecture.png  used on input lin
@@ -1559,7 +1559,7 @@ e 14.
 
 
  <./Bilder/neorv32_cpu_architecture.png>]
-<Bilder/neorv32_debugging_instructions.png, id=482, 962.59625pt x 248.42813pt>
+<Bilder/neorv32_debugging_instructions.png, id=484, 962.59625pt x 248.42813pt>
 File: Bilder/neorv32_debugging_instructions.png Graphic file (type png)
 <use Bilder/neorv32_debugging_instructions.png>
 Package pdftex.def Info: Bilder/neorv32_debugging_instructions.png  used on inp
@@ -1636,33 +1636,38 @@ chapter 7.
 
 
 ]
-<Bilder/WaveFormsMatrixMultiplikationInstruktions.png, id=797, 733.23938pt x 31
+Underfull \hbox (badness 1895) in paragraph at lines 78--79
+[]\T1/Roboto-LF/regular/n/10 Ein Paar von CSR, dass bei der Zäh-lung der Clock-
+Zyklen ver-wen-det
+ []
+
+[39] [40]
+<Bilder/WaveFormsMatrixMultiplikationInstruktions.png, id=849, 733.23938pt x 31
 3.67188pt>
 File: Bilder/WaveFormsMatrixMultiplikationInstruktions.png Graphic file (type p
 ng)
 <use Bilder/WaveFormsMatrixMultiplikationInstruktions.png>
 Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikationInstruktions.png  
-used on input line 103.
+used on input line 163.
 (pdftex.def)             Requested size: 329.95467pt x 141.15103pt.
+<Bilder/WaveFormsMatrixMultiplikation.png, id=851, 726.21312pt x 396.48125pt>
+File: Bilder/WaveFormsMatrixMultiplikation.png Graphic file (type png)
+<use Bilder/WaveFormsMatrixMultiplikation.png>
+Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikation.png  used on inpu
+t line 174.
+(pdftex.def)             Requested size: 326.79288pt x 178.4149pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[39]
-<Bilder/WaveFormsMatrixMultiplikation.png, id=831, 726.21312pt x 396.48125pt>
-File: Bilder/WaveFormsMatrixMultiplikation.png Graphic file (type png)
-<use Bilder/WaveFormsMatrixMultiplikation.png>
-Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikation.png  used on inpu
-t line 114.
-(pdftex.def)             Requested size: 326.79288pt x 178.4149pt.
-) (./Kapitel/ZusammenfassungundAusblick.tex [40 <./Bilder/WaveFormsMatrixMultip
-likationInstruktions.png> <./Bilder/WaveFormsMatrixMultiplikation.png>]
-[41]
+[41 <./Bilder/WaveFormsMatrixMultiplikationInstruktions.png>] [42 <./Bilder/Wav
+eFormsMatrixMultiplikation.png>] [43])
+(./Kapitel/ZusammenfassungundAusblick.tex [44]
 chapter 8.
-[42
+[45
 
 
-]) (./Seiten/Anhang.tex [43]) (out/bthesis_wbischoff_2228538.bbl [44]
+]) (./Seiten/Anhang.tex [46]) (out/bthesis_wbischoff_2228538.bbl [47]
 chapter without number
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/sc' aliased to
 (Font)              `T1/Roboto-LF/regular/sc' on input line 16.
@@ -1725,7 +1730,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--70
 1400 /
  []
 
-[45
+[48
 
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
@@ -1740,7 +1745,7 @@ Underfull \hbox (badness 6625) in paragraph at lines 109--112
 ].  []$\T1/cmtt/m/n/10 https : / / github . com /
  []
 
-) [46] (out/bthesis_wbischoff_2228538.aux)
+) [49] (out/bthesis_wbischoff_2228538.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-29>
@@ -1754,13 +1759,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 41322 strings out of 467538
- 838121 string characters out of 5423725
- 1866212 words of memory out of 5000000
- 69054 multiletter control sequences out of 15000+600000
+ 41492 strings out of 467538
+ 840303 string characters out of 5423725
+ 1865200 words of memory out of 5000000
+ 69109 multiletter control sequences out of 15000+600000
  738074 words of font info for 180 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 112i,9n,120p,11246b,2674s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 112i,9n,120p,11246b,2678s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb><c:/texlive/20
 25/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb><c:/texlive/2025/tex
@@ -1772,10 +1777,10 @@ tt1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/
 texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/te
 xmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/
 type1/urw/palatino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (58 pages, 1175802 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (61 pages, 1188345 bytes).
 PDF statistics:
- 1195 PDF objects out of 1200 (max. 8388607)
- 1077 compressed objects within 11 object streams
- 514 named destinations out of 1000 (max. 500000)
- 52096 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 1349 PDF objects out of 1440 (max. 8388607)
+ 1226 compressed objects within 13 object streams
+ 629 named destinations out of 1000 (max. 500000)
+ 52104 words of extra memory for PDF output out of 61914 (max. 10000000)
 

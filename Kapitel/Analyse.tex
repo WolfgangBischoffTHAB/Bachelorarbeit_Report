@@ -43,7 +43,7 @@ Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache ver
 
 \section{CPU--Control und Execution-Engine} \label{sec:neorv32-execution-engine}
 
-Die Entität ``CPU--Control'' enthält die Kontrollogik des CPU. Die CPU--Control enthält den Program-Counter der auf die nächste Anweisung zeigt, die ``Configuration and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
+Die Entität ``CPU--Control'' enthält die Kontrollogik des CPU. Die CPU--Control enthält den Program-Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
 
 Bei einigen CPU--Designs für FPGAs findet man eine Kontrollogik vor. Die Kontrollogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrollogik Teile des CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
 

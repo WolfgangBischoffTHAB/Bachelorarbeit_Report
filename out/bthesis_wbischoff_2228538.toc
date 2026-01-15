@@ -34,11 +34,12 @@
 \contentsline {section}{\numberline {6.5}Matrix-Engine}{33}{section.291}%
 \contentsline {chapter}{\numberline {7}Auswertung und Evaluierung}{38}{chapter.384}%
 \contentsline {section}{\numberline {7.1}Testdaten}{38}{section.385}%
-\contentsline {section}{\numberline {7.2}Prüfung mit Matrix-Erweiterung}{39}{section.387}%
-\contentsline {section}{\numberline {7.3}Prüfung ohne Matrix-Erweiterung}{41}{section.417}%
-\contentsline {chapter}{\numberline {8}Zusammenfassung und Ausblick}{42}{chapter.418}%
-\contentsline {section}{\numberline {8.1}Zusammenfassung}{42}{section.419}%
-\contentsline {section}{\numberline {8.2}Ausblick}{42}{section.420}%
-\contentsline {chapter}{Anhang}{44}{section*.424}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{45}{chapter*.425}%
+\contentsline {section}{\numberline {7.2}Messung und Vergleichbarkeit}{38}{section.387}%
+\contentsline {section}{\numberline {7.3}Prüfung mit Matrix-Erweiterung}{40}{section.408}%
+\contentsline {section}{\numberline {7.4}Prüfung ohne Matrix-Erweiterung}{42}{section.445}%
+\contentsline {chapter}{\numberline {8}Zusammenfassung und Ausblick}{45}{chapter.530}%
+\contentsline {section}{\numberline {8.1}Zusammenfassung}{45}{section.531}%
+\contentsline {section}{\numberline {8.2}Ausblick}{45}{section.532}%
+\contentsline {chapter}{Anhang}{47}{section*.536}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{48}{chapter*.537}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

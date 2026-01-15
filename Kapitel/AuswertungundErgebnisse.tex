@@ -1,5 +1,8 @@
 \chapter{Auswertung und Evaluierung} \label{chpt:Auswertung_und_Evaluierung_Main}
 
+
+
+
 \section{Testdaten} \label{sec:testdata}
 
 Um eine Vergleichbarkeit der Verfahren und eine Überprüfung der Korrektheit zu erzielen, werden Testdaten mit erwartetem Ergebnis vorgegeben. In diesem Fall handelt es sich um zwei Matrizen A und B von denen das Ergebnis der Multiplikation bekannt ist und durch Matrix C dokumentiert wird.
@@ -61,11 +64,61 @@ Es wird eine 4x4 Matrixmultiplikation mit den beiden Matrizen A und B durchgefü
 
 Zur einfacheren Vergleichbarkeit der Matrix C mit der Waveform der Simulation wurde die Matrix C noch in hexadezimaler Schreibweiße angegeben, da die Waveform zahlen hexadezimal darstellt.
 
+
+
+
+\section{Messung und Vergleichbarkeit} \label{sec:measure_and_compare}
+
+Um Anweisungsfolgen miteinander zu vergleichen, muss zunächst eine Skala gewählt werden. Danach müssen die Anweisungsfolgen auf die Skala abgebildet werden. Die Abbildung muss dem Quellcode eine Zahl auf der Skala zuordnen. Als letztes muss für die Skala dann noch erwähnt werden, welcher Wert besser ist, also wie die Qualität von der Skala abzulesen ist.
+
+Als Skala wird die Zahl der Clock-Ticks gewählt, die der CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, dass der NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Der CPU löst eine Aufgabe dann schneller.
+
+Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweiße des CPU haben, da sie dessen Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand des CPU konfigurieren.
+
+Ein Paar von CSR, dass bei der Zählung der Clock-Zyklen verwendet wird sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
+
+Es werden wirkliche Clock-Cycles gezählt und keine Anweisungen. Das ist ein Vorteil, da damit eine wirkliche Messung erzielt werden kann. Wenn Anweisungen gezählt werden, ist nicht klar wieviel Zeit der CPU zur Bearbeitung der Anweisungen benötigt.
+
+Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird an das VHDL-Design als Input-Signal herangeführt. Dieses Signal wird in sehr vielen Prozessen des Designs verwendet um kombinatorische, getaktete Logik voranzutreiben. Der NEORV32 Register kann beispielsweiße mit einer Taktrate von 100 Mhz betrieben werden. Damit ist die externe Clock-Source dann auf 100 MHz eingestellt. CSR\_MCYCLE und CSR\_MCYCLEH werden dann mit einer Taktrate von 100 Mhz inkrementiert.
+
+Hier ist ein Beispiel für die Verwendung der Abbildung auf die Cycle-Skala:
+
+\begin{lstlisting}
+// start timing
+neorv32_cpu_csr_write(CSR_MCYCLE, 0);
+
+for (i=0; i<(DATA_NUM/2); i++) {
+  v[0] = input_data[i*2+0];
+  v[1] = input_data[i*2+1];
+  xtea_sw_encipher(XTEA_ROUNDS, v, key);
+  cypher_data_sw[i*2+0] = v[0];
+  cypher_data_sw[i*2+1] = v[1];
+}
+
+// stop timing
+uint32_t time_enc_sw = neorv32_cpu_csr_read(CSR_MCYCLE);
+
+// -----------------------------------------------------
+// Print timing results
+// -----------------------------------------------------
+neorv32_uart0_printf("\nExecution timing:\n");
+neorv32_uart0_printf("ENC SW=%u cycles\n", time_enc_sw);
+\end{lstlisting}
+
+Im Beispiel wird nur das Low-Word und damit nur CSR\_MCYCLE verwendet. Die Erwartungshaltung ist offensichtlich, dass die gemessene Befehlsfolge berechnet ist, bevor der Zähler in das High-Word überläuft.
+
+Da das CSR\_MCYCLE CSR-Register einen beliebigen Wert enthält, muss es zunächst in Zeile 2 auf 0 zurückgesetzt werden. Dann kann sein Wert nach Abarbeitung der Befehlsfolge in Zeile 13 ausgelesen und schließlich über eine serielle Schnittstelle ausgegeben werden.
+
+Dieses Verfahren wird im Folgenden zur Bewertung der unterschiedlichen Matrix-Multiplikationen verwendet. Es wird dabei inklusive der Übetragung der Daten von und zum CPU-RAM gemessen, da der Zugriff auf den CPU-RAM bei der Hardwarebeschleunigung berücksichtigt werden kann und damit ein Geschwindigkeitsvorteil erzielt werden kann.
+
+
+
+
 \section{Prüfung mit Matrix-Erweiterung} \label{sec:eval_with_matrix_extension}
 
 Für die Prüfung mit Hardwarebeschleunigung, enthält das ausgeführte Anwendungsprogram die mle32, mmul32 und mse32 Anweisungen als Intrinsics.
 
-Die Matrix A und die Matrix B werden aus dem CPU-Ram in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
+Die Matrix A und die Matrix B werden aus dem CPU-RAM in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
 
 \begin{lstlisting}
 #include <neorv32.h>
@@ -84,6 +137,8 @@ int main() {
   uint32_t matrix_unit_a = 0;
   uint32_t matrix_unit_b = 0;
 
+  neorv32_cpu_csr_write(CSR_MCYCLE, 0);
+
   matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b010, 0b1011011);
   matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b010, 0b1011011);
 
@@ -91,6 +146,11 @@ int main() {
 
   matrix_unit_a = CUSTOM_INSTR_I_TYPE(0x000, matrix_a_addr, 0b001, 0b1011011);
   matrix_unit_b = CUSTOM_INSTR_I_TYPE(0x001, matrix_b_addr, 0b001, 0b1011011);
+
+  uint32_t time_enc_sw = neorv32_cpu_csr_read(CSR_MCYCLE);
+
+  neorv32_uart0_printf("\nExecution timing:\n");
+  neorv32_uart0_printf("ENC SW = %u cycles\n", time_enc_sw);
 
   return 0;
 }
@@ -122,3 +182,93 @@ Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrix-Multiplik
 
 
 \section{Prüfung ohne Matrix-Erweiterung} \label{sec:eval_without_matrix_extension}
+
+Das Testprogramm für die Matrix-Multiplikation ohne Hardwarebeschleunigung ist:
+
+\begin{lstlisting}
+#include <stdio.h>
+
+#define DIMENSION 4
+#define ELEMENTS DIMENSION*DIMENSION
+
+int standardMatrixMult(int* matrixA, int* matrixB, int* matrixC, int rows, int columns) {
+
+    int counter = 0;
+
+    // over row of matrix B
+    for (int i = 0; i < rows; i++) {
+
+        // over column of matrix A
+        for (int j = 0; j < columns; j++) {
+
+            // fuse row and column together into a single cell of matrix C
+            for (int k = 0; k < columns; k++) {
+
+                // int aIdx = i * columns + k;
+                int temp_aIdx = i * columns;
+                int aIdx = temp_aIdx + k;
+
+                // int bIdx = k * columns + j;
+                int temp_bIdx = k * columns;
+                int bIdx = temp_bIdx + j;
+
+                // int cIdx = i * rows + j;
+                int temp_cIdx = i * rows;
+                int cIdx = temp_cIdx + j;
+
+                int aVal = matrixA[aIdx];
+                int bVal = matrixB[bIdx];
+
+                int mult_temp = aVal * bVal;
+
+                int temp_2 = matrixC[cIdx];
+                int temp_3 = temp_2 + mult_temp;
+                matrixC[cIdx] = temp_3;
+
+            }
+
+        }
+
+    }
+
+    return 0;
+}
+
+int main()
+{
+    neorv32_cpu_csr_write(CSR_MCYCLE, 0);
+
+    int matrixA[ELEMENTS] = {
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16
+    };
+    int matrixC[ELEMENTS] = {
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0
+    };
+    int matrixB[ELEMENTS] = {
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16
+    };
+
+    int a22 = standardMatrixMult(matrixA, matrixB, matrixC, 4, 4);
+
+    uint32_t time_enc_sw = neorv32_cpu_csr_read(CSR_MCYCLE);
+
+    neorv32_uart0_printf("\nExecution timing:\n");
+    neorv32_uart0_printf("ENC SW = %u cycles\n", time_enc_sw);
+
+    int resultPrettyPrintC = prettyPrintFormatMatrix(matrixC, DIMENSION);
+
+    exit();
+    return 0;
+}
+\end{lstlisting}
+
+Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine weil der selbsterstellte C-Compiler diesen Quellcode in dieser Form übersetzen kann.
