@@ -16,7 +16,7 @@
 
 In dieser Arbeit soll ein RISC-V CPU um Anweisungen zur Durchführung von Matrixmultiplikationen erweitert werden.
 
-RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, die der Prozessor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant für den kommerziellen Einsatz.
+RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, die der Prozessor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant sowohl für den akademischen als auch für den kommerziellen Einsatz.
 
 Die Firma Qualcomm beispielsweise als eines der weltweit, führenden Unternehmen auf dem Gebiet der Halbleiter und der Telekommunikation hat eine RISC-V Erweiterung namens Xqci zu RISC-V und auch zu den Compiler-Framework LLVM beigesteuert \cite{phoronix_xqci}. Qualcomm führt auch Käufe von Firmen mit RISC-V Wissen durch. Dies deutet daraufhin, dass Qualcomm den Einsatz von RISC-V in Produkten ernsthaft in Erwägung zieht.
 
@@ -24,7 +24,7 @@ Matrixmultiplikation ist die Grundlage für perspektivische Projektionen, Rotati
 
 Getrieben durch den Erfolg von Large Language Models (LLM) kann sich eine Spezifikation für CPUs, wie z.B. RISC-V nicht mehr durchsetzen, wenn Sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. Ein LLM basiert auf neuronalen Netzen. Eingaben an ein Neuronales Netz erfolgen in Form von Vektoren. Werden mehrere Eingaben gleichzeitig an das neuronale Netz gegeben, wird aus der Vektorrechnung ein Matrix-Rechnung.
 
-Die CPUs der Firmen AMD und Intel besitzen die Erweiterungen AVX2 (Advanced Vector Extensions 2), AMX (Advanced Matrix Extensions) und FMA (Fused Multiply Add).
+Die CPUs der Firmen AMD und Intel besitzen bereits die Erweiterungen AVX2 (Advanced Vector Extensions 2), AMX (Advanced Matrix Extensions) und FMA (Fused Multiply Add) zum Rechnen mit Vektoren und Matrizen.
 % https://de.wikipedia.org/wiki/FMA_x86
 
 All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsatz von RISC-V und den Einsatz von Matrixmultiplikation innerhalb eines RISC-V CPU.
@@ -38,14 +38,18 @@ Der NEORV32 RISC-V CPU wird um Anweisungen erweitert, die die hardwarebeschleuni
 
 Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Es wird im speziellen eine Erweiterung des bereits existierenden NEORV32 Core vorgenommen.
 
-Die Matrizenberechnungen erfolgen im ersten Schritt auf Matrizen deren Dimensionen ein vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur die ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Da es viele Ansätze gibt Matrizen zu multiplizieren, wurde eine Einschränkung getroffen. Die Multiplikation erfolgt mit dem Outer-Produkt Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
+Die Matrizenberechnungen erfolgen im ersten Schritt auf Matrizen deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur die ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt.
+
+Da es viele Ansätze gibt Matrizen zu multiplizieren, wurde eine Einschränkung getroffen. Die Multiplikation erfolgt mit dem Outer-Produkt Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
 
 
 
 
 \section{Struktur der Arbeit} \label{sec:Einleitung_Struktur_der_Arbeit}
 
-Zunächst wird im ``Kapitel Theoretische Grundlagen'' die Matrixmultiplikation beschrieben. Es wird detailliert, dass sich die Matrixmultiplikation in Teile aufteilen und damit schrittweise abarbeiten lassen.
+Es wird mit einer Erfassung des Status Quo begonnen. Der Stand der Technick wird beschrieben.
+
+Als nächstes wird die Matrixmultiplikation im ``Kapitel Theoretische Grundlagen'' beschrieben. Es wird beschrieben, dass sich die Matrixmultiplikation in Teile aufteilen und damit schrittweise abarbeiten lässt.
 
 %Nachdem die Matrixmultiplikation beschrieben ist, wird ihre Relevanz in den Anwendungsbegieten der Neuronalen Netze und der 3D-Computergrafik dargestellt.
 

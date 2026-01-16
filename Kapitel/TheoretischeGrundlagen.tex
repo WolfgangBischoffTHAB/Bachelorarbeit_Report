@@ -13,7 +13,9 @@ Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
 \section{Vektoren und Matrizen} \label{sec:vectors_and_matrices}
 
-Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen stattfindet. Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
+Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen stattfindet.
+
+Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
 
 Eine Matrix wird in \cite{Mathematik_Arens} als rechteckiges Zahlenschemata mit m Zeilen und n Spalten beschrieben.
 
@@ -34,7 +36,7 @@ Zur Berechnung der Matrixmultiplikation
     C = A * B
 \end{equation}
 
-muss zur Berechnung eine Zelle der Matrix C ein Skalarprodukt aus einer Zeile von A und einer Spalte von B berechnet werden. Dabei wird zunächst aus der Spalte von B durch Transponieren eine Zeile gemacht und dann der Zeilenvektor aus A mit dem Zeilenvektor aus B durch das Skalarprodukt in einen Skalar umgerechnet. Dieser Skalar wird dann in die Matrix C eingesetzt.
+muss zur Berechnung einer Zelle der Matrix C ein Skalarprodukt aus einer Zeile von A und einer Spalte von B berechnet werden. Dabei wird zunächst aus der Spalte von B durch Transponieren eine Zeile gemacht und dann der Zeilenvektor aus A mit dem Zeilenvektor aus B durch das Skalarprodukt in einen Skalar umgerechnet. Dieser Skalar wird dann in die Matrix C eingesetzt.
 
 Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
@@ -71,6 +73,8 @@ Der Nachteil dieser Beschreibung ist nicht sichtbar, wenn man sich den Pseudo-Co
 In beiden Architekturen Van-Neumann und Harvard gilt, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
 
 Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern des CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
+
+Im aller ungünstigsten Fall besteht dieser Assembler-Code aus einer langen Folge aus einer Load-Anweisung gefolgt von einer Operation gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
 
 % TODO eventuel Assemler listing zeigen
 
@@ -113,9 +117,11 @@ Das besondere an den Vector Registern ist, dass sie konfiguriert werden können.
 
 Der Vorteil ist, dass man beispielsweise 8-bit bytes als Datentyp festlegen kann und dann vier Vektorregister gruppieren kann. Unter der Annahme das ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweise 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektoraddition all dieser Elemente mit nur einer einzigen Instruktion erfolgen! Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
 
-Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleunigung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
+Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleunigung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen.
 
-Dies lässt sich testen, indem man den naiven Matrix Multiplikations Algorithmus in godbolt eingibt und die neuste Version des GCC auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder!
+Moderne, optimierende Compiler wie der GCC oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Anwendungsfall automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
+
+Dies lässt sich testen indem man den naiven Matrix Multiplikations Algorithmus in godbolt \footnote{https://godbolt.org/} eingibt und die neuste Version des GCC für RISC-V auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder! Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
 
 Das Hardware-Software Co-Design sieht das iterative Vorgehen Strip-Mining vor, bei dem die Software die Hardware in jeder Iteration aufs neue konfiguriert und dann Daten zur parallelen Verarbeitung durchführt.
 
@@ -298,7 +304,7 @@ Bei sehr großen Matrizen ist dies nicht zielführend, da der CPU die Matrix nur
 
 Die angestrebte Verbesserung besteht darin, eine Matrix blockweise zu berechnen. Damit eröffnet sich, ähnlich wie bei Vektoren, das Potential der parallelen Berechnung durch SIMD Instruktionen. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
 
-Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist hardwarebeschleunigt die Matrixmultiplikation zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zur+ck in den RAM-Speicher zu schreiben.
+Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist hardwarebeschleunigt die Matrixmultiplikation zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zurück in den RAM-Speicher zu schreiben.
 
 Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von blockweiser Berechnung gesprochen wird.
 
@@ -309,7 +315,7 @@ Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von bl
 \label{fig:Matrix_Multiplikation_Blockwise}
 \end{figure}
 
-In Abbildung \label{fig:Matrix_Multiplikation_Blockwise} wird die grüne Matrix mit der blauen Matrix multipliziert. Es werden einzelne Blöcke A bis H innerhalb der beiden Matrizen definiert.
+In Abbildung \ref{fig:Matrix_Multiplikation_Blockwise} wird die grüne Matrix mit der blauen Matrix multipliziert. Es werden einzelne Blöcke A bis H innerhalb der beiden Matrizen definiert.
 
 Zur Gegenprüfung ist das Ergebnis in Abbildung \ref{fig:Matrix_Multiplikation_Ergebnis} dargestellt.
 
@@ -342,20 +348,20 @@ In Abbildung \ref{fig:Matrix_Multiplikation_A_E_B_G} wird der grau hervorgehoben
 
 Mit dem Wissen über die blockweise Aufteilung ist es nun möglich per SIMD zu parallelisieren oder Strip-Mining auszuführen, wenn keine parallelen Rechenknoten verfügbar sind. In dieser Arbeit werden Instruktionen analog zur \gls{RVV} bereitgestellt um das Strip-Mining für Matrizen zu ermöglichen und dabei blockweise vorzugehen.
 
-Es ist noch zu klären, wie die einzelnen Blöcke miteinander multipliziert und addiert werden.
+Es ist noch zu klären, wie die einzelnen, inneren Blöcke miteinander multipliziert und addiert werden.
 
 
 
 
 \section{Outer-Produkt} \label{sec:outer-produkt}
 
-Das Outer-Produkt wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer-Produkt nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung mit Vektoren reduziert. Damit lässt sich das Verfahren einfach implementieren.
+Das Outer-Produkt wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer-Produkt nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung von Additionen und Mutliplikationen in einer gleichförmigen Form reduziert. Damit lässt sich das Verfahren einfach implementieren.
 
 In der Übersicht \cite{design_VME} von Earl A. Killian wird das Outer-Product auf Seite 53 beschrieben.
 
-TODO: Reproduce the definition
+% TODO: Reproduce the definition here
 
-Im Grunde kann man an der Formel aus Abbildung \ref{fig:Matrix_Multiplikation_Vorschrift} bereits erkennen, dass es nicht ausreicht Multiplikationen auszuführen, vielmehr müssen Ergebnisse auch aufaddiert werden. Daher ist es notwendig im Design Speicherzellen vorzusehen, die Schrittweise durch Addition vervollständigt werden, bis das Endergebnis vorliegt.
+Im Grunde kann man an der Formel aus Abbildung \ref{fig:Matrix_Multiplikation_Vorschrift} bereits erkennen, dass es nicht ausreicht Multiplikationen auszuführen, vielmehr müssen Ergebnisse auch aufaddiert werden. Es handelt sich um eine Multiply-Accumulate Operation. Daher ist es notwendig im Design Speicherzellen vorzusehen, die Schrittweise durch Addition vervollständigt werden, bis das Endergebnis vorliegt.
 
 Dieser ``Matrix-Kern'' ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cite{design_VME} dargestellt. Dieses Konstrukt wird auch Matrix Accumulator (\gls{MAC}) genannt, da er Zwischenergebnisse aufsummiert, also kummuliert.
 

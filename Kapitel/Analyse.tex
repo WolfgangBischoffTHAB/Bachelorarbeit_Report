@@ -1,13 +1,13 @@
 \chapter{Analyse des NEORV32 CPU} \label{chpt:Analysis}
 
-Das Ziel dieses Kapitels ist die Analyse des bestehenden NEORV32 Cores. Die wichtigen Elemente werden beschrieben. Durch die Analyse wird Klarheit darüber geschaffen, wie die Wirkungsweise des NEORV32 CPU ist und wie das System erweitert werden muss um die Matrixmultiplikation zu ergänzen.
+Das Ziel dieses Kapitels ist die Analyse des bestehenden NEORV32 Cores. Die wichtigsten Elemente werden beschrieben. Durch die Analyse wird Klarheit darüber geschaffen, wie die Wirkungsweise des NEORV32 CPU ist und wie das System erweitert werden muss um die Matrixmultiplikation zu ergänzen.
 
 
 
 
 \section{Architektur des NEORV32 Core} \label{sec:neorv32_core_architecture}
 
-Der NEORV32 besitzt folgenden, in Abbildung \ref{fig:NEORV32_Architecture} dargestellten Aufbau.
+Der NEORV32 besitzt den in Abbildung \ref{fig:NEORV32_Architecture} dargestellten Aufbau.
 
 \begin{figure}[h]
 \centering
@@ -47,11 +47,11 @@ Die Entität ``CPU--Control'' enthält die Kontrolllogik des CPU. Die CPU--Contr
 
 Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor. Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrolllogik Teile des CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
 
-Der NEORV32 CPU ist an dieser Stelle eine Ausnahme. Er besitzt anstatt kombinatorischer Logik eine State--Machine, die Execution--Engine genannt wird, um den CPU zu kontrollieren. Die Execution--Engine ist im inneren eines VHDL Prozesse definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf diesen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
+Der NEORV32 CPU ist an dieser Stelle eine Ausnahme. Er besitzt anstatt kombinatorischer Logik eine State--Machine, die Execution--Engine genannt wird, um den CPU zu kontrollieren. Die Execution--Engine ist im inneren eines VHDL Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf diesen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
 
-Der Start-Zustand ist EX\_RESTART state. Aus dem Reset geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
+Der Start-Zustand ist der EX\_RESTART state. Aus dem Reset geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
 
-Im Leerlaufzustand EX\_DISPATCH, wartet die Execution Engine bis ein Trap oder eine Exception eintritt oder bis das Frontend eine gültige Instruktion meldet, die dann abgearbeitet werden muss. Für normale Anweisungen wir der Zustand EX\_EXECUTE betreten.
+Im Leerlaufzustand EX\_DISPATCH, wartet die Execution Engine bis ein Trap oder eine Exception eintritt oder bis das Frontend eine gültige Instruktion meldet, die dann abgearbeitet werden muss. Für normale Anweisungen wird der Zustand EX\_EXECUTE betreten.
 
 In EX\_EXECUTE wird der nächste Zustand abhängig von der Art der Anweisung gewählt. Das heißt EX\_EXECUTE ist ein Switch-State der in mehrere Äste der State--Machine verzweigen kann. Es gibt Zweige für ALU-Operationen, Sprünge und Speicherzugriffe (Load und Store).
 

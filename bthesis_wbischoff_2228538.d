@@ -20,7 +20,6 @@ out/bthesis_wbischoff_2228538.pdf :\
     Kapitel/StandTechnik.tex\
     Kapitel/TheoretischeGrundlagen.tex\
     Kapitel/ZusammenfassungundAusblick.tex\
-    Seiten/Anhang.tex\
     Seiten/Deckblaetter.tex\
     Seiten/Vorwort.tex\
     bthesis_wbischoff_2228538.tex\
@@ -301,8 +300,6 @@ Kapitel/StandTechnik.tex :
 Kapitel/TheoretischeGrundlagen.tex :
 
 Kapitel/ZusammenfassungundAusblick.tex :
-
-Seiten/Anhang.tex :
 
 Seiten/Deckblaetter.tex :
 

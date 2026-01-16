@@ -2,7 +2,7 @@
 
 Das Ziel ist beschrieben. Es geht um die Erweiterung eines RISC-V Kerns um eine hardwarebeschleunigte Matrixmultiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden.
 
-Es wurde besprochen, mit welchen Technik die Matrixmultiplikation ausgeführt werden soll und welche theretischen Grundlagen hinter den Überlegeungen stehen.
+Es wurde besprochen, mit welcher Technik die Matrixmultiplikation ausgeführt werden soll und welche theretischen Grundlagen hinter den Überlegungen stehen.
 
 In diesem Kapitel wird beschrieben, welches Vorgehen gewählt wird um die Arbeit durchzuführen.
 
@@ -15,13 +15,17 @@ Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting u
 
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
-Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
+Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
+
+Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet.
+
+Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
 
 Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weitergegangen werden. Das Design wird nun synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
 
 Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekts enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wierum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
-Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die Bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er auf einem Wafer produziert worden wäre.
+Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die Bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, als ob er auf einem Wafer produziert worden wäre.
 
 Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
 
@@ -52,7 +56,9 @@ Zu einem späteren Zeitpunkt wurde zusätzlich auch das Verfahren von Stephan No
 
 Der Nachteil ist, dass die Verwendung etwas kryptisch ist und viel Erfahrung mit dem GCC voraussetzt. Ein weiterer Nachteil des Inline-Assembly Ansatzes ist, dass der Compiler jetzt nicht mehr autonom arbeiten kann, sondern von einem Menschen gesteuert wird. Damit wird der Compiler davon abgehalten den Quellcode zu optimieren. Für Testfälle ist das Vorgehen zielführend. Für einen industriellen Einsatz muss der Compiler jedoch auf längere Sicht um die Instruktionen erweitert werden um die Optimierung wieder zu ermöglichen.
 
-Das geplante Vorgehen wird sein, die Matrix-Erweiterung mit einer kleinen Testanwendung zu testen, die mit der Strategie von Stephan Nolting und dem GCC übersetzt wird. Sobald das Design funktioniert und noch Zeit zur Verfügung steht, wird die größere Testanwendung aus dem selbsterstellten Compiler ausgeführt, sollte diese Anwendung in den NEORV32-Instruktionsspeicher passen.
+Das gewählte Vorgehen ist es, die Matrix-Erweiterung mit einer kleinen Testanwendung zu testen, die mit der Strategie von Stephan Nolting und dem GCC übersetzt wird.
+
+%Sobald das Design funktioniert und noch Zeit zur Verfügung steht, wird die größere Testanwendung aus dem selbsterstellten Compiler ausgeführt, sollte diese Anwendung in den NEORV32-Instruktionsspeicher passen.
 
 
 
@@ -70,7 +76,7 @@ Die Voraussetzungen für dieses Vorgehen ist, dass sowohl Anwendung A als auch A
 
 \section{Schrittweises Vorgehen} \label{sec:steps}
 
-Abschließend werden also folgende Schritte geplant:
+Das Vorgehen besteht also aus folgenden Schritten:
 
 \begin{enumerate}
 

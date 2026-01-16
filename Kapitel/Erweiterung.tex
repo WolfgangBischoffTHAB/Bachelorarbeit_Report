@@ -23,7 +23,7 @@ Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit Elementen und 
 
 \section{Die Instruktionen} \label{sec:neorv32-custom-instructions}
 
-Um die Matrixmultiplikation durchzuführen sollen neue Instruktionen hinzugefügt werden, die es noch nicht bereits in anderen Extensions für RISC-V gibt. Die Instruktionen sollen das Strip-Mining ermöglichen und sich damit an der \gls{RVV}-Extension orientieren.
+Um die Matrixmultiplikation durchzuführen sollen neue Instruktionen hinzugefügt werden, die es noch nicht bereits in anderen Extensions für RISC-V gibt. Die Instruktionen sollen das Strip-Mining für Matrizen ermöglichen und sich dabei an der \gls{RVV}-Extension orientieren.
 
 Bei der Diskusion des Strip-Mining bei der \gls{RVV}-Extension wurde die Instruktion set(i)vli besprochen, mit der die Vektor-Engine um Datentypen und gewünschte Datenlängen konfiguriert wurde. Des weiteren wurden die Instruktionen vle32.v, vadd.vv und vse32.v im Rahmen des Beispiel-Codes verwendet.
 
@@ -100,6 +100,16 @@ Als erstes wird der neue Matrix-Opcode aus der Erkennung illegaler Opcodes ausge
 -- MATRIX EXTENSION
 when opcode_matrix_c =>
     illegal_cmd <= '0';
+\end{lstlisting}
+
+Der Execution-Engine wird ein neues Signal ``matrix\_operation\_wait\_i'' in die Sensitivitätsliste eingefügt. Dadurch kann sie das Ende der Matrixberechnung erkennen und in den nächsten Zustand übergehen.
+
+\begin{lstlisting}
+execute_engine_fsm_comb: process(
+    ...
+    matrix_operation_wait_i
+    ...
+)
 \end{lstlisting}
 
 Der ALU wird beigebracht, dass sie den Operand B als immediate verwenden muss, sobald sie den Matrix-Extension Opcode sieht. Der Grund ist, dass die Load- und Store-Matrix-Anweisungen die Register-Id als immediate Wert verwenden um zu ermitteln, welches Matrix-Register Sie lesen und schreiben sollen. Damit muss die ALU diesen Immediate-Wert weitergeben, sonst ist er verloren und kann nicht mehr verwendet werden.
@@ -237,7 +247,7 @@ when EX_MATRIX_OPERATION_RSP =>
     end if;
 \end{lstlisting}
 
-Diese beiden Zustände sind sehr simple. Im Request--State wird das Signal matrix\_mul\_o aktiviert und den Response--State übergegangen. Im Response--State wird auf das Signal matrix\_operation\_wait\_i gewartet und dann die Matrixmultiplikation deaktiviert.
+Diese beiden Zustände sind sehr simpel. Im Request--State wird das Signal matrix\_mul\_o aktiviert und dann in den Response--State übergegangen. Im Response--State wird auf das Signal matrix\_operation\_wait\_i gewartet und dann wird die Matrixmultiplikation deaktiviert.
 
 
 
@@ -250,7 +260,7 @@ Die Aufgabe besteht darin, Daten aus dem Datenspeicher in die neuen Matrix-Regis
 
 Der Nachteil daran ist, dass die Matrix-Engine dann Daten lädt, die die Load-Store Unit dann nicht in ihrem Cache geladen hat. Die Load--Store--Unit ist verantwortlich für den Rest des CPU. Damit hätte der CPU dann insgesammt veraltete Daten. Nach Ausführung einer Matrix- Load--Store--Operation müsste die Load--Store--Unit ihren Cache invalidieren, da dieser veraltete Daten enthalten könnte. Daraufhin muss sich der Cache erst wieder aufwärmen und die Performance leidet folglich.
 
-Aus diesem Grund wurde das Laden der Matrix-Engine in die LSU integriert. Wenn eine Matrix Operation eine Matrix berechnet hat und diese Daten dann wieder in den Datenspeicher übertragen werden, dann durchlaufen die Daten den Cache der LSU und wärmen den Cache damit für den Rest des CPU mit aktuellen Daten. Das bedeutet, dass der Rest der ausgeführten Anwendung dann direkt auf die gecachte Matrix zugreifen kann anstelle die Matrix erst wieder aus dem Datenspeicher laden zu müssen.
+Aus diesem Grund wurde das Laden der Matrix-Engine in die \gls{LSU} integriert. Wenn eine Matrix Operation eine Matrix berechnet hat und diese Daten dann wieder in den Datenspeicher übertragen werden, dann durchlaufen die Daten den Cache der \gls{LSU} und wärmen den Cache damit für den Rest des CPU mit aktuellen Daten. Das bedeutet, dass der Rest der ausgeführten Anwendung dann direkt auf die gecachte Matrix zugreifen kann anstelle die Matrix erst wieder aus dem Datenspeicher laden zu müssen.
 
 Damit werden Daten über die Load--Store--Unit geladen, damit die Daten im Cache landen. Die Load--Store--Unit erzeugt Bus--Anfragen, wenn Sie Daten laden und speichern soll. Da ein Matrix-Register aus 16 Elementen besteht, werden beide Prozesse, für Load und für Store erweitert.
 
@@ -258,9 +268,9 @@ Der Load-Prozess wird für Matrix--Load--Anweisungen um eine State--Machine erwe
 
 Sind die 16 Operationen ausgeführt, geht die State--Machine zurück nach ML\_IDLE.
 
-Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählt, welche 16 Element zurückschreiben muss.
+Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählt, welche 16 Elemente zurückschreiben muss.
 
-Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matric-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Load zurück oder speichert Daten für eine Store--Anweisung. Die Daten kommen aus dem Daten--Speicher und durchlaufen den Cache.
+Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matrix-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Store zurück oder speichert Daten für eine Load--Anweisung. Die eigentlichen Daten kommen aus dem Daten--Speicher des CPU und durchlaufen den Cache der \gls{LSU}.
 
 
 
@@ -318,17 +328,17 @@ end process PROC_RAM;
 
 Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrixmultiplikation in das Zielmatrixregister zu übertragen (transfer). Es wäre auch möglich weitere Operationen wie ein elementweises Addieren einer Konstante in diesem Prozess zu implementieren.
 
-Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der LSU ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
+Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der \gls{LSU} ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
 
-Wenn die LSU Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der LSU mit dem PROC\_RAM Prozess geschieht über die Signale hail und tail.
+Wenn die \gls{LSU} Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der \gls{LSU} mit dem PROC\_RAM Prozess geschieht über die Signale head und tail.
 
-Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer-Product. Dazu sind bei 16 Elementen pro Matrixregister und damit mit 4x4 Matrizen vier Schritte notwendig. In den vier Schritten werden Zeilen aus der Matrix A und Spalten aus der Matrix B miteinander verrechnet. Mit vier Zeile und vier Spalten müssen also vier Berechnungen ausgeführt werden.
+Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer-Product. Dazu sind bei 16 Elementen pro Matrixregister und damit mit 4x4 Matrizen vier Schritte notwendig. In den vier Schritten werden Zeilen aus der Matrix A und Spalten aus der Matrix B miteinander verrechnet. Mit vier Zeilen und vier Spalten müssen also vier Berechnungen pro Schritt ausgeführt werden.
 
 Um die Berechnung auszuführen wird eine State--Machine verwendet. Die State--Machine durchläuft die Zustände MM\_RESET, MM\_INIT\_1, und MM\_PROCESS\_1, bis MM\_INIT\_4, MM\_PROCESS\_4 und endet mit MM \_STORE, MM \_DONE.
 
-Der MM\_RESET Zustand setzt die Matrixregister auf 0, wenn das matrix\_mul Signal auf 1 gesetzt wird. Solange matrix\_mul auf 0 steht, verbleibt der Wert der letzten durchgeführt Matrixmultiplikation in den Matrix Register stehen. Der Grund ist, dass man die Werte in den Register halten muss um sie in den RAM zurückschreiben zu können und dies einige CPU-Zyklen dauert. Das matrix\_mul Signal wird von der Kontrollogik des CPU gesetzt, wenn ein mmul32 Befehl ausgeführt wird und steht ansonsten auf 0.
+Der MM\_RESET Zustand setzt die Matrixregister auf 0, wenn das matrix\_mul Signal auf 1 gesetzt wird. Solange matrix\_mul auf 0 steht, verbleibt der Wert der letzten durchgeführt Matrixmultiplikation in den Matrix Register stehen. Der Grund ist, dass man die Werte in den Register halten muss um sie in den RAM zurückschreiben zu können und dies einige CPU-Zyklen dauert. Das matrix\_mul Signal wird von der Kontrolllogik des CPU gesetzt, wenn ein mmul32 Befehl ausgeführt wird und steht ansonsten auf 0.
 
-Wenn das matrix\_mul Signal gesetzt wird, werden die Matrixregiser mit 0 überschrieben und die State Machine geht in den nächsten Zustand über. Es folgen vier Schritte, die jeweils aus einem INIT und einem PROCESS Schritt bestehen. Alle vier Schritte sind äquivalent, es wird daher nur ein Schritt beschrieben.
+Wenn das matrix\_mul Signal gesetzt wird, werden die Matrixregister mit 0 überschrieben und die State Machine geht in den nächsten Zustand über. Es folgen vier Schritte, die jeweils aus einem INIT und einem PROCESS Schritt bestehen. Alle vier Schritte sind äquivalent, es wird daher nur ein Schritt beschrieben.
 
 Im INIT Schritt wird eine Zeile aus der A-Matrix und eine Spalte aus der B-Matrix in extra Signale geladen:
 
