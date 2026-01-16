@@ -1,8 +1,10 @@
 \chapter{Durchführung und Methodik} \label{chpt:Methodik_Main}
 
-Das Ziel ist beschrieben. Es geht um die Erweiterung eines RISC-V Kerns um eine hardware-beschleunigte Matrix-Multiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden. Auch die theoretischen Grundlagen wurden aufgezeigt.
+Das Ziel ist beschrieben. Es geht um die Erweiterung eines RISC-V Kerns um eine hardwarebeschleunigte Matrixmultiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden.
 
-In diesem Kapitel wird beschrieben welches Vorgehen gewählt wird um die Arbeit durchzuführen.
+Es wurde besprochen, mit welchen Technik die Matrixmultiplikation ausgeführt werden soll und welche theretischen Grundlagen hinter den Überlegeungen stehen.
+
+In diesem Kapitel wird beschrieben, welches Vorgehen gewählt wird um die Arbeit durchzuführen.
 
 
 
@@ -13,13 +15,13 @@ Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting u
 
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
-Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Es kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweiße für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingebdaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
+Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde. Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet. Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
 
-Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weiter gegangen werden. Das Design wird nun synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
+Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weitergegangen werden. Das Design wird nun synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
 
 Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekts enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wierum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
-Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er auf einem Wafer produziert worden wäre.
+Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die Bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft der NEORV32 CPU auf dem FPGA, also ob er auf einem Wafer produziert worden wäre.
 
 Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
 
@@ -36,15 +38,15 @@ Die Anwendung muss in Form von Maschinencode, also kodierten Befehlen vorliegen.
 
 Trotzdem wurde der Einsatz eines Assemblers für das Vorgehen bei dieser Arbeit nicht gewählt, da das Erstellen eines Assembler Programms ziemlich kompliziert ist. Es bestand die Furcht davor viel Zeit zu verlieren, wenn das Assemblerprogramm angepasst werden muss oder wenn mehr als eine Testsoftware erstellt werden soll. Dann ist für jede Anpassung wieder Assemblerentwicklung notwendig. Direkte Assembler-Entwicklung wird daher nicht verwendet.
 
-Der erste Ansatz an ein lauffähiges Program zu kommen, war es einen C-Compiler für eine Untermenge der Programmiersprache C zu erstellen. Der Vorteil der sich aus diesem Ansatz ergibt ist es zum einen volle Kontrolle darüber zu haben, welche RISC-V Anweisungen der Compiler ausgibt. Damit lässt sich ein RISC-V Programm erstellen, das tatsächlich auf dem NEORV32 CPU ausgeführt werden kann, wenn man nur Anweisungen generiert, die der NEORV32 auch unterstützt.
+Der erste Ansatz an ein lauffähiges Programm zu kommen, war es einen C-Compiler für eine Untermenge der Programmiersprache C zu erstellen. Der Vorteil der sich aus diesem Ansatz ergibt ist es zum einen volle Kontrolle darüber zu haben, welche RISC-V Anweisungen der Compiler ausgibt. Damit lässt sich ein RISC-V Programm erstellen, das tatsächlich auf dem NEORV32 CPU ausgeführt werden kann, wenn man nur Anweisungen generiert, die der NEORV32 auch unterstützt.
 
-Zum anderen lassen sich in den Compiler dann auch neue Anweisungen einpflegen, die im RISC-V Standard noch nicht definiert sind. Zwangsweiße kennt ein GCC Compiler diese Anweisungen folglich auch nicht. Die Erweiterung des GCC Compiler ist um ein vielfaches komplizierter als die Erweiterung eines simplen, selbsterstellten Compilers. Die Unterstützung eigener Anweisungen wird in dieser Arbeit benötigt um die Matrix-Anweisungen verwenden zu können, die im Zuge dieser Arbeit hinzugefügt werden und daher von GCC nicht unterstützt werden.
+Zum anderen lassen sich in den Compiler dann auch neue Anweisungen einpflegen, die im RISC-V Standard noch nicht definiert sind. Zwangsweise kennt ein GCC Compiler diese Anweisungen folglich auch nicht. Die Erweiterung des GCC Compiler ist um ein vielfaches komplizierter als die Erweiterung eines simplen, selbsterstellten Compilers. Die Unterstützung eigener Anweisungen wird in dieser Arbeit benötigt um die Matrix-Anweisungen verwenden zu können, die im Zuge dieser Arbeit hinzugefügt werden und daher von GCC nicht unterstützt werden.
 
-Da die C Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Untestützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen aber keine if-Anweisung. Bei der Arbeit an der Testanwendung wurde festgestellt, dass interessanterweiße für die Matrix-Multiplikation mit Strip-Mining keine if-Anweisungen benötigt werden. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp.
+Da die C Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Unterstützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen aber keine if-Anweisung. Bei der Arbeit an der Testanwendung wurde festgestellt, dass interessanterweise für die Matrixmultiplikation mit Strip-Mining keine if-Anweisungen benötigt werden. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp.
 
 Es gibt außerdem einen simplen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann. Der Compiler erzeugt ein Listing aus Assembler-Befehlen, die dann von einem Assembler in Maschinen-Code übersetzt werden müssen. Es gibt keine Ausgabe von Objekt-Dateien und keine Linker-Infrastruktur und damit auch keine Bibliotheken. Alle Programme müssen komplett in Form von Quellcode vorliegen und können nicht aus vorübersetzten Bibliotheken stammen.
 
-Es wurde ein beträchlicher Zeitaufwand in diesen Compiler gesteckt und die Teilaufgabe wurde tatsächlich gelöst. Eine Testsoftware zur Matrixmultiplikation lässt sich mit dem Compiler aus der Untermenge von C in RISC-V Assembler übersetzen. Die Erstellung neuer Testsoftware ist effizient möglich.
+Es wurde ein beträchtlicher Zeitaufwand in diesen Compiler gesteckt und die Teilaufgabe wurde tatsächlich gelöst. Eine Testsoftware zur Matrixmultiplikation lässt sich mit dem Compiler aus der Untermenge von C in RISC-V Assembler übersetzen. Die Erstellung neuer Testsoftware ist effizient möglich.
 
 Zu einem späteren Zeitpunkt wurde zusätzlich auch das Verfahren von Stephan Nolting angewandt. Stephan Nolting hat das Problem von neuartigen Anweisungen auch unter Verwendung des bestehenden GCC Compilers gelöst, indem er Inline-Assembly verwendet um damit Maschinen-Code direkt aus dem Compiler ausgeben zu können. Damit hat er die Möglichkeit geschaffen auch Anweisungen mit dem GCC verwenden zu können, die der GCC an sich nicht kennt.
 
@@ -57,22 +59,22 @@ Das geplante Vorgehen wird sein, die Matrix-Erweiterung mit einer kleinen Testan
 
 \section{Evaluierung der Performance} \label{sec:eval_performance}
 
-Die Hardware-beschleunigte Matrix-Berechnung ergibt nur Sinn, wenn sich ein Vorteil gegenüber einer Matrix-Multiplikation ohne die Beschleunigung ergibt. Um zu bestimmen, ob sich die Matrix-Erweiterung positiv auswirkt, soll ein Vergleich zwischen zwei Anwendungen durchgeführt werden.
+Die Hardware-beschleunigte Matrix-Berechnung ergibt nur Sinn, wenn sich ein Vorteil gegenüber einer Matrixmultiplikation ohne die Beschleunigung ergibt. Um zu bestimmen, ob sich die Matrix-Erweiterung positiv auswirkt, soll ein Vergleich zwischen zwei Anwendungen durchgeführt werden.
 
-Die Anwendung A berechnet eine Matrix-Multiplikation unter Verwendung von drei For-Schleifen. Die Anwendung B führt dieselbe Matrix-Multiplikation unter Verwendung der neu hinzugefügten Anweisungen aus. Für beide Anwendungen wird gezählt wieviele CPU-Zyklen die Ausführung benötigt. Es wird selbstverständlich erwartet, dass die Anwendung B die Aufgabe mit weniger CPU-Zyklen erledigt.
+Die Anwendung A berechnet eine Matrixmultiplikation unter Verwendung von drei For-Schleifen. Die Anwendung B führt dieselbe Matrixmultiplikation unter Verwendung der neu hinzugefügten Anweisungen aus. Für beide Anwendungen wird gezählt wie viele CPU-Zyklen die Ausführung benötigt. Es wird selbstverständlich erwartet, dass die Anwendung B die Aufgabe mit weniger CPU-Zyklen erledigt.
 
 Die Voraussetzungen für dieses Vorgehen ist, dass sowohl Anwendung A als auch Anwendung B in den Instruktions-Speicher des NEORV32 passen.
 
 
 
 
-\section{Schrittweißes Vorgehen} \label{sec:steps}
+\section{Schrittweises Vorgehen} \label{sec:steps}
 
 Abschließend werden also folgende Schritte geplant:
 
 \begin{enumerate}
 
-    \item Analyse der theoretischen Grundlagen zur Matrix-Multiplikation. Es soll eine Möglichkeit gefunden werden, die die Berechnung auf einem FPGA ermöglicht und mit VHDL beschrieben werden kann.
+    \item Analyse der theoretischen Grundlagen zur Matrixmultiplikation. Es soll eine Möglichkeit gefunden werden, die die Berechnung auf einem FPGA ermöglicht und mit VHDL beschrieben werden kann.
 
     \item Analyse des NEORV32 CPU. Es sollen die Komponenten des CPU identifiziert werden mit dem Ziel die Stellen zu finden, die geändert bzw. Erweitert werden müssen.
 
@@ -82,7 +84,7 @@ Abschließend werden also folgende Schritte geplant:
 
     \item Das geänderte Design wird synthetisiert und auf dem FPGA ausgeführt. Das Design wird angepasst, bis es auf dem FPGA funktioniert.
 
-    \item Ein Compiler (selbsterstellt oder der GCC Compiler) wird verwendet um Testprogramme zu übersetzen.
+    \item Ein Compiler (selbst erstellt oder der GCC Compiler) wird verwendet um Testprogramme zu übersetzen.
 
     \item Die Testprogramme werden ausgeführt. Die Zyklenzahl wird gemessen und verglichen.
 

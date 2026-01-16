@@ -4,7 +4,7 @@ Dieses Kapitel beschreibt Vektoren und Matrizen aus der Mathematik und deren Ber
 
 Bei der Berechnung ist auf die Geschwindigkeit zu achten. Ausgehend von dem naiven Berechnungsverfahren werden die Schwächen dieses Verfahrens diskutiert und beschrieben, welche Antworten das RISC-V Ökosystem auf diese Probleme hat.
 
-Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISC-V Vektor \gls{SIMD} unterstützen. Aufbauend auf der Vector-Extension wird disktuiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
+Die ersten Hardwarebeschleunigungen sind mit der RISC-V Vector Extension für Vektoren eingeführt worden. Damit kann ein RISC-V Vektor \gls{SIMD} unterstützen. Aufbauend auf der Vector-Extension wird diskutiert, welche Ansätze für die Berechnung von Matrizen verwendet werden können.
 
 Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
@@ -13,7 +13,7 @@ Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
 \section{Vektoren und Matrizen} \label{sec:vectors_and_matrices}
 
-Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen statt findet. Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
+Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen stattfindet. Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert die aus Vektoren wieder Skalare erzeugen.
 
 Eine Matrix wird in \cite{Mathematik_Arens} als rechteckiges Zahlenschemata mit m Zeilen und n Spalten beschrieben.
 
@@ -28,7 +28,7 @@ Eine Matrix wird in \cite{Mathematik_Arens} als rechteckiges Zahlenschemata mit 
 
 Die Multiplikation zwischen zwei Matrizen A und B ist nicht kommutativ und nur definiert, wenn die inneren Dimensionen der Matrizen übereinstimmen, wenn also die Spaltenzahl der ersten Matrix mit der Zeilenzahl der zweiten Matrix übereinstimmt.
 
-Zur Berechnung der Matrix-Multiplikation
+Zur Berechnung der Matrixmultiplikation
 
 \begin{equation}
     C = A * B
@@ -43,7 +43,7 @@ Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
 \section{Matrixmultiplikation mit \gls{SISD}} \label{sec:matrix_mul_sisd}
 
-Laut https://de.wikipedia.org/wiki/Matrizenmultiplikation verwendet eine naive Implementierung in Software drei For-Schleifen.
+Eine Implementierung, die sich direkt an der mathematischen Rechenvorschrift orientiert, verwendet drei For-Schleifen.
 
 \lstset{numbers=left,
         numberstyle=\tiny,
@@ -53,25 +53,20 @@ Laut https://de.wikipedia.org/wiki/Matrizenmultiplikation verwendet eine naive I
         xrightmargin=.25in}
 
 \begin{lstlisting}
-function matmult(A,B,l,m,n)
+C = zero_matrix() // Starte mit Nullwerten
 
-// Ergebnismatrix C mit Nullen initialisieren
-C = zeroes(l,n)
-
-for i = 1 to l  // Schleife ueber die Zeilen von C
-  for k = 1 to n  // Schleife ueber die Spalten von C
-    for j = 1 to m  // Schleife ueber die Spalten von A / Zeilen von B
+for int i = 1 to l  // ueber die Zeilen von C
+  for int k = 1 to n  // ueber die Spalten von C
+    for int j = 1 to m  // ueber die Spalten von A / Zeilen von B
       C(i,k) = C(i,k) + A(i,j) * B(j,k)
     end
   end
 end
-
-return C
 \end{lstlisting}
 
 % Diese Implementierung wird gegen Online-Matrizen berechnet gegengeprüft. Sobald diese naive Implementierung funktioniert, dient sie als Benchmark zur Verifizierung von Algorithmen zur Matrix-Multiplikation, die auf dem FPGA verwendet werden. Im Zuge dieser Arbeit wird ein Java-Program geschrieben, dass diese Matrix-Multiplikation in naiver Form ausführt.
 
-Der Nachteil an diesem naiven Verfahren ist nicht sichtbar, wenn man sich den Pseudo-Code oder eine Implementierung in einer realen, höheren Programmiersprache ansieht. Diese naive Implementierung beschränkt sich auf \gls{SISD} (Single Instruction Single Data) Anweisungen. Wenn der Compiler das Optimierungspotential nicht erkennt, generiert er \gls{SISD} Anweisungen, die jede Multiplikation und Addition einzeln ausführen.
+Der Nachteil dieser Beschreibung ist nicht sichtbar, wenn man sich den Pseudo-Code oder eine Implementierung in einer realen, höheren Programmiersprache ansieht. Diese Implementierung beschränkt sich auf \gls{SISD} (Single Instruction Single Data) Anweisungen. Wenn der Compiler das Optimierungspotential nicht erkennt, generiert er \gls{SISD} Anweisungen, die jede Multiplikation und Addition einzeln ausführen.
 
 In beiden Architekturen Van-Neumann und Harvard gilt, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
 
@@ -84,19 +79,19 @@ Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, d
 
 \section{Matrixmultiplikation mit Strip-Mining und \gls{SIMD}} \label{sec:matrix_mul_simd}
 
-Ein Ansatz diesen Verlust, der durch Load-Store ensteht zu minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruktion Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeit zu können. Die Addition zweier Vektoren geschieht elementweiße und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektor-Addition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereit stellt.
+Ein Ansatz diesen Verlust, der durch Load-Store entsteht zu minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruction Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeiten zu können. Die Addition zweier Vektoren geschieht elementweise und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektoraddition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereitstellt.
 
 Des weiteren erlaubt das Strip-Mining auch Datenobjekte zu verarbeiten, die so groß sind, dass sie nicht als Ganzes in die Register der CPU passen.
 
-Beim Strip-Mining wird von einer Resourcen-Hierarchie ausgegangen. Die Resourcen sind dabei die Register und der Speicher einer CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, das dessen Preis steigt und daher kleiner in der verfügbaren Größe ausfallen muss, aber gleichzeitig auch um einiges schneller als weiter entfernt liegender Speicher ist. Die Hierarchie besteht aus den Register, gefolgt von einem oder mehreren Cache-Leveln und schießlich den RAM Bausteinen.
+Beim Strip-Mining wird von einer Ressourcen-Hierarchie ausgegangen. Die Ressourcen sind dabei die Register und der Speicher einer CPU, wobei Register letztendlich auch nur sehr kleine Speicherzellen sind. Der Grundgedanke ist, dass je näher Speicher am CPU liegt, das dessen Preis steigt und daher kleiner in der verfügbaren Größe ausfallen muss, aber gleichzeitig auch um einiges schneller als ein weiter entfernt liegender Speicher ist. Die Hierarchie besteht aus den Register, gefolgt von einem oder mehreren Cache-Leveln und schließlich den RAM Bausteinen.
 
-Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweiße kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht also darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielweiße ist es ineffizient ständing im Speicher hin- und her zu springen. Ein lineares Laden ist effizienter um die lokalität der Daten innerhalb des Cache auszunutzen.
+Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen dem CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren Beispielsweise kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht also darin, die Daten in effizienter Form an den CPU heranzutragen. Beispielsweise ist es ineffizient ständig im Speicher hin- und her zu springen. Ein lineares Laden ist effizienter um die Lokalität der Daten innerhalb des Cache auszunutzen.
 
-Eine Cache-Hierarchy legt nahe, Vektoren blockweiße zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
+Eine Cache-Hierarchy legt nahe, Vektoren blockweise zu laden, so das ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schnellen Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
 
 Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
 
-Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Registers verfügbar ist. Der CPU Antwortet mit der Registerbeite.
+Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Register verfügbar ist. Der CPU antwortet mit der Registerbreite.
 
 \newacronym{usb}{USB}{Universal Serial Bus} % Define acronym
 \newacronym{pdf}{PDF}{Portable Document Format}
@@ -108,17 +103,17 @@ Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (\gls{RVV}) \
 
 \section{Die RISC-V Vector Extension} \label{sec:riscv_rvv_extension}
 
-Ein RISC-V CPU besitzt die sogenannte X-Register-File. Es handelt sich damit um alle Register, die ein RISC-V CPU standardmäßig, ohne Extensions hat. Dies könnten beispielsweiße die Register x0 bis x31 sein. Die Länge der Register in bits wird durch die Konstante XLEN festgelegt.
+Ein RISC-V CPU besitzt die sogenannte X-Register-File. Es handelt sich damit um alle Register, die ein RISC-V CPU standardmäßig, ohne Extensions hat. Dies könnten beispielsweise die Register x0 bis x31 sein. Die Länge der Register in bits wird durch die Konstante XLEN festgelegt.
 
-Die RVV erweitert einen RISC-V CPU um zusätzliche Vektor Register v0 bis v31. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} (in Anlehnung an die Konstakte \gls{XLEN}) vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. \gls{VLEN} stellt somit eine Eigenschaft des CPU dar. Die \gls{RVV} Spezifikation \cite{rvv_specification} macht die Vorgabe:
+Die \gls{RVV} erweitert einen RISC-V CPU um zusätzliche Vektor Register v0 bis v31. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} (in Anlehnung an die Konstante \gls{XLEN}) vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. \gls{VLEN} stellt somit eine Eigenschaft des CPU dar. Die \gls{RVV} Spezifikation \cite{rvv_specification} macht die Vorgabe:
 
 ``The number of bits in a single vector register, \(VLEN \geq ELEN\), which must be a power of 2, and must be no greater than \(2^{16}\)''.
 
-Das besondere an den Vector Registern ist, dass sie konfiguriert werden können. Es lässt sich festlegen, welcher Datentyp in den Registern erwartet wird, also 8-bit Bytes, 16-bit Halbwörter oder 32- oder 64-bit Wörter. Zusätzlich lassen sich die Vektor-Register Gruppieren, also aneinanderhängen um noch größere Register zu bilden.
+Das besondere an den Vector Registern ist, dass sie konfiguriert werden können. Es lässt sich festlegen, welcher Datentyp in den Registern erwartet wird, also 8-bit Bytes, 16-bit Halbwörter oder 32- oder 64-bit Wörter. Zusätzlich lassen sich die Vektorregister Gruppieren, also aneinanderhängen um noch größere Register zu bilden.
 
-Der Vorteil ist, dass man beispielsweiße 8-bit bytes als Datentyp festlegen kann und dann vier Vektor-Register gruppieren kann. Unter der Annahme das ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweiße 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektor-Addition all dieser Elemente mit nur einer einzigen Instruktion erfolgen! Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
+Der Vorteil ist, dass man beispielsweise 8-bit bytes als Datentyp festlegen kann und dann vier Vektorregister gruppieren kann. Unter der Annahme das ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweise 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektoraddition all dieser Elemente mit nur einer einzigen Instruktion erfolgen! Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
 
-Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleuningung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
+Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Design. Damit ist gemeint, dass eine Anwendung mit der Hardware zusammenarbeiten muss um von der Hardware-Beschleunigung zu profitieren. Es ist weder möglich durch Software oder Hardware alleine eine Beschleunigung zu erzielen. Moderne optimierende Compiler wie der GCC für RISC-V oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Einsatz automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
 
 Dies lässt sich testen, indem man den naiven Matrix Multiplikations Algorithmus in godbolt eingibt und die neuste Version des GCC auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder!
 
@@ -134,35 +129,35 @@ Die Schritte sind:
 
     %\item The application may check if it is cheaper to compute the operation with or without the vector engine. Imagine that only one or two elements of the large vector are left at this point, then it might be cheaper to just use the ALU once or twice instead of loading the vector engine.
 
-    \item Die Applikation entscheidet, ob es effizienter ist die Vektor Operation mit oder ohne Vektor-Erweiterung auszuführen. Wenn die Vektorlänge beispielsweiße nur aus zwei Elementen besteht ist es schneller diese beiden Element einfach so zu verrechnen.
+    \item Die Applikation entscheidet, ob es effizienter ist die Vektoroperation mit oder ohne Vektor-Extension auszuführen. Wenn die Vektorlänge beispielsweise nur aus zwei Elementen besteht ist es schneller diese beiden Element einfach so zu verrechnen.
 
     %\item If the application decides to use the Vector Engine instead of the ALU, then it continues the strip-mining loop. Otherwise it will jump to an end-label. (Optimizing compilers will structure for-loops in a different manner but the concept of terminating a loop is applied in all cases at this point).
 
-    \item Wenn sich die Anwendung dazu entscheidet die Vektor-Extension zu verwenden, dann beginnt die Strip-Mining Schleife. Wenn es zu wenige Elemente gibt, dann springt die Anwendung zu einem Label, dass die Verarbeitung terminiert und berechnet den Rest der Element dort manuell ohne Hardwarebeschleunigungen.
+    \item Wenn sich die Anwendung dazu entscheidet die Vektor-Extension zu verwenden, dann beginnt die Strip-Mining-Schleife. Wenn es zu wenige Elemente gibt, dann springt die Anwendung zu einem Label, dass die Verarbeitung terminiert und berechnet den Rest der Element dort manuell ohne Hardwarebeschleunigungen.
 
     %\item The application specifies the remaining amount of elements in the vector/vectors that need processing. This value is called Application Vector Length (AVL). In the first iteration of strip-mining, AVL is the total length of the vector. As strip-mining processes batches, the AVL will get smaller and smaller by the batch-size each iteration until the vector is processed and the strip-mining loop terminates.
 
-    \item Die Anwendung bestimmt den Anteil der Vektor-Elemente, die noch verarbeitet werden müssen. Dieser Wert wird Application Vector Length (AVL) genannt. Beispielsweiße entspricht die \gls{AVL} in der ersten Iteration der gesamten Länge des Vektors. Mit jedem Schleifendurchlauf werden Teile des Vektors verarbeitet und die AVL nimmt immer mehr ab bis schließlich keine Elemente zur Verarbeitung mehr übrig sind und das Verfahren terminiert.
+    \item Die Anwendung bestimmt den Anteil der Vektorelemente, die noch verarbeitet werden müssen. Dieser Wert wird Application Vector Length (AVL) genannt. Beispielsweise entspricht die \gls{AVL} in der ersten Iteration der gesamten Länge des Vektors. Mit jedem Schleifendurchlauf werden Teile des Vektors verarbeitet und die AVL nimmt immer mehr ab bis schließlich keine Elemente zur Verarbeitung mehr übrig sind und das Verfahren terminiert.
 
     %\item Aside from the AVL, the application also specifies the size/datatype of the elements (= Selected Element Width, SEW) in the vector and how it wants the vector engine to group the elements into the vector registers (= group modifier, LMUL).
 
-    \item Neben der \gls{AVL} muss die Anwendung auch in jeder Iteration den Datentyp bzw. die Größe der einzelnen Vektorelemente konfigurieren. Die Größe wird (= Selected Element Width, SEW) genannt. Es wird auch bestimmt, wie die Vektorelement in den Registern angeordnet werden und wie die Vektor-Register gruppiert werden. Diese Konfiguration wird Group Modifier oder LMUL genannt. Um die Konfiguration vorzunehmen ruft die Anwendung die Instruktion set(i)vli auf.
+    \item Neben der \gls{AVL} muss die Anwendung auch in jeder Iteration den Datentyp bzw. die Größe der einzelnen Vektorelemente konfigurieren. Die Größe wird (= Selected Element Width, SEW) genannt. Es wird auch bestimmt, wie die Vektorelement in den Registern angeordnet werden und wie die Vektorregister gruppiert werden. Diese Konfiguration wird Group Modifier oder LMUL genannt. Um die Konfiguration vorzunehmen ruft die Anwendung die Instruktion set(i)vli auf.
 
     % \item The vector engine takes the request of AVL, SEW and LMUL from the application (which issues a set(i)vli instruction each iteration of the strip-mining loop) and computes the batch size. This is the hardware part of the hardware-software co-design. The vector engine now makes a decision on how many of it's vector registers it needs to combine in order to fit SEW into CPU hardware given the user-requests grouping (l-multiplier, LMUL). Also it needs to keep track of home many ALU-nodes it has available for vector processing. Given all hardware constraints, the vector engine will determine the batch size that it can actually commit to. This batch size is (very confusingly) called vector length (vl). The vl is returned in the destination register to the call of the vsetvli instruction and also stored in the vl register.
 
-    \item Die Vector Engine verwendet die konfigurierten Werte \gls{AVL}, \gls{SEW} und \gls{LMUL} und berechnet die Batch Größe. Ein Batch ist die Menge an Vektor-Elementen die in einer einzigen SIMD-Operation verrechnet werden. Hier kommt der Hardware-Teil des hardware-software co-designs zum tragen, denn der RISC-V CPU und die enthaltene Vector-Engine müssen entscheiden, wie viele Elemente jetzt tatsächlich parallel verarbeitet werden können. Dabei berücksichtigt die Vector-Engine wieviele Rechenknoten sie zur Verfügung hat um parallel zu rechnen. Die ermittelte Anzahl an Elementen wird vector length (VL) genannt und von der Hardware an die Anwendung zurückgegeben. Dazu gibt die Instruktion set(i)vli diesen Wert in ein Rückgaberegister aus, aus dem sich die Anwendung den Wert holen kann.
+    \item Die Vector Engine verwendet die konfigurierten Werte \gls{AVL}, \gls{SEW} und \gls{LMUL} und berechnet die Batch Größe. Ein Batch ist die Menge an Vektorelementen die in einer einzigen SIMD-Operation verrechnet werden. Hier kommt der Hardware-Teil des hardware-software co-designs zum tragen, denn der RISC-V CPU und die enthaltene Vector-Engine müssen entscheiden, wie viele Elemente jetzt tatsächlich parallel verarbeitet werden können. Dabei berücksichtigt die Vector-Engine wie viele Rechenknoten sie zur Verfügung hat um parallel zu rechnen. Die ermittelte Anzahl an Elementen wird vector length (VL) genannt und von der Hardware an die Anwendung zurückgegeben. Dazu gibt die Instruktion set(i)vli diesen Wert in ein Rückgaberegister aus, aus dem sich die Anwendung den Wert holen kann.
 
     %\item The application receives the vl value from the destination register. It now knows what the batch size is. It will execute vector load instructions (vle8, vle16, ...) to load data from a specific address in memory. And it will uptdate the pointers to memory in order to keep track of where to read data for the next batch from. In advances the pointers acording to the batch size returned by the vector engine. The application only specifies the address to load from. It does not specify the amount of elements! The amount of elements was agreed upon by the succesfull setivli instruction. The application has communicated how the data type looks like and the vector engine has commited to a certain vl. This means the amount of elements that are transferred from memory into the CPU registers is implicitly agreed upon!
 
-    \item Die Anwendung kennt jetzt die \gls{VL}, die für diese Iteration gilt. Damit kennt die Software die Batch-Size. Die Software wird nun die Vector-Load Instructionen (vle8, vle16, ...) verwenden um einen Anteil des Vektors oder der Vektoren, der genau der \gls{VL} entspricht in die Vektor-Register zu laden. Die Anwendung wird auch einen Zeiger nach vorne verschieben, um sich zu merken von welcher Stelle in der nächsten Iteration geladen werden muss.
+    \item Die Anwendung kennt jetzt die \gls{VL}, die für diese Iteration gilt. Damit kennt die Software die Batch-Size. Die Software wird nun die Vector-Load Instructionen (vle8, vle16, ...) verwenden um einen Anteil des Vektors oder der Vektoren, der genau der \gls{VL} entspricht in die Vektorregister zu laden. Die Anwendung wird auch einen Zeiger nach vorne verschieben, um sich zu merken von welcher Stelle in der nächsten Iteration geladen werden muss.
 
     %\item The vector engine will process the load instruction (vle8, vle16, ...) and load it's internal vector registers. To load data from memory it will use the agreed upon vl value implicitly.
 
-    \item Die Vector-Engine verarbeitet die Vector-Load Anweisungen und schreibt die geladenen Daten in die Vektor-Register.
+    \item Die Vector-Engine verarbeitet die Vector-Load Anweisungen und schreibt die geladenen Daten in die Vektorregister.
 
     %\item The application executes a vector/vector or vector/scalar operation (vadd, vsub, ...). The application implicitly knows that this operation is only executed on the current batch and not on all vector elements in total.
 
-    \item Die Anwendung führt nun eine Instruktion aus um die Vektoren zu verrechnen. Es können beispielsweiße eine elementweiße Addition (vadd), Subtraktion (vsub), Multiplikation oder sonstige Operationen ausgeführt werden.
+    \item Die Anwendung führt nun eine Instruktion aus um die Vektoren zu verrechnen. Es können beispielsweise eine elementweise Addition (vadd), Subtraktion (vsub), Multiplikation oder sonstige Operationen ausgeführt werden.
 
     %\item The vector engine performs the operation on all loaded elements in parallel by applying all the ALU-nodes that it has reserved for this step of strip-mining meaning, the current batch of elements.
 
@@ -183,9 +178,6 @@ Die Schritte sind:
 \end{enumerate}
 
 Hier alles in Form von Quellcode:
-
-Now that the basic idea and principle has been described in natural language, lets look at code that implements the strip-mining hardware-software co-design.
-
 
 \begin{lstlisting}
 # vector-vector add routine of 32-bit integers
@@ -250,11 +242,11 @@ vvaddint32:
 		ret
 \end{lstlisting}
 
-Jetzt, da die Wirkungsweiße der RVV Extension beschrieben worden ist, kann nachvollzogen werden, in welchem Spannungsfeld die RISC-V Gremien Entscheidungen treffen müssen, wenn es um den nächsten Schritt hin zu einer Matrix-Extension geht.
+Jetzt, da die Wirkungsweise der \gls{RVV} Extension beschrieben worden ist, kann nachvollzogen werden, in welchem Spannungsfeld die RISC-V Gremien Entscheidungen treffen müssen, wenn es um den nächsten Schritt hin zu einer Matrix-Extension geht.
 
-Da die RVV Extension ratifiziert worden ist, gibt es bereits Chips die auf dem Markt verfügbar sind, und die die RVV implementieren. Ein Beispiel ist der OrangePi RV2 Single Board Computer, der einen Spacemit-K1 RISC-V Chip verwendet.
+Da die \gls{RVV} Extension ratifiziert worden ist, gibt es bereits Chips die auf dem Markt verfügbar sind, und die die \gls{RVV} implementieren. Ein Beispiel ist der OrangePi RV2 Single Board Computer, der einen Spacemit-K1 RISC-V Chip verwendet.
 
-Das bedeutet, Firmen haben bereits Designs erstellt und Investitionen in die RISC-V RVV Strategie investiert. Wenn eine Matrix-Extension Register wiederverwenden würden, hätten solche Firmen einen Vorteil. Auf der anderen Seite möchte man das bestmögliche Verfahren ermöglichen um effizient mit Matrizen rechnen zu können und sich damit von der Konkurrenz abzuheben. Eventuel ist der Ansatz, der für Vektoren gewählt wurde, für Matrizen nicht optimal.
+Das bedeutet, Firmen haben bereits Designs erstellt und Investitionen in die RISC-V \gls{RVV} Strategie investiert. Wenn eine Matrix-Extension Vektorregister wiederverwenden würde, hätten solche Firmen einen Vorteil. Auf der anderen Seite möchte man das bestmögliche Verfahren ermöglichen um effizient mit Matrizen rechnen zu können und sich damit von der Konkurrenz abzuheben. Eventuel ist der Ansatz, der für Vektoren gewählt wurde, für Matrizen nicht optimal.
 
 Es gibt daher laut Krste Asanovic \cite{RISCV_StateOfTheUnion} bei der Arbeit an einer Extension für Matrizen drei große Strömungen.
 
@@ -265,17 +257,17 @@ Es gibt daher laut Krste Asanovic \cite{RISCV_StateOfTheUnion} bei der Arbeit an
 \label{fig:Matrix-Extension-Optionen}
 \end{figure}
 
-Zunächst wird in der linken Spalte der Abbildung \ref{fig:Matrix-Extension-Optionen} gezeigt, dass sich eine Matrix theoretisch elementweiße berechnen lässt, wenn für jedes Element der Matrix individuel eine Dot-Produkt mit Hilfe der \gls{RVV}-Extension berechnet wird. Dies ist nur möglich, wenn der CPU die \gls{RVV} besitzt und gleichzeitig, wenn die Matrix spalten- oder zweilenweiße in ein Vektor-Register passt.
+Zunächst wird in der linken Spalte der Abbildung \ref{fig:Matrix-Extension-Optionen} gezeigt, dass sich eine Matrix theoretisch elementweise berechnen lässt, wenn für jedes Element der Matrix individuel eine Dot-Produkt mit Hilfe der \gls{RVV}-Extension berechnet wird. Dies ist nur möglich, wenn der CPU die \gls{RVV} besitzt und gleichzeitig, wenn die Matrix spalten- oder zweilenweise in ein Vektorregister passt.
 
-Die Integrated Matrix Extension \gls{IME} \cite{RISCV_IntegratedMatrixExtension} verwendet die \gls{RVV}-Register wieder um darin Matrix-Berechnungen auszuführen. Es wird keine spezielle Hardware für die Matrix-Berechnung hinzugefügt. Die erklärten Ziele des \gls{IME}-Charter sind es, einen bedeutenden Geschwindigkeitsvorteil zu erzielen, bei vergleichbaren Kosten, wie sie bereits für die RVV anfallen.
+Die Integrated Matrix Extension \gls{IME} \cite{RISCV_IntegratedMatrixExtension} verwendet die \gls{RVV}-Register wieder um darin Matrix-Berechnungen auszuführen. Es wird keine spezielle Hardware für die Matrix-Berechnung hinzugefügt. Die erklärten Ziele des \gls{IME}-Charter sind es, einen bedeutenden Geschwindigkeitsvorteil zu erzielen, bei vergleichbaren Kosten, wie sie bereits für die \gls{RVV} anfallen.
 
 Die Vector-Matrix Extension \gls{VME} baut auf die \gls{RVV}-Extension auf und führt zusätzlich einen sogenannten Matrix-State bzw. eine Matrix-Engine hinzu. Mit dem Matrix-State ist gemeint, dass der CPU um Komponenten erweitert wird, die in der Lage sind zwischenergebnisse bei einer Matrix-Multiplikation zu speichern. Es kommt bei der \gls{VME} also weitere Hardware für die Matrix-Berechnung hinzu. Diese zusätzliche Hardware ist in der Abbildung \label{fig:Matrix-Extension-Optionen} in roter Farbe markiert.
 
-Die Attached Matrix Extension \gls{AME} geht noch einen Schritt weiter und verwendet dabei keine Vektor-Register aus der \gls{RVV}-Extension mehr sondern fügt Architectured-State sogar für komplette Matrix Register hinzu. Sowohl die Eingabedaten als auch die Zwischen- und Endergebnisse werden in speziellen Matrix-Registern gespeichert. Damit ist die \gls{AME} als einziger Ansatz unabhängig von der \gls{RVV}-Extension und könnte auch komplett ohne \gls{RVV}-Extension angeboten werden.
+Die Attached Matrix Extension \gls{AME} geht noch einen Schritt weiter und verwendet dabei keine Vektorregister aus der \gls{RVV}-Extension mehr sondern fügt Architectured State sogar für komplette Matrix Register hinzu. Sowohl die Eingabedaten als auch die Zwischen- und Endergebnisse werden in speziellen Matrix-Registern gespeichert. Damit ist die \gls{AME} als einziger Ansatz unabhängig von der \gls{RVV}-Extension und könnte auch komplett ohne \gls{RVV}-Extension angeboten werden.
 
 Für die offizielle Ratifizierung einer RISC-V Matrix-Extension ist zum jetzigen Zeitpunkt nicht klar, welcher Ansatz verwendet wird oder ob eventuel sogar mehr als eine Spezifikation ratifiziert werden wird.
 
-In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured-State her am ehesten an der Attached Matrix Extension \gls{AME} orientiert. Zustätzlich werden Instruktionen vorgesehen, wie sie bei der Vektor-Extension zu sehen sind. Damit ist gemeint, dass die hinzugefügten Instruktionen den Strip-Mining Ansatz ermöglichen. Damit kann eine Matrixmultiplikation auch für sehr große Matrixen, die nicht als Ganzes in die CPU-Register passen, erfolgen.
+In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured State her am ehesten an der Attached Matrix Extension \gls{AME} orientiert. Zustätzlich werden Instruktionen vorgesehen, wie sie bei der Vektor-Extension zu sehen sind. Damit ist gemeint, dass die hinzugefügten Instruktionen den Strip-Mining Ansatz ermöglichen. Damit kann eine Matrixmultiplikation auch für sehr große Matrixen, die nicht als Ganzes in die CPU-Register passen, erfolgen.
 
 %TODO:  beschriebe alle drei vorgehen.
 
@@ -296,44 +288,44 @@ In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured-S
 
 %TODO: Erkläre FPGA
 
-\section{Blockweiße Matrix Multiplikation} \label{sec:mmul_block}
+\section{Blockweise Matrixmultiplikation} \label{sec:mmul_block}
 
-Im Folgenden wird das blockweiße Vorgehen erläutert, mit dem die Matrix-Multiplikation ausgeführt werden wird.
+Im Folgenden wird das blockweise Vorgehen erläutert, mit dem die Matrixmultiplikation ausgeführt werden wird.
 
-Bei der herkömlichen Matrix-Multiplikation über das Dot-Product von Zeilen und Spalten werden die beiden Matrizen A und B in ihrere kompletten Dimension betrachtet, da jeweils komplette Zeilen und Spalten verrechnet werden um ein Matrix-Element zu bestimmen.
+Bei der herkömmlichen Matrixmultiplikation über das Dot-Product von Zeilen und Spalten werden die beiden Matrizen A und B in ihrere kompletten Dimension betrachtet, da jeweils komplette Zeilen und Spalten verrechnet werden um ein Matrix-Element zu bestimmen.
 
-Bei sehr großen Matrizen ist dies nicht zielführend, da der CPU die Matrix nur schrittweiße erfassen könnte und damit nur sehr ineffizient berechnen kann. Aus diesem Grund bietet sich das Outer Product an.
+Bei sehr großen Matrizen ist dies nicht zielführend, da der CPU die Matrix nur schrittweise erfassen könnte und damit nur sehr ineffizient berechnen kann. Aus diesem Grund bietet sich das Outer Product an.
 
-Die angestrebte Verbesserung besteht darin, eine Matrix blockweiße zu berechnen. Damit eröffnet sich, ähnlich wie bei Vektoren, das Potential der parallelen Berechnung durch SIMD Instruktionen. Wie bei Vektoren ist es durch das blockweiße Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
+Die angestrebte Verbesserung besteht darin, eine Matrix blockweise zu berechnen. Damit eröffnet sich, ähnlich wie bei Vektoren, das Potential der parallelen Berechnung durch SIMD Instruktionen. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
 
 Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist hardwarebeschleunigt die Matrixmultiplikation zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zur+ck in den RAM-Speicher zu schreiben.
 
-Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von blockweißer Berechnung gesprochen wird.
+Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von blockweiser Berechnung gesprochen wird.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{"MatrixMult_1.png"}
-\caption{Matrix Multiplikation blockweiße}
+\caption{Matrixmultiplikation blockweise}
 \label{fig:Matrix_Multiplikation_Blockwise}
 \end{figure}
 
 In Abbildung \label{fig:Matrix_Multiplikation_Blockwise} wird die grüne Matrix mit der blauen Matrix multipliziert. Es werden einzelne Blöcke A bis H innerhalb der beiden Matrizen definiert.
 
-Zur Gegenprüfung ist das Ergebnis in Abbildung \ref{fig:Matri_Multiplikation_Ergebnis} dargestellt.
+Zur Gegenprüfung ist das Ergebnis in Abbildung \ref{fig:Matrix_Multiplikation_Ergebnis} dargestellt.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{"MatrixMult_2.png"}
-\caption{Matrix Multiplikation Ergebnis}
+\caption{Matrixmultiplikation Ergebnis}
 \label{fig:Matrix_Multiplikation_Ergebnis}
 \end{figure}
 
-Dieses Ergebnis wird den Berechnungsvorschriften aus \ref{fig:Matrix_Multiplikation_Vorschrift} zufolge berechnet. Beispielsweiße gilt für den grauen Block die Vorschrift \( A*E + B*G \)
+Dieses Ergebnis wird den Berechnungsvorschriften aus \ref{fig:Matrix_Multiplikation_Vorschrift} zufolge berechnet. Beispielsweise gilt für den grauen Block die Vorschrift \( A*E + B*G \)
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{"MatrixMult_4.png"}
-\caption{Matrix Multiplikation Berechnungsvorschrift}
+\caption{Matrixmultiplikation Berechnungsvorschrift}
 \label{fig:Matrix_Multiplikation_Vorschrift}
 \end{figure}
 
@@ -348,24 +340,24 @@ In Abbildung \ref{fig:Matrix_Multiplikation_A_E_B_G} wird der grau hervorgehoben
 \label{fig:Matrix_Multiplikation_A_E_B_G}
 \end{figure}
 
-Mit dem Wissen über die blockweiße Aufteilung ist es nun möglich per SIMD zu parallelisieren oder Strip-Mining auszuführen, wenn keine parallelen Rechenknoten verfügbar sind. In dieser Arbeit werden Instruktionen analog zur RVV bereitgestellt um das Strip-Mining für Matrizen zu ermöglichen und dabei blockweiße vorzugehen.
+Mit dem Wissen über die blockweise Aufteilung ist es nun möglich per SIMD zu parallelisieren oder Strip-Mining auszuführen, wenn keine parallelen Rechenknoten verfügbar sind. In dieser Arbeit werden Instruktionen analog zur \gls{RVV} bereitgestellt um das Strip-Mining für Matrizen zu ermöglichen und dabei blockweise vorzugehen.
 
-Es ist noch zu klären, wie die einzelnen Blöcke miteinander multiplizert und addiert werden.
+Es ist noch zu klären, wie die einzelnen Blöcke miteinander multipliziert und addiert werden.
 
 
 
 
 \section{Outer-Produkt} \label{sec:outer-produkt}
 
-Das Outer-Produkt wird verwendet um die Matrix-Multiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer-Produkt nützlich macht ist, dass es die Matrix-Multiplikation auf die Verrechnung von Vektoren reduziert. Damit lässt sich das Verfahren einfach implementieren.
+Das Outer-Produkt wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer-Produkt nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung mit Vektoren reduziert. Damit lässt sich das Verfahren einfach implementieren.
 
 In der Übersicht \cite{design_VME} von Earl A. Killian wird das Outer-Product auf Seite 53 beschrieben.
 
 TODO: Reproduce the definition
 
-Im Grunde kann man an der Formel aus Abbildung \ref{fig:Matrix_Multiplikation_Vorschrift} bereits erkennen, dass es nicht ausreicht Multiplikationen auszuführen, vielmehr müssen Ergebnisse auch aufaddiert werden. Daher ist es notwendig im Design einen State vorzusehen, der Schrittweiße durch Addition vervollständigt wird, bis das Endergebnis vorliegt.
+Im Grunde kann man an der Formel aus Abbildung \ref{fig:Matrix_Multiplikation_Vorschrift} bereits erkennen, dass es nicht ausreicht Multiplikationen auszuführen, vielmehr müssen Ergebnisse auch aufaddiert werden. Daher ist es notwendig im Design Speicherzellen vorzusehen, die Schrittweise durch Addition vervollständigt werden, bis das Endergebnis vorliegt.
 
-Dieser ``Matrix-Kern'' ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cite{design_VME} dargestellt. Dieses Konstrukt wird auch Matrix Accumulator \gls{MAC} genannt, da er Zwischenergebnisse aufsummiert, also kummuliert.
+Dieser ``Matrix-Kern'' ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cite{design_VME} dargestellt. Dieses Konstrukt wird auch Matrix Accumulator (\gls{MAC}) genannt, da er Zwischenergebnisse aufsummiert, also kummuliert.
 
 \begin{figure}[h]
 \centering
@@ -374,6 +366,6 @@ Dieser ``Matrix-Kern'' ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cit
 \label{fig:MAC_MatrixAccumulator}
 \end{figure}
 
-Wenn zwei Vektoren außen an den \gls{MAC} angelegt werden, dann berechnet er ein Zwischenergebnis für das Outer Product aus den beiden Vektoren und akkumuliert das Zwischenergebnis zum Rest auf. Wenn alle Vektoren angelegt worden sind, enthält der \gls{MAC} somit das komplette Outer Product.
+Wenn zwei Vektoren außen an den \gls{MAC} angelegt werden, dann berechnet er ein Zwischenergebnis für das Outer Product aus den beiden Vektoren und akkumuliert das Zwischenergebnis zum Rest auf. Wenn alle Vektoren angelegt worden sind, enthält der \gls{MAC} somit das komplette Ergebnis der Multiplikation.
 
-Die Kombination aus dem blockweißen Ansatz und dem Outer Produkt mittels \gls{MAC} ermöglicht es ein Design zu erstellen, dass dem angestrebten RISC-V \gls{AME} Ansatz ermöglicht.
+Die Kombination aus dem blockweisen Ansatz und dem Outer Produkt mittels \gls{MAC} ermöglicht es ein Design zu erstellen, dass dem angestrebten RISC-V \gls{AME} Ansatz ermöglicht.
