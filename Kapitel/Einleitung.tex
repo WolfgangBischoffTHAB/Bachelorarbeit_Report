@@ -38,7 +38,7 @@ Der NEORV32 RISC-V CPU wird um Anweisungen erweitert, die die hardwarebeschleuni
 
 Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Es wird im speziellen eine Erweiterung des bereits existierenden NEORV32 Core vorgenommen.
 
-Die Matrizenberechnungen erfolgen im ersten Schritt auf Matrizen deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur die ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt.
+Die Matrizenberechnungen erfolgen im ersten Schritt auf Matrizen deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur die ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
 
 Da es viele Ansätze gibt Matrizen zu multiplizieren, wurde eine Einschränkung getroffen. Die Multiplikation erfolgt mit dem Outer-Produkt Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
 
@@ -47,9 +47,9 @@ Da es viele Ansätze gibt Matrizen zu multiplizieren, wurde eine Einschränkung 
 
 \section{Struktur der Arbeit} \label{sec:Einleitung_Struktur_der_Arbeit}
 
-Es wird mit einer Erfassung des Status Quo begonnen. Der Stand der Technick wird beschrieben.
+Es wird mit einer Erfassung des Status Quo begonnen. Der Stand der Technik wird beschrieben.
 
-Als nächstes wird die Matrixmultiplikation im ``Kapitel Theoretische Grundlagen'' beschrieben. Es wird beschrieben, dass sich die Matrixmultiplikation in Teile aufteilen und damit schrittweise abarbeiten lässt.
+Als nächstes wird die Matrixmultiplikation im Kapitel ``Theoretische Grundlagen'' beschrieben. Es wird beschrieben, dass sich die Matrixmultiplikation in Teile aufteilen und damit schrittweise abarbeiten lässt.
 
 %Nachdem die Matrixmultiplikation beschrieben ist, wird ihre Relevanz in den Anwendungsbegieten der Neuronalen Netze und der 3D-Computergrafik dargestellt.
 

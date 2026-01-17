@@ -94,6 +94,27 @@ Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktion
 
 In diesem Abschnitt wird die Execution-Engine erweitert, so dass sie die neuen Instruktion auch ausführt, wenn sie von dem Frontend präsentiert werden.
 
+Eine Übersicht aller Komponenten ist in Abbildung \ref{fig:VHDL_Entities} zu sehen.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.35]{"VHDL_Entities.png"}
+\caption{VHDL Entities}
+\label{fig:VHDL_Entities}
+\end{figure}
+
+Die Instruktionen werden über das Frontend (FE) aus dem Anweisungsspeicher (IMem) geladen und an die Kontrolllogik weitergegeben. Die Daten der Matrix-Elemente kommen aus dem Datenspeicher (DMEM) und durchlaufen den Daten-Cache (DCache).
+
+Die Komponente neorv32\_cpu\_control gibt die Kontrolsignale matrix\_mar \_load\_store und matrix\_mul aus, wenn die Instruktionen mle32, mse32 bzw. mmul32 ausgeführt werden müssen.
+
+Im Falle von mle32 (Load) werden die Signale data\_out und head verwendet um die 16 Matrixelemente vom Bus-Request an die richtige Stelle in die Matrix-Register zu übertragen. PROC\_RAM übernimmt diese Koordinationsaufgabe.
+
+Wird eine mmul32 Anweisung ausgeführt und damit das matrix\_mul signal von der Control-Logik gesetzt, dann beginnt der Prozess PROC\_MATRIX \_MUL mit der Multiplikation. Die Matrix-Register werden in die Arbeitsregister übertragen. Nach der Bearbeitung wird das Ergebnis aus den Arbeitsregistern wieder zurück in die Matrixregister übertragen.
+
+Analog zu mle32 werden die Signale data\_in und tail für mse32 (Store) Anweisung verwendet um Daten aus den Matrixregistern zurück in den Datenspeicher und den Cache zu schreiben.
+
+Im Folgenden werden die Änderungen im Detail beschrieben.
+
 Als erstes wird der neue Matrix-Opcode aus der Erkennung illegaler Opcodes ausgeschlossen.
 
 \begin{lstlisting}
@@ -117,7 +138,7 @@ Der ALU wird beigebracht, dass sie den Operand B als immediate verwenden muss, s
 \begin{lstlisting}
 -- ALU operand B: is immediate? --
 case opcode is
-    -- WBI: added matrix opcode here because the mle32, mse32 instructions contain an immediate
+    -- add matrix opcode here because the mle32, mse32 instructions contain an immediate
     -- that needs to be added to the register encoded in the instruction
     when opcode_matrix_c | opcode_alui_c | opcode_lui_c ...
         ctrl_nxt.alu_opb_mux <= '1';

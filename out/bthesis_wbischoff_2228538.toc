@@ -14,30 +14,30 @@
 \contentsline {section}{\numberline {3.4}Die RISC-V Vector Extension}{9}{section.28}%
 \contentsline {section}{\numberline {3.5}Blockweise Matrixmultiplikation}{14}{section.105}%
 \contentsline {section}{\numberline {3.6}Outer-Produkt}{15}{section.110}%
-\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{17}{chapter.112}%
-\contentsline {section}{\numberline {4.1}Der NEORV32 Core und dessen Einsatz}{17}{section.113}%
-\contentsline {section}{\numberline {4.2}Test-Software}{18}{section.115}%
-\contentsline {section}{\numberline {4.3}Evaluierung der Performance}{20}{section.116}%
-\contentsline {section}{\numberline {4.4}Schrittweises Vorgehen}{20}{section.117}%
-\contentsline {chapter}{\numberline {5}Analyse des NEORV32 CPU}{22}{chapter.125}%
-\contentsline {section}{\numberline {5.1}Architektur des NEORV32 Core}{22}{section.126}%
-\contentsline {section}{\numberline {5.2}Die Fetch-Engine}{22}{section.128}%
-\contentsline {section}{\numberline {5.3}CPU--Control und Execution-Engine}{23}{section.130}%
-\contentsline {section}{\numberline {5.4}Die Load-Store-Engine}{24}{section.131}%
-\contentsline {chapter}{\numberline {6}Erweiterung des NEORV32-CPU}{26}{chapter.132}%
-\contentsline {section}{\numberline {6.1}Die Matrix-Register}{26}{section.133}%
-\contentsline {section}{\numberline {6.2}Die Instruktionen}{26}{section.141}%
-\contentsline {section}{\numberline {6.3}Erweiterung der Execution-Engine}{28}{section.177}%
-\contentsline {section}{\numberline {6.4}Erweiterung der Load--Store--Unit}{32}{section.297}%
-\contentsline {section}{\numberline {6.5}Matrix-Engine}{33}{section.298}%
-\contentsline {chapter}{\numberline {7}Auswertung und Evaluierung}{37}{chapter.384}%
-\contentsline {section}{\numberline {7.1}Testdaten}{37}{section.385}%
-\contentsline {section}{\numberline {7.2}Messung und Vergleichbarkeit}{37}{section.387}%
-\contentsline {section}{\numberline {7.3}Prüfung mit Matrix-Erweiterung}{40}{section.416}%
-\contentsline {section}{\numberline {7.4}Prüfung ohne Matrix-Erweiterung}{42}{section.453}%
-\contentsline {section}{\numberline {7.5}Auswertung}{43}{section.541}%
-\contentsline {chapter}{\numberline {8}Zusammenfassung und Ausblick}{45}{chapter.556}%
-\contentsline {section}{\numberline {8.1}Zusammenfassung}{45}{section.557}%
-\contentsline {section}{\numberline {8.2}Ausblick}{45}{section.558}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{48}{chapter*.562}%
+\contentsline {chapter}{\numberline {4}Durchführung und Methodik}{18}{chapter.114}%
+\contentsline {section}{\numberline {4.1}Der NEORV32 Core und dessen Einsatz}{18}{section.115}%
+\contentsline {section}{\numberline {4.2}Test-Software}{19}{section.117}%
+\contentsline {section}{\numberline {4.3}Evaluierung der Performance}{21}{section.118}%
+\contentsline {section}{\numberline {4.4}Schrittweises Vorgehen}{21}{section.119}%
+\contentsline {chapter}{\numberline {5}Analyse des NEORV32 CPU}{23}{chapter.127}%
+\contentsline {section}{\numberline {5.1}Architektur des NEORV32 Core}{23}{section.128}%
+\contentsline {section}{\numberline {5.2}Die Fetch-Engine}{23}{section.130}%
+\contentsline {section}{\numberline {5.3}CPU--Control und Execution-Engine}{24}{section.132}%
+\contentsline {section}{\numberline {5.4}Die Load-Store-Engine}{25}{section.133}%
+\contentsline {chapter}{\numberline {6}Erweiterung des NEORV32-CPU}{27}{chapter.134}%
+\contentsline {section}{\numberline {6.1}Die Matrix-Register}{27}{section.135}%
+\contentsline {section}{\numberline {6.2}Die Instruktionen}{27}{section.143}%
+\contentsline {section}{\numberline {6.3}Erweiterung der Execution-Engine}{29}{section.179}%
+\contentsline {section}{\numberline {6.4}Erweiterung der Load--Store--Unit}{34}{section.300}%
+\contentsline {section}{\numberline {6.5}Matrix-Engine}{35}{section.301}%
+\contentsline {chapter}{\numberline {7}Auswertung und Evaluierung}{39}{chapter.387}%
+\contentsline {section}{\numberline {7.1}Testdaten}{39}{section.388}%
+\contentsline {section}{\numberline {7.2}Messung und Vergleichbarkeit}{39}{section.390}%
+\contentsline {section}{\numberline {7.3}Prüfung mit Matrix-Erweiterung}{42}{section.419}%
+\contentsline {section}{\numberline {7.4}Prüfung ohne Matrix-Erweiterung}{44}{section.456}%
+\contentsline {section}{\numberline {7.5}Auswertung}{45}{section.544}%
+\contentsline {chapter}{\numberline {8}Zusammenfassung und Ausblick}{47}{chapter.559}%
+\contentsline {section}{\numberline {8.1}Zusammenfassung}{47}{section.560}%
+\contentsline {section}{\numberline {8.2}Ausblick}{47}{section.561}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{50}{chapter*.565}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

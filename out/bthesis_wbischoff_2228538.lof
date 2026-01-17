@@ -8,15 +8,16 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Matrixmultiplikation Ergebnis}}{15}{figure.caption.107}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{15}{figure.caption.108}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{15}{figure.caption.109}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{16}{figure.caption.111}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{17}{figure.caption.113}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces NEORV32 Architektur}}{22}{figure.caption.127}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces NEORV32 Gültige Instruktion}}{23}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces NEORV32 Architektur}}{23}{figure.caption.129}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces NEORV32 Gültige Instruktion}}{24}{figure.caption.131}%
 \addvspace {\baselineskip }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces VHDL Entities}}{30}{figure.caption.180}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{41}{figure.caption.451}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{41}{figure.caption.452}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{43}{figure.caption.454}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{43}{figure.caption.455}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

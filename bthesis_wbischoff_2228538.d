@@ -7,6 +7,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/MatrixMult_2.png\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
+    Bilder/VHDL_Entities.png\
     Bilder/WaveFormsMatrixMultiplikation.png\
     Bilder/WaveFormsMatrixMultiplikationInstruktions.png\
     Bilder/neorv32_cpu_architecture.png\
@@ -72,6 +73,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb\
+    c:/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb\
     c:/texlive/2025/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb\
@@ -275,6 +277,8 @@ Bilder/MatrixMult_3.png :
 
 Bilder/MatrixMult_4.png :
 
+Bilder/VHDL_Entities.png :
+
 Bilder/WaveFormsMatrixMultiplikation.png :
 
 Bilder/WaveFormsMatrixMultiplikationInstruktions.png :
@@ -404,6 +408,8 @@ c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb :
 c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb :
 
 c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb :
+
+c:/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb :
 
 c:/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb :
 
