@@ -38,6 +38,35 @@ Zur Berechnung der Matrixmultiplikation
 
 muss zur Berechnung einer Zelle der Matrix C ein Skalarprodukt aus einer Zeile von A und einer Spalte von B berechnet werden. Dabei wird zunächst aus der Spalte von B durch Transponieren eine Zeile gemacht und dann der Zeilenvektor aus A mit dem Zeilenvektor aus B durch das Skalarprodukt in einen Skalar umgerechnet. Dieser Skalar wird dann in die Matrix C eingesetzt.
 
+% \[
+% \begin{bmatrix}
+%     a_{11} & a_{12} & a_{13} & \dots  & a_{1n} \\
+%     a_{21} & a_{22} & a_{23} & \dots  & a_{2n} \\
+%     \vdots & \vdots & \vdots & \ddots & \vdots \\
+%     a_{d1} & a_{d2} & a_{d3} & \dots  & a_{dn}
+% \end{bmatrix}
+% *
+% \begin{bmatrix}
+%     b_{11} & b_{12} & b_{13} & \dots  & b_{1n} \\
+%     b_{21} & b_{22} & b_{23} & \dots  & b_{2n} \\
+%     \vdots & \vdots & \vdots & \ddots & \vdots \\
+%     b_{d1} & b_{d2} & b_{d3} & \dots  & b_{dn}
+% \end{bmatrix}
+% \]
+
+% \[
+% c_{11} = a_{11} * b_{11} + a_{12} * b_{21} + \dots + a_{1n} * b_{d1}
+% \]
+
+% \[
+% \begin{bmatrix}
+%     c_{11} & \dots \\
+%     \dots \\
+%     \dots \\
+%     \dots
+% \end{bmatrix}
+% \]
+
 Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
 

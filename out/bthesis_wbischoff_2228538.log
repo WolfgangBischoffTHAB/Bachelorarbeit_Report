@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  17 JAN 2026 17:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  18 JAN 2026 12:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1404,22 +1404,22 @@ chapter 3.
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 46.
+(hyperref)                removing `\gls' on input line 75.
 
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 57.
+(Font)              `T1/Roboto-LF/regular/n' on input line 86.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 9.0pt on input line 57.
+(Font)              scaled to size 9.0pt on input line 86.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 58.
+(Font)              `T1/Roboto-LF/regular/n' on input line 87.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 5.0pt on input line 58.
+(Font)              scaled to size 5.0pt on input line 87.
 
-Underfull \hbox (badness 1097) in paragraph at lines 71--72
+Underfull \hbox (badness 1097) in paragraph at lines 100--101
 \T1/Roboto-LF/regular/n/10 mier-spra-che an-sieht. Die-se Im-ple-men-tie-rung b
 e-schränkt sich auf []SISD[]
  []
@@ -1427,10 +1427,10 @@ e-schränkt sich auf []SISD[]
 [7{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 84.
+(hyperref)                removing `\gls' on input line 113.
 
 [8] [9] [10]
-Underfull \hbox (badness 3179) in paragraph at lines 162--163
+Underfull \hbox (badness 3179) in paragraph at lines 191--192
 []\T1/Roboto-LF/regular/n/10 Die Vector-Engine ver-ar-bei-tet die Vector-Load A
 n-wei-sun-gen und
  []
@@ -1441,41 +1441,41 @@ n-wei-sun-gen und
 File: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png Graphic file (type png)
 <use Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>
 Package pdftex.def Info: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png  used o
-n input line 261.
+n input line 290.
 (pdftex.def)             Requested size: 322.72774pt x 176.38232pt.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
-(Font)              `T1/Roboto-LF/bold/n' on input line 262.
+(Font)              `T1/Roboto-LF/bold/n' on input line 291.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
-(Font)              scaled to size 9.0pt on input line 262.
+(Font)              scaled to size 9.0pt on input line 291.
  [13 <./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>]
 <Bilder/MatrixMult_1.png, id=401, 514.42188pt x 77.25414pt>
 File: Bilder/MatrixMult_1.png Graphic file (type png)
 <use Bilder/MatrixMult_1.png>
-Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 313.
+Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 342.
 (pdftex.def)             Requested size: 308.6555pt x 46.35281pt.
  [14 <./Bilder/MatrixMult_1.png>]
 <Bilder/MatrixMult_2.png, id=409, 257.46187pt x 51.33662pt>
 File: Bilder/MatrixMult_2.png Graphic file (type png)
 <use Bilder/MatrixMult_2.png>
-Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 324.
+Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 353.
 (pdftex.def)             Requested size: 154.4783pt x 30.8022pt.
 <Bilder/MatrixMult_4.png, id=411, 450.18187pt x 38.61pt>
 File: Bilder/MatrixMult_4.png Graphic file (type png)
 <use Bilder/MatrixMult_4.png>
-Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 333.
+Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 362.
 (pdftex.def)             Requested size: 270.1112pt x 23.16617pt.
 <Bilder/MatrixMult_3.png, id=413, 514.42188pt x 141.0511pt>
 File: Bilder/MatrixMult_3.png Graphic file (type png)
 <use Bilder/MatrixMult_3.png>
-Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 344.
+Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 373.
 (pdftex.def)             Requested size: 308.6555pt x 84.6313pt.
  [15 <./Bilder/MatrixMult_2.png> <./Bilder/MatrixMult_4.png> <./Bilder/MatrixMu
 lt_3.png>]
 <Bilder/MAC_MatrixAccumulator.png, id=429, 432.11438pt x 405.515pt>
 File: Bilder/MAC_MatrixAccumulator.png Graphic file (type png)
 <use Bilder/MAC_MatrixAccumulator.png>
-Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 3
-97.
+Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 4
+26.
 (pdftex.def)             Requested size: 259.27061pt x 243.31087pt.
  [16]) (./Kapitel/DurchfuehrungArbeit.tex [17 <./Bilder/MAC_MatrixAccumulator.p
 ng>]
@@ -1712,7 +1712,7 @@ r/sftt0800.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000
 e/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-di
 st/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/
 urw/palatino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (61 pages, 1205556 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (61 pages, 1205667 bytes).
 PDF statistics:
  1412 PDF objects out of 1440 (max. 8388607)
  1287 compressed objects within 13 object streams
