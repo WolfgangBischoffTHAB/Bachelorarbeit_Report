@@ -101,7 +101,7 @@ Der Nachteil dieser Beschreibung ist nicht sichtbar, wenn man sich den Pseudo-Co
 
 In den beiden Architekturen Van-Neumann und Harvard gilt gleichermaßen, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
 
-Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern des CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
+Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern der CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
 
 Im aller ungünstigsten Fall besteht dieser Assembler-Code aus einer langen Folge aus einer Load-Anweisung gefolgt von einer Operation gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
 
@@ -112,7 +112,7 @@ Im aller ungünstigsten Fall besteht dieser Assembler-Code aus einer langen Folg
 
 \section{Matrixmultiplikation mit Strip-Mining und \gls{SIMD}} \label{sec:matrix_mul_simd}
 
-Ein Ansatz diesen Verlust, der durch Load-Store entsteht zu minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruction Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeiten zu können. Die Addition zweier Vektoren geschieht elementweise und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektoraddition für \gls{SIMD} Anweisungen, wenn der CPU die passende Hardware bereitstellt.
+Ein Ansatz diesen Verlust, der durch Load-Store entsteht zu minimieren, ist das Strip-Mining in Kombination mit der Verwendung von \gls{SIMD}. \gls{SIMD} (Single Instruction Multiple Data) erlaubt es mehr als ein Datum gleichzeitig durch eine einzige Instruktion verarbeiten zu können. Die Addition zweier Vektoren geschieht elementweise und jedes Elementpaar kann unabhängig von allen anderen Paaren in jeglicher Reihenfolge addiert werden. Damit eignet sich die Vektoraddition für \gls{SIMD} Anweisungen, wenn die CPU die passende Hardware bereitstellt.
 
 Des weiteren erlaubt das Strip-Mining auch Datenobjekte zu verarbeiten, die so groß sind, dass sie nicht als Ganzes in die Register der CPU passen.
 
@@ -124,7 +124,7 @@ Eine Cache-Hierarchy legt nahe, Vektoren blockweise zu laden, so das ein Block j
 
 Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
 
-Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU internen Register verfügbar ist. Der CPU antwortet mit der Registerbreite.
+Wenn nun sehr große Vektoren addiert werden sollen, dann kommt Strip-Mining zum Einsatz. Mit groß ist hier gemeint, dass die Vektoren weder im Ganzen in die CPU-Register passen noch passen die Vektoren im Ganzen in einen Cache-Frame. Die Software verwendet eine Instruktion um zu ermitteln, wie viel Platz innerhalb der CPU-internen Register verfügbar ist. Die CPU antwortet mit der Registerbreite.
 
 \newacronym{usb}{USB}{Universal Serial Bus} % Define acronym
 \newacronym{pdf}{PDF}{Portable Document Format}
@@ -138,7 +138,7 @@ Für die Berechnung von Vektoren wurde die RISC-V Vector Extension (\gls{RVV}) \
 
 Ein RISC-V CPU besitzt die sogenannte X-Register-File. Es handelt sich damit um alle Register, die ein RISC-V CPU standardmäßig, ohne Extensions hat. Dies könnten beispielsweise die Register x0 bis x31 sein. Die Länge der Register in bits wird durch die Konstante XLEN festgelegt.
 
-Die \gls{RVV} erweitert einen RISC-V CPU um zusätzliche Vektor Register v0 bis v31. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} (in Anlehnung an die Konstante \gls{XLEN}) vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. \gls{VLEN} stellt somit eine Eigenschaft des CPU dar. Die \gls{RVV} Spezifikation \cite{rvv_specification} macht die Vorgabe:
+Die \gls{RVV} erweitert einen RISC-V CPU um zusätzliche Vektor Register v0 bis v31. Die Länge der Vektor Register wird durch die Konstante \gls{VLEN} (in Anlehnung an die Konstante \gls{XLEN}) vorgegeben. \gls{VLEN} wird bei der Synthese des Designs auf einen Wert festgelegt und ist nicht zur Laufzeit änderbar. \gls{VLEN} stellt somit eine Eigenschaft der CPU dar. Die \gls{RVV} Spezifikation \cite{rvv_specification} macht die Vorgabe:
 
 ``The number of bits in a single vector register, \(VLEN \geq ELEN\), which must be a power of 2, and must be no greater than \(2^{16}\)''.
 
@@ -292,11 +292,11 @@ Es gibt daher laut Krste Asanovic \cite{RISCV_StateOfTheUnion} bei der Arbeit an
 \label{fig:Matrix-Extension-Optionen}
 \end{figure}
 
-Zunächst wird in der linken Spalte der Abbildung \ref{fig:Matrix-Extension-Optionen} gezeigt, dass sich eine Matrix theoretisch elementweise berechnen lässt, wenn für jedes Element der Matrix individuel eine Dot-Produkt mit Hilfe der \gls{RVV}-Extension berechnet wird. Dies ist nur möglich, wenn der CPU die \gls{RVV} besitzt und gleichzeitig, wenn die Matrix spalten- oder zweilenweise in ein Vektorregister passt.
+Zunächst wird in der linken Spalte der Abbildung \ref{fig:Matrix-Extension-Optionen} gezeigt, dass sich eine Matrix theoretisch elementweise berechnen lässt, wenn für jedes Element der Matrix individuel eine Dot-Produkt mit Hilfe der \gls{RVV}-Extension berechnet wird. Dies ist nur möglich, wenn die CPU die \gls{RVV} besitzt und gleichzeitig, wenn die Matrix spalten- oder zweilenweise in ein Vektorregister passt.
 
 Die Integrated Matrix Extension \gls{IME} \cite{RISCV_IntegratedMatrixExtension} verwendet die \gls{RVV}-Register wieder um darin Matrix-Berechnungen auszuführen. Es wird keine spezielle Hardware für die Matrix-Berechnung hinzugefügt. Die erklärten Ziele des \gls{IME}-Charter sind es, einen bedeutenden Geschwindigkeitsvorteil zu erzielen, bei vergleichbaren Kosten, wie sie bereits für die \gls{RVV} anfallen.
 
-Die Vector-Matrix Extension \gls{VME} baut auf die \gls{RVV}-Extension auf und führt zusätzlich einen sogenannten Matrix-State bzw. eine Matrix-Engine hinzu. Mit dem Matrix-State ist gemeint, dass der CPU um Komponenten erweitert wird, die in der Lage sind Zwischenergebnisse bei einer Matrix-Multiplikation zu speichern. Es kommt bei der \gls{VME} also weitere Hardware für die Matrix-Berechnung hinzu. Diese zusätzliche Hardware ist in der Abbildung \label{fig:Matrix-Extension-Optionen} in roter Farbe markiert.
+Die Vector-Matrix Extension \gls{VME} baut auf die \gls{RVV}-Extension auf und führt zusätzlich einen sogenannten Matrix-State bzw. eine Matrix-Engine hinzu. Mit dem Matrix-State ist gemeint, dass die CPU um Komponenten erweitert wird, die in der Lage sind Zwischenergebnisse bei einer Matrix-Multiplikation zu speichern. Es kommt bei der \gls{VME} also weitere Hardware für die Matrix-Berechnung hinzu. Diese zusätzliche Hardware ist in der Abbildung \label{fig:Matrix-Extension-Optionen} in roter Farbe markiert.
 
 Die Attached Matrix Extension \gls{AME} geht noch einen Schritt weiter und verwendet dabei keine Vektorregister aus der \gls{RVV}-Extension mehr sondern fügt Architectured State sogar für komplette Matrix Register hinzu. Sowohl die Eingabedaten als auch die Zwischen- und Endergebnisse werden in speziellen Matrix-Registern gespeichert. Damit ist die \gls{AME} als einziger Ansatz unabhängig von der \gls{RVV}-Extension und könnte auch komplett ohne \gls{RVV}-Extension angeboten werden. Auch hier ist neue Hardware in roter Farbe dargestellt.
 
@@ -329,7 +329,7 @@ Im Folgenden wird das blockweise Vorgehen erläutert, mit dem die Matrixmultipli
 
 Bei der herkömmlichen Matrixmultiplikation über das Dot-Product von Zeilen und Spalten werden die beiden Matrizen A und B in ihrere kompletten Dimension betrachtet, da jeweils komplette Zeilen und Spalten verrechnet werden um ein Matrix-Element zu bestimmen.
 
-Bei sehr großen Matrizen ist dies nicht zielführend, da der CPU die Matrix nur schrittweise erfassen könnte und damit nur sehr ineffizient berechnen kann.
+Bei sehr großen Matrizen ist dies nicht zielführend, da die CPU die Matrix nur schrittweise erfassen könnte und damit nur sehr ineffizient berechnen kann.
 
 Die angestrebte Verbesserung besteht darin, eine Matrix blockweise zu berechnen. Damit eröffnet sich, ähnlich wie bei Vektoren, das Potential der parallelen Berechnung durch SIMD Instruktionen. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
 

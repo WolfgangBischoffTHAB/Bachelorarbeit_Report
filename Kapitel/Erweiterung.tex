@@ -279,9 +279,9 @@ Der nächste Schritt ist die Erweiterung der Load--Store--Unit. Die Load--Store-
 
 Die Aufgabe besteht darin, Daten aus dem Datenspeicher in die neuen Matrix-Register zu laden. Hier wäre es möglich die Matrix-Engine als eigenen Bus-Teilnehmer an den Bus zu binden. Die Matrix-Engine hätte dann die Möglichkeit Daten aus dem Datenspeicher über den Bus zu laden.
 
-Der Nachteil daran ist, dass die Matrix-Engine dann Daten lädt, die die Load-Store Unit dann nicht in ihrem Cache geladen hat. Die Load--Store--Unit ist verantwortlich für den Rest des CPU. Damit hätte der CPU dann insgesammt veraltete Daten. Nach Ausführung einer Matrix- Load--Store--Operation müsste die Load--Store--Unit ihren Cache invalidieren, da dieser veraltete Daten enthalten könnte. Daraufhin muss sich der Cache erst wieder aufwärmen und die Performance leidet folglich.
+Der Nachteil daran ist, dass die Matrix-Engine dann Daten lädt, die die Load-Store Unit dann nicht in ihrem Cache geladen hat. Die Load--Store--Unit ist verantwortlich für den Rest der CPU. Damit hätte die CPU dann insgesammt veraltete Daten. Nach Ausführung einer Matrix- Load--Store--Operation müsste die Load--Store--Unit ihren Cache invalidieren, da dieser veraltete Daten enthalten könnte. Daraufhin muss sich der Cache erst wieder aufwärmen und die Performance leidet folglich.
 
-Aus diesem Grund wurde das Laden der Matrix-Engine in die \gls{LSU} integriert. Wenn eine Matrix Operation eine Matrix berechnet hat und diese Daten dann wieder in den Datenspeicher übertragen werden, dann durchlaufen die Daten den Cache der \gls{LSU} und wärmen den Cache damit für den Rest des CPU mit aktuellen Daten. Das bedeutet, dass der Rest der ausgeführten Anwendung dann direkt auf die gecachte Matrix zugreifen kann anstelle die Matrix erst wieder aus dem Datenspeicher laden zu müssen.
+Aus diesem Grund wurde das Laden der Matrix-Engine in die \gls{LSU} integriert. Wenn eine Matrix Operation eine Matrix berechnet hat und diese Daten dann wieder in den Datenspeicher übertragen werden, dann durchlaufen die Daten den Cache der \gls{LSU} und wärmen den Cache damit für den Rest der CPU mit aktuellen Daten. Das bedeutet, dass der Rest der ausgeführten Anwendung dann direkt auf die gecachte Matrix zugreifen kann anstelle die Matrix erst wieder aus dem Datenspeicher laden zu müssen.
 
 Damit werden Daten über die Load--Store--Unit geladen, damit die Daten im Cache landen. Die Load--Store--Unit erzeugt Bus--Anfragen, wenn Sie Daten laden und speichern soll. Da ein Matrix-Register aus 16 Elementen besteht, werden beide Prozesse, für Load und für Store erweitert.
 
@@ -291,7 +291,7 @@ Sind die 16 Operationen ausgeführt, geht die State--Machine zurück nach ML\_ID
 
 Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählt, welche 16 Elemente zurückschreiben muss.
 
-Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matrix-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Store zurück oder speichert Daten für eine Load--Anweisung. Die eigentlichen Daten kommen aus dem Daten--Speicher des CPU und durchlaufen den Cache der \gls{LSU}.
+Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matrix-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Store zurück oder speichert Daten für eine Load--Anweisung. Die eigentlichen Daten kommen aus dem Daten--Speicher der CPU und durchlaufen den Cache der \gls{LSU}.
 
 
 
@@ -357,7 +357,7 @@ Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer-Product. 
 
 Um die Berechnung auszuführen wird eine State--Machine verwendet. Die State--Machine durchläuft die Zustände MM\_RESET, MM\_INIT\_1, und MM\_PROCESS\_1, bis MM\_INIT\_4, MM\_PROCESS\_4 und endet mit MM \_STORE, MM \_DONE.
 
-Der MM\_RESET Zustand setzt die Matrixregister auf 0, wenn das matrix\_mul Signal auf 1 gesetzt wird. Solange matrix\_mul auf 0 steht, verbleibt der Wert der letzten durchgeführt Matrixmultiplikation in den Matrix Register stehen. Der Grund ist, dass man die Werte in den Register halten muss um sie in den RAM zurückschreiben zu können und dies einige CPU-Zyklen dauert. Das matrix\_mul Signal wird von der Kontrolllogik des CPU gesetzt, wenn ein mmul32 Befehl ausgeführt wird und steht ansonsten auf 0.
+Der MM\_RESET Zustand setzt die Matrixregister auf 0, wenn das matrix\_mul Signal auf 1 gesetzt wird. Solange matrix\_mul auf 0 steht, verbleibt der Wert der letzten durchgeführt Matrixmultiplikation in den Matrix Register stehen. Der Grund ist, dass man die Werte in den Register halten muss um sie in den RAM zurückschreiben zu können und dies einige CPU-Zyklen dauert. Das matrix\_mul Signal wird von der Kontrolllogik der CPU gesetzt, wenn ein mmul32 Befehl ausgeführt wird und steht ansonsten auf 0.
 
 Wenn das matrix\_mul Signal gesetzt wird, werden die Matrixregister mit 0 überschrieben und die State Machine geht in den nächsten Zustand über. Es folgen vier Schritte, die jeweils aus einem INIT und einem PROCESS Schritt bestehen. Alle vier Schritte sind äquivalent, es wird daher nur ein Schritt beschrieben.
 

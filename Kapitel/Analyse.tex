@@ -23,7 +23,7 @@ Er ist im Groben aus einem Frontend und einem Backend aufgebaut. Das Frontend er
 
 \section{Die Fetch-Engine} \label{sec:neorv32-fetch-engine}
 
-Die Fetch-Engine steht am Anfang der Abarbeitung einer Anweisung. Sie ist für das Laden der Anweisung aus dem Speicher zuständig und lädt von der Adresse, die momentan im Program-Counter-Register steht. Die Fetch Engine arbeitet unabhängig vom Rest des CPU. Sie implementiert intern eine State--Machine, die Anweisungen puffern kann und sie kann intern Anweisungen laden ohne, dass die Anweisungen akut vom Rest des Systems gebraucht wird.
+Die Fetch-Engine steht am Anfang der Abarbeitung einer Anweisung. Sie ist für das Laden der Anweisung aus dem Speicher zuständig und lädt von der Adresse, die momentan im Program-Counter-Register steht. Die Fetch Engine arbeitet unabhängig vom Rest der CPU. Sie implementiert intern eine State--Machine, die Anweisungen puffern kann und sie kann intern Anweisungen laden ohne, dass die Anweisungen akut vom Rest des Systems gebraucht wird.
 
 Aus diesem Grund gibt es ein weiteres Signal, welches in Abbildung \ref{fig:NEORV32_valid_instruction} als ``debug\_valid\_i'' sichtbar gemacht wurde und angibt, ob die geladene Instruktion gültig ist und verwendet werden sollte oder nicht.
 
@@ -34,7 +34,7 @@ Aus diesem Grund gibt es ein weiteres Signal, welches in Abbildung \ref{fig:NEOR
 \label{fig:NEORV32_valid_instruction}
 \end{figure}
 
-Dieses Wissen ist wichtig, wenn man das Verhalten des CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das vom CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
+Dieses Wissen ist wichtig, wenn man das Verhalten der CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das vom CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
 
 Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache verfügt wenn dies konfiguriert wird. In der Standardkonfiguration ist kein Cache für Instruktionen konfiguriert, wie in der Abbildung \ref{fig:NEORV32_Architecture} dargestellt. Die Fetch Engine greift direkt auf den Speicher zu.
 
@@ -43,9 +43,9 @@ Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache ver
 
 \section{CPU--Control und Execution-Engine} \label{sec:neorv32-execution-engine}
 
-Die Entität ``CPU--Control'' enthält die Kontrolllogik des CPU. Die CPU--Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
+Die Entität ``CPU--Control'' enthält die Kontrolllogik der CPU. Die CPU--Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
 
-Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor. Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrolllogik Teile des CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
+Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor. Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrolllogik Teile der CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
 
 Sehr häufig kommen Pipelines zum Einsatz. Eine Instruktion durchläuft nacheinander die Stages der Pipeline. Die freien Stages können für andere Instruktionen verwendet werden. Damit erhöht sich der Durchsatz des Systems und die Auslastung der vorhandenen Hardware erhöht sich.
 

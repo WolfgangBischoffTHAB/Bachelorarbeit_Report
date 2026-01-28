@@ -8,7 +8,7 @@ In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das K
 
 %Diese zwei Abläufe (Cache-Frame laden und Register laden) werden dann solange wiederholt, bis der gesamte Vektor abgearbeitet ist. Ein Hinweis auf dieses Strip-Mining Vorgehen findet sich in der RISC-V Vector Extension Spezifikation. zum Strip-Mining.
 
-Die Alternative zum Hardware unterstützen Strip-Mining wäre es, jedes einzelne Vektorelement einzeln in ein Register des CPU zu laden und dann mit einem Element des zweiten Vektors zu verrechnen. Dabei wird für jedes Element ein Laden und Speicher aus dem Speicher notwendig und man bezahlt mit einem hohen Verlust an Geschwindigkeit für die im Gegenzug triviale Implementierung.
+Die Alternative zum Hardware unterstützen Strip-Mining wäre es, jedes einzelne Vektorelement einzeln in ein Register der CPU zu laden und dann mit einem Element des zweiten Vektors zu verrechnen. Dabei wird für jedes Element ein Laden und Speicher aus dem Speicher notwendig und man bezahlt mit einem hohen Verlust an Geschwindigkeit für die im Gegenzug triviale Implementierung.
 
 Der Vorteil der \gls{RVV} Register ist es, dass diese Vektorregister mehrere Elemente parallel auf eine Instruktion hin zusammenrechnen können. Der CPU verfährt dann in einem echten \gls{SIMD}-Betriebsmodus (Single Instruction Multiple Data) und spart ein vielfaches an Taktzyklen im Vergleich zur sequentiellen Ausführung.
 
@@ -16,7 +16,7 @@ Der Vorteil der \gls{RVV} Register ist es, dass diese Vektorregister mehrere Ele
 
 % https://github.com/flame/blis/blob/master/docs/KernelsHowTo.md
 
-Das Prinzip des Strip-Mining wird auch in mathematischen Bibliotheken verwendet. Eine bekannte Bibliothek ist blis \cite{BLIS1}. blis verwendet den Begriff Kernel oder Microkernel. Ein Kernel ist Code, der auf einem Cache-Frame ausgeführt wird, also den Code darstellt, den der CPU sehr schnell ausführen kann. Optimierte Anweisung für verschiedene CPU Architekturen werden hauptsächlich in dem Code verwendet, der dem Kernel zuzurechnen ist um Zeit zu sparen.
+Das Prinzip des Strip-Mining wird auch in mathematischen Bibliotheken verwendet. Eine bekannte Bibliothek ist blis \cite{BLIS1}. blis verwendet den Begriff Kernel oder Microkernel. Ein Kernel ist Code, der auf einem Cache-Frame ausgeführt wird, also den Code darstellt, den die CPU sehr schnell ausführen kann. Optimierte Anweisung für verschiedene CPU Architekturen werden hauptsächlich in dem Code verwendet, der dem Kernel zuzurechnen ist um Zeit zu sparen.
 
 Um die Berechnungen im Kernel herum gibt es weiteren Code, der über Schleifen nacheinander alle Daten in den Kernel lädt, bis die Berechnung vollständig abgeschlossen ist.
 
