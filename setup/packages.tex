@@ -186,8 +186,9 @@
 
 \usepackage{upgreek}
 
-\lstset{ %
-    basicstyle=\footnotesize\ttfamily,	% the size of the fonts that are used for the code
+\lstdefinestyle{PseudoLang}{ %
+    language=C++,
+    basicstyle=\footnotesize,	% the size of the fonts that are used for the code
     numbers=left,						% where to put the line-numbers
     numbersep=5pt,						% how far the line-numbers are from the code
     backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
@@ -199,13 +200,13 @@
     captionpos=t,                   % sets the caption-position to bottom
     breaklines=true,                % sets automatic line breaking
     breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
-    title=\lstname,                 % show the filename of files included with \lstinputlisting;
-									% also try caption instead of title
+    title=\lstname,                 % show the filename of files included with \lstinputlisting; also try caption instead of title
     keywordstyle=\color{blue},      % keyword style
     commentstyle=\color{dkgreen},   % comment style
     escapeinside={\%*}{*)},         % if you want to add LaTeX within your code
-    morekeywords={*,...}            % if you want to add more keywords to the set
-    frame=b,
+    alsoletter={.},
+    morekeywords={*,end,vsetvli,vle32.v,vse32.v,vadd.vv,add,sub,slli,bnez,ret},            % if you want to add more keywords to the set
+    frame=none,
     stringstyle=\color{mauve}\ttfamily,	% Farbe der String
     showspaces=false,					% Leerzeichen anzeigen ?
     showtabs=false,						% Tabs anzeigen ?
@@ -215,6 +216,24 @@
     framexbottommargin=4pt,
     showstringspaces=false      % Leerzeichen in Strings anzeigen ?
 }
+
+\lstdefinestyle{VHDLStyle}{ %
+    language=VHDL,
+    basicstyle=\footnotesize,
+    breaklines=true,
+    aboveskip=20pt,
+    belowskip=10pt
+}
+
+
+% \lstset{language=C++,
+%         keywordstyle=\color{eminence},
+%         numbers=left,
+%         numberstyle=\tiny,
+%         breaklines=true,
+%         numbersep=5pt,
+%         xleftmargin=.25in,
+%         xrightmargin=.25in}
 
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
@@ -231,6 +250,11 @@
 \usepackage{enumitem}
 \setlist[description]{style=nextline}
 \usepackage{romannum}
+\usepackage{xcolor}
+\definecolor{commentgreen}{RGB}{2,112,10}
+\definecolor{eminence}{RGB}{108,48,130}
+\definecolor{weborange}{RGB}{255,165,0}
+\definecolor{frenchplum}{RGB}{129,20,83}
 
 \renewcaptionname{ngerman}\figureautorefname{Abb.}
 

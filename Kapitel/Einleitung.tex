@@ -1,18 +1,12 @@
 \chapter{Einleitung} \label{chpt:Einleitung_Main}
 
+Mathematische Rechenvorschriften wie die Matrixmultiplikation existieren nicht zum Selbstzweck sondern finden in vielen Gebieten Anwendung. Dadurch sie zu einem extrem relevanten Leistungsmerkmal für moderne CPU Architekturen geworden. Die Anwendungsgebiete der Matrixmultiplikation sollen aufgezeigt werden.
+
+Die Aufgabenstellung der Arbeit besteht in der Erweiterung einer RISC-V CPU um Anweisungen zur Berechnung der Matrixmultiplikation. Die Bedeutung von RISC-V und die Aufgabenstellung an sich wird beschrieben.
+
+Das Kapitel wird mit einer Erläuterung zum Aufbau der Arbeit abgeschlossen.
+
 \section{Motivation} \label{sec:Einleitung_Motivation}
-
-% Test \cite{StatistischesBundesamtWiesbaden.}.
-% Test \cite{PaperKoehler1.}.
-% Test \cite{machinelearning.}.
-% Test \cite{dropout.}.
-
-	% \begin{figure}[ht]
-	% 	\centering
-	% 	\includegraphics[scale=0.30]{Bilder/Neural_Network.jpg}
-	% 	\caption{Beispielbild}
-	% 	\label{fig: Neural_Network_Fig}
-	% \end{figure}
 
 In dieser Arbeit soll ein RISC-V CPU um Anweisungen zur Durchführung von Matrixmultiplikationen erweitert werden.
 
@@ -34,7 +28,7 @@ All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsat
 
 \section{Aufgabenstellung} \label{sec:Einleitung_Aufgabenstellung}
 
-Der NEORV32 RISC-V CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Dabei orientieren sich die Anweisungen von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension ratifiziert worden sind. Im speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die die CPU, aufgrund von begrenzter Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als ganzes gelöst ist.
+Die NEORV32 RISC-V CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Dabei orientieren sich die Anweisungen von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension ratifiziert worden sind. Im speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die die CPU, aufgrund von begrenzter Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als ganzes gelöst ist.
 
 Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Es wird im speziellen eine Erweiterung des bereits existierenden NEORV32 Core vorgenommen.
 

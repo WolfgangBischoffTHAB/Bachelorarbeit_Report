@@ -1,5 +1,11 @@
 \chapter{Auswertung und Evaluierung} \label{chpt:Auswertung_und_Evaluierung_Main}
 
+In diesem Kapitel wird untersucht, ob der gewählte Ansatz zur Integration von Matrixoperationen in die NOERV32 CPU zielführend war. Zunächst wird die Funktionalität der Erweiterung geprüft. Das Prüfverfahren wird erläutert.
+
+Danach wird untersucht, ob das erweiterte System eine Matrixmultiplikation schneller ausführen kann, als das unmodifizierte System. Um diesen Vergleich anzustellen wird die mathematische Vorschrift zur Matrixmultiplikation mit drei for-Schleifen auf zwei Matrizen ausgeführt. Die gleichen beiden Matrizen werden mit den hinzugefügten Anweisungen zur Matrixmultiplikation verrechnet.
+
+Das Messverfahren wird beschrieben. Die Laufzeiten werden gemessen, ausgewertet und verglichen. Das Ergebnis dieses Vergleichs wird eingeordnet und diskutiert und es wird ein abschließendes Fazit gezogen.
+
 
 
 
@@ -83,7 +89,7 @@ Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die extern
 
 Hier ist ein Beispiel für die Verwendung der Abbildung auf die Cycle-Skala:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=PseudoLang]
 // start timing
 neorv32_cpu_csr_write(CSR_MCYCLE, 0);
 
@@ -109,7 +115,7 @@ Im Beispiel wird nur das Low-Word und damit nur CSR\_MCYCLE verwendet. Die Erwar
 
 Da das CSR\_MCYCLE CSR-Register einen beliebigen Wert enthält, muss es zunächst in Zeile 2 auf 0 zurückgesetzt werden. Dann kann sein Wert nach Abarbeitung der Befehlsfolge in Zeile 13 ausgelesen und schließlich über eine serielle Schnittstelle ausgegeben werden.
 
-Dieses Verfahren wird im Folgenden zur Bewertung der unterschiedlichen Matrixmultiplikation verwendet. Es wird dabei inklusive der Übetragung der Daten von und zum CPU-RAM gemessen, da der Zugriff auf den CPU-RAM bei der Hardwarebeschleunigung berücksichtigt werden kann und damit ein Geschwindigkeitsvorteil erzielt werden kann.
+Dieses Verfahren wird im Folgenden zur Bewertung der unterschiedlichen Matrixmultiplikationen verwendet. Es wird dabei inklusive der Übetragung der Daten von und zum CPU-RAM gemessen, da der Zugriff auf den CPU-RAM bei der Hardwarebeschleunigung berücksichtigt werden kann und damit ein Geschwindigkeitsvorteil erzielt werden kann.
 
 Das Vorgehen ist das Folgende:
 
@@ -121,7 +127,7 @@ Das Vorgehen ist das Folgende:
 
     \item Für jedes Testprogram, wird dieses Testprogramm mit dem GCC Compiler in der Version riscv-none-elf-gcc.exe (xPack GNU RISC-V Embedded GCC x86\_64) 14.2.0 übersetzt. Für die Übersetzung der Beispiele und Testprogramme sind im NEORV32 Projekt Skripte und auch das sogenannte ``image\_gen'' Werkzeug bereitgestellt. Mit ``image\_gen'' wird aus den Ausgaben des GCC eine Datei erstellt, die vom Bootloader verstanden wird.
 
-    \item Die Ausgabe des ``image\_gen'' Werkzeugs wird dem Bootloader über die UART-Schnittstelle zugeführt. Dazu wurde ein eigener Uploader \footnote{https://github.com/Thewbi/neorv\_bootloader\_app\_uploader} erstellt, die Firmware könnte aber auch über jeden beliebigen Terminal-Emulator übertragen werden.
+    \item Die Ausgabe des ``image\_gen'' Werkzeugs wird dem Bootloader über die UART-Schnittstelle zugeführt. Dazu wurde ein eigener Uploader erstellt. Die Firmware könnte aber auch über jeden beliebigen Terminal-Emulator übertragen werden.
 
     \item Der Bootloader speichert das übertragene Programm im NEORV32 CPU und führt es aus, sobald der Uploader den Befehl zur Ausführung gibt.
 
@@ -140,7 +146,7 @@ Für die Prüfung mit Hardwarebeschleunigung, enthält das ausgeführte Anwendun
 
 Die Matrix A und die Matrix B werden aus dem CPU-RAM in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=PseudoLang]
 #include <neorv32.h>
 
 uint32_t matrix_a[16]
@@ -198,7 +204,7 @@ Danach wird geprüft, ob die Matrixmultiplikation in der Simulation mit den rich
 
 In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer-Produkt multipliziert und auf die Accumulator-Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
 
-Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplikation mit dem erstellten Design funktioniert wie geplant.
+Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplikation mit dem erstellten Design wie geplant funktioniert.
 
 
 
@@ -207,7 +213,7 @@ Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplika
 
 Das Testprogramm für die Matrixmultiplikation ohne Hardwarebeschleunigung ist:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=PseudoLang]
 #include <stdio.h>
 
 #define DIMENSION 4
@@ -305,7 +311,7 @@ Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine weil de
 
 Für die hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=PseudoLang]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"
@@ -318,7 +324,7 @@ Es werden 185 Zyklen notiert.
 
 Für die nicht hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=PseudoLang]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"
@@ -329,8 +335,8 @@ Für die nicht hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
 Es werden 10385 Zyklen notiert.
 
-Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplikation zweier 4x4, vorzeichenloser Integer-Matrizen unter Ausführung mit der Matrix-Extension um einen Faktor von etwa 56 beschleunigt.
+Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplikation zweier 4x4, vorzeichenloser Integer-Matrizen unter Ausführung der Matrix-Extension um einen Faktor von etwa 56 beschleunigt.
 
-Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen. Damit ergibt sich dann ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen.
+Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen. Damit ergibt sich dann ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zu gunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn der Algorithmus stark optimiert wird.
 
-Es lässt sich konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat. Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen den Speicher übertragen und dies geschieht ohne, dass die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss. Der Overhead wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert. Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.
+Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat. Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht ohne das die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert. Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.

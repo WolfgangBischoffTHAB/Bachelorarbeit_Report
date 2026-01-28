@@ -1,15 +1,21 @@
 \chapter{Zusammenfassung und Ausblick} \label{chpt:Zusammenfassung_und_Ausblick_Main}
 
+Am Ende der Arbeit wird das erreichte nochmals zusammengefasst um von diesem Standpunkt aus einen Blick in die Zukunft zu wagen.
+
+Rückblickend lässt sich sagen, welche Entscheidungen zielführend und welche Entscheidungen hinderlich waren. Dies wird in der Zusammenfassung disktuiert.
+
+Für die Zukunft werden im Ausblick Ideen angeführt, die während oder nach der Arbeit an der Lösung entsanden sind. Diese Gedanken sollen als Wegweiser für eine eventuelle Verbesserung oder Weiterführung der Arbeit dienen.
+
 
 
 
 \section{Zusammenfassung} \label{sec:summary}
 
-Im Rahmen dieser Arbeit wurde der existierende NEORV32 CPU um Komponenten zur Matrix-Berechnung erweitert. Die Komponenten unterliegen starken Einschränkungen. Unter anderem können zum jetzigen Zeitpunkt lediglich 4x4 Matrizen mit vorzeichenlosen 32-Bit Zahlen berechnet werden. Durch zusätzlichen Arbeitseinsatz ist es möglich das Design um weitere Datentypen und Konvertierungen zu erweitern.
+Im Rahmen dieser Arbeit wurde die existierende NEORV32 CPU um Komponenten zur Matrix-Berechnung erweitert. Die Komponenten unterliegen starken Einschränkungen. Unter anderem können zum jetzigen Zeitpunkt lediglich 4x4 Matrizen mit vorzeichenlosen 32-Bit Zahlen berechnet werden. Zum termingerechten Abschluss dieser Arbeit war es notwendig solche Einschränkungen vorzunehmen. Für die Zukunft wäre es durch zusätzlichen Arbeitseinsatz  möglich das Design um weitere Datentypen und Konvertierungen zu erweitern.
 
 Die durchgeführten Änderungen orientieren sich an der Befehlsmenge der bereits existierenden RISC-V Vektor-Extension und greifen damit auch das Konzept des Strip-Mining auf. Strip-Mining erlaubt die Erstellung eines Hardware-Software-Co-Designs, welches in der Lage ist Matrixmultiplikationen größere Matrizen durch Multiplikationen kleinerer Dimensionen zusammenzusetzen.
 
-Um die Softwareentwicklung für Anwendungen und Testprogramme zu ermöglichen, wurden exzessive Anstrengungen unternommen, die etwa den gleichen Zeitaufwand wie die VHDL Entwicklung zur Folge hatten. Insbesondere wurde es durch einen Compiler ermöglicht die neuen Anweisungen auch unter Verwendung einer höheren Programmiersprache wie C in RISC-V Maschinencode zu übersetzen. Im Nachhinein wäre der direkte Einsatz der NEORV32 Intrinsics ein sehr großer Vorteil gewesen. Leider wurde dieser Weg erst spät entdeckt.
+Um die Softwareentwicklung für Anwendungen und Testprogramme zu ermöglichen, wurden exzessive Anstrengungen unternommen, die etwa den gleichen Zeitaufwand wie die VHDL Entwicklung zur Folge hatten. Insbesondere wurde es durch einen Compiler ermöglicht die neuen Anweisungen auch unter Verwendung einer höheren Programmiersprache wie C in RISC-V Maschinencode zu übersetzen. Im Nachhinein wäre der schnellstmögliche Einsatz der NEORV32 Intrinsics ein sehr großer Vorteil gewesen. Leider wurde dieser Weg erst spät gelernt.
 
 Es wurde ein Vergleich zweier Testprogramme auf dem NEORV32 Chip durchgeführt. Die Messungen zeigen einen Geschwindigkeitszuwachs um einen relevanten Faktor. Das Experiment ist geglückt und könnte in Zukunft durch die Erweiterung auf ein vollständiges Typsystem und weiter verbesserte Speicherzugriffe noch verbessert werden.
 

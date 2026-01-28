@@ -76,19 +76,15 @@ Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
 Eine Implementierung, die sich direkt an der mathematischen Rechenvorschrift orientiert, verwendet drei For-Schleifen.
 
-\lstset{numbers=left,
-        numberstyle=\tiny,
-        breaklines=true,
-        numbersep=5pt,
-        xleftmargin=.25in,
-        xrightmargin=.25in}
 
-\begin{lstlisting}
+
+\begin{lstlisting}[style=PseudoLang]
 C = zero_matrix() // Starte mit Nullwerten
 
 for int i = 1 to l  // ueber die Zeilen von C
   for int k = 1 to n  // ueber die Spalten von C
-    for int j = 1 to m  // ueber die Spalten von A / Zeilen von B
+    for int j = 1 to m  // ueber die Spalten von A
+                        // und Zeilen von B
       C(i,k) = C(i,k) + A(i,j) * B(j,k)
     end
   end
@@ -216,66 +212,67 @@ Die Schritte sind:
 
 Es folgt ein Beispiel in RISC-V Assembly, das das obige Vorgehen umsetzt.
 
-\begin{lstlisting}
-# vector-vector add routine of 32-bit integers
-#
-# void vvaddint32(size_t n,
-#     const int*x, const int*y, int*z)
-# {
-#	for (size_t i=0; i<n; i++)
-#   {
-#      z[i] = x[i] + y[i];
-#   }
-# }
-#
-# Mapping parameters to argument register (a0 .. a7)
-# a0 = n, a1 = x, a2 = y, a3 = z
-#
-# Non-vector instructions are indented
+
+\begin{lstlisting}[style=PseudoLang]
+// vector-vector add routine of 32-bit integers
+//
+// void vvaddint32(size_t n,
+//     const int*x, const int*y, int*z)
+// {
+//	 for (size_t i=0; i<n; i++)
+//   {
+//      z[i] = x[i] + y[i];
+//   }
+// }
+//
+// Mapping parameters to argument register (a0 .. a7)
+// a0 = n, a1 = x, a2 = y, a3 = z
+//
+// Non-vector instructions are indented
 vvaddint32:
 
-    # Set vector length based on 32-bit vectors.
-    # t0 contains the amount of elements that will be
-    # processed
+    // Set vector length based on 32-bit vectors.
+    // t0 contains the amount of elements that will be
+    // processed
 	vsetvli t0, a0, e32, ta, ma
 
-    # Load for first vector
+    // Load for first vector
 	vle32.v v0, (a1)
 
-        # Decrement number of elements that
-        # still need processing.
-        # t0 is the result of vsetvli. It
-        # is the amount of elements processed
-        # this iteration
+        // Decrement number of elements that
+        // still need processing.
+        // t0 is the result of vsetvli. It
+        // is the amount of elements processed
+        // this iteration
 		sub a0, a0, t0
 
-        # Multiply number done by 4 bytes (= 32 bit
-        # integer) because of SEW=e32
+        // Multiply number done by 4 bytes (= 32 bit
+        // integer) because of SEW=e32
 		slli t0, t0, 2
 
-        # Increment/Advance pointer for first vector
+        // Increment/Advance pointer for first vector
 		add a1, a1, t0
 
-    # Load for second vector
+    // Load for second vector
 	vle32.v v1, (a2)
-        # Increment/Advance pointer for second vector
+        // Increment/Advance pointer for second vector
 		add a2, a2, t0
 
-    # Sum vectors
+    // Sum vectors
 	vadd.vv v2, v0, v1
 
-    # Store result back to memory
+    // Store result back to memory
 	vse32.v v2, (a3)
 
-        # Increment/Advance pointer for destination
+        // Increment/Advance pointer for destination
 		add a3, a3, t0
 
-        # Loop back to the beginning of the for loop
-        # if the element count is not zero. Otherwise
-        # continue with the ret instruction
+        // Loop back to the beginning of the for loop
+        // if the element count is not zero. Otherwise
+        // continue with the ret instruction
 		bnez a0, vvaddint32
 
-        # Finished with the function
+        // Finished with the function
 		ret
 \end{lstlisting}
 
