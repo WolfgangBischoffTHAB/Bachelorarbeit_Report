@@ -150,7 +150,9 @@ Die Verwendung der Vector-Extension erfolgt durch ein Hardware-Software-Co-Desig
 
 Moderne, optimierende Compiler wie der GCC oder die LLVM Infrastruktur wurden um das Wissen um die RISC-V Vektor-Extension erweitert und können den Anwendungsfall automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren!
 
-Dies lässt sich testen indem man den naiven Matrix Multiplikations Algorithmus in godbolt \footnote{https://godbolt.org/} eingibt und die neuste Version des GCC für RISC-V auswählt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder! Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
+Dies lässt sich testen indem man den naiven Matrix Multiplikationsalgorithmus mit der neuesten Version des GCC für RISC-V übersetzt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder! Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
+
+% \footnote{https://godbolt.org/}
 
 Das Hardware-Software Co-Design sieht das iterative Vorgehen Strip-Mining vor, bei dem die Software die Hardware in jeder Iteration aufs neue konfiguriert und dann Daten zur parallelen Verarbeitung durchführt.
 

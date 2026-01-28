@@ -12,10 +12,10 @@
 % Einbinden eigener Makros
 \input{setup/macros}
 
-% Einbinden eigner Pakete
+% Einbinden eigener Pakete
 \input{setup/custom_packages}
 
-% Daten die automatisch Verwendet werden
+% Daten die automatisch verwendet werden
 \author{Wolfgang Bischoff}
 \title{Extension of a RISC-V Core with Custom Matrix Multiplication instructions}
 %\subject{Extension of a RISC-V Core with Custom Matrix Multiplication instructions}
@@ -31,7 +31,7 @@
 
 \begin{document}
 
-   % Dokument erstmalig initialisieren (Front Matter)
+   % Dokument initialisieren (Front Matter) - ROMAN NUMBERING
    \frontmatter
    \pagestyle{plain}
 
@@ -50,8 +50,8 @@
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   \newpage \phantomsection
-   \addtotoc{Abbildungsverzeichnis}
+   % Abbildungsverzeichnis
+   \newpage \phantomsection \addtotoc{Abbildungsverzeichnis}
    \listoffigures
 
 %    % Tabellenverzeichnis
@@ -62,7 +62,8 @@
    %\addtotoc{Abkürzungsverzeichnis}
    %\input{Seiten/Acronyme}
 
-   \printunsrtglossaries % list all entries
+   % list all entries of glossary
+   \printunsrtglossaries
 
 %    % Formelverzeichnis
 %    \listoftoc{equation}
@@ -70,11 +71,14 @@
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   % Dokument initialisieren
+   % Dokument initialisieren (Main Matter) - NORMAL NUMBERING
    \mainmatter
-   \pagestyle{empty}
+%  \pagestyle{empty}
+%  \pagestyle{plain}
+   \pagestyle{headings}  % Normale Seitenzahlen Kopf und Fußzeile zurückbringen
 
    % Kapitel einbinden
+
    \input{Kapitel/Einleitung}
    \input{Kapitel/StandTechnik}
    \input{Kapitel/TheoretischeGrundlagen}
@@ -84,6 +88,7 @@
    \input{Kapitel/AuswertungundErgebnisse}
    \input{Kapitel/ZusammenfassungundAusblick}
    %\input{Seiten/Anhang}
+
    \bibliographystyle{natdin}
    \bibliography{Literatur/Literatur}        % Bibliographie erzeugen
 

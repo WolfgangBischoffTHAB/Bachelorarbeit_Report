@@ -1,4 +1,4 @@
-\chapter{Analyse des NEORV32 CPU} \label{chpt:Analysis}
+\chapter{Analyse der NEORV32 CPU} \label{chpt:Analysis}
 
 Das Ziel dieses Kapitels ist die Analyse des bestehenden NEORV32 Cores. Die wichtigsten Elemente werden beschrieben. Durch die Analyse wird Klarheit darüber geschaffen, wie die Wirkungsweise des NEORV32 CPU ist und wie das System erweitert werden muss um die Matrixmultiplikation zu ergänzen.
 
@@ -69,6 +69,6 @@ Für länger laufende Befehle muss die Execution--Engine auf den Abschluss der O
 
 Die State--Machine der Execution--Engine produziert eine Vielzahl an Signalen, die andere Entitäten des VHDL--Designs aktivieren und mit Eingabedaten versorgen. Ein wichtiger Teil des Designs ist die sogenannte Load--Store Unit. Die Load--Store Unit hat zur Aufgabe Bus--Requests zu erstellen und Bus--Responses zu verarbeiten.
 
-Die Bus--Requests werden auf dem Bus innerhalb des NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load--Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store--Anweisungen geschrieben. Die Aufgabe der Load--Store--Unit besteht darin die Signale der Execution--Engine in passende Bus--Requests für Load-- oder Store Anweisungen zu übersetzen.
+Die Bus--Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load--Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store--Anweisungen geschrieben. Die Aufgabe der Load--Store--Unit besteht darin die Signale der Execution--Engine in passende Bus--Requests für Load-- oder Store Anweisungen zu übersetzen.
 
 Dabei ist folgende Besonderheit zu beachten. Die Bus--Requests, die von der Load--Store--Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data--Cache verbunden. Damit unterstützt der NEORV32 CPU eine Cache--Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load--Store--Unit immer zunächst in den Cache. Wenn ein Cache--Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.

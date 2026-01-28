@@ -1,4 +1,16 @@
-\pagestyle{empty}
+%\pagestyle{empty}
+
+% https://mirror.funkfreundelandshut.de/latex/macros/latex/contrib/koma-script/doc/scrguide-de.pdf
+% Seite 289
+\usepackage[automark]{scrlayer-scrpage}
+\ihead{\headmark} % linke Seite (inside) zeigt die zuletzt gesetzte header marker an
+\chead{} % Mitte (center) des headers leer
+\ohead{}
+
+\ifoot[]{} % linke Seite footer leer
+\cfoot[]{} % Mitte footer leer
+\ofoot[]{\thepage} % Rechte seite (output) zeigt Seitezahl
+
 % Deutsche Anpassungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[T1]{fontenc}				% Schriftkodierung
 \usepackage[utf8]{inputenc}				% Eingabekodierung
@@ -103,9 +115,9 @@
 
 % Listings %%
 \usepackage{listings}
-\usepackage{lipsum}
+%\usepackage{lipsum}
 
-% Spaltendefinition rechtsbndig mit definierter Breite
+% Spaltendefinition rechtsbündig mit definierter Breite
 \newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}}
 
 %% Mathematik-Packages%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
