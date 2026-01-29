@@ -2,12 +2,16 @@
 out/bthesis_wbischoff_2228538.pdf :\
     ./Literatur/Literatur.bib\
     Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png\
+    Bilder/LLM_1.png\
+    Bilder/LLM_2.png\
     Bilder/MAC_MatrixAccumulator.png\
     Bilder/MatrixMult_1.png\
     Bilder/MatrixMult_2.png\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
+    Bilder/PerspectiveProjection.png\
     Bilder/VHDL_Entities.png\
+    Bilder/ViewFrustum.png\
     Bilder/WaveFormsMatrixMultiplikation.png\
     Bilder/WaveFormsMatrixMultiplikationInstruktions.png\
     Bilder/neorv32_cpu_architecture.png\
@@ -279,6 +283,10 @@ out/bthesis_wbischoff_2228538.pdf :\
 
 Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png :
 
+Bilder/LLM_1.png :
+
+Bilder/LLM_2.png :
+
 Bilder/MAC_MatrixAccumulator.png :
 
 Bilder/MatrixMult_1.png :
@@ -289,7 +297,11 @@ Bilder/MatrixMult_3.png :
 
 Bilder/MatrixMult_4.png :
 
+Bilder/PerspectiveProjection.png :
+
 Bilder/VHDL_Entities.png :
+
+Bilder/ViewFrustum.png :
 
 Bilder/WaveFormsMatrixMultiplikation.png :
 

@@ -14,9 +14,51 @@ RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, d
 
 Die Firma Qualcomm beispielsweise als eines der weltweit, führenden Unternehmen auf dem Gebiet der Halbleiter und der Telekommunikation hat eine RISC-V Erweiterung namens Xqci zu RISC-V und auch zu den Compiler-Framework LLVM beigesteuert \cite{phoronix_xqci}. Qualcomm führt auch Käufe von Firmen mit RISC-V Wissen durch. Dies deutet daraufhin, dass Qualcomm den Einsatz von RISC-V in Produkten ernsthaft in Erwägung zieht.
 
-Matrixmultiplikation ist die Grundlage für perspektivische Projektionen, Rotationen und Bewegung von Objekten in der 3D Computer-Grafik. Dort ist es notwendig 4x4 Matrizen zu verwenden und mathematische Berechnungen so schnell wie möglich auf diesen Matrizen ausführen zu können. Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem Alltag, aber auch aus vielen professionellen Bereichen nicht mehr wegzudenken.
+Matrixmultiplikation ist die Grundlage für perspektivische Projektionen, Rotationen und Bewegung von Objekten in der 3D Computer-Grafik. Dort ist es notwendig 4x4 Matrizen zu verwenden und mathematische Berechnungen so schnell wie möglich auf diesen Matrizen ausführen zu können.
 
-Getrieben durch den Erfolg von Large Language Models (LLM) kann sich eine Spezifikation für CPUs, wie z.B. RISC-V nicht mehr durchsetzen, wenn Sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. Ein LLM basiert auf neuronalen Netzen. Eingaben an ein Neuronales Netz erfolgen in Form von Vektoren. Werden mehrere Eingaben gleichzeitig an das neuronale Netz gegeben, wird aus der Vektorrechnung ein Matrix-Rechnung.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.65]{"ViewFrustum.png"}
+\caption{View Frustum}
+\label{fig:ViewFrustum}
+\end{figure}
+
+In Abbildung \ref{fig:NEORV32_Architecture} aus \cite{RTR3} wird auf der linken Seite das Sichtfeld (View Frustum) einer Kamera in einer Szene dargestellt. Durch die Matrix \(P_{p}\) wird dieses Sichtfeld perspektivisch korrekt auf den Einheitswürfel auf der rechten Seite abgebildet. Durch das Umformen des Sichtfelds erscheinen weiter entfernte Objekte z.B. kleiner. Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Mathematisch werden also viele Punkte mit einer Matrix multipliziert um die transformierten Punkte zu erhalten. Diese zeigt, dass die Matrixmultiplikation extrem schnell ablaufen muss um eine hohe Bildwiederholrate zu erreichen. Die Projektionsmatrix ist in Abbildung \ref{fig:PerspectiveProjection} aus \cite{RTR3} dargestellt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{"PerspectiveProjection.png"}
+\caption{Perspective Projection Matrix}
+\label{fig:PerspectiveProjection}
+\end{figure}
+
+Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem Alltag, aber auch aus vielen professionellen Bereichen nicht mehr wegzudenken.
+
+Seit Google im Jahr 2017 die Transformer Architektur erfunden und OpenAI ChatGPT 1 programmiert hat, dauert die Erfolgsgeschichte von Large Language Models bis heute an. Generative künstliche Intelligenz wird als revolutionäre Erfindung betrachtet und führt schon jetzt dazu, dass Softwareentwickler Angst um ihren Wert auf dem Arbeitsmarkt haben. Es ist spätestens im Jahre 2026 klar, dass die KI Aufgaben bedeutend viel schneller erledigt als es ein Mensch jemals könnte.
+
+Die rasante Verbreitung von LLMs hat Auswirkungen auf die Hardwarehersteller und den Handel der Hardware. Die Firma Micron hat beispielsweiße einen Rückzug aus dem Endkundengeschäft vollzogen und verkauft RAM-Bausteine nur noch an Firmenkunden, die den RAM-Speicher dann bevorzugt für die Berechnung in Rechenzentren einsetzen. Es liegt nahe, dass LLMs in den Rechenzentren trainiert und betrieben werden. Die RAM-Preise für Endkunden sind aus diesem Grund innerhalb des Jahres 2025 um ein vielfaches angestiegen.
+
+Gleiches gilt für Grafikbeschleuniger der Firma NVIDIA. Auch hier konkuriert der Endkunde mit dem Firmenkunden. NVIDIA kann die Preise beinahe beliebig festlegen. Das Top-Produkt für Endkunden der Firma NVIDIA ist eine 5090 RTX Grafikkarte. Sie ist im Januar 2026 für etwa 3600 Euro erhältlich und kostet damit mehr als der gesamte Rest eines Computers. Eine Grafikkarte ist in der Lage Matrixmultiplikationen in großer Parallelität und extrem schnell zu berechnen. Grafikkarten werden auch zum Training von LLMs verwendet.
+
+Ein LLM basiert auf Neuronalen Netzen. Zwei Neuronen in einem sehr einfachen Netz sind in Abbildung \ref{fig:SimpleNeuralNetzwork} aus \cite{basic-neural-network-matrix-maths-part-1} dargestellt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{"LLM_1.png"}
+\caption{Einfaches Neuronales Netz}
+\label{fig:SimpleNeuralNetzwork}
+\end{figure}
+
+Eingaben an ein Neuronales Netz erfolgen in Form von Vektoren. Werden mehrere Eingaben \(x_{i}\) gleichzeitig an das neuronale Netz gegeben, wird aus der Vektorrechnung ein Matrix-Rechnung, da gleichzeitig mit mehreren Gewichtungen \(w_{i,j}\) multipliziert werden muss. Dieser Umstand ist in \ref{fig:InputBatching} aus \cite{basic-neural-network-matrix-maths-part-1} dargestellt
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.55]{"LLM_2.png"}
+\caption{Mehrere kombinierte Eingaben}
+\label{fig:InputBatching}
+\end{figure}
+
+Getrieben durch den Erfolg von LLM kann sich eine Spezifikation für CPUs, wie z.B. RISC-V nicht mehr durchsetzen, wenn Sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. Die Endkunden werden Produkte, die nicht in der Lage sind Matrizen hardwarebeschleunigt zu berechnen nicht mehr kaufen z.B. aus Gründen der Computergrafik. Das gleiche gilt für Firmenkunden, die den Betrieb eines LLM planen. Ohne beschleunigte Matrixberechnung kann sich ein CPU nicht mehr auf dem Markt behaupten.
 
 Die CPUs der Firmen AMD und Intel besitzen bereits die Erweiterungen AVX2 (Advanced Vector Extensions 2), AMX (Advanced Matrix Extensions) und FMA (Fused Multiply Add) zum Rechnen mit Vektoren und Matrizen.
 % https://de.wikipedia.org/wiki/FMA_x86

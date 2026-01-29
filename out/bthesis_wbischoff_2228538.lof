@@ -1,23 +1,27 @@
 \babel@toc {english}{}\relax 
 \babel@toc {ngerman}{}\relax 
 \addvspace {\baselineskip }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces View Frustum}}{2}{figure.caption.9}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Perspective Projection Matrix}}{2}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Einfaches Neuronales Netz}}{3}{figure.caption.11}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Mehrere kombinierte Eingaben}}{3}{figure.caption.12}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Ansätze zur Matrix-Extension}}{13}{figure.caption.104}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Matrixmultiplikation blockweise}}{14}{figure.caption.106}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Matrixmultiplikation Ergebnis}}{15}{figure.caption.107}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{15}{figure.caption.108}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{15}{figure.caption.109}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{17}{figure.caption.113}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Ansätze zur Matrix-Extension}}{15}{figure.caption.107}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Matrixmultiplikation blockweise}}{16}{figure.caption.109}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Matrixmultiplikation Ergebnis}}{17}{figure.caption.110}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{17}{figure.caption.111}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{17}{figure.caption.112}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Matrix Accumulator (MAC)}}{19}{figure.caption.116}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces NEORV32 Architektur}}{23}{figure.caption.129}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces NEORV32 Gültige Instruktion}}{24}{figure.caption.131}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces NEORV32 Architektur}}{25}{figure.caption.132}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces NEORV32 Gültige Instruktion}}{26}{figure.caption.134}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces VHDL Entities}}{30}{figure.caption.180}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces VHDL Entities}}{32}{figure.caption.183}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{43}{figure.caption.453}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{44}{figure.caption.454}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{45}{figure.caption.456}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{46}{figure.caption.457}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
