@@ -1,6 +1,6 @@
 \chapter{Auswertung und Evaluierung} \label{chpt:Auswertung_und_Evaluierung_Main}
 
-In diesem Kapitel wird untersucht, ob der gewählte Ansatz zur Integration von Matrixoperationen in die NOERV32 CPU zielführend war. Zunächst wird die Funktionalität der Erweiterung geprüft. Das Prüfverfahren wird erläutert.
+In diesem Kapitel wird untersucht, ob der gewählte Ansatz zur Integration von Matrixoperationen in die NEORV32 CPU zielführend war. Zunächst wird die Funktionalität der Erweiterung geprüft. Das Prüfverfahren wird erläutert.
 
 Danach wird untersucht, ob das erweiterte System eine Matrixmultiplikation schneller ausführen kann, als das unmodifizierte System. Um diesen Vergleich anzustellen wird die mathematische Vorschrift zur Matrixmultiplikation mit drei for-Schleifen auf zwei Matrizen ausgeführt. Die gleichen beiden Matrizen werden mit den hinzugefügten Anweisungen zur Matrixmultiplikation verrechnet.
 
@@ -77,7 +77,7 @@ Zur einfacheren Vergleichbarkeit der Matrix C mit der Waveform der Simulation wu
 
 Um Anweisungsfolgen miteinander zu vergleichen, muss zunächst eine Skala gewählt werden. Danach müssen die Anweisungsfolgen auf die Skala abgebildet werden. Die Abbildung muss dem Quellcode eine Zahl auf der Skala zuordnen. Als letztes muss für die Skala dann noch erwähnt werden, welcher Wert besser ist, also wie die Qualität von der Skala abzulesen ist.
 
-Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, dass der NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Die CPU löst eine Aufgabe dann schneller.
+Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, dass die NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Die CPU löst eine Aufgabe dann schneller.
 
 Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie dessen Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
 
@@ -85,7 +85,7 @@ Ein Paar von CSR, dass bei der Zählung der Clock-Zyklen verwendet wird sind die
 
 Es werden wirkliche Clock-Cycles gezählt und keine Anweisungen. Das ist ein Vorteil, da damit eine wirkliche Messung erzielt werden kann. Wenn Anweisungen gezählt werden, ist nicht klar wieviel Zeit die CPU zur Bearbeitung der Anweisungen benötigt.
 
-Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird an das VHDL-Design als Input-Signal herangeführt. Dieses Signal wird in sehr vielen Prozessen des Designs verwendet um sequentielle, getaktete Logik voranzutreiben. Der NEORV32 CPU kann beispielsweise mit einer Taktrate von 100 Mhz betrieben werden. Damit ist die externe Clock-Source dann auf 100 MHz eingestellt. CSR\_MCYCLE und CSR\_MCYCLEH werden dann mit einer Taktrate von 100 Mhz inkrementiert.
+Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird an das VHDL-Design als Input-Signal herangeführt. Dieses Signal wird in sehr vielen Prozessen des Designs verwendet um sequentielle, getaktete Logik voranzutreiben. Die NEORV32 CPU kann beispielsweise mit einer Taktrate von 100 Mhz betrieben werden. Damit ist die externe Clock-Source dann auf 100 MHz eingestellt. CSR\_MCYCLE und CSR\_MCYCLEH werden dann mit einer Taktrate von 100 Mhz inkrementiert.
 
 Hier ist ein Beispiel für die Verwendung der Abbildung auf die Cycle-Skala:
 

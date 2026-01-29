@@ -1,6 +1,6 @@
 \chapter{Analyse der NEORV32 CPU} \label{chpt:Analysis}
 
-Das Ziel dieses Kapitels ist die Analyse des bestehenden NEORV32 Cores. Die wichtigsten Elemente werden beschrieben. Durch die Analyse wird Klarheit darüber geschaffen, wie die Wirkungsweise des NEORV32 CPU ist und wie das System erweitert werden muss um die Matrixmultiplikation zu ergänzen.
+Das Ziel dieses Kapitels ist die Analyse des bestehenden NEORV32 Cores. Die wichtigsten Elemente werden beschrieben. Durch die Analyse wird Klarheit darüber geschaffen, wie die Wirkungsweise der NEORV32 CPU ist und wie das System erweitert werden muss um die Matrixmultiplikation zu ergänzen.
 
 
 
@@ -34,7 +34,7 @@ Aus diesem Grund gibt es ein weiteres Signal, welches in Abbildung \ref{fig:NEOR
 \label{fig:NEORV32_valid_instruction}
 \end{figure}
 
-Dieses Wissen ist wichtig, wenn man das Verhalten der CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das vom CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
+Dieses Wissen ist wichtig, wenn man das Verhalten der CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das von der CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
 
 Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache verfügt wenn dies konfiguriert wird. In der Standardkonfiguration ist kein Cache für Instruktionen konfiguriert, wie in der Abbildung \ref{fig:NEORV32_Architecture} dargestellt. Die Fetch Engine greift direkt auf den Speicher zu.
 
@@ -45,13 +45,13 @@ Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache ver
 
 Die Entität ``CPU--Control'' enthält die Kontrolllogik der CPU. Die CPU--Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
 
-Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor. Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrolllogik Teile der CPU an- und abschalten. Damit konfiguriert sich ein CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
+Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor. Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit einfach direkt Signale aus, die ohne Zustand also ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Allgemein wird die Kontrolllogik Teile der CPU an- und abschalten. Damit konfiguriert sich eine CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
 
 Sehr häufig kommen Pipelines zum Einsatz. Eine Instruktion durchläuft nacheinander die Stages der Pipeline. Die freien Stages können für andere Instruktionen verwendet werden. Damit erhöht sich der Durchsatz des Systems und die Auslastung der vorhandenen Hardware erhöht sich.
 
-Der NEORV32 CPU ist an dieser Stelle eine Ausnahme. Er besitzt anstelle einer Pipeline eine State--Machine, die Execution--Engine genannt wird, um den CPU zu kontrollieren. Statt einer Fetch-Stage gibt es das separate Frontend, welches Instruktionen lädt.
+Die NEORV32 CPU ist an dieser Stelle eine Ausnahme. Sie besitzt anstelle einer Pipeline eine State--Machine, die Execution--Engine genannt wird, um die CPU zu kontrollieren. Statt einer Fetch-Stage gibt es das separate Frontend, welches Instruktionen lädt.
 
-Die Execution--Engine ist im Inneren eines VHDL Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf diesen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
+Die Execution--Engine ist im Inneren eines VHDL-Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf dessen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
 
 Der Start-Zustand ist der EX\_RESTART state. Aus dem Reset geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
 
@@ -71,4 +71,4 @@ Die State--Machine der Execution--Engine produziert eine Vielzahl an Signalen, d
 
 Die Bus--Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load--Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store--Anweisungen geschrieben. Die Aufgabe der Load--Store--Unit besteht darin die Signale der Execution--Engine in passende Bus--Requests für Load-- oder Store Anweisungen zu übersetzen.
 
-Dabei ist folgende Besonderheit zu beachten. Die Bus--Requests, die von der Load--Store--Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data--Cache verbunden. Damit unterstützt der NEORV32 CPU eine Cache--Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load--Store--Unit immer zunächst in den Cache. Wenn ein Cache--Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.
+Dabei ist folgende Besonderheit zu beachten. Die Bus--Requests, die von der Load--Store--Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data--Cache verbunden. Damit unterstützt die NEORV32 CPU eine Cache--Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load--Store--Unit immer zunächst in den Cache. Wenn ein Cache--Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.

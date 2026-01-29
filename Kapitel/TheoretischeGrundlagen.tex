@@ -97,7 +97,7 @@ Der Nachteil dieser Beschreibung ist nicht sichtbar, wenn man sich den Pseudo-Co
 
 In den beiden Architekturen Van-Neumann und Harvard gilt gleichermaßen, dass eine Berechnung nicht im Speicher sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen muss also eine Übertragung zwischen Speicher und CPU erfolgen. Man nennt dies die Load-Store-Architektur.
 
-Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern der CPU verbleiben können, da ein CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
+Der Nachteil der naiven Implementierung liegt also in der Tatsache begründet, dass Werte nicht in den Registern der CPU verbleiben können, da eine CPU nur wenige Register besitzt und diese Register wiederverwendet werden müssen. Um die Register wiederzuverwenden muss der enthaltene Wert zurück in den Speicher geschrieben werden! Dies ist in der höheren Programmiersprache nicht dargestellt und wird erst sichtbar, wenn man sich den Assembler-Quellcode ansieht, den der Compiler erstellt.
 
 Im aller ungünstigsten Fall besteht dieser Assembler-Code aus einer langen Folge aus einer Load-Anweisung gefolgt von einer Operation gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
 

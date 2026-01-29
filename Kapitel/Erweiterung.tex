@@ -91,7 +91,7 @@ Im Zuge dieser Arbeit ist ein einfacher Compiler erstellt worden, der auch dazu 
 
 \section{Erweiterung der Execution-Engine} \label{sec:neorv32-extending-execution-engine}
 
-Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktionen vor, welches in den NEORV32 CPU geladen und ausgeführt werden kann.
+Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktionen vor, welches in die NEORV32 CPU geladen und ausgeführt werden kann.
 
 In diesem Abschnitt wird die Execution-Engine erweitert, so dass sie die neuen Instruktion auch ausführt, wenn sie von dem Frontend präsentiert werden.
 
@@ -294,7 +294,7 @@ Sind die 16 Operationen ausgeführt, geht die State--Machine zurück nach ML\_ID
 
 Ein etwa gleichartiges Vorgehen wird auch für die Matrix--Store--Operation gewählt, welche 16 Elemente zurückschreiben muss.
 
-Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matrix-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und im CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Store zurück oder speichert Daten für eine Load--Anweisung. Die eigentlichen Daten kommen aus dem Daten--Speicher der CPU und durchlaufen den Cache der \gls{LSU}.
+Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Matrix-Engine. Abhängig von den Zählern, die in den Operationen Load und Store verändert werden, produziert der PROC\_RAM Prozess Signale, die die Load--Store--Unit verlassen und in der CPU mit dem RAM für die Matrix--Engine verbunden sind. Damit wird der RAM der Matrix--Engine gesteuert und gibt entweder Daten für ein Store zurück oder speichert Daten für eine Load--Anweisung. Die eigentlichen Daten kommen aus dem Daten--Speicher der CPU und durchlaufen den Cache der \gls{LSU}.
 
 
 
