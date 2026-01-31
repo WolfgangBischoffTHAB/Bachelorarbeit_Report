@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Process.svg"
+   inkscape:export-filename="Process.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.50835204"
+     inkscape:cx="-364.9046"
+     inkscape:cy="309.82466"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;stroke:#000000;stroke-width:0.428001;stroke-opacity:1"
+       x="24.75"
+       y="2.8522313"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="fill:#1a1a1a;stroke:#000000;stroke-width:0.428;stroke-opacity:1"
+         x="24.75"
+         y="2.8522313" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.428001;stroke-opacity:1"
+       x="32.110596"
+       y="11.500928"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.428;stroke-opacity:1"
+         x="32.110596"
+         y="11.500928">TestApp</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.428001;stroke-opacity:1"
+       x="32.110596"
+       y="33.214684"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="stroke:#56be7e;stroke-width:0.428;stroke-opacity:1"
+         x="32.110596"
+         y="33.214684">Emulator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.428001;stroke-opacity:1"
+       x="46.670521"
+       y="22.613375"
+       id="text3-6"><tspan
+         sodipodi:role="line"
+         id="tspan3-3"
+         style="stroke:#56be7e;stroke-width:0.428;stroke-opacity:1"
+         x="46.670521"
+         y="22.613375">Debug</tspan></text>
+    <path
+       id="path3"
+       style="fill:none;stroke:#56be7e;stroke-width:1.428;stroke-opacity:1"
+       d="m 44.1953,16.800996 a 5.7964683,5.7964683 0 0 1 1.348382,3.716662 v 0 a 5.7964683,5.7964683 0 0 1 -5.796469,5.796468 5.7964683,5.7964683 0 0 1 -5.796468,-5.796468 5.7964683,5.7964683 0 0 1 5.796468,-5.796469 5.7964683,5.7964683 0 0 1 0.294177,0.0075" />
+    <path
+       id="rect4"
+       style="fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.95811;stroke-opacity:1"
+       d="m 43.296606,18.363426 0.355927,-2.379375 2.367071,0.370114 -1.30533,0.970881 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path3-7"
+       style="fill:none;stroke:#c50000;stroke-width:1.428;stroke-opacity:1"
+       d="m 93.942675,48.573809 a 5.7964683,5.7964683 0 0 1 1.34838,3.716662 v 0 a 5.7964683,5.7964683 0 0 1 -5.79647,5.796468 5.7964683,5.7964683 0 0 1 -5.796468,-5.796468 5.7964683,5.7964683 0 0 1 5.796468,-5.796469 5.7964683,5.7964683 0 0 1 0.29418,0.0075" />
+    <path
+       id="rect4-6"
+       style="fill:#000000;fill-opacity:1;stroke:#c50000;stroke-width:0.95811;stroke-opacity:1"
+       d="m 93.043975,50.136239 0.35593,-2.379375 2.36707,0.370114 -1.30533,0.970881 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path3-7-1"
+       style="fill:none;stroke:#390bec;stroke-width:1.428;stroke-opacity:1"
+       d="m 159.02776,16.455136 a 5.7964683,5.7964683 0 0 1 1.34838,3.716662 v 0 a 5.7964683,5.7964683 0 0 1 -5.79647,5.796468 5.7964683,5.7964683 0 0 1 -5.79647,-5.796468 5.7964683,5.7964683 0 0 1 5.79647,-5.796469 5.7964683,5.7964683 0 0 1 0.29418,0.0075" />
+    <path
+       id="rect4-6-8"
+       style="fill:#000000;fill-opacity:1;stroke:#390bec;stroke-width:0.95811;stroke-opacity:1"
+       d="m 158.12906,18.017566 0.35593,-2.379375 2.36707,0.370114 -1.30533,0.970881 z"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="rect4-7"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.06234"
+       d="m 76.497976,38.7099 0.323455,2.684746 -2.675371,-0.298503 1.125142,-1.152534 z"
+       sodipodi:nodetypes="ccccc" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.71983;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5"
+       width="14.134056"
+       height="0.54427052"
+       x="66.426636"
+       y="-25.137205"
+       transform="rotate(44.791584)" />
+    <path
+       id="rect4-7-6"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.06234"
+       d="m 137.29346,30.20928 2.70086,-0.133651 -0.48611,2.647718 -1.07046,-1.203485 z"
+       sodipodi:nodetypes="ccccc" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.71983;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5-2"
+       width="14.134056"
+       height="0.54427052"
+       x="68.32476"
+       y="114.40891"
+       transform="rotate(-41.171675)" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#c50000;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+       x="82.996582"
+       y="43.471886"
+       id="text5"><tspan
+         sodipodi:role="line"
+         style="stroke:#c50000;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+         x="82.996582"
+         y="43.471886"
+         id="tspan6">VHDL Design</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#390bec;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+       x="147.82272"
+       y="11.502049"
+       id="text5-2"><tspan
+         sodipodi:role="line"
+         style="stroke:#390bec;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+         x="147.82272"
+         y="11.502049"
+         id="tspan6-8">VHDL Design</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#c50000;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+       x="82.904579"
+       y="64.817612"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="stroke:#c50000;stroke-width:0.428;stroke-dasharray:none;stroke-opacity:1"
+         x="82.904579"
+         y="64.817612">Simulator</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#c50000;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="96.889702"
+       y="54.788803"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="stroke:#c50000;stroke-width:0.428;stroke-opacity:1"
+         x="96.889702"
+         y="54.788803">WaveForm</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#390bec;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="119.21622"
+       y="21.592886"
+       id="text9"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         style="stroke:#390bec;stroke-width:0.428;stroke-opacity:1"
+         x="119.21622"
+         y="21.592886">Synthesis</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#390bec;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="145.46376"
+       y="33.674717"
+       id="text10"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="stroke:#390bec;stroke-width:0.428;stroke-opacity:1"
+         x="145.46376"
+         y="33.674717">FPGA</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#c50000;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="56.377575"
+       y="54.541641"
+       id="text11"><tspan
+         sodipodi:role="line"
+         id="tspan11"
+         style="stroke:#c50000;stroke-width:0.428;stroke-opacity:1"
+         x="56.377575"
+         y="54.541641">Evaluate</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#56be7e;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="8.3726768"
+       y="21.989775"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         style="stroke:#56be7e;stroke-width:0.428;stroke-opacity:1"
+         x="8.3726768"
+         y="21.989775">Compile</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#390bec;stroke-width:0.428001;stroke-dasharray:none;stroke-opacity:1"
+       x="164.20259"
+       y="21.523588"
+       id="text13"><tspan
+         sodipodi:role="line"
+         id="tspan13"
+         style="stroke:#390bec;stroke-width:0.428;stroke-opacity:1"
+         x="164.20259"
+         y="21.523588">printf()</tspan></text>
+  </g>
+</svg>

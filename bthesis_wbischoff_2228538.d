@@ -11,6 +11,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
     Bilder/PerspectiveProjection.png\
+    Bilder/Process.pdf\
     Bilder/SISD_SIMD.pdf\
     Bilder/VHDL_Entities.png\
     Bilder/ViewFrustum.png\
@@ -303,6 +304,8 @@ Bilder/MatrixMult_3.png :
 Bilder/MatrixMult_4.png :
 
 Bilder/PerspectiveProjection.png :
+
+Bilder/Process.pdf :
 
 Bilder/SISD_SIMD.pdf :
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  31 JAN 2026 13:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  31 JAN 2026 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1373,7 +1373,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
 
 
 ]
-<Bilder/ViewFrustum.png, id=210, 506.39188pt x 236.885pt>
+<Bilder/ViewFrustum.png, id=214, 506.39188pt x 236.885pt>
 File: Bilder/ViewFrustum.png Graphic file (type png)
 <use Bilder/ViewFrustum.png>
 Package pdftex.def Info: Bilder/ViewFrustum.png  used on input line 28.
@@ -1386,7 +1386,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
 (Font)              `T1/Roboto-LF/bold/n' on input line 29.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 (Font)              scaled to size 9.0pt on input line 29.
-<Bilder/PerspectiveProjection.png, id=215, 325.71687pt x 143.03438pt>
+<Bilder/PerspectiveProjection.png, id=219, 325.71687pt x 143.03438pt>
 File: Bilder/PerspectiveProjection.png Graphic file (type png)
 <use Bilder/PerspectiveProjection.png>
 Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 3
@@ -1395,12 +1395,12 @@ Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 3
 Package babel Info: 'ngerman' activates 'ngerman' shorthands.
 (babel)             Reported on input line 47.
  [2 <./Bilder/ViewFrustum.png> <./Bilder/PerspectiveProjection.png>]
-<Bilder/LLM_1.png, id=230, 342.78062pt x 195.73125pt>
+<Bilder/LLM_1.png, id=234, 342.78062pt x 195.73125pt>
 File: Bilder/LLM_1.png Graphic file (type png)
 <use Bilder/LLM_1.png>
 Package pdftex.def Info: Bilder/LLM_1.png  used on input line 58.
 (pdftex.def)             Requested size: 308.4997pt x 176.15648pt.
-<Bilder/LLM_2.png, id=233, 556.57938pt x 71.26625pt>
+<Bilder/LLM_2.png, id=237, 556.57938pt x 71.26625pt>
 File: Bilder/LLM_2.png Graphic file (type png)
 <use Bilder/LLM_2.png>
 Package pdftex.def Info: Bilder/LLM_2.png  used on input line 67.
@@ -1410,7 +1410,7 @@ Package pdftex.def Info: Bilder/LLM_2.png  used on input line 67.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <./Bilder/LLM_1.png>] [4 <./Bilder/LLM_2.png>] (./Kapitel/StandTechnik.tex
-<Bilder/strip_mining_2.png, id=253, 877.77937pt x 367.87437pt>
+<Bilder/strip_mining_2.png, id=257, 877.77937pt x 367.87437pt>
 File: Bilder/strip_mining_2.png Graphic file (type png)
 <use Bilder/strip_mining_2.png>
 Package pdftex.def Info: Bilder/strip_mining_2.png  used on input line 11.
@@ -1472,13 +1472,13 @@ n. Wenn der Com-pi-ler das
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 107.
 
-<Bilder/SISD_SIMD.pdf, id=323, 257.96375pt x 77.28876pt>
+<Bilder/SISD_SIMD.pdf, id=327, 257.96375pt x 77.28876pt>
 File: Bilder/SISD_SIMD.pdf Graphic file (type pdf)
 <use Bilder/SISD_SIMD.pdf>
 Package pdftex.def Info: Bilder/SISD_SIMD.pdf  used on input line 117.
 (pdftex.def)             Requested size: 206.37126pt x 61.83107pt.
 [11 <./Bilder/SISD_SIMD.pdf>] [12]
-<Bilder/CombiningVectorRegisters.png, id=351, 603.75563pt x 365.86688pt>
+<Bilder/CombiningVectorRegisters.png, id=355, 603.75563pt x 365.86688pt>
 File: Bilder/CombiningVectorRegisters.png Graphic file (type png)
 <use Bilder/CombiningVectorRegisters.png>
 Package pdftex.def Info: Bilder/CombiningVectorRegisters.png  used on input lin
@@ -1491,7 +1491,7 @@ n-wei-sun-gen und
  []
 
 [15] [16]
-<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=460, 717.17938pt x 391.9643
+<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=464, 717.17938pt x 391.9643
 7pt>
 File: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png Graphic file (type png)
 <use Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>
@@ -1499,22 +1499,22 @@ Package pdftex.def Info: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png  used o
 n input line 314.
 (pdftex.def)             Requested size: 322.72774pt x 176.38232pt.
  [17 <./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>] [18]
-<Bilder/MatrixMult_1.png, id=495, 514.42188pt x 77.25414pt>
+<Bilder/MatrixMult_1.png, id=499, 514.42188pt x 77.25414pt>
 File: Bilder/MatrixMult_1.png Graphic file (type png)
 <use Bilder/MatrixMult_1.png>
 Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 368.
 (pdftex.def)             Requested size: 308.6555pt x 46.35281pt.
-<Bilder/MatrixMult_2.png, id=498, 257.46187pt x 51.33662pt>
+<Bilder/MatrixMult_2.png, id=502, 257.46187pt x 51.33662pt>
 File: Bilder/MatrixMult_2.png Graphic file (type png)
 <use Bilder/MatrixMult_2.png>
 Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 379.
 (pdftex.def)             Requested size: 154.4783pt x 30.8022pt.
-<Bilder/MatrixMult_4.png, id=500, 450.18187pt x 38.61pt>
+<Bilder/MatrixMult_4.png, id=504, 450.18187pt x 38.61pt>
 File: Bilder/MatrixMult_4.png Graphic file (type png)
 <use Bilder/MatrixMult_4.png>
 Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 388.
 (pdftex.def)             Requested size: 270.1112pt x 23.16617pt.
-<Bilder/MatrixMult_3.png, id=502, 514.42188pt x 141.0511pt>
+<Bilder/MatrixMult_3.png, id=506, 514.42188pt x 141.0511pt>
 File: Bilder/MatrixMult_3.png Graphic file (type png)
 <use Bilder/MatrixMult_3.png>
 Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 399.
@@ -1530,7 +1530,7 @@ Underfull \hbox (badness 1810) in paragraph at lines 448--449
 f-sum-miert, al-so kum-mu-
  []
 
-<Bilder/MAC_MatrixAccumulator.png, id=524, 432.11438pt x 405.515pt>
+<Bilder/MAC_MatrixAccumulator.png, id=528, 432.11438pt x 405.515pt>
 File: Bilder/MAC_MatrixAccumulator.png Graphic file (type png)
 <use Bilder/MAC_MatrixAccumulator.png>
 Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 4
@@ -1550,38 +1550,48 @@ dann durch-ge-führt wer-
 
 [22]
 chapter 3.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 14.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 7.6pt on input line 14.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 14.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 14.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 14.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 14.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
-(Font)              `T1/Roboto-LF/regular/n' on input line 14.
-LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
-(Font)              scaled to size 6.0pt on input line 14.
+<Bilder/Process.pdf, id=551, 506.89375pt x 166.6225pt>
+File: Bilder/Process.pdf Graphic file (type pdf)
+<use Bilder/Process.pdf>
+Package pdftex.def Info: Bilder/Process.pdf  used on input line 38.
+(pdftex.def)             Requested size: 304.1386pt x 99.97426pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [23
 
 
-] [24] [25] [26]) (./Kapitel/Analyse.tex [27]
+]
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 54.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 7.6pt on input line 54.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 54.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 54.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 54.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 54.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
+(Font)              `T1/Roboto-LF/regular/n' on input line 54.
+LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
+(Font)              scaled to size 6.0pt on input line 54.
+ [24 <./Bilder/Process.pdf>] [25] [26] [27]) (./Kapitel/Analyse.tex
+[28]
 chapter 4.
-<Bilder/neorv32_cpu_architecture.png, id=580, 828.09375pt x 391.4625pt>
+<Bilder/neorv32_cpu_architecture.png, id=603, 828.09375pt x 391.4625pt>
 File: Bilder/neorv32_cpu_architecture.png Graphic file (type png)
 <use Bilder/neorv32_cpu_architecture.png>
 Package pdftex.def Info: Bilder/neorv32_cpu_architecture.png  used on input lin
 e 14.
 (pdftex.def)             Requested size: 322.95526pt x 152.66975pt.
-[28
+[29
 
 
  <./Bilder/neorv32_cpu_architecture.png>]
-<Bilder/neorv32_debugging_instructions.png, id=587, 962.59625pt x 248.42813pt>
+<Bilder/neorv32_debugging_instructions.png, id=610, 962.59625pt x 248.42813pt>
 File: Bilder/neorv32_debugging_instructions.png Graphic file (type png)
 <use Bilder/neorv32_debugging_instructions.png>
 Package pdftex.def Info: Bilder/neorv32_debugging_instructions.png  used on inp
@@ -1593,8 +1603,8 @@ Underfull \hbox (badness 1107) in paragraph at lines 46--47
 l-lo-gik der CPU. Die CPU--
  []
 
-[29 <./Bilder/neorv32_debugging_instructions.png>] [30])
-(./Kapitel/Erweiterung.tex [31]
+[30 <./Bilder/neorv32_debugging_instructions.png>] [31])
+(./Kapitel/Erweiterung.tex [32]
 chapter 5.
 (c:/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
@@ -1603,7 +1613,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
 (Font)              `T1/Roboto-LF/bold/n' on input line 13.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 (Font)              scaled to size 8.0pt on input line 13.
- [32
+ [33
 
 
 ]
@@ -1611,8 +1621,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [33{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-<Bilder/VHDL_Entities.png, id=663, 874.26625pt x 573.14125pt>
+ [34{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+<Bilder/VHDL_Entities.png, id=686, 874.26625pt x 573.14125pt>
 File: Bilder/VHDL_Entities.png Graphic file (type png)
 <use Bilder/VHDL_Entities.png>
 Package pdftex.def Info: Bilder/VHDL_Entities.png  used on input line 102.
@@ -1621,7 +1631,7 @@ Package pdftex.def Info: Bilder/VHDL_Entities.png  used on input line 102.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[34]
+[35]
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/it' aliased to
 (Font)              `T1/Roboto-LF/regular/it' on input line 122.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
@@ -1630,8 +1640,8 @@ LaTeX Font Info:    Font shape `TS1/Roboto-LF/m/it' aliased to
 (Font)              `TS1/Roboto-LF/regular/it' on input line 122.
 LaTeX Font Info:    Font shape `TS1/Roboto-LF/regular/it' will be
 (Font)              scaled to size 8.0pt on input line 122.
- [35{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_hlrajr.enc} <./Bild
-er/VHDL_Entities.png>] [36] [37] [38]
+ [36{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_hlrajr.enc} <./Bild
+er/VHDL_Entities.png>] [37] [38] [39]
 Underfull \hbox (badness 1496) in paragraph at lines 291--292
 []\T1/Roboto-LF/regular/n/10 Der Load-Prozess wird für Matrix--Load--Anweisunge
 n um ei-ne State--
@@ -1643,7 +1653,7 @@ Underfull \hbox (badness 2460) in paragraph at lines 297--298
 -gna-le für den RAM-
  []
 
-[39] [40]
+[40] [41]
 Underfull \hbox (badness 2158) in paragraph at lines 361--362
 []\T1/Roboto-LF/regular/n/10 Um die Be-rech-nung aus-zu-füh-ren wird ei-ne Stat
 e--Machine ver-wen-det.
@@ -1655,9 +1665,9 @@ Underfull \hbox (badness 1655) in paragraph at lines 361--362
  mit MM
  []
 
-[41] [42]) (./Kapitel/AuswertungundErgebnisse.tex [43]
+[42] [43]) (./Kapitel/AuswertungundErgebnisse.tex [44]
 chapter 6.
-[44
+[45
 
 
 ]
@@ -1666,7 +1676,7 @@ Underfull \hbox (badness 1895) in paragraph at lines 84--85
 Zyklen ver-wen-det
  []
 
-[45]
+[46]
 Underfull \hbox (badness 1609) in paragraph at lines 128--129
 \T1/Roboto-LF/regular/n/10 Com-pi-ler in der Ver-si-on riscv-none-elf-gcc.exe (
 xPack GNU RISC-
@@ -1678,16 +1688,16 @@ Underfull \hbox (badness 1087) in paragraph at lines 128--129
 Über-set-zung
  []
 
-[46] [47]
-<Bilder/WaveFormsMatrixMultiplikationInstruktions.png, id=995, 733.23938pt x 31
-3.67188pt>
+[47] [48]
+<Bilder/WaveFormsMatrixMultiplikationInstruktions.png, id=1018, 733.23938pt x 3
+13.67188pt>
 File: Bilder/WaveFormsMatrixMultiplikationInstruktions.png Graphic file (type p
 ng)
 <use Bilder/WaveFormsMatrixMultiplikationInstruktions.png>
 Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikationInstruktions.png  
 used on input line 189.
 (pdftex.def)             Requested size: 329.95467pt x 141.15103pt.
-<Bilder/WaveFormsMatrixMultiplikation.png, id=997, 726.21312pt x 396.48125pt>
+<Bilder/WaveFormsMatrixMultiplikation.png, id=1020, 726.21312pt x 396.48125pt>
 File: Bilder/WaveFormsMatrixMultiplikation.png Graphic file (type png)
 <use Bilder/WaveFormsMatrixMultiplikation.png>
 Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikation.png  used on inpu
@@ -1697,9 +1707,9 @@ t line 200.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[48 <./Bilder/WaveFormsMatrixMultiplikationInstruktions.png>] [49 <./Bilder/Wav
-eFormsMatrixMultiplikation.png>] [50])
-(./Kapitel/ZusammenfassungundAusblick.tex [51]
+[49 <./Bilder/WaveFormsMatrixMultiplikationInstruktions.png>] [50 <./Bilder/Wav
+eFormsMatrixMultiplikation.png>] [51])
+(./Kapitel/ZusammenfassungundAusblick.tex [52]
 chapter 7.
 
 Underfull \hbox (badness 1038) in paragraph at lines 16--17
@@ -1713,10 +1723,10 @@ Underfull \hbox (badness 2189) in paragraph at lines 16--17
 ist Ma-trix-mul-ti-pli-
  []
 
-[52
+[53
 
 
-] [53]) (out/bthesis_wbischoff_2228538.bbl [54]
+] [54]) (out/bthesis_wbischoff_2228538.bbl [55]
 chapter without number
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/sc' aliased to
 (Font)              `T1/Roboto-LF/regular/sc' on input line 17.
@@ -1828,7 +1838,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--94
 1400 /
  []
 
-[55
+[56
 
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
@@ -1849,7 +1859,7 @@ Underfull \hbox (badness 6910) in paragraph at lines 138--143
 mas.com / 2025 / 02 / basic -[] neural -[]
  []
 
-) [56] (out/bthesis_wbischoff_2228538.aux)
+) [57] (out/bthesis_wbischoff_2228538.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-29>
@@ -1860,13 +1870,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 42939 strings out of 467538
- 887805 string characters out of 5423725
- 1979316 words of memory out of 5000000
- 70501 multiletter control sequences out of 15000+600000
+ 42955 strings out of 467538
+ 888138 string characters out of 5423725
+ 1980414 words of memory out of 5000000
+ 70514 multiletter control sequences out of 15000+600000
  745867 words of font info for 190 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 112i,20n,125p,11246b,2823s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 112i,21n,125p,11246b,2823s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Bold.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/google/roboto/Roboto-Italic.pfb><c:/texlive/20
 25/texmf-dist/fonts/type1/google/roboto/Roboto-Regular.pfb><c:/texlive/2025/tex
@@ -1879,10 +1889,10 @@ athpazo/fplmr.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0
 texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/pal
 atino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (67 pages, 1624127 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (68 pages, 1661626 bytes).
 PDF statistics:
- 1537 PDF objects out of 1728 (max. 8388607)
- 1386 compressed objects within 14 object streams
- 678 named destinations out of 1000 (max. 500000)
- 54200 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 1565 PDF objects out of 1728 (max. 8388607)
+ 1409 compressed objects within 15 object streams
+ 681 named destinations out of 1000 (max. 500000)
+ 54213 words of extra memory for PDF output out of 61914 (max. 10000000)
 

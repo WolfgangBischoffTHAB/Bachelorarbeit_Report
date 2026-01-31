@@ -9,34 +9,76 @@ In diesem Kapitel wird beschrieben, welches Vorgehen gewählt wird um die Arbeit
 
 
 
+\section{Schrittweises Vorgehen} \label{sec:steps}
+
+Das Vorgehen besteht aus folgenden Schritten:
+
+\begin{enumerate}
+
+    \item Analyse der theoretischen Grundlagen zur Matrixmultiplikation. Es soll eine Möglichkeit gefunden werden, die die Berechnung auf einem FPGA ermöglicht und mit VHDL beschrieben werden kann. Dieser Schritt erfolgte im Kapitel \ref{chpt:Theoretische_Grundlagen_Main}.
+
+    \item Analyse der NEORV32 CPU. Es sollen die Komponenten der CPU identifiziert werden mit dem Ziel die Stellen zu finden, die geändert bzw. erweitert werden müssen. Dieser Schritt erfolgt in Kapitel \ref{chpt:Analysis}.
+
+    \item Ein Compiler (selbst erstellt oder der GCC Compiler) wird verwendet um Testprogramme zu übersetzen.
+
+    \item Die Änderungen werden in den NEORV32 eingebracht.
+
+    \item Das geänderte Design wird simuliert bis die gewünschten Signale vorliegen.
+
+    \item Das geänderte Design wird synthetisiert und auf dem FPGA ausgeführt. Das Design wird angepasst, bis es auf dem FPGA funktioniert.
+
+    \item Die Testprogramme werden ausgeführt. Die Zyklenzahl wird gemessen und verglichen.
+
+\end{enumerate}
+
+Das gewählte Vorgehen während der Änderung lediglich des Quellcode ist in Abbildung \ref{fig:process} dargestellt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{"Process.pdf"}
+\caption{Entwicklungsschritte}
+\label{fig:process}
+\end{figure}
+
+Es gibt drei große Phasen, die in einem Wasserfallprozess streng linear abgearbeitet werden. Innerhalb jedes Schritts findet ein Iteratives Vorgehen statt, dass durch den Kreisel dargestellt werden soll.
+
+Links des Kreisel ist der Name des Vorgehens aufgeführt, das den Quellcode in den kompilierten Zustand überführt, also der Compiler, das Evaluieren oder Synthetisieren. Unterhalb des Kreisel ist das Werkzeug aufgelistet, mit dem das Kompilat ausgeführt wird. Rechts des Kreisel ist das Mittel aufgelistet, über das die Ausführung bewertet wird.
+
+Der Quellcode wird bearbeitet und getestet, bis er das gewünschte Ergebnis erzielt. In diesem Fall wird in die nächste Phase übergegangen. Dies wird durch die Pfeile zwischen den Phasen angedeutet.
+
+
+
+
 \section{Der NEORV32 Core und dessen Einsatz} \label{sec:neorv32_core}
 
 Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting und anderen Programmierern \footnote{https://github.com/stnolting/neorv32/graphs/contributors}, welches als Open-Source Projekt unter der BSD-3 Lizenz veröffentlicht ist \cite{NEORV32_github}. Es gibt zum einen sehr gute Dokumentation zu dem Projekt in Form von textueller Dokumentation, dem sogenannten Datenblatt \cite{NEORV32_DataSheet}. Zum anderen ist auch der Quellcode selbst sehr gut dokumentiert und einheitlich formatiert und damit gut lesbar.
 
+Am Anfang der Entwicklung wurden zunächst zwei Anwendungen erstellt, die auf dem NEORV32 nach der Erweiterung um eine Matrix-Engine laufen sollen. Eine der Anwendungen verwendet die Extension, die andere nicht um die Laufzeit einer Matrixmultiplikation mit und ohne Erweiterung messen zu können. Die Entwicklung der Anwendungen erfolgt mit Hilfe eines eigenen Compilers und auch des GCC Compilers. Die Ausführung findet auf einem eigens entwickelten Emulator statt. Dieser Schritt ist in Abbildung \ref{fig:process} auf der linken Seite dargestellt. Wenn beide Testprogramme im Emulator funktionieren, geht die Entwicklung in die nächste Phase, bei der das VHDL-Design angepasst wird.
+
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
-Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
+Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Dieser Schritt ist in Abbildung \ref{fig:process} mittig dargestellt. Das Anwendungsprogramm aus dem ersten Schritt wird in den VHDL Quellcode in Form eines Speicherdumps eingebettet, damit der Simulator die Testanwendungen ausführt. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
 
-Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet.
+Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet. Das wichtigste Signal ist die Clocksource, die die CPU tacktet, damit die sequentielle Logik Schritte ausführt.
 
 Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
 
-Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann ein Schritt weitergegangen werden. Das Design wird nun synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
+Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann zum finalen Schritt übergegangen werden, der in Abbildung \ref{fig:process} auf der rechten Seite dargestellt ist. Das Design wird jetzt synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
 
 Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekts enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wiederum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
 Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die Bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft die NEORV32 CPU auf dem FPGA, als ob er auf einem Wafer produziert worden wäre.
 
-Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
+%Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32--Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
 
-Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan. Die Umgestaltung des Designs nach der Simulation bis zur Funktion nach der Synthese wird nochmals als eigener Arbeitsschritt bei der Durchführung dieser Arbeit antizipiert.
+Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan. Die Umgestaltung des Designs nach der Simulation bis zur korrekten Funktion nach der Synthese wird nochmals als eigener Arbeitsschritt bei der Durchführung dieser Arbeit antizipiert. In dieser Phase wird die Funktion über den UART des NEORV32 getestet, der verwendet wird, wenn die Testanwendung einen printf() Aufruf absetzt. Dies ist momentan die einfachste Möglichkeit die Extension zu testen.
 
 
 
 
 \section{Test-Software} \label{sec:testsoftware}
 
-Um zu Evaluieren, ob das Design wirklich funktioniert, muss die CPU mit einer Anwengungssoftware betrieben werden, die die neuen Instruktionen wirklich ausführt.
+Um zu Evaluieren, ob das Design wirklich funktioniert, muss die CPU mit einer Anwendungssoftware betrieben werden, die die neuen Instruktionen wirklich ausführt.
 
 Die Anwendung muss in Form von Maschinencode, also kodierten Befehlen vorliegen. Eine Anweisung ist bei RISC-V eine 32-bit Zahl oder eine 16-bit Zahl, wenn komprimierte Anweisungen unterstützt werden. Die Software kann durch einen Assembler in Maschinencode übersetzt werden. Tatsächlich ist die Kodierung für RISC-V nicht kompliziert und dazu auch gut dokumentiert.
 
@@ -74,24 +116,10 @@ Die Voraussetzungen für dieses Vorgehen ist, dass sowohl Anwendung A als auch A
 
 
 
-\section{Schrittweises Vorgehen} \label{sec:steps}
+\section{Zusammenfassung} \label{sec:process_summary}
 
-Das Vorgehen besteht also aus folgenden Schritten:
+In diesem Abschnitt wurde beschrieben, welche Schritte zur Durchführung dieser Arbeit durchgeführt werden müssen. Die Planung und Durchführung der Änderungen am NEORV32 Design, das Erstellen von Testsoftware und das Messen des Ergebnisses wurden als wichtige Punkte identifiziert und beschrieben. Es wird zwischen Simulation und Synthese bzw. Ausführung auf dem FPGA unterschieden.
 
-\begin{enumerate}
+Zusätzlich wurden die Werkzeuge aufgelistet, mit denen die Entwicklung durchgeführt wird und welche Bedeutung diese Werkzeuge in den einzelnen Schritten haben.
 
-    \item Analyse der theoretischen Grundlagen zur Matrixmultiplikation. Es soll eine Möglichkeit gefunden werden, die die Berechnung auf einem FPGA ermöglicht und mit VHDL beschrieben werden kann.
-
-    \item Analyse der NEORV32 CPU. Es sollen die Komponenten der CPU identifiziert werden mit dem Ziel die Stellen zu finden, die geändert bzw. erweitert werden müssen.
-
-    \item Die Änderungen werden eingebracht.
-
-    \item Das geänderte Design wird simuliert bis die gewünschten Signale vorliegen.
-
-    \item Das geänderte Design wird synthetisiert und auf dem FPGA ausgeführt. Das Design wird angepasst, bis es auf dem FPGA funktioniert.
-
-    \item Ein Compiler (selbst erstellt oder der GCC Compiler) wird verwendet um Testprogramme zu übersetzen.
-
-    \item Die Testprogramme werden ausgeführt. Die Zyklenzahl wird gemessen und verglichen.
-
-\end{enumerate}
+Nachdem das Vorgehen beschrieben ist, werden die Analyseergebnisse am NEORV32 im folgenden Kapitel beschrieben. Darauf folgt ein Kapitel, dass identifizierten Änderungen ausführt, gefolgt von einem Kapitel in dem die Änderungen dann gemessen und ausgewertet werden.
