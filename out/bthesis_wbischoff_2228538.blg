@@ -26,45 +26,47 @@ Warning--entry type for "basic-neural-network-matrix-maths-part-1" isn't style-f
 --line 202 of file Literatur/Literatur.bib
 Warning--entry type for "stream_computing_risc_v_matrix" isn't style-file defined
 --line 218 of file Literatur/Literatur.bib
-You've used 19 entries,
+Warning--entry type for "intro_rvv" isn't style-file defined
+--line 226 of file Literatur/Literatur.bib
+You've used 20 entries,
             4728 wiz_defined-function locations,
-            992 strings with 10266 characters,
-and the built_in function-call counts, 12847 in all, are:
-= -- 1232
-> -- 427
-< -- 457
-+ -- 559
-- -- 157
-* -- 878
-:= -- 2328
-add.period$ -- 32
-call.type$ -- 19
-change.case$ -- 104
-chr.to.int$ -- 18
-cite$ -- 19
-duplicate$ -- 352
-empty$ -- 772
-format.name$ -- 258
-if$ -- 2382
+            997 strings with 10419 characters,
+and the built_in function-call counts, 13352 in all, are:
+= -- 1282
+> -- 437
+< -- 472
++ -- 576
+- -- 161
+* -- 907
+:= -- 2414
+add.period$ -- 34
+call.type$ -- 20
+change.case$ -- 108
+chr.to.int$ -- 19
+cite$ -- 20
+duplicate$ -- 368
+empty$ -- 809
+format.name$ -- 264
+if$ -- 2483
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 98
-newline$ -- 125
-num.names$ -- 76
-pop$ -- 163
+missing$ -- 104
+newline$ -- 131
+num.names$ -- 80
+pop$ -- 170
 preamble$ -- 1
-purify$ -- 142
+purify$ -- 148
 quote$ -- 0
-skip$ -- 782
+skip$ -- 816
 stack$ -- 0
-substring$ -- 733
-swap$ -- 72
-text.length$ -- 50
+substring$ -- 761
+swap$ -- 74
+text.length$ -- 51
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 227
+type$ -- 240
 warning$ -- 0
-while$ -- 107
+while$ -- 111
 width$ -- 0
-write$ -- 274
-(There were 9 warnings)
+write$ -- 288
+(There were 10 warnings)

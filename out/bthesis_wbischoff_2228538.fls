@@ -570,7 +570,15 @@ INPUT c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-t1--b
 INPUT c:/texlive/2025/texmf-dist/fonts/vf/google/roboto/Roboto-Regular-lf-ts1.vf
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/google/roboto/Roboto-Regular-lf-ts1--base.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_ocbbsb.enc
+INPUT ./Bilder/SISD_SIMD.pdf
+INPUT ./Bilder/SISD_SIMD.pdf
+INPUT ./Bilder/SISD_SIMD.pdf
+INPUT ./Bilder/SISD_SIMD.pdf
 INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
+INPUT ./Bilder/CombiningVectorRegisters.png
+INPUT ./Bilder/CombiningVectorRegisters.png
+INPUT ./Bilder/CombiningVectorRegisters.png
+INPUT ./Bilder/CombiningVectorRegisters.png
 INPUT ./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png
 INPUT ./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png
 INPUT ./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png

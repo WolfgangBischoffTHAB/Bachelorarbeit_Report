@@ -1,6 +1,7 @@
 #===Dependents, and related info, for bthesis_wbischoff_2228538:
 out/bthesis_wbischoff_2228538.pdf :\
     ./Literatur/Literatur.bib\
+    Bilder/CombiningVectorRegisters.png\
     Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png\
     Bilder/LLM_1.png\
     Bilder/LLM_2.png\
@@ -10,6 +11,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
     Bilder/PerspectiveProjection.png\
+    Bilder/SISD_SIMD.pdf\
     Bilder/VHDL_Entities.png\
     Bilder/ViewFrustum.png\
     Bilder/WaveFormsMatrixMultiplikation.png\
@@ -282,6 +284,8 @@ out/bthesis_wbischoff_2228538.pdf :\
 
 ./Literatur/Literatur.bib :
 
+Bilder/CombiningVectorRegisters.png :
+
 Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png :
 
 Bilder/LLM_1.png :
@@ -299,6 +303,8 @@ Bilder/MatrixMult_3.png :
 Bilder/MatrixMult_4.png :
 
 Bilder/PerspectiveProjection.png :
+
+Bilder/SISD_SIMD.pdf :
 
 Bilder/VHDL_Entities.png :
 

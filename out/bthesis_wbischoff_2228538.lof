@@ -7,21 +7,23 @@
 \contentsline {figure}{\numberline {1.4}{\ignorespaces Mehrere kombinierte Eingaben}}{4}{figure.caption.12}%
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Strip Mining}}{5}{figure.caption.15}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Ansätze zur Matrix-Extension}}{16}{figure.caption.108}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Matrixmultiplikation blockweise}}{17}{figure.caption.110}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Matrixmultiplikation Ergebnis}}{18}{figure.caption.111}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{18}{figure.caption.112}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{18}{figure.caption.113}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrix Accumulator (MAC)}}{20}{figure.caption.117}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces SISD (links) und SIMD (rechts)}}{11}{figure.caption.33}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces RVV Register}}{13}{figure.caption.35}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Ansätze zur Matrix-Extension}}{17}{figure.caption.112}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Matrixmultiplikation blockweise}}{19}{figure.caption.114}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Matrixmultiplikation Ergebnis}}{19}{figure.caption.115}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{19}{figure.caption.116}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{20}{figure.caption.117}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrix Accumulator (MAC)}}{21}{figure.caption.121}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32 Architektur}}{26}{figure.caption.133}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{27}{figure.caption.135}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32 Architektur}}{28}{figure.caption.138}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{29}{figure.caption.140}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{33}{figure.caption.184}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{35}{figure.caption.189}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{46}{figure.caption.457}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{47}{figure.caption.458}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{48}{figure.caption.462}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{49}{figure.caption.463}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
