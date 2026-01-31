@@ -24,6 +24,7 @@
 
 % URL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{url}						% Links durch \url{}
+\def\UrlBreaks{\do\/\do-}
 
 \usepackage[
   left=4.7cm,
@@ -161,24 +162,32 @@
 %\usepackage[symbols,sort=none,nogroupskip]{glossaries-extra}
 \usepackage[sort=none,nogroupskip]{glossaries-extra}
 
-%\newglossaryentry{ex}{name={sample}, description={an example}}
+\newglossaryentry{AME}{name={AME}, description={Attached Matrix Extension}}
+\newglossaryentry{AVL}{name={AVL}, description={Application Vector Length}}
+
+\newglossaryentry{CSR}{name={CSR}, description={Control and Status Register}}
+
+\newglossaryentry{IME}{name={IME}, description={Integrated Matrix Extension}}
+
+\newglossaryentry{LSU}{name={LSU}, description={Load Store Unit}}
+\newglossaryentry{LLM}{name={LLM}, description={Large Language Model}}
+\newglossaryentry{LMUL}{name={LMUL}, description={Group Modifier}}
+
+\newglossaryentry{MAC}{name={MAC}, description={Matrix Accumulator}}
+\newglossaryentry{MLEN}{name={MLEN}, description={Matrix-Registerlänge in Bits}}
+
 \newglossaryentry{RVV}{name={RVV}, description={RISC-V Vector Extensions}}
+
 \newglossaryentry{SISD}{name={SISD}, description={Single Instruction Single Data}}
 \newglossaryentry{SIMD}{name={SIMD}, description={Single Instruction Multiple Data}}
 \newglossaryentry{XLEN}{name={XLEN}, description={Standardregisterlänge in Bits}}
-\newglossaryentry{VLEN}{name={VLEN}, description={Vector-Registerlänge in Bits}}
-\newglossaryentry{MLEN}{name={MLEN}, description={Matrix-Registerlänge in Bits}}
-\newglossaryentry{AVL}{name={AVL}, description={Application Vector Length}}
 \newglossaryentry{SEW}{name={SEW}, description={Selected Element Width}}
-\newglossaryentry{LMUL}{name={LMUL}, description={Group Modifier}}
+
+\newglossaryentry{VLEN}{name={VLEN}, description={Vector-Registerlänge in Bits}}
 \newglossaryentry{VL}{name={VL}, description={Vector Length}}
-\newglossaryentry{IME}{name={IME}, description={Integrated Matrix Extension}}
 \newglossaryentry{VME}{name={VME}, description={Vector Matrix Extension}}
-\newglossaryentry{AME}{name={AME}, description={Attached Matrix Extension}}
-\newglossaryentry{MAC}{name={MAC}, description={Matrix Accumulator}}
-%Multiply-Accumulate-Operation \gls{MAC}
-\newglossaryentry{CSR}{name={CSR}, description={Control and Status Register}}
-\newglossaryentry{LSU}{name={LSU}, description={Load Store Unit}}
+
+
 
 
 

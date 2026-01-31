@@ -16,6 +16,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/WaveFormsMatrixMultiplikationInstruktions.png\
     Bilder/neorv32_cpu_architecture.png\
     Bilder/neorv32_debugging_instructions.png\
+    Bilder/strip_mining_2.png\
     Bilder/thab_logo.png\
     Kapitel/Analyse.tex\
     Kapitel/AuswertungundErgebnisse.tex\
@@ -310,6 +311,8 @@ Bilder/WaveFormsMatrixMultiplikationInstruktions.png :
 Bilder/neorv32_cpu_architecture.png :
 
 Bilder/neorv32_debugging_instructions.png :
+
+Bilder/strip_mining_2.png :
 
 Bilder/thab_logo.png :
 
