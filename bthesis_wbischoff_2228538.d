@@ -10,15 +10,21 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/MatrixMult_2.png\
     Bilder/MatrixMult_3.png\
     Bilder/MatrixMult_4.png\
+    Bilder/Matrix_Tiling.png\
     Bilder/PerspectiveProjection.png\
+    Bilder/PipelinedDesign.png\
     Bilder/Process.pdf\
     Bilder/SISD_SIMD.pdf\
+    Bilder/Sample_WaveForm.png\
+    Bilder/StripMining.pdf\
     Bilder/VHDL_Entities.png\
     Bilder/ViewFrustum.png\
     Bilder/WaveFormsMatrixMultiplikation.png\
     Bilder/WaveFormsMatrixMultiplikationInstruktions.png\
+    Bilder/floorplan_1.png\
     Bilder/neorv32_cpu_architecture.png\
     Bilder/neorv32_debugging_instructions.png\
+    Bilder/schematic_cropped.pdf\
     Bilder/strip_mining_2.png\
     Bilder/thab_logo.png\
     Kapitel/Analyse.tex\
@@ -303,11 +309,19 @@ Bilder/MatrixMult_3.png :
 
 Bilder/MatrixMult_4.png :
 
+Bilder/Matrix_Tiling.png :
+
 Bilder/PerspectiveProjection.png :
+
+Bilder/PipelinedDesign.png :
 
 Bilder/Process.pdf :
 
 Bilder/SISD_SIMD.pdf :
+
+Bilder/Sample_WaveForm.png :
+
+Bilder/StripMining.pdf :
 
 Bilder/VHDL_Entities.png :
 
@@ -317,9 +331,13 @@ Bilder/WaveFormsMatrixMultiplikation.png :
 
 Bilder/WaveFormsMatrixMultiplikationInstruktions.png :
 
+Bilder/floorplan_1.png :
+
 Bilder/neorv32_cpu_architecture.png :
 
 Bilder/neorv32_debugging_instructions.png :
+
+Bilder/schematic_cropped.pdf :
 
 Bilder/strip_mining_2.png :
 

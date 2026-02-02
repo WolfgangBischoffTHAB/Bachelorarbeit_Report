@@ -9,22 +9,28 @@
 \addvspace {\baselineskip }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces SISD (links) und SIMD (rechts)}}{11}{figure.caption.33}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces RVV Register}}{13}{figure.caption.35}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Ansätze zur Matrix-Extension}}{17}{figure.caption.112}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Matrixmultiplikation blockweise}}{19}{figure.caption.114}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Matrixmultiplikation Ergebnis}}{19}{figure.caption.115}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{19}{figure.caption.116}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{20}{figure.caption.117}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrix Accumulator (MAC)}}{21}{figure.caption.121}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Strip-Mining Ablauf}}{14}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Ansätze zur Matrix-Extension}}{18}{figure.caption.113}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Matrix in Blöcken}}{19}{figure.caption.115}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrixmultiplikation blockweise}}{20}{figure.caption.116}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Matrixmultiplikation Ergebnis}}{20}{figure.caption.117}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{20}{figure.caption.118}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{21}{figure.caption.119}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Matrix Accumulator (MAC)}}{23}{figure.caption.123}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Entwicklungsschritte}}{24}{figure.caption.132}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Entwicklungsschritte}}{25}{figure.caption.134}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Waveforms}}{26}{figure.caption.137}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Schaltplan nach der Synthese}}{27}{figure.caption.138}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Implementierung}}{27}{figure.caption.139}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32 Architektur}}{29}{figure.caption.140}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{30}{figure.caption.142}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32 Architektur}}{31}{figure.caption.145}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{32}{figure.caption.147}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Design eines RISC-V CPU mit Pipeline}}{33}{figure.caption.149}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{36}{figure.caption.191}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{39}{figure.caption.198}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{49}{figure.caption.464}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{50}{figure.caption.465}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{52}{figure.caption.471}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{53}{figure.caption.472}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

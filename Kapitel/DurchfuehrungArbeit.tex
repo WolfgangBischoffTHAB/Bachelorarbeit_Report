@@ -59,13 +59,48 @@ Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschie
 
 Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Dieser Schritt ist in Abbildung \ref{fig:process} mittig dargestellt. Das Anwendungsprogramm aus dem ersten Schritt wird in den VHDL Quellcode in Form eines Speicherdumps eingebettet, damit der Simulator die Testanwendungen ausführt. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
 
-Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen. Durch visuelle Inspektion kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet. Das wichtigste Signal ist die Clocksource, die die CPU tacktet, damit die sequentielle Logik Schritte ausführt.
+Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in .vcd Dateien. Ein sogenannter Waveform-Viewer kann die Signale dann anzeigen wie in \ref{fig:sample_waveform} dargestellt ist.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{"Sample_WaveForm.png"}
+\caption{Waveforms}
+\label{fig:sample_waveform}
+\end{figure}
+
+In \ref{fig:sample_waveform} lässt sich erkennen, das die Load-Store-Unit aktiviert wird, da das Signal lsu\_en\_i auf einen neue Zustand wechselt. Dann werden Daten geladen und man sieht die 16 einzelnen Rückmeldungen des Datenbus. Durch diese einzelnen Ereignisse kann ein Rückschluss auf die Funktion des Designs gezogen werden.
+
+Durch visuelle Inspektion der Waveform kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert, wie vom Designer erwartet. Das wichtigste Signal ist die Clocksource, die die CPU taktet, damit die sequentielle Logik Schritte ausführt.
 
 Das NEORV32 Projekt bietet ein vorgefertigtes Skript, welches den Simulator GHDL ausführt. Also solches ist das NEORV32 Projekt für Anfänger sehr gut geeignet, da es diese Funktion bereits automatisch bereitstellt.
 
-Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann zum finalen Schritt übergegangen werden, der in Abbildung \ref{fig:process} auf der rechten Seite dargestellt ist. Das Design wird jetzt synthetisiert statt evaluiert. Die Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt. Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden.
+Wenn die Simulation die erwarteten Ergebnisse zeigt, dann kann zum finalen Schritt übergegangen werden, der in Abbildung \ref{fig:process} auf der rechten Seite dargestellt ist. Das Design wird jetzt synthetisiert statt evaluiert.
 
-Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekts enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wiederum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
+Synthese-Werkzeuge führen das sogenannte ``Lowering'' durch. ``Lowering'' im Sinne des Wortes soll andeuten, dass die Synthese-Werkzeuge eine Transformation von den abstrakten, also hohen Beschreibungen im Quellcode in Designs aus physischen Logikzellen durchführen. Von abstrakt zu physisch findet also ein ``Lowering'' statt.
+
+Ein Ausschnitt aus dem Ergebnis der Synthese ist in Abbildung \ref{fig:schematic} zusehen.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.55]{"schematic_cropped.pdf"}
+\caption{Schaltplan nach der Synthese}
+\label{fig:schematic}
+\end{figure}
+
+In Abbildung \ref{fig:schematic} sind einzelne Look-Up-Tables zusehen, die mit LUT3 bzw. LUT4 beschrieben sind. Die logischen Funktionen aus denen das Design im Kern besteht, werden in diesen LUTs abgespeichert und so miteiander kombiniert, dass die Funktion des gesammten Designs realisiert wird. Es ergibt sich ein sehr großes Netz aus Elementen. Ein Mensch kann die Wirkungsweiße des Designs auf dieser Detailebene nur sehr schwer verstehen.
+
+Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und alle anderen Objekte werden konkret in die Resource eingebettet, die der FPGA bietet! Ein Floor-Plan ensteht. Das Vivado-Synthesewerkzeug kann also tatsächlich grafisch angeben, welche LUTs an welcher Stelle in den FPGA-Chip angeordnet worden sind. Diese ist in Abbildung \ref{fig:floorplan_1} auf der linken Seite dargestellt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.55]{"floorplan_1.png"}
+\caption{Implementierung}
+\label{fig:floorplan_1}
+\end{figure}
+
+Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden. Dieser Bit-Stream von dem FPGA Chip als Vorgabe verwendet, wie er sich zu konfigurieren hat. Die programmierbare Hardware nimmt jetzt die gewünschte Form an und führt die Funktion des Designs in Hardware aus.
+
+Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekt enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wiederum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
 Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das Lowering konkret aus. Das Ergebnis ist die Bitstream--Datei. Vivado kann mit dem FPGA Board ARTY A7 100T sprechen und die bistream Datei über eine USB--Verbindung auf den FPGA übertragen. Der FPGA wird sich dem bistream zufolge konfigurieren und ab dann läuft die NEORV32 CPU auf dem FPGA, als ob er auf einem Wafer produziert worden wäre.
 

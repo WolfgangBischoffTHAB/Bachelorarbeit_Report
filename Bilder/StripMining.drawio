@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
+  <diagram name="Seite-1" id="M206xRh3nsdFvEcyAZ2h">
+    <mxGraphModel dx="1572" dy="928" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="RVV für die Aufgabe verwenden?" vertex="1">
+          <mxGeometry height="80" width="200" x="250" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-2" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="350" y="70" as="sourcePoint" />
+            <mxPoint x="320" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-4" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Operation ohne RVV auf &lt;br&gt;den Rest anwenden" vertex="1">
+          <mxGeometry height="80" width="200" x="10" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-7" parent="1" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;targetShapes=umlLifeline;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="95" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Elementanzahl (AVL) bestimmen" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Vektorengine konfigurieren mit&amp;nbsp;set(i)vli (SEW, LMUL)" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Batchgröße lesen (VL, Vectorlength)&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Load (#VL Elemente werden in Vektorregister geladen)" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="SIMD Operation ausführen" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Store (#VL Elemente werden aus Vektorregister gelesen)" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-14" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="140" />
+            </Array>
+            <mxPoint x="110" y="330" as="sourcePoint" />
+            <mxPoint x="160" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-15" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-13" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="700" />
+              <mxPoint x="480" y="700" />
+              <mxPoint x="480" y="140" />
+            </Array>
+            <mxPoint x="110" y="680" as="sourcePoint" />
+            <mxPoint x="480" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-16" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-4" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="10" y="350" as="sourcePoint" />
+            <mxPoint x="110" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-17" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-8" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="110" y="450" as="sourcePoint" />
+            <mxPoint x="160" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-18" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-8" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-9" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="270" y="320" as="sourcePoint" />
+            <mxPoint x="270" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-19" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-9" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-10" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="330" y="390" as="sourcePoint" />
+            <mxPoint x="330" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-20" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-10" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-11" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="340" y="450" as="sourcePoint" />
+            <mxPoint x="340" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-21" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-11" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="350" y="590" as="sourcePoint" />
+            <mxPoint x="350" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-22" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-12" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="220" y="520" as="sourcePoint" />
+            <mxPoint x="220" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Daten &amp;amp; Vektoroperation" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

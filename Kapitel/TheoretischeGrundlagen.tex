@@ -175,6 +175,15 @@ Dies lässt sich testen indem man den naiven Matrix Multiplikationsalgorithmus m
 
 Das Hardware-Software Co-Design sieht das iterative Vorgehen Strip-Mining vor, bei dem die Software die Hardware in jeder Iteration aufs neue konfiguriert und dann Daten zur parallelen Verarbeitung durchführt.
 
+Ein Ablaufdiagram ist in \ref{fig:strip_mining} dargestellt:
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{"StripMining.pdf"}
+\caption{Strip-Mining Ablauf}
+\label{fig:strip_mining}
+\end{figure}
+
 Die Schritte sind:
 
 \begin{enumerate}
@@ -355,11 +364,22 @@ Im Folgenden wird das blockweise Vorgehen erläutert, mit dem die Matrixmultipli
 
 Bei der herkömmlichen Matrixmultiplikation über das Skalarpoduct von Zeilen und Spalten werden die beiden Matrizen A und B in ihrer kompletten Dimension betrachtet, da jeweils komplette Zeilen und Spalten verrechnet werden müssen um ein Matrix-Element zu bestimmen.
 
-Bei sehr großen Matrizen ist dies nicht zielführend, da die CPU die Matrix nur schrittweise erfassen könnte und damit nur sehr ineffizient berechnen kann.
+Bei sehr großen Matrizen ist dies nicht zielführend, da die CPU die Matrix nur schrittweise erfassen und damit nur sehr ineffizient berechnen kann.
 
-Die angestrebte Verbesserung besteht darin, eine Matrix blockweise zu berechnen. Damit eröffnet sich, ähnlich wie bei Vektoren, das Potential der parallelen Berechnung durch SIMD Instruktionen. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
+Die angestrebte Verbesserung besteht darin, eine Matrix blockweise zu berechnen. Die Abbildung \ref{fig:matrix_tiling} visualisiert das blockweiße Vorgehen.
 
-Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist hardwarebeschleunigt die Matrixmultiplikation zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zurück in den RAM-Speicher zu schreiben.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{"Matrix_Tiling.png"}
+\caption{Matrix in Blöcken}
+\label{fig:matrix_tiling}
+\end{figure}
+
+Die Matrizen muss nicht mehr im Ganzen in den CPU oder Cache passen sondern es kann nur ein Teil der Matrizen betrachtet werden.
+
+Zusätzlich eröffnet sich ebenfalls das Potential der parallelen Berechnung. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
+
+Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist, die Matrixmultiplikation  hardwarebeschleunigt zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zurück in den RAM-Speicher zu schreiben.
 
 Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von blockweiser Berechnung gesprochen wird.
 
@@ -403,7 +423,7 @@ In Abbildung \ref{fig:Matrix_Multiplikation_A_E_B_G} wird der grau hervorgehoben
 
 Mit dem Wissen über die blockweise Aufteilung ist es nun möglich per SIMD zu parallelisieren oder Strip-Mining auszuführen, wenn keine parallelen Rechenknoten verfügbar sind. In dieser Arbeit werden Instruktionen analog zur \gls{RVV} bereitgestellt um das Strip-Mining für Matrizen zu ermöglichen und dabei blockweise vorzugehen.
 
-Es ist noch zu klären, wie die einzelnen, inneren Blöcke miteinander multipliziert und addiert werden.
+Es ist noch zu klären, wie die einzelnen, inneren Blöcke miteinander multipliziert und addiert werden. Die Instruktionen, die im Rahmen dieser Arbeit in die NEORV32 CPU eingebracht werden, ermöglichen genau die Berechnung dieser inneren Blöcke. Der Rest muss durch ein Hardware-Software Co-Design organisiert werden.
 
 
 
@@ -445,7 +465,7 @@ columns of A with the rows of B''
 
 In der Formel (\ref{outerproductsum}) sind A und B zwei Matrizen, die miteinander multipliziert werden. Man kann erkennen, dass es nicht ausreicht lediglich die Multiplikationen aus Formel (\ref{outerproduct}) auszuführen, vielmehr müssen die Ergebnisse auch aufaddiert werden. Es handelt sich um eine Multiply-Accumulate Operation. Daher ist es notwendig im Design Speicherzellen vorzusehen, die Schrittweise durch Addition vervollständigt werden, bis das Endergebnis vorliegt.
 
-Der ``Matrix-Kern'' aus Speicherzellen für die Multiplikation ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cite{design_VME} dargestellt. Dieses Konstrukt wird auch Matrix Accumulator (\gls{MAC}) genannt, da er Zwischenergebnisse aufsummiert, also kummuliert.
+Der ``Matrix-Kern'' aus Speicherzellen für die Multiplikation ist in Abbildung \ref{fig:MAC_MatrixAccumulator} aus \cite{design_VME} dargestellt. Dieses Konstrukt wird auch Matrix Accumulator (\gls{MAC}) genannt, da es Zwischenergebnisse aufsummiert, also kummuliert.
 
 \begin{figure}[h]
 \centering
@@ -463,10 +483,12 @@ Die Kombination aus dem blockweisen Ansatz und dem Outer Produkt mittels \gls{MA
 
 \section{Zusammenfassung} \label{sec:summary_theory}
 
-Dieses Kapitel über die theoretischen Grundlagen beginnt bei der mathematischen Definition von Matrizen und führt hin zu einer konkreten Umsetzung dieser Operation in einem Computersystem. Die Gedankengänge aus diesem Kapitel stellen die Grundlagen für die Implementierung dar.
+Dieses Kapitel über die theoretischen Grundlagen beginnt bei der mathematischen Definition von Matrizen und führt hin zu einer konkreten Umsetzung der Matrixmultiplikation in einem Computersystem. Die Gedankengänge aus diesem Kapitel stellen die Grundlagen für die Implementierung dar.
 
 Da die streng mathematische Multiplikation auf einem Load-- Store-- Computersystem zu langsam ist, wurde die SIMD Verarbeitung in Kombination mit der Cache-Hierarchie besprochen. Auf einem RISC-V System gibt es bereits SIMD Instruktionen für die Berechnung von Vektoren in Form der Vektor-Extension. Es wurde beschrieben, wie das Hardware-Software Co-Design des Strip-Mining für die \gls{RVV}-Extension aufgebaut ist.
 
 Ausgehend von diesem Standpunkt sind die drei großen Strömungen IME, VME und AME der RISC-V Charter zur Handhabung der Matrixberechnung vorgestellt worden. Es wurde erläutert, welche Überlegungen zur Entscheidung zugunsten der AME für diese Bachelorarbeit zugrunde liegen.
 
-Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des Outer-Produkt Ansatzen geschlossen. Gerüstet mit einem dokumentierten Zielbild kann als nächstes eine Implementierung methodisch geplant und dann durchgeführt werden.
+Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des Outer-Produkt Ansatzen geschlossen. Damit ist das Strip-Mining auch für Matrizen möglich.
+
+Gerüstet mit einem dokumentierten Zielbild kann als nächstes eine Implementierung methodisch geplant und dann durchgeführt werden.
