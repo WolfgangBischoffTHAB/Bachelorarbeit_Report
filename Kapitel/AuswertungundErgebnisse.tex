@@ -182,22 +182,24 @@ int main() {
 }
 \end{lstlisting}
 
-Zunächst wird über den WaveForm Viewer visuell geprüft, ob die korrekten Steuersignal ausgegeben werden. Dazu wird Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} betrachtet.
+
+
+%Dazu wird Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} betrachtet.
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikationInstruktions.png"}
+%\caption{Steuersignale der Matrixmultiplikation}
+%\label{fig:Waveforms-Matrix-Mult-ControlSignals}
+%\end{figure}
+
+%Die schnellste Art Informationen aus der Ansicht zu ziehen ist es, sich auf die Signale ``load'', ``matrix\_mul\_o'' und ``store'' zu konzentrieren. Diese Signale entsprechen der Abarbeitung der Instruktionen mle32, mmul32 und mse32 in genau dieser Reihenfolge. In der Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} kann man sehen, dass die Signale in genau der gewünschten Reihenfolge und auch Häufigkeit auf den Wert eins springen. Es wird zwei mal geladen und gespeichert, da die Testanwendung die Matrizen A und B lädt und speichert. Die Operation mmul32, angedeutet durch das Signal ``matrix\_mul\_o'', wird nur einmalig ausgeführt, wie erwartet.
+
+Zunächst wird über den WaveForm Viewer visuell geprüft, ob die korrekten Steuersignal ausgegeben werden. Danach wird geprüft, ob die Matrixmultiplikation in der Simulation mit den richtigen Daten abgearbeitet wird und ob die richtigen Werte in der Matrix C abgelegt werden.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikationInstruktions.png"}
-\caption{Steuersignale der Matrixmultiplikation}
-\label{fig:Waveforms-Matrix-Mult-ControlSignals}
-\end{figure}
-
-Die schnellste Art Informationen aus der Ansicht zu ziehen ist es, sich auf die Signale ``load'', ``matrix\_mul\_o'' und ``store'' zu konzentrieren. Diese Signale entsprechen der Abarbeitung der Instruktionen mle32, mmul32 und mse32 in genau dieser Reihenfolge. In der Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} kann man sehen, dass die Signale in genau der gewünschten Reihenfolge und auch Häufigkeit auf den Wert eins springen. Es wird zwei mal geladen und gespeichert, da die Testanwendung die Matrizen A und B lädt und speichert. Die Operation mmul32, angedeutet durch das Signal ``matrix\_mul\_o'', wird nur einmalig ausgeführt, wie erwartet.
-
-Danach wird geprüft, ob die Matrixmultiplikation in der Simulation mit den richtigen Daten abgearbeitet wird und ob die richtigen Werte in der Matrix C abgelegt werden.
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikation.png"}
+\includegraphics[scale=.45]{"WaveFormsMatrixMultiplikation_2.png"}
 \caption{Waveforms der Matrixmultiplikation}
 \label{fig:Waveforms-Matrix-Mult}
 \end{figure}
@@ -337,6 +339,8 @@ Es werden 10385 Zyklen notiert.
 
 Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplikation zweier 4x4, vorzeichenloser Integer-Matrizen unter Ausführung der Matrix-Extension um einen Faktor von etwa 56 beschleunigt.
 
-Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen. Damit ergibt sich dann ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zu gunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn der Algorithmus stark optimiert wird.
+Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen.
+
+Optimiert man die gewählten Testprogramme weiter oder wählt man komplett andere Testprogramme, so ergibt sich ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zu gunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn das Testprogramm stark optimiert wird.
 
 Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat. Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht ohne das die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert. Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.

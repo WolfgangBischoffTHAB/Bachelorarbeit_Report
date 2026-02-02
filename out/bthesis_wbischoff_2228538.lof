@@ -28,9 +28,9 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Design eines RISC-V CPU mit Pipeline}}{33}{figure.caption.149}%
 \addvspace {\baselineskip }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{39}{figure.caption.198}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Matrix Engine}}{44}{figure.caption.320}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Steuersignale der Matrixmultiplikation}}{52}{figure.caption.471}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Waveforms der Matrixmultiplikation}}{53}{figure.caption.472}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Waveforms der Matrixmultiplikation}}{53}{figure.caption.479}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

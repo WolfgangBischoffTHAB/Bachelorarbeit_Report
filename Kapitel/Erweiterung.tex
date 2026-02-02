@@ -24,15 +24,17 @@ Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit Elementen und 
 
 \section{Die Instruktionen} \label{sec:neorv32-custom-instructions}
 
-Um die Matrixmultiplikation durchzuführen sollen neue Instruktionen hinzugefügt werden, die es noch nicht bereits in anderen Extensions für RISC-V gibt. Die Instruktionen sollen das Strip-Mining für Matrizen ermöglichen und sich dabei an der \gls{RVV}-Extension orientieren.
+Dieser Abschnitt beschreibt, welche Instruktionen hinzugefügt werden sollen und warum diese Instruktionen ausgewählt worden sind. Es wird beschrieben, wie man diese neuen Instruktionen im Übersetzungprozess eines existierenden Compilers verwenden kann.
 
-Bei der Diskusion des Strip-Mining bei der \gls{RVV}-Extension wurde die Instruktion set(i)vli besprochen, mit der die Vektor-Engine um Datentypen und gewünschte Datenlängen konfiguriert wurde. Des weiteren wurden die Instruktionen vle32.v, vadd.vv und vse32.v im Rahmen des Beispiel-Codes verwendet.
+Um die Matrixmultiplikation durchzuführen sollen neue Instruktionen hinzugefügt werden, die es noch nicht bereits in anderen Extensions für RISC-V gibt. Die Instruktionen sollen das Strip-Mining für Matrizen ermöglichen und sich dabei an der \gls{RVV}-Extension orientieren. Daher folgt zunächst ein kurzer Rückblick zur Vektor-Extension.
+
+Bei der Diskusion des Strip-Mining bei der \gls{RVV}-Extension wurde die Instruktion set(i)vli besprochen, mit der die Vektor-Engine für Datentypen und gewünschte Datenlängen konfiguriert wird. Des weiteren wurden die Instruktionen vle32.v, vadd.vv und vse32.v im Rahmen eines Beispiels verwendet.
 
 vle32.v lädt Daten aus dem Daten-Speicher in die Vector-Register (Load-Operation), vadd.vv ist die SIMD Instruktion, die zwei Vektoren elementweise parallel miteinander addiert hat und vse32.v speichert die Daten schließlich in den Daten-Speicher zurück (Store-Operation)
 
 Für die Matrix-Extension werden die Instruktion mle32, mmul32 und mse32 hinzugefügt. Dabei ist mle32 die Load-Operation, mmul32 die SIMD - Instruktion und mse32 die Store-Operation. Ein Äquivalent zur set(i)vli ist nicht vorgesehen, da die Matrix-Engine zum jetzigen Stand keine Konfigurationsmöglichkeiten anbietet.
 
-Der NEORV32 besitzt eine Menge an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
+Die NEORV32 CPU besitzt eine Menge an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
 
 Ein Beispiel dafür sind die Intrinsics the X-Window Systems \cite{XToolkitIntrinsics}. Hier wird eine einfach zu verwendende Schnittstelle zur Softwareentwicklung mit dem X-Window System für die Programmiersprache erstellt.
 
@@ -91,9 +93,9 @@ Im Zuge dieser Arbeit ist ein einfacher Compiler erstellt worden, der auch dazu 
 
 \section{Erweiterung der Execution-Engine} \label{sec:neorv32-extending-execution-engine}
 
-Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktionen vor, welches in die NEORV32 CPU geladen und ausgeführt werden kann.
+Bis zu diesem Punkt liegt ein Beispiel-Programm mit den neuen Matrix-Instruktionen vor, welches in die NEORV32 CPU geladen und ausgeführt werden kann. Damit wurde der Software-Anteil der Erweiterung beschrieben. Es folgt nun eine Diskussion der Erweiterungen der Hardware.
 
-In diesem Abschnitt wird die Execution-Engine erweitert, so dass sie die neuen Instruktion auch ausführt, wenn sie von dem Frontend präsentiert werden.
+In diesem Abschnitt wird die Execution-Engine erweitert, so dass sie die neuen Instruktion tatsächlich ausführt, wenn sie von dem Frontend präsentiert werden.
 
 Eine Übersicht aller Komponenten ist in Abbildung \ref{fig:VHDL_Entities} zu sehen.
 
@@ -104,7 +106,7 @@ Eine Übersicht aller Komponenten ist in Abbildung \ref{fig:VHDL_Entities} zu se
 \label{fig:VHDL_Entities}
 \end{figure}
 
-Die Instruktionen werden über das Frontend (FE) aus dem Anweisungsspeicher (IMem) geladen und an die Kontrolllogik weitergegeben. Die Daten der Matrix-Elemente kommen aus dem Datenspeicher (DMEM) und durchlaufen den Daten-Cache (DCache).
+Die Instruktionen werden über das Frontend (FE) aus dem Anweisungsspeicher (IMem) geladen und an die Kontrolllogik weitergegeben. Die Daten der Matrix-Elemente kommen aus dem Datenspeicher (DMEM) und durchlaufen dabei den Daten-Cache (DCache).
 
 Die Komponente neorv32\_cpu\_control gibt die Kontrolsignale matrix\_mar \_load\_store und matrix\_mul aus, wenn die Instruktionen mle32, mse32 bzw. mmul32 ausgeführt werden müssen.
 
@@ -303,6 +305,35 @@ Der neue PROC\_RAM Prozess produziert Steuersignale für den RAM-Speicher der Ma
 
 In die Datei ``neorv32\_cpu.vhd'' wird die Matrix-Engine eingebaut.
 
+Die Matrix-Engine ist schematisch in Abbildung dargestellt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{"MatrixEngine.png"}
+\caption{Matrix Engine}
+\label{fig:MatrixEngine}
+\end{figure}
+
+Auf der linken Seite und am oberen Bildrand befinden sich die beiden Matrixregister für die Matrizen A und B. Genau in der mitte der Abbildung befindet sich die MAC-Einheit, in der die Outer-Products aufaddiert werden und in der sich das Ergebnis, also die Matrix C bildet. Zwischen den Matrix-Register und der MAC-Einheit befinden sich die Arbeitsregister.
+
+Um die Matrix-Engine zu verwenden sind folgende Schritte notwendig:
+
+\begin{enumerate}
+
+    \item Die Matrix Register A und B müssen aus dem Speicher bzw. dem Cache mit Matrix-Daten geladen werden.
+
+    \item Die MAC-Einheit muss mit Nullen gefüllt werden.
+
+    \item Die Arbeitsregister müssen mit einer Spalte der Matrix A und einer Zeile der Matrix B gefüllt werden.
+
+    \item Die MAC-Einheit wird verwendet um das Outer-Product zu berechnen und zu speichern.
+
+    \item Die vorhergehenden drei Schritte müssen insgesammt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
+
+    \item Der Inhalt der MAC-Einheit muss zurück in den Speicher und den Cache übertragen werden, damit er dann der Softwareapplikation zur Verfügung steht.
+
+\end{enumerate}
+
 Die Engine besteht zunächst aus dem PROC\_RAM Prozess.
 
 \begin{lstlisting}[style=VHDLStyle]
@@ -350,9 +381,7 @@ begin
 end process PROC_RAM;
 \end{lstlisting}
 
-Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrixmultiplikation in das Zielmatrixregister zu übertragen (transfer). Es wäre auch möglich weitere Operationen wie ein elementweises Addieren einer Konstante in diesem Prozess zu implementieren.
-
-Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der \gls{LSU} ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
+Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrixmultiplikation in das Zielmatrixregister zu übertragen (transfer). Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der \gls{LSU} ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
 
 Wenn die \gls{LSU} Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der \gls{LSU} mit dem PROC\_RAM Prozess geschieht über die Signale head und tail.
 
@@ -381,7 +410,7 @@ when MM_INIT_1 =>
   mat_mul_engine_state <= MM_PROCESS_1;
 \end{lstlisting}
 
-Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply - Accumulate - Operation oder kurz MAC. Mit Multiply-Accumulate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer-Produkten zusammengesetzt. Die Outer-Produkte werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
+Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply - Accumulate - Operation. Mit Multiply-Accumulate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer-Produkten zusammengesetzt. Die Outer-Produkte werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
 
 \begin{lstlisting}[style=VHDLStyle]
 when MM_PROCESS_1 =>
@@ -429,3 +458,14 @@ Die 16 Multiplikationen pro MM\_PROCESS Zustand werden hoffentlich von der Toolc
 Zusätzlich wäre es denkbar die vier MM\_INIT und MM\_PROCESS Schritte nicht sequentiell an eine State-Machine zu binden sondern sich über die parallele Ausführung der vier Schritte gedanken zu machen. Dazu muss die Aufgabe gelöst sein eine Parallele Akkumulation der Teilergebnisse in die Speicher c11 bis c44 zu bewerkstelligen. Ein vierfaches, gleichzeitiges Schreiben in die Zellen ist ohne Synchronisation vermutlich nicht möglich. Aus diesem Grund wurde im ersten Schritt das sequentielle Vorgehen gewählt. Hier kann weiter optimiert werden.
 
 Damit sind die wichtigsten Erweiterung des NEORV32 beschrieben.
+
+
+
+
+\section{Zusammenfassung} \label{sec:extension_theory}
+
+Die Umsetzung der Erweiterung wurde besprochen. Softwareseitig besteht die Umsetzung aus den neuen Anweisungen für den Umgang mit Matrizen. Es wurde beschrieben, wie die Anweisung ausgewählt worden sind und wie sie über einen Compiler verfügbar gemacht wurden.
+
+Auf der Hardwareseite wurde beschrieben wie die Load-Store-Unit erweitert wird und wie die Matrix-Engine aussieht und mit Daten versorgt wird.
+
+Im folgenden Kapitel soll die umgesetzte Erweiterung benutzt werden und Laufzeiten sollen gemessen werden um Entscheiden zu können, ob die Erweiterung tatsächlich einen Geschwindigkeitsvorteil bringt.

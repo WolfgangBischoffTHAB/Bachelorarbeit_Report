@@ -33,16 +33,17 @@
 \contentsline {section}{\numberline {5.1}Die Matrix-Register}{36}{section.153}%
 \contentsline {section}{\numberline {5.2}Die Instruktionen}{36}{section.162}%
 \contentsline {section}{\numberline {5.3}Erweiterung der Execution-Engine}{38}{section.197}%
-\contentsline {section}{\numberline {5.4}Erweiterung der Load--Store--Unit}{42}{section.318}%
+\contentsline {section}{\numberline {5.4}Erweiterung der Load--Store--Unit}{43}{section.318}%
 \contentsline {section}{\numberline {5.5}Matrix-Engine}{44}{section.319}%
-\contentsline {chapter}{\numberline {6}Auswertung und Evaluierung}{48}{chapter.405}%
-\contentsline {section}{\numberline {6.1}Testdaten}{48}{section.406}%
-\contentsline {section}{\numberline {6.2}Messung und Vergleichbarkeit}{49}{section.408}%
-\contentsline {section}{\numberline {6.3}Prüfung mit Matrix-Erweiterung}{51}{section.436}%
-\contentsline {section}{\numberline {6.4}Prüfung ohne Matrix-Erweiterung}{53}{section.473}%
-\contentsline {section}{\numberline {6.5}Auswertung}{55}{section.561}%
-\contentsline {chapter}{\numberline {7}Zusammenfassung und Ausblick}{56}{chapter.576}%
-\contentsline {section}{\numberline {7.1}Zusammenfassung}{56}{section.577}%
-\contentsline {section}{\numberline {7.2}Ausblick}{57}{section.578}%
-\contentsline {chapter}{\nonumberline Quellenverzeichnis}{59}{chapter*.582}%
+\contentsline {section}{\numberline {5.6}Zusammenfassung}{48}{section.412}%
+\contentsline {chapter}{\numberline {6}Auswertung und Evaluierung}{49}{chapter.413}%
+\contentsline {section}{\numberline {6.1}Testdaten}{49}{section.414}%
+\contentsline {section}{\numberline {6.2}Messung und Vergleichbarkeit}{50}{section.416}%
+\contentsline {section}{\numberline {6.3}Prüfung mit Matrix-Erweiterung}{52}{section.444}%
+\contentsline {section}{\numberline {6.4}Prüfung ohne Matrix-Erweiterung}{53}{section.480}%
+\contentsline {section}{\numberline {6.5}Auswertung}{55}{section.568}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung und Ausblick}{57}{chapter.583}%
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{57}{section.584}%
+\contentsline {section}{\numberline {7.2}Ausblick}{58}{section.585}%
+\contentsline {chapter}{\nonumberline Quellenverzeichnis}{60}{chapter*.586}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -31,7 +31,9 @@ Die Alternative wäre es, ein grundlegend neues Design zu beginnen welches dann 
 
 Ein Nachteil eines solch spezialisierten Designs ist es, dass es seine Allgemeinheit verliert. Ein RISC-V CPU soll eine allgemeine Rechenmaschine bleiben.
 
-Es ist fallabhängig, welchen Weg ein Unternehmen wählen sollte. Ein finanzstarkes Unternehmen kann sich für die Erstellung von Anwendungsspezifischen Chips entscheiden, wie man es im Falle von Amazon und dem Trainium Chip sehen kann \footnote{https://aws.amazon.com/de/ai/machine-learning/trainium/}. Unternehmen wie NVIDIA erstellen Beschleunigerkarten, die für High-Performance Computing im Sinne von großer Parallelität eingesetzt werden können und damit ein großeres Feld abdecken. CPU Designs von Intel und AMD sind um Instruktionserweiterungen wie AVX2, AMX und FMA für die Vektor- und Matrixberechnung erweitert worden wobei sie immer noch allgemeines Computing erlauben. In Zukunft wird RISC-V diesen Weg mit einer Matrix-Extension auch gehen und hat mit der \gls{RVV} bereits begonnen.
+Es ist fallabhängig, welchen Weg ein Unternehmen wählen sollte. Ein finanzstarkes Unternehmen kann sich für die Erstellung von Anwendungsspezifischen Chips entscheiden, wie man es im Falle von Amazon und dem Trainium Chip sehen kann. Unternehmen wie NVIDIA erstellen Beschleunigerkarten, die für High-Performance Computing im Sinne von großer Parallelität eingesetzt werden können und damit ein großeres Feld abdecken. CPU Designs von Intel und AMD sind um Instruktionserweiterungen wie AVX2, AMX und FMA für die Vektor- und Matrixberechnung erweitert worden wobei sie immer noch allgemeines Computing erlauben. In Zukunft wird RISC-V diesen Weg mit einer Matrix-Extension auch gehen und hat mit der \gls{RVV} bereits begonnen.
+
+%\footnote{https://aws.amazon.com/de/ai/machine-learning/trainium/}
 
 Wahrscheinlich ist es aus wirtschaftlicher Sicht notwendig zu wissen, was der Markt fordert und Hardware erstellen zu können die die Anforderung des Marktes erfüllen. Aus akademischer Sicht ist es wichtig die Zusammenarbeit mit Firmen aus der Industrie zu suchen um innovative Lösungen für die zukünftigen Entwicklungen finden zu können.
 
@@ -41,4 +43,6 @@ Zusätzlich ist das System aus dieser Arbeit um weitere Datentypen zu ergänzen.
 
 Es ist zu prüfen, welche Ergebnisse das Lowering hervorgebracht hat. Wurden wirklich Hardware-Bausteine innerhalb des FPGA verwendet oder sind Anteile unnötigerweise durch Logikzellen synthetisiert worden? Hier lässt sich in Kleinstarbeit noch eine Optimierung durchführen, falls Logikzellen anstatt von vorhandener Hardware verwendet werden.
 
-Ein weiterer Schritt ist es sicherlich eine Umgebung für die Validierung des Systems bereitzustellen. Aufgrund zeitlicher Beschränkungen wurde das Design nur visuell mit einem Waveform-Viewer geprüft. Die Sprache System-Verilog beispeilsweise bietet weitrechendere Möglichkeiten zur Validierung. Für VHDL könnte die UVVM \footnote{https://www.uvvm.org/} oder cocotb \footnote{https://www.cocotb.org/} eingesetzt werden.
+Ein weiterer Schritt ist es sicherlich eine Umgebung für die Validierung des Systems bereitzustellen. Aufgrund zeitlicher Beschränkungen wurde das Design nur visuell mit einem Waveform-Viewer geprüft. Die Sprache System-Verilog beispeilsweise bietet weitrechendere Möglichkeiten zur Validierung.
+
+%Für VHDL könnte die UVVM \footnote{https://www.uvvm.org/} oder cocotb \footnote{https://www.cocotb.org/} eingesetzt werden.
