@@ -29,4 +29,5 @@
 \contentsline {lstlisting}{\numberline {6.5}{\ignorespaces Ausgabe der Zyklen, beschleunigte Multiplikation}}{56}{lstlisting.573}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
+\def \@chapapp {\appendixname }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

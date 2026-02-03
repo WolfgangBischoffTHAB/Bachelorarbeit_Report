@@ -35,6 +35,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Kapitel/StandTechnik.tex\
     Kapitel/TheoretischeGrundlagen.tex\
     Kapitel/ZusammenfassungundAusblick.tex\
+    Seiten/Anhang.tex\
     Seiten/Deckblaetter.tex\
     Seiten/Vorwort.tex\
     bthesis_wbischoff_2228538.tex\
@@ -279,6 +280,11 @@ out/bthesis_wbischoff_2228538.pdf :\
     c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map\
     c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt\
     c:/texlive/2025/texmf.cnf\
+    out/../Appendix/src/neorv32_cpu.vhd\
+    out/../Appendix/src/neorv32_cpu_control.vhd\
+    out/../Appendix/src/neorv32_cpu_m_lsu.vhd\
+    out/../Appendix/src/neorv32_cpu_regfile.vhd\
+    out/../Appendix/src/neorv32_package.vhd\
     setup/commands.tex\
     setup/custom_packages.tex\
     setup/listofequations.tex\
@@ -358,6 +364,8 @@ Kapitel/StandTechnik.tex :
 Kapitel/TheoretischeGrundlagen.tex :
 
 Kapitel/ZusammenfassungundAusblick.tex :
+
+Seiten/Anhang.tex :
 
 Seiten/Deckblaetter.tex :
 
@@ -846,6 +854,16 @@ c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map :
 c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt :
 
 c:/texlive/2025/texmf.cnf :
+
+out/../Appendix/src/neorv32_cpu.vhd :
+
+out/../Appendix/src/neorv32_cpu_control.vhd :
+
+out/../Appendix/src/neorv32_cpu_m_lsu.vhd :
+
+out/../Appendix/src/neorv32_cpu_regfile.vhd :
+
+out/../Appendix/src/neorv32_package.vhd :
 
 setup/commands.tex :
 

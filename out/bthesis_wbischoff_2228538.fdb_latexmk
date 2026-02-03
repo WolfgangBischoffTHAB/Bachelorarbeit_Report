@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex out/bthesis_wbischoff_2228538"] 1770144455.84714 "out/bthesis_wbischoff_2228538.aux" "out/bthesis_wbischoff_2228538.bbl" "out/bthesis_wbischoff_2228538" 1770145363.17349 0
+["bibtex out/bthesis_wbischoff_2228538"] 1770151414.49297 "out/bthesis_wbischoff_2228538.aux" "out/bthesis_wbischoff_2228538.bbl" "out/bthesis_wbischoff_2228538" 1770151428.22849 0
   "./Literatur/Literatur.bib" 1769859131 8159 7165d03577bc8ff9ef648596d35cfaac ""
   "c:/texlive/2025/texmf-dist/bibtex/bst/din1505/natdin.bst" 1768044513 56373 839a1cb71aed1a75234c001a8d1308cf ""
-  "out/bthesis_wbischoff_2228538.aux" 1770145361 38270 1e0836f06a4077760a4053f5dc6eaae4 "pdflatex"
+  "out/bthesis_wbischoff_2228538.aux" 1770151426 38762 d1a4e91da1bb6e024a05c600b2dbfd15 "pdflatex"
   (generated)
   "out/bthesis_wbischoff_2228538.bbl"
   "out/bthesis_wbischoff_2228538.blg"
   (rewritten before read)
-["pdflatex"] 1770145354.21373 "bthesis_wbischoff_2228538.tex" "out/bthesis_wbischoff_2228538.pdf" "bthesis_wbischoff_2228538" 1770145363.17424 0
+["pdflatex"] 1770151415.03886 "bthesis_wbischoff_2228538.tex" "out/bthesis_wbischoff_2228538.pdf" "bthesis_wbischoff_2228538" 1770151428.22922 0
   "Bilder/CombiningVectorRegisters.png" 1769859014 109817 7b815ef09c3a67bbf46c976929c7b944 ""
   "Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png" 1768233781 228169 626adf27aee454a09fea0190976691a2 ""
   "Bilder/LLM_1.png" 1769718087 64836 f642332cfaf9654d5830facd9a69fc96 ""
@@ -42,9 +42,10 @@
   "Kapitel/StandTechnik.tex" 1769850185 8098 20a890ed6f6faa437624434a4668e0ce ""
   "Kapitel/TheoretischeGrundlagen.tex" 1770144115 38936 a93b9c37ccfb82d7db067804145f8351 ""
   "Kapitel/ZusammenfassungundAusblick.tex" 1770140157 7258 ea584fffc7ef28387caf5a4a81eb801a ""
+  "Seiten/Anhang.tex" 1770151378 1233 a6d3e1ef12bbcf2d2b053235343bc00e ""
   "Seiten/Deckblaetter.tex" 1769627258 3775 68b929d31212c2c49df30ea9c71f2172 ""
   "Seiten/Vorwort.tex" 1769712192 771 fb5d0ed226559735618efeadaec5d087 ""
-  "bthesis_wbischoff_2228538.tex" 1770142218 3417 903928334796c5704cc791638f3520fd ""
+  "bthesis_wbischoff_2228538.tex" 1770149972 3503 8985f97fafefe9d1b3f9a48a816ef195 ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1768044621 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1768044091 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_b5rac7.enc" 1768047761 3075 0696ceafc85b8352a913efb9ba64bc17 ""
@@ -285,16 +286,21 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1768049274 5587484 30eee748fa419a911c40b0c750dd21ba ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1768049659 3635709 a1f44dfe00c3066b43581817995bf4ae ""
   "c:/texlive/2025/texmf.cnf" 1768049248 713 e69b156964470283e0530f5060668171 ""
-  "out/bthesis_wbischoff_2228538.aux" 1770145361 38270 1e0836f06a4077760a4053f5dc6eaae4 "pdflatex"
-  "out/bthesis_wbischoff_2228538.bbl" 1770144456 7607 64b2deac4ce18dce55d5a04e57eddf89 "bibtex out/bthesis_wbischoff_2228538"
-  "out/bthesis_wbischoff_2228538.lof" 1770145361 3010 2bc8f27bab76b2b92d2d10b42f346e50 "pdflatex"
-  "out/bthesis_wbischoff_2228538.lol" 1770145361 2783 64348c189f515512a38529bb386c5c4a "pdflatex"
-  "out/bthesis_wbischoff_2228538.toc" 1770145361 3940 710b856a0fda7c847023f7f617e45ee6 "pdflatex"
+  "out/../Appendix/src/neorv32_cpu.vhd" 1770149139 42859 48d4e29a3feedf4b4fff9ac5fac44673 ""
+  "out/../Appendix/src/neorv32_cpu_control.vhd" 1767957015 96821 53b3ea8ec71dca13c6f7fc280dc36a44 ""
+  "out/../Appendix/src/neorv32_cpu_m_lsu.vhd" 1769335918 24132 bf51ec9df41f38cf270bb195fb4a7e40 ""
+  "out/../Appendix/src/neorv32_cpu_regfile.vhd" 1767780397 6251 e89a3ba0285897cbb8eb7f1d35dea33b ""
+  "out/../Appendix/src/neorv32_package.vhd" 1767782774 74557 debd2085992aafe0adca0d70bbeb9aea ""
+  "out/bthesis_wbischoff_2228538.aux" 1770151426 38762 d1a4e91da1bb6e024a05c600b2dbfd15 "pdflatex"
+  "out/bthesis_wbischoff_2228538.bbl" 1770151415 7607 64b2deac4ce18dce55d5a04e57eddf89 "bibtex out/bthesis_wbischoff_2228538"
+  "out/bthesis_wbischoff_2228538.lof" 1770151426 3042 05c0918ab5d9f7a3bcbeac29bf6b414b "pdflatex"
+  "out/bthesis_wbischoff_2228538.lol" 1770151426 2815 3713d1d7b4a6d785e8cf0fd1ccb12527 "pdflatex"
+  "out/bthesis_wbischoff_2228538.toc" 1770151426 4022 63e7d649d3acd5bd29dccdf22eaf9832 "pdflatex"
   "setup/commands.tex" 1769712192 4311 572de9c5680194361fc2f5a1520cf5cc ""
-  "setup/custom_packages.tex" 1768042264 47 221d6ace41230e4dcc96d3398cbaa07d ""
+  "setup/custom_packages.tex" 1770146600 49 3d55826c7cb6fa1ac4ec791dd18acc18 ""
   "setup/listofequations.tex" 1768042264 215 d3a2d3022be8954b839d2db46c3647df ""
   "setup/macros.tex" 1768042264 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "setup/packages.tex" 1770144079 11480 61b954f0a860283a9f4bf76605a18cf3 ""
+  "setup/packages.tex" 1770151361 11480 61b954f0a860283a9f4bf76605a18cf3 ""
   "setup/page.tex" 1769625680 2875 82868ed192a19612b17ae64f1ff4cc59 ""
   (generated)
   "out/bthesis_wbischoff_2228538.aux"

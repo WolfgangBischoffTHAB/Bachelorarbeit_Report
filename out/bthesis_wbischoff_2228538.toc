@@ -47,4 +47,6 @@
 \contentsline {section}{\numberline {7.1}Zusammenfassung}{58}{section.581}%
 \contentsline {section}{\numberline {7.2}Ausblick}{59}{section.582}%
 \contentsline {chapter}{\nonumberline Quellenverzeichnis}{61}{chapter*.583}%
+\contentsline {chapter}{Anhang}{I}{section*.584}%
+\def \@chapapp {\appendixname }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
