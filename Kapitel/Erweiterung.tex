@@ -9,7 +9,7 @@ In diesem Kapitel werden die Erweiterungen an den Entitäten des vorgegebenen De
 
 Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit Elementen und sind nicht für andere Datentypen konfiguierbar und nicht für größere Längen miteinander kombinierbar, wie es bei der \gls{RVV} der Fall ist. Die Register sind wie folgt definiert.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Die Matrix-Register},captionpos=b]
   type ram_type is array (0 to MLEN-1)
     of std_ulogic_vector(XLEN-1 downto 0);
   subtype matrix_ram_addr is integer range 0 to MLEN-1;
@@ -40,7 +40,7 @@ Ein Beispiel dafür sind die Intrinsics the X-Window Systems \cite{XToolkitIntri
 
 Die Intrinsics des NEORV32 sind eine Erweiterung der Programmiersprache C um RISC-V Instruktionen aus C-Quellcode heraus auszugeben. Ein Beispiel für die Verwendung ist das folgende Testprogramm.
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Hardwarebeschleunigte Multiplikation},captionpos=b]
 #include <neorv32.h>
 
 uint32_t matrix_a[16]
@@ -120,7 +120,7 @@ Im Folgenden werden die Änderungen im Detail beschrieben.
 
 Als erstes wird der neue Matrix-Opcode aus der Erkennung illegaler Opcodes ausgeschlossen.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Test auf illegale Opcodes},captionpos=b]
 -- MATRIX EXTENSION
 when opcode_matrix_c =>
     illegal_cmd <= '0';
@@ -128,7 +128,7 @@ when opcode_matrix_c =>
 
 Der Execution-Engine wird ein neues Signal ``matrix\_operation\_wait\_i'' in die Sensitivitätsliste eingefügt. Dadurch kann sie das Ende der Matrixberechnung erkennen und in den nächsten Zustand übergehen.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Erweiterung der Sensitivitätsliste},captionpos=b]
 execute_engine_fsm_comb: process(
     ...
     matrix_operation_wait_i
@@ -138,7 +138,7 @@ execute_engine_fsm_comb: process(
 
 Der ALU wird beigebracht, dass sie den Operand B als immediate verwenden muss, sobald sie den Matrix-Extension Opcode sieht. Der Grund ist, dass die Load- und Store-Matrix-Anweisungen die Register-Id als immediate Wert verwenden um zu ermitteln, welches Matrix-Register Sie lesen und schreiben sollen. Damit muss die ALU diesen Immediate-Wert weitergeben, sonst ist er verloren und kann nicht mehr verwendet werden.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Übernahme der Immediate-Parameter},captionpos=b]
 -- ALU operand B: is immediate? --
 case opcode is
     -- add matrix opcode here because the mle32, mse32 instructions contain an immediate
@@ -152,13 +152,13 @@ end case;
 
 Im EX\_DISPATCH Zustand wird die Matrixmultiplikation gestoppt.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Matrixmultiplikation beenden},captionpos=b]
 matrix_mul_o <= '0';
 \end{lstlisting}
 
 Der EX\_EXECUTE Zustand wird um die Behandlung der Matrix-Instruktionen erweitert.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Erweiterung des EX\_EXECUTE Zustands},captionpos=b]
 -- Matrix Extension --
 when opcode_matrix_c =>
 
@@ -186,7 +186,7 @@ Für die drei Instruktionen mle32, mse32 und mmul32 werden neue Zustände in die
 
 Für die Matrix Load- und Store--Instruktionen wird der Zustand EX\_MATRIX \_MEM\_REQ hinzugefügt.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Erweiterung des EX\_MATRIX\_MEM\_REQ Zustands},captionpos=b]
 -- trigger a loop of memory requests for the matrix
 when EX_MATRIX_MEM_REQ =>
 
@@ -216,7 +216,7 @@ when EX_MATRIX_MEM_REQ =>
 
 Im Zustand EX\_MATRIX\_MEM\_RSP wird auf die Rückmeldung gewartet. Wenn die Rückmeldung anhand des Signals ``lsu\_wait\_i'' erfolgt ist, dann wird der geladene Wert über das write--back signal (wb) in die Register--File (RF) geschrieben. Dann wird die Matrix-Engine deaktiviert.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Ende der Speichertransaktionen},captionpos=b]
 when EX_MATRIX_MEM_RSP => -- wait for memory response
 
     if (lsu_wait_i = '0') then
@@ -234,7 +234,7 @@ when EX_MATRIX_MEM_RSP => -- wait for memory response
 
 Für Matrixoperationen gibt es die beiden neuen Zustände EX\_MATRIX \_OPERATION\_REQ und EX\_MATRIX \_OPERATION\_RSP. Mit Matrix Operationen ist die Matrixmultiplikation gemeint. Da die Matrixmultiplikation nicht in einem einzigen Schritt ausgeführt ist, muss die Execution-Engine auf die Matrix-Engine warten. Daher ergibt sich die Notwendigkeit für einen Request-- und einen Response--State.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Warten auf das Ende der Multiplikation},captionpos=b]
 when EX_MATRIX_OPERATION_REQ => -- matrix add operation
 
     if (or_reduce_f(trap_ctrl.exc_buf(exc_ialign_c downto exc_iaccess_c)) = '0') then
@@ -328,7 +328,7 @@ Um die Matrix-Engine zu verwenden sind folgende Schritte notwendig:
 
     \item Die MAC-Einheit wird verwendet um das Outer-Product zu berechnen und zu speichern.
 
-    \item Die vorhergehenden drei Schritte müssen insgesammt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
+    \item Die vorhergehenden drei Schritte müssen insgesamt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
 
     \item Der Inhalt der MAC-Einheit muss zurück in den Speicher und den Cache übertragen werden, damit er dann der Softwareapplikation zur Verfügung steht.
 
@@ -336,7 +336,7 @@ Um die Matrix-Engine zu verwenden sind folgende Schritte notwendig:
 
 Die Engine besteht zunächst aus dem PROC\_RAM Prozess.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Datentransfer der Matrixengine},captionpos=b]
 PROC_RAM : process(clk_i)
   variable l : line;
 begin
@@ -344,13 +344,13 @@ begin
       ...
   elsif rising_edge(clk_i) then
     if (transfer = '1') then
-      -- store the c temporaries into the second matrix engine register
+      -- store the matrixmult result into the first matrix engine register
       matrix_ram_0(0) <= std_ulogic_vector(c11(31 downto 0));
       matrix_ram_0(1) <= std_ulogic_vector(c12(31 downto 0));
       ...
       matrix_ram_0(15) <= std_ulogic_vector(c44(31 downto 0));
 
-      -- store the c temporaries into the second matrix engine register
+      -- store the matrixmult result into the second matrix engine register
       matrix_ram_1(0) <= std_ulogic_vector(c11(31 downto 0));
       matrix_ram_1(1) <= std_ulogic_vector(c12(31 downto 0));
       ...
@@ -372,16 +372,17 @@ begin
         data_in <= matrix_ram_1(tail);
       end if;
     end if;
-    if (matrix_add = '1') then
-      for i in 0 to 15 loop
-        matrix_ram_0(i) <= std_ulogic_vector(unsigned(matrix_ram_0(i)) + unsigned(matrix_immediate));
-      end loop;
-    end if;
   end if;
 end process PROC_RAM;
 \end{lstlisting}
 
-Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrixmultiplikation in das Zielmatrixregister zu übertragen (transfer). Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der \gls{LSU} ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
+%if (matrix_add = '1') then
+%      for i in 0 to 15 loop
+%        matrix_ram_0(i) <= std_ulogic_vector(unsigned(matrix_ram_0(i)) + unsigned(matrix_immediate));
+%      end loop;
+%    end if;
+
+Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und die Rechenergebnisse der Matrixmultiplikation in (momentan beide) Zielmatrixregister zu übertragen (transfer). Beim Speichern und Laden der Matrixregister werden die Signale head und tail verwendet, die von der \gls{LSU} ausgegeben werden. Diese Signale beschreiben das Element, dass geschrieben werden soll.
 
 Wenn die \gls{LSU} Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der \gls{LSU} mit dem PROC\_RAM Prozess geschieht über die Signale head und tail.
 
@@ -395,7 +396,7 @@ Wenn das matrix\_mul Signal gesetzt wird, werden die Matrixregister mit 0 übers
 
 Im INIT Schritt wird eine Zeile aus der A-Matrix und eine Spalte aus der B-Matrix in extra Signale geladen:
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Befüllen der Arbeitsregister},captionpos=b]
 when MM_INIT_1 =>
   a11 <= unsigned(matrix_ram_0(0));
   a21 <= unsigned(matrix_ram_0(4));
@@ -412,7 +413,7 @@ when MM_INIT_1 =>
 
 Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply - Accumulate - Operation. Mit Multiply-Accumulate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer-Produkten zusammengesetzt. Die Outer-Produkte werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Multiply Accumulate Schritt},captionpos=b]
 when MM_PROCESS_1 =>
 
   c11 <= c11 + (a11 * b11);
@@ -439,9 +440,9 @@ when MM_PROCESS_1 =>
   mat_mul_engine_state <= MM_INIT_2;
 \end{lstlisting}
 
-Nach vier MM\_INIT und vier MM\_PROCESS Zuständen ist die Matrixmultiplikation durchgeführt und wird schließlich im MM\_STORE Schritt in das Zielregister übertragen. Dazu wird das Signal ``transfer'' auf 1 gesetzt.
+Nach vier MM\_INIT und vier MM\_PROCESS Zuständen ist die Matrixmultiplikation durchgeführt. Das Ergebnis wird schließlich im MM\_STORE Schritt in das Zielregister übertragen. Dazu wird das Signal ``transfer'' auf 1 gesetzt.
 
-\begin{lstlisting}[style=VHDLStyle]
+\begin{lstlisting}[style=VHDLStyle,caption={Matrixengine Transfer Flag},captionpos=b]
 when MM_STORE =>
   -- enable transfer in the RAM part
   transfer <= '1';

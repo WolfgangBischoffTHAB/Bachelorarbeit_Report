@@ -62,6 +62,13 @@
    %\addtotoc{Abkürzungsverzeichnis}
    %\input{Seiten/Acronyme}
 
+   % Alle Quellcodelistings
+   \renewcommand{\lstlistingname}{Quellcode} % Listing -> Algorithm
+   \renewcommand{\lstlistlistingname}{Quellcodeauszüge} % List of Listings -> List of Algorithms
+   \newpage \phantomsection \addtotoc{Quellcodeauszüge}
+   \makeatletter \renewcommand{\@dotsep}{10000} \makeatother
+   \lstlistoflistings
+
    % list all entries of glossary
    \printunsrtglossaries
 

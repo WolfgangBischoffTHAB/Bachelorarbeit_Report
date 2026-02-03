@@ -76,6 +76,28 @@ return C
 \end{lstlisting}
 ```
 
+To add a table of all listings, first add a caption to each listing.
+
+```
+\begin{lstlisting}[style=VHDLStyle,caption={Matrixengine Transfer Flag},captionpos=b]
+when MM_STORE =>
+  -- enable transfer in the RAM part
+  transfer <= '1';
+\end{lstlisting}
+```
+
+Then add the table at a central location:
+
+```
+% Alle Quellcodelistings
+\renewcommand{\lstlistingname}{Quellcode} % Listing -> Algorithm (Change the word used as subtitle to each listing)
+\renewcommand{\lstlistlistingname}{Quellcodeauszüge} % List of Listings -> List of Algorithms (Change the word used as a caption to the table of all listings)
+\newpage \phantomsection \addtotoc{Quellcodeauszüge}
+\makeatletter \renewcommand{\@dotsep}{10000} \makeatother
+\lstlistoflistings
+
+```
+
 # Glossaries
 
 https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/glossaries/glossariesbegin.pdf

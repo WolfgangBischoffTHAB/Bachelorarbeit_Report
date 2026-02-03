@@ -89,7 +89,7 @@ Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die extern
 
 Hier ist ein Beispiel für die Verwendung der Abbildung auf die Cycle-Skala:
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Verwendung der Timing-Register},captionpos=b]
 // start timing
 neorv32_cpu_csr_write(CSR_MCYCLE, 0);
 
@@ -146,7 +146,7 @@ Für die Prüfung mit Hardwarebeschleunigung, enthält das ausgeführte Anwendun
 
 Die Matrix A und die Matrix B werden aus dem CPU-RAM in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Verwendung der Intrinsics},captionpos=b]
 #include <neorv32.h>
 
 uint32_t matrix_a[16]
@@ -215,7 +215,7 @@ Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplika
 
 Das Testprogramm für die Matrixmultiplikation ohne Hardwarebeschleunigung ist:
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Matrixmultiplikation ohne Hardwarebeschleunigung},captionpos=b]
 #include <stdio.h>
 
 #define DIMENSION 4
@@ -313,7 +313,7 @@ Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine weil de
 
 Für die hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, einfache Multiplikation},captionpos=b]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"
@@ -326,7 +326,7 @@ Es werden 185 Zyklen notiert.
 
 Für die nicht hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, beschleunigte Multiplikation},captionpos=b]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"
@@ -341,6 +341,12 @@ Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplik
 
 Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen.
 
-Optimiert man die gewählten Testprogramme weiter oder wählt man komplett andere Testprogramme, so ergibt sich ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zu gunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn das Testprogramm stark optimiert wird.
+Optimiert man die gewählten Testprogramme weiter oder wählt man komplett andere Testprogramme, so ergibt sich ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zugunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn das Testprogramm stark optimiert wird.
 
-Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat. Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht ohne das die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert. Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.
+Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat.
+
+Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht ohne das die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss.
+
+Anstatt die Matrixmultiplikation durch eine iterative Anwendung steuern zu lassen, bei der alle Instruktionen für die Schleifen durch die Execution-Engine geschleust werden, ist die NEORV32 CPU jetzt in der Lage die Matrixmultiplikation ohne äußere Einflüsse intern zu berechnen. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert.
+
+%Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.

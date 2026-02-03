@@ -76,7 +76,7 @@ Ein anschaulichere Beschreibung bietet das Falksche Schema \cite{Falk}.
 
 Eine Implementierung, die sich direkt an der mathematischen Rechenvorschrift orientiert, verwendet drei For-Schleifen.
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Matrixmultiplikation Iterativ},captionpos=b]
 C = zero_matrix() // Starte mit Nullwerten
 
 for int i = 1 to l  // ueber die Zeilen von C
@@ -210,11 +210,11 @@ Die Schritte sind:
 
     % \item The vector engine takes the request of AVL, SEW and LMUL from the application (which issues a set(i)vli instruction each iteration of the strip-mining loop) and computes the batch size. This is the hardware part of the hardware-software co-design. The vector engine now makes a decision on how many of it's vector registers it needs to combine in order to fit SEW into CPU hardware given the user-requests grouping (l-multiplier, LMUL). Also it needs to keep track of home many ALU-nodes it has available for vector processing. Given all hardware constraints, the vector engine will determine the batch size that it can actually commit to. This batch size is (very confusingly) called vector length (vl). The vl is returned in the destination register to the call of the vsetvli instruction and also stored in the vl register.
 
-    \item Die Vector Engine verwendet die konfigurierten Werte \gls{AVL}, \gls{SEW} und \gls{LMUL} und berechnet die Batch Größe. Ein Batch ist die Menge an Vektorelementen die in einer einzigen SIMD-Operation verrechnet werden. Hier kommt der Hardware-Teil des hardware-software co-designs zum tragen, denn der RISC-V CPU und die enthaltene Vector-Engine müssen entscheiden, wie viele Elemente jetzt tatsächlich parallel verarbeitet werden können. Dabei berücksichtigt die Vector-Engine wie viele Rechenknoten sie zur Verfügung hat um parallel zu rechnen. Die ermittelte Anzahl an Elementen wird vector length (VL) genannt und von der Hardware an die Anwendung zurückgegeben. Dazu gibt die Instruktion set(i)vli diesen Wert in ein Rückgaberegister aus, aus dem sich die Anwendung den Wert holen kann.
+    \item Die Vector Engine verwendet die konfigurierten Werte \gls{AVL}, \gls{SEW} und \gls{LMUL} und berechnet die Batch Größe. Ein Batch ist die Menge an Vektorelementen die in einer einzigen SIMD-Operation verrechnet werden. Hier kommt der Hardware-Teil des hardware-software co-designs zum tragen, denn der RISC-V CPU und die enthaltene Vector-Engine müssen entscheiden, wie viele Elemente jetzt tatsächlich parallel verarbeitet werden können. Dabei berücksichtigt die Vector-Engine wie viele Rechenknoten sie zur Verfügung hat um parallel zu rechnen. Die ermittelte Anzahl an Elementen wird Vector length (VL) genannt und von der Hardware an die Anwendung zurückgegeben. Dazu gibt die Instruktion set(i)vli diesen Wert in ein Rückgaberegister aus, aus dem sich die Anwendung den Wert holen kann.
 
     %\item The application receives the vl value from the destination register. It now knows what the batch size is. It will execute vector load instructions (vle8, vle16, ...) to load data from a specific address in memory. And it will uptdate the pointers to memory in order to keep track of where to read data for the next batch from. In advances the pointers acording to the batch size returned by the vector engine. The application only specifies the address to load from. It does not specify the amount of elements! The amount of elements was agreed upon by the succesfull setivli instruction. The application has communicated how the data type looks like and the vector engine has commited to a certain vl. This means the amount of elements that are transferred from memory into the CPU registers is implicitly agreed upon!
 
-    \item Die Anwendung kennt jetzt die \gls{VL}, die für diese Iteration gilt. Damit kennt die Software die Batch-Size. Die Software wird nun die Vector-Load Instructionen (vle8, vle16, ...) verwenden um einen Anteil des Vektors oder der Vektoren, der genau der \gls{VL} entspricht in die Vektorregister zu laden. Die Anwendung wird auch einen Zeiger nach vorne verschieben, um sich zu merken von welcher Stelle in der nächsten Iteration geladen werden muss.
+    \item Die Anwendung kennt jetzt die Vektor Length (VL), die für diese Iteration gilt. Damit kennt die Software die Batch-Size. Die Software wird nun die Vector-Load Instructionen (vle8, vle16, ...) verwenden um einen Anteil des Vektors oder der Vektoren, der genau der Vektor Length (VL) entspricht in die Vektorregister zu laden. Die Anwendung wird auch einen Zeiger nach vorne verschieben, um sich zu merken von welcher Stelle in der nächsten Iteration geladen werden muss.
 
     %\item The vector engine will process the load instruction (vle8, vle16, ...) and load it's internal vector registers. To load data from memory it will use the agreed upon vl value implicitly.
 
@@ -245,7 +245,7 @@ Die Schritte sind:
 Es folgt ein Beispiel in RISC-V Assembly, das das obige Vorgehen umsetzt. Die Anweisungen aus der Vektor-Extension sind weniger eingerückt als die normalen RISC-V Anweisungen.
 
 
-\begin{lstlisting}[style=PseudoLang]
+\begin{lstlisting}[style=PseudoLang,caption={Vektoraddition Strip-Mining},captionpos=b]
 // vector-vector add routine of 32-bit integers
 //
 // void vvaddint32(size_t n,

@@ -479,6 +479,10 @@ INPUT out/bthesis_wbischoff_2228538.lof
 INPUT out/bthesis_wbischoff_2228538.lof
 INPUT out/bthesis_wbischoff_2228538.lof
 OUTPUT out/bthesis_wbischoff_2228538.lof
+INPUT out/bthesis_wbischoff_2228538.lol
+INPUT out/bthesis_wbischoff_2228538.lol
+INPUT out/bthesis_wbischoff_2228538.lol
+OUTPUT out/bthesis_wbischoff_2228538.lol
 INPUT ./Kapitel/Einleitung.tex
 INPUT ./Kapitel/Einleitung.tex
 INPUT ./Kapitel/Einleitung.tex
