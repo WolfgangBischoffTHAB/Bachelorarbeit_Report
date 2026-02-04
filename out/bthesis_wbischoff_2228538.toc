@@ -16,7 +16,7 @@
 \contentsline {section}{\numberline {2.5}Das Hardware-Software-Co-Design}{13}{section.38}%
 \contentsline {section}{\numberline {2.6}Übergang zur einer Matrix Extension}{17}{section.114}%
 \contentsline {section}{\numberline {2.7}Blockweise Matrixmultiplikation}{19}{section.116}%
-\contentsline {section}{\numberline {2.8}Outer-Produkt}{21}{section.122}%
+\contentsline {section}{\numberline {2.8}Outer Product}{21}{section.122}%
 \contentsline {section}{\numberline {2.9}Zusammenfassung}{23}{section.126}%
 \contentsline {chapter}{\numberline {3}Durchführung und Methodik}{24}{chapter.127}%
 \contentsline {section}{\numberline {3.1}Schrittweises Vorgehen}{24}{section.128}%
@@ -29,7 +29,7 @@
 \contentsline {section}{\numberline {4.2}Die Fetch-Engine}{32}{section.148}%
 \contentsline {section}{\numberline {4.3}CPU--Control und Execution-Engine}{32}{section.150}%
 \contentsline {section}{\numberline {4.4}Die Load-Store-Engine}{34}{section.152}%
-\contentsline {section}{\numberline {4.5}Zusammenfassung}{34}{section.153}%
+\contentsline {section}{\numberline {4.5}Zusammenfassung}{35}{section.153}%
 \contentsline {chapter}{\numberline {5}Erweiterung der NEORV32-CPU}{36}{chapter.154}%
 \contentsline {section}{\numberline {5.1}Die Matrix-Register}{36}{section.155}%
 \contentsline {section}{\numberline {5.2}Die Instruktionen}{36}{section.164}%

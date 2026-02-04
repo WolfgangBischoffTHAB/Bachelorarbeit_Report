@@ -2,7 +2,7 @@
 
 Das Ziel ist beschrieben. Es geht um die Erweiterung eines RISC-V Kerns um eine hardwarebeschleunigte Matrixmultiplikation. Dabei soll die Arbeit möglichst nahe an einer der möglichen Erweiterungen liegen, die momentan tatsächlich von den RISC-V Gremien vorbereitet werden.
 
-Es wurde besprochen, mit welcher Technik die Matrixmultiplikation ausgeführt werden soll und welche theretischen Grundlagen hinter den Überlegungen stehen.
+Es wurde besprochen, mit welcher Technik die Matrixmultiplikation ausgeführt werden soll und welche theoretischen Grundlagen hinter den Überlegungen stehen.
 
 In diesem Kapitel wird beschrieben, welches Vorgehen gewählt wird um die Arbeit durchzuführen.
 
@@ -31,7 +31,7 @@ Das Vorgehen besteht aus folgenden Schritten:
 
 \end{enumerate}
 
-Das gewählte Vorgehen während der Änderung lediglich des Quellcode ist in Abbildung \ref{fig:process} dargestellt.
+Das gewählte Vorgehen zur Programmierung ist in Abbildung \ref{fig:process} dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -40,7 +40,7 @@ Das gewählte Vorgehen während der Änderung lediglich des Quellcode ist in Abb
 \label{fig:process}
 \end{figure}
 
-Es gibt drei große Phasen, die in einem Wasserfallprozess streng linear abgearbeitet werden. Innerhalb jedes Schritts findet ein Iteratives Vorgehen statt, dass durch den Kreisel dargestellt werden soll.
+Es gibt drei große Phasen, die in einem Wasserfallprozess streng linear abgearbeitet werden. Bei den drei Phasen handelt es sich um die Erstellung der Testanwendungen, der Änderung des VHDL Quellcode während der Simulation und der Erstellung des VHDL Codes bei der Ausführung auf dem FPGA. Innerhalb jedes Schritts findet ein Iteratives Vorgehen statt, dass durch den Kreisel dargestellt werden soll.
 
 Links des Kreisel ist der Name des Vorgehens aufgeführt, das den Quellcode in den kompilierten Zustand überführt, also der Compiler, das Evaluieren oder Synthetisieren. Unterhalb des Kreisel ist das Werkzeug aufgelistet, mit dem das Kompilat ausgeführt wird. Rechts des Kreisel ist das Mittel aufgelistet, über das die Ausführung bewertet wird.
 
@@ -51,9 +51,9 @@ Der Quellcode wird bearbeitet und getestet, bis er das gewünschte Ergebnis erzi
 
 \section{Der NEORV32 Core und dessen Einsatz} \label{sec:neorv32_core}
 
-Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting und anderen Programmierern \footnote{https://github.com/stnolting/neorv32/graphs/contributors}, welches als Open-Source Projekt unter der BSD-3 Lizenz veröffentlicht ist \cite{NEORV32_github}. Es gibt zum einen sehr gute Dokumentation zu dem Projekt in Form von textueller Dokumentation, dem sogenannten Datenblatt \cite{NEORV32_DataSheet}. Zum anderen ist auch der Quellcode selbst sehr gut dokumentiert und einheitlich formatiert und damit gut lesbar.
+Der NEORV32 Chip ist ein VHDL- und auch ein Verilog-Design von Stephan Nolting und anderen Programmierern \footnote{https://github.com/stnolting/neorv32/graphs/contributors}, welches als Open-Source Projekt unter der BSD-3 Lizenz veröffentlicht ist \cite{NEORV32_github}. Es gibt zum einen sehr gute Dokumentation zu dem Projekt in Form von textueller Dokumentation, dem sogenannten Datenblatt \cite{NEORV32_DataSheet}. Zum anderen ist auch der Quellcode selbst sehr gut dokumentiert, einheitlich formatiert und damit gut lesbar.
 
-Am Anfang der Entwicklung wurden zunächst zwei Anwendungen erstellt, die auf dem NEORV32 nach der Erweiterung um eine Matrix-Engine laufen sollen. Eine der Anwendungen verwendet die Extension, die andere nicht um die Laufzeit einer Matrixmultiplikation mit und ohne Erweiterung messen zu können. Die Entwicklung der Anwendungen erfolgt mit Hilfe eines eigenen Compilers und auch des GCC Compilers. Die Ausführung findet auf einem eigens entwickelten Emulator statt. Dieser Schritt ist in Abbildung \ref{fig:process} auf der linken Seite dargestellt. Wenn beide Testprogramme im Emulator funktionieren, geht die Entwicklung in die nächste Phase, bei der das VHDL-Design angepasst wird.
+Am Anfang der Entwicklung wurden zunächst zwei Anwendungen erstellt, die auf dem NEORV32 nach der Erweiterung um eine Matrix-Engine laufen sollen. Eine der Anwendungen verwendet die Extension, die andere nicht um die Laufzeit einer Matrixmultiplikation mit und ohne Erweiterung messen und vergleichen zu können. Die Entwicklung der Anwendungen erfolgt mit Hilfe eines eigenen Compilers und auch des GCC Compilers. Die Ausführung findet auf einem eigens entwickelten Emulator statt. Dieser Schritt ist in Abbildung \ref{fig:process} auf der linken Seite dargestellt. Wenn beide Testprogramme im Emulator funktionieren, geht die Entwicklung in die nächste Phase, bei der das VHDL-Design angepasst wird.
 
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
@@ -87,9 +87,9 @@ Ein Ausschnitt aus dem Ergebnis der Synthese ist in Abbildung \ref{fig:schematic
 \label{fig:schematic}
 \end{figure}
 
-In Abbildung \ref{fig:schematic} sind einzelne Look-Up-Tables zusehen, die mit LUT3 bzw. LUT4 beschrieben sind. Die logischen Funktionen aus denen das Design im Kern besteht, werden in diesen LUTs abgespeichert und so miteiander kombiniert, dass die Funktion des gesammten Designs realisiert wird. Es ergibt sich ein sehr großes Netz aus Elementen. Ein Mensch kann die Wirkungsweiße des Designs auf dieser Detailebene nur sehr schwer verstehen.
+In Abbildung \ref{fig:schematic} sind einzelne Look-Up-Tables zusehen, die mit LUT3 bzw. LUT4 beschrieben sind. Die logischen Funktionen aus denen das Design im Kern besteht, werden in diesen LUTs abgespeichert und so miteiander kombiniert, dass die Funktion des gesamten Designs realisiert wird. Es ergibt sich ein sehr großes Netz aus Elementen. Ein Mensch kann die Wirkungsweiße des Designs auf dieser Detailebene nur sehr schwer verstehen.
 
-Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und alle anderen Objekte werden konkret in die Resource eingebettet, die der FPGA bietet. Ein Floor-Plan ensteht. Das Vivado-Synthesewerkzeug kann also tatsächlich grafisch angeben, welche LUTs an welcher Stelle in den FPGA-Chip angeordnet worden sind. Diese ist in Abbildung \ref{fig:floorplan_1} auf der linken Seite dargestellt.
+Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und alle anderen Objekte werden konkret in die Resource eingebettet, die der FPGA bietet. Ein Floor-Plan ensteht. Das Vivado-Synthesewerkzeug kann also tatsächlich grafisch angeben, welche LUTs an welcher Stelle in den FPGA-Chip angeordnet worden sind. Dies ist exemplarisch in Abbildung \ref{fig:floorplan_1} dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -98,7 +98,7 @@ Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und 
 \label{fig:floorplan_1}
 \end{figure}
 
-Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden. Dieser Bit-Stream von dem FPGA Chip als Vorgabe verwendet, wie er sich zu konfigurieren hat. Die programmierbare Hardware nimmt jetzt die gewünschte Form an und führt die Funktion des Designs in Hardware aus.
+Sind die Logikzellen bestimmt, lokalisiert und miteinander verbunden, dann kann diese Aufteilung durch eine Bitstream-Datei auf einen FPGA übertragen werden. Dieser Bit-Stream wird von dem FPGA Chip als Vorgabe verwendet, wie er sich zu konfigurieren hat. Die programmierbare Hardware nimmt jetzt die gewünschte Form an und führt die Funktion des Designs in Hardware aus.
 
 Um die Synthese-Werkzeuge einzusetzen, gibt es ein Parallelprojekt zum NEORV32--Projekt namens, neorv32--setups. Dieses Projekt enthält ein TCL--Script, welches in der Entwicklungsumgebung Vivado in der Version 2025.1 ausgeführt werden kann und dann wiederum ein Vivado--Projekt erzeugt. Wenn dieses erzeugte Vivado--Projekt dann schließlich in Vivado 2025.1 geöffnet wird, dann kann der VHDL-Quellcode übersetzt werden.
 
@@ -115,7 +115,7 @@ Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulie
 
 Um zu Evaluieren, ob das Design wirklich funktioniert, muss die CPU mit einer Anwendungssoftware betrieben werden, die die neuen Instruktionen wirklich ausführt.
 
-Die Anwendung muss in Form von Maschinencode, also kodierten Befehlen vorliegen. Eine Anweisung ist bei RISC-V eine 32-bit Zahl oder eine 16-bit Zahl, wenn komprimierte Anweisungen unterstützt werden. Die Software kann durch einen Assembler in Maschinencode übersetzt werden. Tatsächlich ist die Kodierung für RISC-V nicht kompliziert und dazu auch gut dokumentiert.
+Die Anwendung muss in Form von Maschinencode, also kodierten Befehlen vorliegen. Eine Anweisung ist bei RISC-V eine 32-bit Zahl oder eine 16-bit Zahl, wenn komprimierte Anweisungen unterstützt werden. Die Software kann durch einen Assembler in Maschinencode übersetzt werden. Tatsächlich ist die Kodierung in Maschinencode für RISC-V nicht kompliziert und dazu auch sehr gut dokumentiert.
 
 Trotzdem wurde der Einsatz eines Assemblers für das Vorgehen bei dieser Arbeit nicht gewählt, da das Erstellen eines Assembler Programms ziemlich kompliziert ist. Es bestand die Furcht davor viel Zeit zu verlieren, wenn das Assemblerprogramm angepasst werden muss oder wenn mehr als eine Testsoftware erstellt werden soll. Dann ist für jede Anpassung wieder Assemblerentwicklung notwendig. Direkte Assembler-Entwicklung wird daher nicht verwendet.
 
@@ -131,7 +131,11 @@ Es wurde ein beträchtlicher Zeitaufwand in diesen Compiler gesteckt und die Tei
 
 Zu einem späteren Zeitpunkt wurde zusätzlich auch das Verfahren von Stephan Nolting angewandt. Stephan Nolting hat das Problem von neuartigen Anweisungen auch unter Verwendung des bestehenden GCC Compilers gelöst, indem er Inline-Assembly verwendet um damit Maschinen-Code direkt aus dem Compiler ausgeben zu können. Damit hat er die Möglichkeit geschaffen auch Maschinencode für Anweisungen mit dem GCC zu erstellen, obwohl der GCC diese Anweisungen nicht kennt.
 
-Der Nachteil ist, dass die Verwendung etwas kryptisch ist und viel Erfahrung mit dem GCC voraussetzt. Ein weiterer Nachteil des Inline-Assembly Ansatzes ist, dass der Compiler jetzt nicht mehr autonom arbeiten kann, sondern von einem Menschen gesteuert wird. Damit wird der Compiler davon abgehalten den Quellcode zu optimieren. Für Testfälle ist das Vorgehen zielführend. Für einen industriellen Einsatz muss der Compiler jedoch auf längere Sicht um die Instruktionen erweitert werden um die Optimierung wieder zu ermöglichen.
+Der Nachteil ist, dass die Verwendung etwas kryptisch ist und viel Erfahrung mit dem GCC voraussetzt. Ein weiterer Nachteil des Inline-Assembly Ansatzes ist, dass der Compiler jetzt nicht mehr autonom arbeiten kann, sondern von einem Menschen gesteuert wird.
+
+Damit wird der Compiler davon abgehalten den Quellcode zu optimieren. Des weiteren kann ein Compiler der die Anweisungen nicht kennt, die zum Strip-Mining benötigt werden, auch keinen Code für das Hardware-Software Co-Design generieren.
+
+Für Testfälle ist das Vorgehen zielführend. Für einen industriellen Einsatz muss der Compiler jedoch auf längere Sicht um die Instruktionen erweitert werden um die Optimierung wieder zu ermöglichen.
 
 Das gewählte Vorgehen ist es, die Matrix-Erweiterung mit einer kleinen Testanwendung zu testen, die mit der Strategie von Stephan Nolting und dem GCC übersetzt wird.
 

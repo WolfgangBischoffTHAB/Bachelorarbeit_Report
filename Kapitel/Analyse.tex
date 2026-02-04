@@ -47,7 +47,9 @@ Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache ver
 
 Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor, die abhängig von der momentan geladenen Anweisung Steuersignale für den Datenpfad erzeugt. Der Begriff Datenpfad beschreibt zusammenfassend alle Hardware-Komponenten, die die Anweisungen wirklich berechnen. Beispiele für Komponenten im Datenpfad sind die Arithmetisch--Logische--Einheit oder der Sign-Extender.
 
-Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit direkt Signale aus, die ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Es ist in Abbildung \ref{fig:PipelinedDesign} dargestellt. Allgemein wird die Kontrolllogik Einfluss auf den Datenpfad haben und Teile des Datenpfads an- und abschalten. Damit konfiguriert sich eine CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
+Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit direkt Signale aus, die ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Es ist in Abbildung \ref{fig:PipelinedDesign} dargestellt. In dieser Abbildung ist die Kontrolllogik in blauer Farbe oberhalb des Datenpfad abgebildet, welcher in schwarzer Farbe gezeichnet ist.
+
+Allgemein wird die Kontrolllogik Einfluss auf den Datenpfad haben und Teile des Datenpfads an- und abschalten. Damit konfiguriert sich eine CPU für jede Anwendung passend neu um diese Anweisung ausführen zu können.
 
 \begin{figure}[h]
 \centering
@@ -64,7 +66,7 @@ Die NEORV32 CPU ist an dieser Stelle eine Ausnahme. Sie besitzt anstelle einer P
 
 Die Entität ``CPU--Control'' enthält die Kontrolllogik der NEORV32 CPU. Die CPU--Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
 
-Die Execution--Engine ist im Inneren eines VHDL-Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine nachdem sie einen Request nach außen gibt, auch wieder auf dessen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
+Die Execution--Engine ist im Inneren eines VHDL-Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine, nachdem sie einen Request nach außen gibt, auch wieder auf dessen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
 
 Der Start-Zustand ist der EX\_RESTART state. Aus dem Reset geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
 

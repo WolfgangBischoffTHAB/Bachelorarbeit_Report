@@ -1,10 +1,10 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
   <diagram name="Seite-1" id="M206xRh3nsdFvEcyAZ2h">
-    <mxGraphModel dx="1572" dy="928" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="300" math="0" shadow="0">
+    <mxGraphModel dx="476" dy="281" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="RVV für die Aufgabe verwenden?" vertex="1">
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="RVV für die Aufgabe&amp;nbsp;&lt;div&gt;verwenden?&lt;/div&gt;" vertex="1">
           <mxGeometry height="80" width="200" x="250" y="100" as="geometry" />
         </mxCell>
         <mxCell id="arZ8FZV_RT8OMGQ_2WcB-2" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-1" value="">
@@ -102,6 +102,12 @@
         </mxCell>
         <mxCell id="arZ8FZV_RT8OMGQ_2WcB-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Daten &amp;amp; Vektoroperation" vertex="1">
           <mxGeometry height="60" width="173" x="263.5" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="XBoBFG11MnCPPhUFSPL1-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Nein" vertex="1">
+          <mxGeometry height="30" width="60" x="170" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="XBoBFG11MnCPPhUFSPL1-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Ja" vertex="1">
+          <mxGeometry height="30" width="60" x="300" y="180" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
