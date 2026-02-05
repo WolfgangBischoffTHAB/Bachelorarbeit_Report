@@ -48,19 +48,6 @@ entity neorv32_cpu_m_lsu is
     dbus_rsp_i  : in  bus_rsp_t; -- response, in neorv32_cpu.vhd:l.579 this signal is connected to a port of the neorv32_cpu. Then in neorv32_top.vhd this port is connected to neorv32_dcache_inst.host_rsp_o => cpu_d_rsp(i),
     -- debug
     dbus_rsp_i_ack : in std_ulogic
---    debug_data_output : out std_ulogic_vector(31 downto 0)
-
---    meta_o  : out std_ulogic_vector(2 downto 0);
---    addr_o  : out std_ulogic_vector(31 downto 0);
---    data_o  : out std_ulogic_vector(31 downto 0);
---    ben_o   : out std_ulogic_vector(3 downto 0);
---    stb_o   : out std_ulogic;
---    rw_o    : out std_ulogic;
---    amo_o   : out std_ulogic;
---    amoop_o : out std_ulogic_vector(3 downto 0);
---    burst_o : out std_ulogic;
---    lock_o  : out std_ulogic;
---    fence_o : out std_ulogic
   );
 end neorv32_cpu_m_lsu;
 
@@ -112,18 +99,6 @@ architecture neorv32_cpu_lsu_rtl of neorv32_cpu_m_lsu is
 
 begin
 
---  meta_o <= dbus_req_o.meta;
---  addr_o <= dbus_req_o.addr;
---  data_o <= dbus_req_o.data;
---  ben_o <= dbus_req_o.ben;
---  stb_o <= dbus_req_o.stb;
---  rw_o <= dbus_req_o.rw;
---  amo_o <= dbus_req_o.amo;
---  amoop_o <= dbus_req_o.amoop;
---  burst_o <= dbus_req_o.burst;
---  lock_o <= dbus_req_o.lock;
---  fence_o <= dbus_req_o.fence;
-
   -- Access Address -------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
   mem_addr_reg: process(rstn_i, clk_i)
@@ -135,11 +110,6 @@ begin
       if (ctrl_i.lsu_mo_we = '1') then
         mar <= addr_i; -- memory address register
         misaligned <= '0';
-        -- case ctrl_i.ir_funct3(1 downto 0) is -- alignment check
-        --   when "00"   => misaligned <= '0'; -- byte
-        --   when "01"   => misaligned <= addr_i(0); -- half-word
-        --   when others => misaligned <= addr_i(1) or addr_i(0); -- word
-        -- end case;
       end if;
     end if;
   end process mem_addr_reg;
@@ -151,15 +121,6 @@ begin
     else
 
       matrix_stb <= ctrl_i.lsu_m_en;
-
-      -- if (ctrl_i.lsu_m_en = '1') then
-      --   -- create a strobe command for the memory bus request
-      --   if matrix_stb <= '0' then
-      --     matrix_stb <= '1';
-      --   else
-      --     matrix_stb <= '0';
-      --   end if;
-      -- end if;
 
     end if;
   end process STROBE_PROCESS;
@@ -293,28 +254,6 @@ begin
             -- -- DEBUG
             -- write(l, String'("LSU MATRIX STORE MS_PROCESS"));
             -- writeline(output, l);
-
-            -- -- DEBUG asdf
-            -- write(l, data_in_i);
-            -- writeline(output, l);
-
-            -- if (dbus_rsp_i.ack = '0')
-
-            -- -- lsu_mo_we == write memory output registers (data & address)
-            -- if (ctrl_i.lsu_mo_we = '1') then
-
-            --   -- access identifiers --
-            --   dbus_req_o.meta  <= ctrl_i.cpu_debug & ctrl_i.lsu_priv & '0'; -- LSB: data access
-            --   dbus_req_o.rw    <= ctrl_i.lsu_rw; -- read/write
-            --   dbus_req_o.amo   <= ctrl_i.lsu_rmw or ctrl_i.lsu_rvs; -- atomic memory operation
-            --   dbus_req_o.amoop <= amo_cmd;
-
-            --   -- word
-            --   --dbus_req_o.data <= rd_data;
-            --dbus_req_o.data <= x"000000FF";
-            --dbus_req_o.ben  <= (others => '1');
-
-            -- end if;
 
             -- need to wait for the cache and the memory to respond before advancing in the state machine
             if (dbus_rsp_i.ack = '1') then
@@ -458,32 +397,8 @@ begin
       -- store ::= from matrix RAM into CPU RAM
       if (store = '1') then
 
-        -- debug
-        --  write(l, String'("STORE"));
-        --  writeline(output, l);
-        --  write(l, ram_i(tail));
-        --  writeline(output, l);
-
---        debug_data_output <= data_in_i;
-
         -- write external read signal
         store_o <= '1';
-
-        -- rd_data is a dummy value and is currently connected to nothing
-        -- rd_data <= ram_i(tail);
-        --rd_data <= data_in_i; -- data_in_i is a word from Matrix RAM
-
-        -- -- DEBUG
-        -- write(l, data_in_i);
-        -- writeline(output, l);
-
-        -- TODO Continue here: Where dbus_req_o.data is written on line 197, mix this shit in and test if
-        -- the values F, F, F are written to RAM!
-
-        --dbus_req_o.data <= data_in_i;
-
-        --  write(l, ram_i(tail));
-        --  writeline(output, l);
 
       end if;
 

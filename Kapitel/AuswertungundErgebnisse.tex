@@ -81,11 +81,13 @@ Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung de
 
 Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie dessen Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
 
-Ein Paar von CSR, dass bei der Zählung der Clock-Zyklen verwendet wird sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
+Ein Paar von CSR, dass bei der Zählung der Clock-Zyklen verwendet wird, sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
 
 Es werden wirkliche Clock-Cycles gezählt und keine Anweisungen. Das ist ein Vorteil, da damit eine wirkliche Messung erzielt werden kann. Wenn Anweisungen gezählt werden, ist nicht klar wieviel Zeit die CPU zur Bearbeitung der Anweisungen benötigt.
 
-Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird an das VHDL-Design als Input-Signal herangeführt. Dieses Signal wird in sehr vielen Prozessen des Designs verwendet um sequentielle, getaktete Logik voranzutreiben. Die NEORV32 CPU kann beispielsweise mit einer Taktrate von 100 Mhz betrieben werden. Damit ist die externe Clock-Source dann auf 100 MHz eingestellt. CSR\_MCYCLE und CSR\_MCYCLEH werden dann mit einer Taktrate von 100 Mhz inkrementiert.
+Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird über einen Crystal-Oscillator erzeugt, optional über Phase-Locked-Loops oder Divider verändert und dann an das VHDL-Design als Input-Signal herangeführt.
+
+Das Clock-Signal wird in sehr vielen Prozessen des Designs verwendet um sequentielle, getaktete Logik voranzutreiben. Die NEORV32 CPU kann beispielsweise mit einer Taktrate von 100 Mhz betrieben werden. Damit ist die externe Clock-Source dann auf 100 MHz einzustellen. CSR\_MCYCLE und CSR\_MCYCLEH werden dann mit einer Taktrate von 100 Mhz inkrementiert.
 
 Hier ist ein Beispiel für die Verwendung der Abbildung auf die Cycle-Skala:
 

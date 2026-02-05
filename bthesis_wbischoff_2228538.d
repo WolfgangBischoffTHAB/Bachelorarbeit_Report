@@ -5,6 +5,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png\
     Bilder/LLM_1.png\
     Bilder/LLM_2.png\
+    Bilder/LoadStoreUnitAndBus.pdf\
     Bilder/MAC_MatrixAccumulator.png\
     Bilder/MatrixEngine.png\
     Bilder/MatrixMult_1.png\
@@ -17,6 +18,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/Process.pdf\
     Bilder/SISD_SIMD.pdf\
     Bilder/Sample_WaveForm.png\
+    Bilder/StateMachine.pdf\
     Bilder/StripMining.pdf\
     Bilder/VHDL_Entities.png\
     Bilder/ViewFrustum.png\
@@ -305,6 +307,8 @@ Bilder/LLM_1.png :
 
 Bilder/LLM_2.png :
 
+Bilder/LoadStoreUnitAndBus.pdf :
+
 Bilder/MAC_MatrixAccumulator.png :
 
 Bilder/MatrixEngine.png :
@@ -328,6 +332,8 @@ Bilder/Process.pdf :
 Bilder/SISD_SIMD.pdf :
 
 Bilder/Sample_WaveForm.png :
+
+Bilder/StateMachine.pdf :
 
 Bilder/StripMining.pdf :
 

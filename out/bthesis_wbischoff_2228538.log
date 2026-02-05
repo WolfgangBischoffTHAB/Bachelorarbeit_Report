@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  4 FEB 2026 20:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  5 FEB 2026 21:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1386,7 +1386,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
 
 
 ]
-<Bilder/ViewFrustum.png, id=276, 506.39188pt x 236.885pt>
+<Bilder/ViewFrustum.png, id=280, 506.39188pt x 236.885pt>
 File: Bilder/ViewFrustum.png Graphic file (type png)
 <use Bilder/ViewFrustum.png>
 Package pdftex.def Info: Bilder/ViewFrustum.png  used on input line 28.
@@ -1399,7 +1399,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
 (Font)              `T1/Roboto-LF/bold/n' on input line 29.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 (Font)              scaled to size 9.0pt on input line 29.
-<Bilder/PerspectiveProjection.png, id=281, 325.71687pt x 143.03438pt>
+<Bilder/PerspectiveProjection.png, id=285, 325.71687pt x 143.03438pt>
 File: Bilder/PerspectiveProjection.png Graphic file (type png)
 <use Bilder/PerspectiveProjection.png>
 Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 3
@@ -1408,12 +1408,12 @@ Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 3
 Package babel Info: 'ngerman' activates 'ngerman' shorthands.
 (babel)             Reported on input line 47.
  [2 <./Bilder/ViewFrustum.png> <./Bilder/PerspectiveProjection.png>]
-<Bilder/LLM_1.png, id=296, 342.78062pt x 195.73125pt>
+<Bilder/LLM_1.png, id=300, 342.78062pt x 195.73125pt>
 File: Bilder/LLM_1.png Graphic file (type png)
 <use Bilder/LLM_1.png>
 Package pdftex.def Info: Bilder/LLM_1.png  used on input line 58.
 (pdftex.def)             Requested size: 308.4997pt x 176.15648pt.
-<Bilder/LLM_2.png, id=299, 556.57938pt x 71.26625pt>
+<Bilder/LLM_2.png, id=303, 556.57938pt x 71.26625pt>
 File: Bilder/LLM_2.png Graphic file (type png)
 <use Bilder/LLM_2.png>
 Package pdftex.def Info: Bilder/LLM_2.png  used on input line 67.
@@ -1423,7 +1423,7 @@ Package pdftex.def Info: Bilder/LLM_2.png  used on input line 67.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3 <./Bilder/LLM_1.png>] [4 <./Bilder/LLM_2.png>] (./Kapitel/StandTechnik.tex
-<Bilder/strip_mining_2.png, id=320, 877.77937pt x 367.87437pt>
+<Bilder/strip_mining_2.png, id=324, 877.77937pt x 367.87437pt>
 File: Bilder/strip_mining_2.png Graphic file (type png)
 <use Bilder/strip_mining_2.png>
 Package pdftex.def Info: Bilder/strip_mining_2.png  used on input line 11.
@@ -1473,20 +1473,20 @@ Package microtype Info: Loading generic protrusion settings for font family
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 113.
 
-<Bilder/SISD_SIMD.pdf, id=389, 257.96375pt x 77.28876pt>
+<Bilder/SISD_SIMD.pdf, id=393, 257.96375pt x 77.28876pt>
 File: Bilder/SISD_SIMD.pdf Graphic file (type pdf)
 <use Bilder/SISD_SIMD.pdf>
 Package pdftex.def Info: Bilder/SISD_SIMD.pdf  used on input line 123.
 (pdftex.def)             Requested size: 206.37126pt x 61.83107pt.
 [11 <./Bilder/SISD_SIMD.pdf>] [12]
-<Bilder/CombiningVectorRegisters.png, id=417, 603.75563pt x 365.86688pt>
+<Bilder/CombiningVectorRegisters.png, id=421, 603.75563pt x 365.86688pt>
 File: Bilder/CombiningVectorRegisters.png Graphic file (type png)
 <use Bilder/CombiningVectorRegisters.png>
 Package pdftex.def Info: Bilder/CombiningVectorRegisters.png  used on input lin
 e 164.
 (pdftex.def)             Requested size: 313.95473pt x 190.25186pt.
  [13 <./Bilder/CombiningVectorRegisters.png>]
-<Bilder/StripMining.pdf, id=426, 347.37779pt x 505.89pt>
+<Bilder/StripMining.pdf, id=430, 347.37779pt x 505.89pt>
 File: Bilder/StripMining.pdf Graphic file (type pdf)
 <use Bilder/StripMining.pdf>
 Package pdftex.def Info: Bilder/StripMining.pdf  used on input line 188.
@@ -1498,7 +1498,7 @@ n-wei-sun-gen und
  []
 
 [15] [16]
-<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=508, 717.17938pt x 391.9643
+<Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png, id=512, 717.17938pt x 391.9643
 7pt>
 File: Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png Graphic file (type png)
 <use Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>
@@ -1510,7 +1510,7 @@ n input line 329.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [17] [18 <./Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png>]
-<Bilder/Matrix_Tiling.png, id=573, 231.36438pt x 221.82875pt>
+<Bilder/Matrix_Tiling.png, id=577, 231.36438pt x 221.82875pt>
 File: Bilder/Matrix_Tiling.png Graphic file (type png)
 <use Bilder/Matrix_Tiling.png>
 Package pdftex.def Info: Bilder/Matrix_Tiling.png  used on input line 379.
@@ -1520,17 +1520,17 @@ Package pdftex.def Info: Bilder/Matrix_Tiling.png  used on input line 379.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [19]
-<Bilder/MatrixMult_1.png, id=578, 514.42188pt x 77.25414pt>
+<Bilder/MatrixMult_1.png, id=582, 514.42188pt x 77.25414pt>
 File: Bilder/MatrixMult_1.png Graphic file (type png)
 <use Bilder/MatrixMult_1.png>
 Package pdftex.def Info: Bilder/MatrixMult_1.png  used on input line 394.
 (pdftex.def)             Requested size: 308.6555pt x 46.35281pt.
-<Bilder/MatrixMult_2.png, id=581, 257.46187pt x 51.33662pt>
+<Bilder/MatrixMult_2.png, id=585, 257.46187pt x 51.33662pt>
 File: Bilder/MatrixMult_2.png Graphic file (type png)
 <use Bilder/MatrixMult_2.png>
 Package pdftex.def Info: Bilder/MatrixMult_2.png  used on input line 405.
 (pdftex.def)             Requested size: 154.4783pt x 30.8022pt.
-<Bilder/MatrixMult_4.png, id=583, 450.18187pt x 38.61pt>
+<Bilder/MatrixMult_4.png, id=587, 450.18187pt x 38.61pt>
 File: Bilder/MatrixMult_4.png Graphic file (type png)
 <use Bilder/MatrixMult_4.png>
 Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 414.
@@ -1539,7 +1539,7 @@ Package pdftex.def Info: Bilder/MatrixMult_4.png  used on input line 414.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Bilder/MatrixMult_3.png, id=585, 514.42188pt x 141.0511pt>
+<Bilder/MatrixMult_3.png, id=589, 514.42188pt x 141.0511pt>
 File: Bilder/MatrixMult_3.png Graphic file (type png)
 <use Bilder/MatrixMult_3.png>
 Package pdftex.def Info: Bilder/MatrixMult_3.png  used on input line 425.
@@ -1554,7 +1554,7 @@ Underfull \hbox (badness 1424) in paragraph at lines 476--477
 f-sum-miert, al-so kum-mu-
  []
 
-<Bilder/MAC_MatrixAccumulator.png, id=607, 432.11438pt x 405.515pt>
+<Bilder/MAC_MatrixAccumulator.png, id=611, 432.11438pt x 405.515pt>
 File: Bilder/MAC_MatrixAccumulator.png Graphic file (type png)
 <use Bilder/MAC_MatrixAccumulator.png>
 Package pdftex.def Info: Bilder/MAC_MatrixAccumulator.png  used on input line 4
@@ -1571,7 +1571,7 @@ ock-wei-sen Be-rech-nung
 
 ) (./Kapitel/DurchfuehrungArbeit.tex [23 <./Bilder/MAC_MatrixAccumulator.png>]
 chapter 3.
-<Bilder/Process.pdf, id=630, 506.89375pt x 166.6225pt>
+<Bilder/Process.pdf, id=634, 506.89375pt x 166.6225pt>
 File: Bilder/Process.pdf Graphic file (type pdf)
 <use Bilder/Process.pdf>
 Package pdftex.def Info: Bilder/Process.pdf  used on input line 38.
@@ -1600,12 +1600,12 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/m/n' aliased to
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/n' will be
 (Font)              scaled to size 6.0pt on input line 54.
  [25 <./Bilder/Process.pdf>]
-<Bilder/Sample_WaveForm.png, id=663, 622.325pt x 62.2325pt>
+<Bilder/Sample_WaveForm.png, id=667, 622.325pt x 62.2325pt>
 File: Bilder/Sample_WaveForm.png Graphic file (type png)
 <use Bilder/Sample_WaveForm.png>
 Package pdftex.def Info: Bilder/Sample_WaveForm.png  used on input line 66.
 (pdftex.def)             Requested size: 311.16173pt x 31.11617pt.
-<Bilder/schematic_cropped.pdf, id=667, 561.09625pt x 231.86626pt>
+<Bilder/schematic_cropped.pdf, id=671, 561.09625pt x 231.86626pt>
 File: Bilder/schematic_cropped.pdf Graphic file (type pdf)
 <use Bilder/schematic_cropped.pdf>
 Package pdftex.def Info: Bilder/schematic_cropped.pdf  used on input line 85.
@@ -1615,7 +1615,7 @@ Package pdftex.def Info: Bilder/schematic_cropped.pdf  used on input line 85.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [26 <./Bilder/Sample_WaveForm.png>]
-<Bilder/floorplan_1.png, id=677, 212.29312pt x 345.29pt>
+<Bilder/floorplan_1.png, id=681, 212.29312pt x 345.29pt>
 File: Bilder/floorplan_1.png Graphic file (type png)
 <use Bilder/floorplan_1.png>
 Package pdftex.def Info: Bilder/floorplan_1.png  used on input line 96.
@@ -1629,7 +1629,7 @@ ro-jekt ent-hält ein
 [27 <./Bilder/schematic_cropped.pdf> <./Bilder/floorplan_1.png>] [28] [29])
 (./Kapitel/Analyse.tex [30]
 chapter 4.
-<Bilder/neorv32_cpu_architecture.png, id=699, 828.09375pt x 391.4625pt>
+<Bilder/neorv32_cpu_architecture.png, id=703, 828.09375pt x 391.4625pt>
 File: Bilder/neorv32_cpu_architecture.png Graphic file (type png)
 <use Bilder/neorv32_cpu_architecture.png>
 Package pdftex.def Info: Bilder/neorv32_cpu_architecture.png  used on input lin
@@ -1639,25 +1639,41 @@ e 14.
 
 
  <./Bilder/neorv32_cpu_architecture.png>]
-<Bilder/neorv32_debugging_instructions.png, id=706, 962.59625pt x 248.42813pt>
+<Bilder/neorv32_debugging_instructions.png, id=710, 962.59625pt x 248.42813pt>
 File: Bilder/neorv32_debugging_instructions.png Graphic file (type png)
 <use Bilder/neorv32_debugging_instructions.png>
 Package pdftex.def Info: Bilder/neorv32_debugging_instructions.png  used on inp
 ut line 34.
 (pdftex.def)             Requested size: 308.0371pt x 79.49861pt.
  [32 <./Bilder/neorv32_debugging_instructions.png>]
-<Bilder/PipelinedDesign.png, id=717, 891.83188pt x 480.79625pt>
+<Bilder/PipelinedDesign.png, id=721, 891.83188pt x 480.79625pt>
 File: Bilder/PipelinedDesign.png Graphic file (type png)
 <use Bilder/PipelinedDesign.png>
 Package pdftex.def Info: Bilder/PipelinedDesign.png  used on input line 56.
 (pdftex.def)             Requested size: 285.39203pt x 153.85793pt.
- [33 <./Bilder/PipelinedDesign.png>] [34]
-Underfull \hbox (badness 2158) in paragraph at lines 100--101
+<Bilder/StateMachine.pdf, id=724, 682.46968pt x 381.34468pt>
+File: Bilder/StateMachine.pdf Graphic file (type pdf)
+<use Bilder/StateMachine.pdf>
+Package pdftex.def Info: Bilder/StateMachine.pdf  used on input line 75.
+(pdftex.def)             Requested size: 327.58171pt x 183.04335pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33 <./Bilder/PipelinedDesign.png>] [34 <./Bilder/StateMachine.pdf>]
+<Bilder/LoadStoreUnitAndBus.pdf, id=744, 189.8292pt x 233.9139pt>
+File: Bilder/LoadStoreUnitAndBus.pdf Graphic file (type pdf)
+<use Bilder/LoadStoreUnitAndBus.pdf>
+Package pdftex.def Info: Bilder/LoadStoreUnitAndBus.pdf  used on input line 100
+.
+(pdftex.def)             Requested size: 189.82872pt x 233.91331pt.
+ [35 <./Bilder/LoadStoreUnitAndBus.pdf>]
+Underfull \hbox (badness 2158) in paragraph at lines 118--119
 []\T1/Roboto-LF/regular/n/10 Das Ba-ckend wur-de an-hand sei-ner re-le-van-ten 
 Be-stand-tei-le Execution-
  []
 
-) (./Kapitel/Erweiterung.tex [35]
+) (./Kapitel/Erweiterung.tex [36]
 chapter 5.
 (c:/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
@@ -1666,7 +1682,7 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/b/n' aliased to
 (Font)              `T1/Roboto-LF/bold/n' on input line 13.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 (Font)              scaled to size 8.0pt on input line 13.
- [36
+ [37
 
 
 ]
@@ -1674,13 +1690,13 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [37{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [38]
-<Bilder/VHDL_Entities.png, id=793, 874.26625pt x 573.14125pt>
+ [38{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [39]
+<Bilder/VHDL_Entities.png, id=828, 874.26625pt x 573.14125pt>
 File: Bilder/VHDL_Entities.png Graphic file (type png)
 <use Bilder/VHDL_Entities.png>
 Package pdftex.def Info: Bilder/VHDL_Entities.png  used on input line 104.
 (pdftex.def)             Requested size: 305.99777pt x 200.60243pt.
- [39 <./Bilder/VHDL_Entities.png>]
+ [40 <./Bilder/VHDL_Entities.png>]
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/it' aliased to
 (Font)              `T1/Roboto-LF/regular/it' on input line 124.
 LaTeX Font Info:    Font shape `T1/Roboto-LF/regular/it' will be
@@ -1689,25 +1705,25 @@ LaTeX Font Info:    Font shape `TS1/Roboto-LF/m/it' aliased to
 (Font)              `TS1/Roboto-LF/regular/it' on input line 124.
 LaTeX Font Info:    Font shape `TS1/Roboto-LF/regular/it' will be
 (Font)              scaled to size 8.0pt on input line 124.
- [40{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_hlrajr.enc}] [41] [
-42]
+ [41{c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_hlrajr.enc}] [42] [
+43]
 Underfull \hbox (badness 1496) in paragraph at lines 293--294
 []\T1/Roboto-LF/regular/n/10 Der Load-Prozess wird für Matrix--Load--Anweisunge
 n um ei-ne State--
  []
 
-[43]
+[44]
 Underfull \hbox (badness 2460) in paragraph at lines 299--300
 []\T1/Roboto-LF/regular/n/10 Der neue PROC_RAM Pro-zess pro-du-ziert Steu-er-si
 -gna-le für den RAM-
  []
 
-<Bilder/MatrixEngine.png, id=931, 402.50375pt x 321.2pt>
+<Bilder/MatrixEngine.png, id=967, 402.50375pt x 321.2pt>
 File: Bilder/MatrixEngine.png Graphic file (type png)
 <use Bilder/MatrixEngine.png>
 Package pdftex.def Info: Bilder/MatrixEngine.png  used on input line 312.
 (pdftex.def)             Requested size: 281.7507pt x 224.83847pt.
-[44 <./Bilder/MatrixEngine.png>] [45]
+[45 <./Bilder/MatrixEngine.png>] [46]
 Underfull \hbox (badness 2158) in paragraph at lines 391--392
 []\T1/Roboto-LF/regular/n/10 Um die Be-rech-nung aus-zu-füh-ren wird ei-ne Stat
 e--Machine ver-wen-det.
@@ -1719,15 +1735,15 @@ Underfull \hbox (badness 1655) in paragraph at lines 391--392
  mit MM
  []
 
-[46]
+[47]
 Underfull \hbox (badness 1210) in paragraph at lines 414--415
 \T1/Roboto-LF/regular/n/10 ti-pli-ka-ti-on als Kern-ope-ra-ti-on aus-ge-führt w
 ird aber das Er-geb-nis die-ser
  []
 
-[47]) (./Kapitel/AuswertungundErgebnisse.tex [48] [49]
+[48]) (./Kapitel/AuswertungundErgebnisse.tex [49] [50]
 chapter 6.
-[50
+[51
 
 
 ]
@@ -1736,27 +1752,27 @@ Underfull \hbox (badness 1895) in paragraph at lines 84--85
 Zyklen ver-wen-det
  []
 
-[51]
-Underfull \hbox (badness 1609) in paragraph at lines 128--129
+[52]
+Underfull \hbox (badness 1609) in paragraph at lines 130--131
 \T1/Roboto-LF/regular/n/10 Com-pi-ler in der Ver-si-on riscv-none-elf-gcc.exe (
 xPack GNU RISC-
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 128--129
+Underfull \hbox (badness 1087) in paragraph at lines 130--131
 \T1/Roboto-LF/regular/n/10 V Em-bed-ded GCC x86_64) 14.2.0 über-setzt. Für die 
 Über-set-zung
  []
 
-[52] [53]
-<Bilder/WaveFormsMatrixMultiplikation_2.png, id=1118, 676.5275pt x 78.79437pt>
+[53] [54]
+<Bilder/WaveFormsMatrixMultiplikation_2.png, id=1150, 676.5275pt x 78.79437pt>
 File: Bilder/WaveFormsMatrixMultiplikation_2.png Graphic file (type png)
 <use Bilder/WaveFormsMatrixMultiplikation_2.png>
 Package pdftex.def Info: Bilder/WaveFormsMatrixMultiplikation_2.png  used on in
-put line 202.
+put line 204.
 (pdftex.def)             Requested size: 304.43456pt x 35.45712pt.
- [54 <./Bilder/WaveFormsMatrixMultiplikation_2.png>] [55] [56])
-(./Kapitel/ZusammenfassungundAusblick.tex [57]
+ [55 <./Bilder/WaveFormsMatrixMultiplikation_2.png>] [56] [57])
+(./Kapitel/ZusammenfassungundAusblick.tex [58]
 chapter 7.
 
 Underfull \hbox (badness 1038) in paragraph at lines 16--17
@@ -1770,16 +1786,22 @@ Underfull \hbox (badness 2189) in paragraph at lines 16--17
 ist Ma-trix-mul-ti-pli-
  []
 
-[58
+[59
 
 
-] [59]
-Underfull \hbox (badness 1946) in paragraph at lines 46--47
+]
+Underfull \hbox (badness 3049) in paragraph at lines 34--35
+[]\T1/Roboto-LF/regular/n/10 Unternehmen wie NVI-DIA er-stel-len Be-schleu-ni-g
+er-kar-ten, die für High-
+ []
+
+[60]
+Underfull \hbox (badness 1946) in paragraph at lines 53--54
 \T1/Roboto-LF/regular/n/10 System-Verilog bei-s-peils-wei-se bie-tet weit-re-ch
 en-de-re Mög-lich-kei-ten zur
  []
 
-) (out/bthesis_wbischoff_2228538.bbl [60]
+) (out/bthesis_wbischoff_2228538.bbl [61]
 chapter without number
 LaTeX Font Info:    Font shape `T1/Roboto-LF/m/sc' aliased to
 (Font)              `T1/Roboto-LF/regular/sc' on input line 17.
@@ -1891,7 +1913,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--94
 1400 /
  []
 
-[61
+[62
 
 
 {c:/texlive/2025/texmf-dist/fonts/enc/dvips/roboto/rbto_shbyjm.enc}]
@@ -1912,7 +1934,7 @@ Underfull \hbox (badness 6910) in paragraph at lines 138--143
 mas.com / 2025 / 02 / basic -[] neural -[]
  []
 
-) (./Seiten/Anhang.tex [62] (out/../Appendix/src/neorv32_cpu.vhd
+) (./Seiten/Anhang.tex [63] (out/../Appendix/src/neorv32_cpu.vhd
 Overfull \hbox (73.95169pt too wide) in paragraph at lines 1--2
 [][] 
  []
@@ -2092,272 +2114,282 @@ Overfull \hbox (6.751pt too wide) in paragraph at lines 398--399
  []
 
 [27]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 423--424
+Overfull \hbox (6.751pt too wide) in paragraph at lines 422--423
 [][] 
  []
 
 
-Overfull \hbox (6.751pt too wide) in paragraph at lines 439--440
+Overfull \hbox (6.751pt too wide) in paragraph at lines 438--439
 [][] 
  []
 
 [28]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 451--452
+Overfull \hbox (6.751pt too wide) in paragraph at lines 450--451
 [][] 
  []
 
-[29] [30] [31]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 588--589
+[29] [30]
+Overfull \hbox (6.751pt too wide) in paragraph at lines 575--576
 [][] 
  []
 
-
-Overfull \hbox (6.751pt too wide) in paragraph at lines 598--599
-[][] 
- []
-
-
-Overfull \hbox (6.751pt too wide) in paragraph at lines 616--617
+[31]
+Overfull \hbox (6.751pt too wide) in paragraph at lines 585--586
 [][] 
  []
 
 
-Overfull \hbox (6.751pt too wide) in paragraph at lines 620--621
+Overfull \hbox (6.751pt too wide) in paragraph at lines 603--604
+[][] 
+ []
+
+
+Overfull \hbox (6.751pt too wide) in paragraph at lines 607--608
+[][] 
+ []
+
+
+Overfull \hbox (6.751pt too wide) in paragraph at lines 625--626
 [][] 
  []
 
 [32]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 638--639
+Overfull \hbox (6.751pt too wide) in paragraph at lines 652--653
+[][] 
+ []
+
+
+Overfull \hbox (6.751pt too wide) in paragraph at lines 670--671
 [][] 
  []
 
 [33]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 688--689
-[][] 
- []
-
-
-Overfull \hbox (6.751pt too wide) in paragraph at lines 706--707
-[][] 
- []
-
-
-Overfull \hbox (6.751pt too wide) in paragraph at lines 731--732
+Overfull \hbox (6.751pt too wide) in paragraph at lines 695--696
 [][] 
  []
 
 [34]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 789--790
+Overfull \hbox (6.751pt too wide) in paragraph at lines 753--754
+[][] 
+ []
+
+
+Overfull \hbox (6.751pt too wide) in paragraph at lines 761--762
+[][] 
+ []
+
+
+Overfull \hbox (6.751pt too wide) in paragraph at lines 780--781
 [][] 
  []
 
 [35]
-Overfull \hbox (6.751pt too wide) in paragraph at lines 797--798
+Overfull \hbox (11.55106pt too wide) in paragraph at lines 787--788
 [][] 
  []
 
 
-Overfull \hbox (6.751pt too wide) in paragraph at lines 816--817
-[][] 
- []
-
-
-Overfull \hbox (11.55106pt too wide) in paragraph at lines 823--824
-[][] 
- []
-
-
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 824--825
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 788--789
 [][] 
  []
 
 [36]
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 878--879
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 842--843
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 880--882
-[][] 
- []
-
-[37]
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 883--884
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 844--846
 [][] 
  []
 
 
-Overfull \hbox (54.7515pt too wide) in paragraph at lines 901--902
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 847--848
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 902--903
-[][] 
- []
-
-[38] [39]
-Overfull \hbox (11.55106pt too wide) in paragraph at lines 999--1000
+Overfull \hbox (54.7515pt too wide) in paragraph at lines 865--866
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1000--1001
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 866--867
+[][] 
+ []
+
+[37] [38] [39]
+Overfull \hbox (11.55106pt too wide) in paragraph at lines 963--964
+[][] 
+ []
+
+
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 964--965
 [][] 
  []
 
 [40] [41]
-Overfull \hbox (21.15115pt too wide) in paragraph at lines 1086--1087
+Overfull \hbox (21.15115pt too wide) in paragraph at lines 1050--1051
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1087--1088
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1051--1052
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1092--1093
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1056--1057
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1094--1096
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1058--1060
 [][] 
  []
 
 
-Overfull \hbox (78.75174pt too wide) in paragraph at lines 1096--1097
+Overfull \hbox (78.75174pt too wide) in paragraph at lines 1060--1061
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1097--1098
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1061--1062
+[][] 
+ []
+
+
+Overfull \hbox (54.7515pt too wide) in paragraph at lines 1073--1074
+[][] 
+ []
+
+
+Overfull \hbox (54.7515pt too wide) in paragraph at lines 1082--1084
 [][] 
  []
 
 [42]
-Overfull \hbox (54.7515pt too wide) in paragraph at lines 1109--1110
-[][] 
- []
-
-
-Overfull \hbox (54.7515pt too wide) in paragraph at lines 1118--1120
+Overfull \hbox (54.7515pt too wide) in paragraph at lines 1100--1101
 [][] 
  []
 
 [43]
-Overfull \hbox (54.7515pt too wide) in paragraph at lines 1136--1137
+Overfull \hbox (25.9512pt too wide) in paragraph at lines 1122--1123
 [][] 
  []
 
 
-Overfull \hbox (25.9512pt too wide) in paragraph at lines 1158--1159
-[][] 
- []
-
-
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1159--1160
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1123--1124
 [][] 
  []
 
 [44] [45]
-Overfull \hbox (45.1514pt too wide) in paragraph at lines 1212--1213
+Overfull \hbox (45.1514pt too wide) in paragraph at lines 1176--1177
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1213--1214
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1177--1178
 [][] 
  []
 
 [46]
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1242--1243
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1206--1207
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1244--1246
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1208--1210
 [][] 
  []
 
 
-Overfull \hbox (21.15115pt too wide) in paragraph at lines 1246--1247
+Overfull \hbox (21.15115pt too wide) in paragraph at lines 1210--1211
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1247--1248
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1211--1212
+[][] 
+ []
+
+
+Overfull \hbox (30.75125pt too wide) in paragraph at lines 1224--1225
+[][] 
+ []
+
+
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1225--1226
+[][] 
+ []
+
+
+Overfull \hbox (40.35135pt too wide) in paragraph at lines 1235--1236
+[][] 
+ []
+
+
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1236--1237
 [][] 
  []
 
 [47]
-Overfull \hbox (30.75125pt too wide) in paragraph at lines 1260--1261
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1269--1270
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1261--1262
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1271--1272
+[][] 
+ []
+
+[48]
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1346--1347
 [][] 
  []
 
 
-Overfull \hbox (40.35135pt too wide) in paragraph at lines 1271--1272
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1348--1349
+[][] 
+ []
+
+[49]
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1385--1386
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1272--1273
-[][] 
- []
-
-
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1305--1306
-[][] 
- []
-
-
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1307--1308
-[][] 
- []
-
-[48] [49]
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1382--1383
-[][] 
- []
-
-
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1384--1385
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1387--1388
 [][] 
  []
 
 [50]
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1421--1422
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1413--1414
 [][] 
  []
 
 
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1423--1424
+Overfull \hbox (102.75198pt too wide) in paragraph at lines 1415--1417
 [][] 
  []
 
 
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1449--1450
+Overfull \hbox (45.1514pt too wide) in paragraph at lines 1453--1454
 [][] 
  []
 
 
-Overfull \hbox (102.75198pt too wide) in paragraph at lines 1451--1453
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1454--1455
 [][] 
  []
 
 [51]
-Overfull \hbox (45.1514pt too wide) in paragraph at lines 1489--1490
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1466--1467
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1490--1491
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1468--1469
 [][] 
  []
 
@@ -2372,91 +2404,81 @@ Overfull \hbox (64.3516pt too wide) in paragraph at lines 1504--1505
  []
 
 [52]
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1538--1539
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1527--1528
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1540--1541
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1529--1530
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1563--1564
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1534--1535
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1565--1566
-[][] 
- []
-
-[53]
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1570--1571
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1536--1537
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1572--1573
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1541--1542
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1577--1578
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1543--1544
+[][] 
+ []
+
+[53] [54]
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1586--1587
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1579--1580
-[][] 
- []
-
-[54]
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1622--1623
+Overfull \hbox (64.3516pt too wide) in paragraph at lines 1588--1589
 [][] 
  []
 
 
-Overfull \hbox (64.3516pt too wide) in paragraph at lines 1624--1625
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1601--1602
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1637--1638
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1603--1605
 [][] 
  []
 
 [55]
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1639--1641
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1622--1623
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1658--1659
+Overfull \hbox (294.75394pt too wide) in paragraph at lines 1624--1626
 [][] 
  []
 
 
-Overfull \hbox (294.75394pt too wide) in paragraph at lines 1660--1662
+Overfull \hbox (54.7515pt too wide) in paragraph at lines 1626--1627
 [][] 
  []
 
 
-Overfull \hbox (54.7515pt too wide) in paragraph at lines 1662--1663
-[][] 
- []
-
-
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1663--1664
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1627--1628
 [][] 
  []
 
 [56]
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 1706--1707
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 1670--1671
 [][] 
  []
 
-[57]) (out/../Appendix/src/neorv32_cpu_m_lsu.vhd
+) (out/../Appendix/src/neorv32_cpu_m_lsu.vhd
 Overfull \hbox (73.95169pt too wide) in paragraph at lines 1--2
 [][] 
  []
@@ -2471,42 +2493,42 @@ Overfull \hbox (73.95169pt too wide) in paragraph at lines 9--11
 [][] 
  []
 
-[58] [59]
-Overfull \hbox (49.95145pt too wide) in paragraph at lines 127--128
+[57] [58]
+Overfull \hbox (49.95145pt too wide) in paragraph at lines 102--103
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 128--129
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 103--104
 [][] 
  []
 
-[60]
-Overfull \hbox (121.95218pt too wide) in paragraph at lines 170--171
+[59]
+Overfull \hbox (121.95218pt too wide) in paragraph at lines 131--132
 [][] 
  []
 
-[61] [62] [63] [64]
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 408--409
+[60] [61] [62]
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 347--348
 [][] 
  []
 
-[65]
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 498--499
+[63] [64]
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 413--414
 [][] 
  []
 
-[66] [67] [68]
-Overfull \hbox (49.95145pt too wide) in paragraph at lines 626--627
+[65] [66]
+Overfull \hbox (49.95145pt too wide) in paragraph at lines 541--542
 [][] 
  []
 
 
-Overfull \hbox (136.35233pt too wide) in paragraph at lines 627--628
+Overfull \hbox (136.35233pt too wide) in paragraph at lines 542--543
 [][] 
  []
 
-[69]) (out/../Appendix/src/neorv32_cpu_regfile.vhd
+[67]) (out/../Appendix/src/neorv32_cpu_regfile.vhd
 Overfull \hbox (73.95169pt too wide) in paragraph at lines 1--2
 [][] 
  []
@@ -2536,12 +2558,12 @@ Overfull \hbox (73.95169pt too wide) in paragraph at lines 21--23
 [][] 
  []
 
-[70]
+[68]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 63--65
 [][] 
  []
 
-[71]
+[69]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 78--79
 [][] 
  []
@@ -2551,7 +2573,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 106--107
 [][] 
  []
 
-[72]) (out/../Appendix/src/neorv32_package.vhd
+[70]) (out/../Appendix/src/neorv32_package.vhd
 Overfull \hbox (73.95169pt too wide) in paragraph at lines 1--2
 [][] 
  []
@@ -2586,7 +2608,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 22--23
 [][] 
  []
 
-[73]
+[71]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 40--41
 [][] 
  []
@@ -2601,7 +2623,7 @@ Overfull \hbox (198.75296pt too wide) in paragraph at lines 51--53
 [][] 
  []
 
-[74] [75]
+[72] [73]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 101--102
 [][] 
  []
@@ -2631,7 +2653,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 117--118
 [][] 
  []
 
-[76]
+[74]
 Overfull \hbox (11.55106pt too wide) in paragraph at lines 169--170
 [][] 
  []
@@ -2641,12 +2663,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 170--171
 [][] 
  []
 
-
+[75]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 203--204
 [][] 
  []
 
-[77]
+
 Overfull \hbox (49.95145pt too wide) in paragraph at lines 242--243
 [][] 
  []
@@ -2656,7 +2678,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 243--244
 [][] 
  []
 
-[78]
+[76]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 308--309
 [][] 
  []
@@ -2671,7 +2693,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 313--314
 [][] 
  []
 
-[79]
+[77]
 Overfull \hbox (49.95145pt too wide) in paragraph at lines 333--334
 [][] 
  []
@@ -2681,7 +2703,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 334--335
 [][] 
  []
 
-[80]
+[78]
 Overfull \hbox (54.7515pt too wide) in paragraph at lines 364--365
 [][] 
  []
@@ -2691,7 +2713,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 365--366
 [][] 
  []
 
-[81]
+[79]
 Overfull \hbox (6.751pt too wide) in paragraph at lines 413--414
 [][] 
  []
@@ -2701,12 +2723,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 414--415
 [][] 
  []
 
-
+[80]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 422--423
 [][] 
  []
 
-[82]
+
 Overfull \hbox (64.3516pt too wide) in paragraph at lines 452--453
 [][] 
  []
@@ -2716,12 +2738,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 453--454
 [][] 
  []
 
-[83] [84] [85] [86]
+[81] [82] [83] [84] [85]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 598--599
 [][] 
  []
 
-[87]
+
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 600--602
 [][] 
  []
@@ -2736,7 +2758,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 603--604
 [][] 
  []
 
-[88] [89]
+[86] [87]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 703--704
 [][] 
  []
@@ -2761,12 +2783,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 717--718
 [][] 
  []
 
-
+[88]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 728--729
 [][] 
  []
 
-[90]
+
 Overfull \hbox (54.7515pt too wide) in paragraph at lines 734--735
 [][] 
  []
@@ -2776,7 +2798,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 735--736
 [][] 
  []
 
-[91]
+[89]
 Overfull \hbox (64.3516pt too wide) in paragraph at lines 774--775
 [][] 
  []
@@ -2786,7 +2808,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 775--776
 [][] 
  []
 
-[92]
+[90]
 Overfull \hbox (45.1514pt too wide) in paragraph at lines 813--814
 [][] 
  []
@@ -2806,7 +2828,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 819--820
 [][] 
  []
 
-[93]
+[91]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 835--836
 [][] 
  []
@@ -2826,17 +2848,17 @@ Overfull \hbox (198.75296pt too wide) in paragraph at lines 858--860
 [][] 
  []
 
-[94] [95] [96] [97]
+[92] [93] [94] [95]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 1063--1064
 [][] 
  []
 
-
+[96]
 Overfull \hbox (198.75296pt too wide) in paragraph at lines 1065--1067
 [][] 
  []
 
-[98]
+
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 1068--1069
 [][] 
  []
@@ -2856,12 +2878,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 1102--1103
 [][] 
  []
 
-
+[97]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 1113--1114
 [][] 
  []
 
-[99]
+
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 1124--1125
 [][] 
  []
@@ -2891,7 +2913,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 1158--1159
 [][] 
  []
 
-[100]
+[98]
 Overfull \hbox (59.55154pt too wide) in paragraph at lines 1169--1170
 [][] 
  []
@@ -2916,12 +2938,12 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 1198--1199
 [][] 
  []
 
-
+[99]
 Overfull \hbox (136.35233pt too wide) in paragraph at lines 1210--1211
 [][] 
  []
 
-[101]
+
 Overfull \hbox (54.7515pt too wide) in paragraph at lines 1226--1227
 [][] 
  []
@@ -2941,7 +2963,7 @@ Overfull \hbox (136.35233pt too wide) in paragraph at lines 1248--1249
 [][] 
  []
 
-[102])) [103] (out/bthesis_wbischoff_2228538.aux)
+[100])) [101] (out/bthesis_wbischoff_2228538.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-29>
@@ -2952,10 +2974,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 49963 strings out of 467538
- 992439 string characters out of 5423725
- 2322022 words of memory out of 5000000
- 72615 multiletter control sequences out of 15000+600000
+ 49865 strings out of 467538
+ 991510 string characters out of 5423725
+ 2311201 words of memory out of 5000000
+ 72637 multiletter control sequences out of 15000+600000
  745867 words of font info for 190 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  112i,20n,125p,11246b,2883s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2971,11 +2993,11 @@ athpazo/fplmr.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0
 texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/pal
 atino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (176 pages, 1981985 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (175 pages, 2025185 bytes).
 
 PDF statistics:
- 7899 PDF objects out of 8907 (max. 8388607)
- 7562 compressed objects within 76 object streams
- 5564 named destinations out of 6186 (max. 500000)
- 54275 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 7781 PDF objects out of 8907 (max. 8388607)
+ 7438 compressed objects within 75 object streams
+ 5444 named destinations out of 6186 (max. 500000)
+ 54285 words of extra memory for PDF output out of 61914 (max. 10000000)
 

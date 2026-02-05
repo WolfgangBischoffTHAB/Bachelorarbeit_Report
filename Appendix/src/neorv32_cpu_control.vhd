@@ -400,7 +400,6 @@ begin
 --        write(l, String'("EX_DISPATCH"));
 --        writeline(output, l);
 
-
         ctrl_nxt.alu_opa_mux <= '1'; -- prepare update of next PC in EX_EXECUTE (opa = current PC)
         ctrl_nxt.alu_opb_mux <= '1'; -- prepare update of next PC in EX_EXECUTE (opb = imm = +2/4)
         --
@@ -495,18 +494,6 @@ begin
               when funct3_and_c  => ctrl_nxt.alu_op <= alu_op_and_c; -- AND(I)
               when others        => ctrl_nxt.alu_op <= alu_op_zero_c;
             end case;
-
-            -- -- ALU increment input --
-            -- case funct7_v is
-            --     --when 7'b1000000 => -- custom add1 code
-            --     when "1000000" =>
-            --         if (ctrl_nxt.alu_op = alu_op_add_c) then
-            --             ctrl_nxt.alu_inc <= '1'; -- send custom increment signal into the ALU
-            --         else
-            --             ctrl_nxt.alu_inc <= '0';
-            --         end if;
-            --     when others => ctrl_nxt.alu_inc <= '0';
-            -- end case;
 
             -- addition/subtraction control --
             if (funct3_v(2 downto 1) = funct3_slt_c(2 downto 1)) or -- SLT(I), SLTU(I)
@@ -657,31 +644,8 @@ begin
 
         else
 
---          if (trap_ctrl.exc_buf(exc_ialign_c) = '1') then
---            write(l, String'("exc_ialign_c"));
---            writeline(output, l);
---          end if;
-
---          if (trap_ctrl.exc_buf(exc_illegal_c) = '1') then
---            write(l, String'("exc_illegal_c"));
---            writeline(output, l);
---          end if;
-
---          if (trap_ctrl.exc_buf(exc_iaccess_c) = '1') then
---            write(l, String'("exc_iaccess_c"));
---            writeline(output, l);
---          end if;
-
---          write(l, trap_ctrl.exc_buf);
---          writeline(output, l);
-
-          -- DISPATCH is a bad thing! If the REQUEST state is exited via dispatch, then the instruction failed!
-          -- A normal EX_MEM_REQ state after a lw instruction does not take the DISPATCH way out!
-          -- DISPATCH during response is normal however!
-          --write (l, String'("EX_MATRIX_MEM_REQ->DISPATCH"));
-          --writeline (output, l);
-
           exe_engine_nxt.state <= EX_DISPATCH;
+		  
         end if;
 
       when EX_MEM_RSP => -- wait for memory response
