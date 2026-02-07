@@ -25,7 +25,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/WaveFormsMatrixMultiplikation_2.png\
     Bilder/floorplan_1.png\
     Bilder/neorv32_cpu_architecture.png\
-    Bilder/neorv32_debugging_instructions.png\
+    Bilder/neorv32_debugging_instructions_2.png\
     Bilder/schematic_cropped.pdf\
     Bilder/strip_mining_2.png\
     Bilder/thab_logo.png\
@@ -347,7 +347,7 @@ Bilder/floorplan_1.png :
 
 Bilder/neorv32_cpu_architecture.png :
 
-Bilder/neorv32_debugging_instructions.png :
+Bilder/neorv32_debugging_instructions_2.png :
 
 Bilder/schematic_cropped.pdf :
 

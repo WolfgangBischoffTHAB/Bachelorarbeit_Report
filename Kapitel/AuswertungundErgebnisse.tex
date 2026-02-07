@@ -11,7 +11,7 @@ Das Messverfahren wird beschrieben. Die Laufzeiten werden gemessen, ausgewertet 
 
 \section{Testdaten} \label{sec:testdata}
 
-Um eine Vergleichbarkeit der Verfahren und eine Überprüfung der Korrektheit zu erzielen, werden Testdaten mit erwartetem Ergebnis vorgegeben. In diesem Fall handelt es sich um zwei Matrizen A und B von denen das Ergebnis der Multiplikation bekannt ist und durch Matrix C dokumentiert wird.
+Um eine Vergleichbarkeit der Verfahren und eine Überprüfung der Korrektheit zu erzielen, werden Testdaten mit erwartetem Ergebnis vorgegeben. In diesem Fall handelt es sich um zwei Matrizen A und B, von denen das Ergebnis der Multiplikation bekannt ist und welches durch Matrix C dokumentiert wird.
 
 Es wird eine 4x4 Matrixmultiplikation mit den beiden Matrizen A und B durchgeführt, für die das Ergebnis bekannt ist.
 
@@ -75,15 +75,15 @@ Zur einfacheren Vergleichbarkeit der Matrix C mit der Waveform der Simulation wu
 
 \section{Messung und Vergleichbarkeit} \label{sec:measure_and_compare}
 
-Um Anweisungsfolgen miteinander zu vergleichen, muss zunächst eine Skala gewählt werden. Danach müssen die Anweisungsfolgen auf die Skala abgebildet werden. Die Abbildung muss dem Quellcode eine Zahl auf der Skala zuordnen. Als letztes muss für die Skala dann noch erwähnt werden, welcher Wert besser ist, also wie die Qualität von der Skala abzulesen ist.
+Um Anweisungsfolgen miteinander zu vergleichen, muss zunächst eine Skala gewählt werden. Danach müssen die Anweisungsfolgen auf der Skala abgebildet werden. Die Abbildung muss dem Quellcode eine Zahl auf der Skala zuordnen. Als letztes muss für die Skala dann noch erwähnt werden, welcher Wert besser ist, also wie die Qualität von der Skala abzulesen ist.
 
-Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, dass die NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Die CPU löst eine Aufgabe dann schneller.
+Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, das die NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Die CPU löst eine Aufgabe dann schneller.
 
-Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie dessen Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
+Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V"=Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie deren Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
 
-Ein Paar von CSR, dass bei der Zählung der Clock-Zyklen verwendet wird, sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
+Ein Paar von CSR, das bei der Zählung der Clock-Zyklen verwendet wird, sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
 
-Es werden wirkliche Clock-Cycles gezählt und keine Anweisungen. Das ist ein Vorteil, da damit eine wirkliche Messung erzielt werden kann. Wenn Anweisungen gezählt werden, ist nicht klar wieviel Zeit die CPU zur Bearbeitung der Anweisungen benötigt.
+Es werden wirkliche Clock-Cycles gezählt und keine Anweisungen. Das ist ein Vorteil, da damit eine wirkliche Messung erzielt werden kann. Wenn Anweisungen gezählt werden, ist nicht klar, wieviel Zeit die CPU zur Bearbeitung der Anweisungen benötigt.
 
 Ein Clock-Cycle beschreibt einen Ausschlag der externen Clock-Source. Die externe Clock-Source wird über einen Crystal-Oscillator erzeugt, optional über Phase-Locked-Loops oder Divider verändert und dann an das VHDL-Design als Input-Signal herangeführt.
 
@@ -115,19 +115,19 @@ neorv32_uart0_printf("ENC SW=%u cycles\n", time_enc_sw);
 
 Im Beispiel wird nur das Low-Word und damit nur CSR\_MCYCLE verwendet. Die Erwartungshaltung ist offensichtlich, dass die gemessene Befehlsfolge berechnet ist, bevor der Zähler in das High-Word überläuft.
 
-Da das CSR\_MCYCLE CSR-Register einen beliebigen Wert enthält, muss es zunächst in Zeile 2 auf 0 zurückgesetzt werden. Dann kann sein Wert nach Abarbeitung der Befehlsfolge in Zeile 13 ausgelesen und schließlich über eine serielle Schnittstelle ausgegeben werden.
+Da das CSR\_MCYCLE"=CSR-Register einen beliebigen Wert enthält, muss es zunächst in Zeile 2 auf 0 zurückgesetzt werden. Dann kann sein Wert nach Abarbeitung der Befehlsfolge in Zeile 13 ausgelesen und schließlich über eine serielle Schnittstelle ausgegeben werden.
 
-Dieses Verfahren wird im Folgenden zur Bewertung der unterschiedlichen Matrixmultiplikationen verwendet. Es wird dabei inklusive der Übetragung der Daten von und zum CPU-RAM gemessen, da der Zugriff auf den CPU-RAM bei der Hardwarebeschleunigung berücksichtigt werden kann und damit ein Geschwindigkeitsvorteil erzielt werden kann.
+Dieses Verfahren wird im Folgenden zur Bewertung der unterschiedlichen Matrixmultiplikationen verwendet. Es wird dabei inklusive der Übertragung der Daten von und zum CPU-RAM gemessen, da der Zugriff auf den CPU-RAM bei der Hardwarebeschleunigung berücksichtigt werden kann und damit ein Geschwindigkeitsvorteil erzielt werden kann.
 
 Das Vorgehen ist das Folgende:
 
 \begin{enumerate}
 
-    \item In Vivado wird das Design synthetisiert. Dabei wird der Bootloader als erstes Anwendungsprogramm direkt in das Design synthetisiert. Damit ist der Bootloader-Maschinencode direkt im internen Instruktion-Speicher der CPU enthalten und wird damit direkt beim Systemstart ausgeführt.
+    \item In Vivado wird das Design synthetisiert. Dabei wird der Bootloader als erstes Anwendungsprogramm direkt in das Design synthetisiert. Damit ist der Bootloader-Maschinencode direkt im internen Instruktionsspeicher der CPU enthalten und wird damit direkt beim Systemstart ausgeführt.
 
     \item Der Bitstream wird über den in Vivado integrierten Hardware-Manager auf das FPGA-Board übertragen und dort ausgeführt. Der Bootloader ist jetzt über eine UART-Schnittstelle erreichbar.
 
-    \item Für jedes Testprogram, wird dieses Testprogramm mit dem GCC Compiler in der Version riscv-none-elf-gcc.exe (xPack GNU RISC-V Embedded GCC x86\_64) 14.2.0 übersetzt. Für die Übersetzung der Beispiele und Testprogramme sind im NEORV32 Projekt Skripte und auch das sogenannte ``image\_gen'' Werkzeug bereitgestellt. Mit ``image\_gen'' wird aus den Ausgaben des GCC eine Datei erstellt, die vom Bootloader verstanden wird.
+    \item Für jedes Testprogramm wird dieses Testprogramm mit dem GCC Compiler in der Version riscv-none-elf-gcc.exe (xPack GNU RISC-V Embedded GCC x86\_64) 14.2.0 übersetzt. Für die Übersetzung der Beispiele und Testprogramme sind im NEORV32"=Projekt Skripte und auch das sogenannte ``image\_gen'' Werkzeug bereitgestellt. Mit ``image\_gen'' wird aus den Ausgaben des GCC eine Datei erstellt, die vom Bootloader verstanden wird.
 
     \item Die Ausgabe des ``image\_gen'' Werkzeugs wird dem Bootloader über die UART-Schnittstelle zugeführt. Dazu wurde ein eigener Uploader erstellt. Die Firmware könnte aber auch über jeden beliebigen Terminal-Emulator übertragen werden.
 
@@ -144,9 +144,9 @@ Das Vorgehen ist das Folgende:
 
 \section{Prüfung mit Matrix-Erweiterung} \label{sec:eval_with_matrix_extension}
 
-Für die Prüfung mit Hardwarebeschleunigung, enthält das ausgeführte Anwendungsprogram die mle32, mmul32 und mse32 Anweisungen als Intrinsics.
+Für die Prüfung mit Hardwarebeschleunigung enthält das ausgeführte Anwendungsprogramm die mle32, mmul32 und mse32"=Anweisungen als Intrinsics.
 
-Die Matrix A und die Matrix B werden aus dem CPU-RAM in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32 Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
+Die Matrix A und die Matrix B werden aus dem CPU-RAM in die Matrix-Engine geladen. Danach erfolgt die Multiplikation durch Aufruf der mmul32"=Anweisung, danach erfolgt das Speichern der Matrix A und Matrix B zurück in den CPU RAM. Matrix A enthält in der momentanen Implementierung das Ergebnis der Multiplikation.
 
 \begin{lstlisting}[style=PseudoLang,caption={Verwendung der Intrinsics},captionpos=b]
 #include <neorv32.h>
@@ -197,7 +197,7 @@ int main() {
 
 %Die schnellste Art Informationen aus der Ansicht zu ziehen ist es, sich auf die Signale ``load'', ``matrix\_mul\_o'' und ``store'' zu konzentrieren. Diese Signale entsprechen der Abarbeitung der Instruktionen mle32, mmul32 und mse32 in genau dieser Reihenfolge. In der Abbildung \ref{fig:Waveforms-Matrix-Mult-ControlSignals} kann man sehen, dass die Signale in genau der gewünschten Reihenfolge und auch Häufigkeit auf den Wert eins springen. Es wird zwei mal geladen und gespeichert, da die Testanwendung die Matrizen A und B lädt und speichert. Die Operation mmul32, angedeutet durch das Signal ``matrix\_mul\_o'', wird nur einmalig ausgeführt, wie erwartet.
 
-Zunächst wird über den WaveForm Viewer visuell geprüft, ob die korrekten Steuersignal ausgegeben werden. Danach wird geprüft, ob die Matrixmultiplikation in der Simulation mit den richtigen Daten abgearbeitet wird und ob die richtigen Werte in der Matrix C abgelegt werden.
+Zunächst wird über den WaveForm"=Viewer visuell geprüft, ob die korrekten Steuersignale ausgegeben werden. Danach wird geprüft, ob die Matrixmultiplikation in der Simulation mit den richtigen Daten abgearbeitet wird und ob die richtigen Werte in der Matrix C abgelegt werden.
 
 \begin{figure}[h]
 \centering
@@ -206,7 +206,7 @@ Zunächst wird über den WaveForm Viewer visuell geprüft, ob die korrekten Steu
 \label{fig:Waveforms-Matrix-Mult}
 \end{figure}
 
-In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer-Produkt multipliziert und auf die Accumulator-Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
+In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer-Produkt multipliziert und auf die Accumulator"=Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
 
 Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplikation mit dem erstellten Design wie geplant funktioniert.
 
@@ -306,7 +306,7 @@ int main()
 }
 \end{lstlisting}
 
-Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine weil der selbsterstellte C-Compiler diesen Quellcode in dieser Form auch übersetzen können soll, falls weitere Test durchgeführt werden sollten.
+Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine, weil der selbsterstellte C-Compiler diesen Quellcode in dieser Form auch übersetzen können soll, falls weitere Tests durchgeführt werden sollten. Da der selbsterstellte C-Compiler nur eine Untermenge der Programmiersprache C versteht, muss der Quellcode auf diese Weise erstellt werden.
 
 
 
@@ -347,7 +347,7 @@ Optimiert man die gewählten Testprogramme weiter oder wählt man komplett ander
 
 Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat.
 
-Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht ohne das die Execution-Engine 16 einzelne Load- und Store Befehle ausführen muss.
+Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht, ohne dass die Execution-Engine 16 einzelne Load- und Store"=Befehle ausführen muss.
 
 Anstatt die Matrixmultiplikation durch eine iterative Anwendung steuern zu lassen, bei der alle Instruktionen für die Schleifen durch die Execution-Engine geschleust werden, ist die NEORV32 CPU jetzt in der Lage die Matrixmultiplikation ohne äußere Einflüsse intern zu berechnen. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert.
 

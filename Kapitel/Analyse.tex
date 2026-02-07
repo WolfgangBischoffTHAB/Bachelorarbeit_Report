@@ -12,7 +12,7 @@ Der NEORV32 besitzt den in Abbildung \ref{fig:NEORV32_Architecture} dargestellte
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.39]{"neorv32_cpu_architecture.png"}
-\caption{NEORV32 Architektur}
+\caption{NEORV32-Architektur}
 \label{fig:NEORV32_Architecture}
 \end{figure}
 
@@ -23,29 +23,33 @@ Beide Teile arbeiten in gewisser Weise unabhängig voneinander. Damit kann das F
 
 
 
-\section{Die Fetch-Engine} \label{sec:neorv32-fetch-engine}
+\section{Die Fetch"=Engine} \label{sec:neorv32-fetch-engine}
 
-Die Fetch-Engine steht am Anfang der Abarbeitung einer Anweisung. Sie ist für das Laden der Anweisung aus dem Speicher zuständig und lädt von der Adresse, die momentan im Program-Counter-Register steht. Die Fetch Engine arbeitet unabhängig vom Rest der CPU. Sie implementiert intern eine State--Machine, die Anweisungen puffern kann und sie kann intern Anweisungen laden ohne, dass die Anweisungen akut vom Rest des Systems gebraucht wird.
+Die Fetch"=Engine steht am Anfang der Abarbeitung einer Anweisung. Sie ist für das Laden der Anweisung aus dem Speicher zuständig und lädt von der Adresse, die momentan im Program"=Counter"=Register steht.
 
-Aus diesem Grund gibt es ein weiteres Signal, welches in Abbildung \ref{fig:NEORV32_valid_instruction} als ``debug\_valid\_i'' sichtbar gemacht wurde und angibt, ob die geladene Instruktion gültig ist und verwendet werden sollte oder nicht.
+Die Fetch"=Engine arbeitet unabhängig vom Rest der CPU. Sie implementiert intern eine State"=Machine, die Anweisungen puffern kann und sie kann intern Anweisungen laden ohne, dass die Anweisungen akut vom Rest des Systems gebraucht werden.
+
+Aus diesem Grund wurden, lediglich zur Analyse, zwei weitere Signale hinzugefügt, welche in Abbildung \ref{fig:NEORV32_valid_instruction} als ``debug\_valid\_i'' und ``debug\_instr\_i'' sichtbar gemacht wurden.
+
+Das Signal ``debug\_instr\_i'' zeigt die geladene Instruktion an. Das Signal ``debug\_valid\_i'' zeigt an, ob die geladene Instruktion gültig ist und verwendet werden sollte oder nicht. In \ref{fig:NEORV32_valid_instruction} sieht man, dass dem Backend Anweisungen angeboten werden während gleichzeitig das Signal ``debug\_valid\_i'' nicht aktiv ist. In diesem Fall muss die angebotene Anweisung ignoriert werden.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.32]{"neorv32_debugging_instructions.png"}
+\includegraphics[scale=0.45]{"neorv32_debugging_instructions_2.png"}
 \caption{NEORV32 Gültige Instruktion}
 \label{fig:NEORV32_valid_instruction}
 \end{figure}
 
-Dieses Wissen ist wichtig, wenn man das Verhalten der CPU anhand einer WaveForm--Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler--Programm aus, das von der CPU ausgeführt wird. Wenn die Fetch-Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht.
+Dieses Wissen ist wichtig, wenn man das Verhalten der CPU anhand einer WaveForm"=Ansicht diagnostizieren möchte. Dabei geht man oft von einem Assembler"=Programm aus, das von der CPU ausgeführt wird. Es wird erwartet, dass die Assembler-Instruktionen in einer gewissen Reihenfolge abgearbeitet werden. Wenn die Fetch"=Engine kreuz und quer Instruktionen lädt, muss man wissen, ob die momentan anliegende Instruktion gültig ist oder nicht um dem Programmablauf folgen zu können.
 
-Es ist des Weiteren zu bemerken, dass die Fetch Engine nur über einen Cache verfügt, wenn ein Cache konfiguriert wird. In der Standardkonfiguration ist kein Cache für Instruktionen konfiguriert, wie in der Abbildung \ref{fig:NEORV32_Architecture} dargestellt. Die Fetch Engine greift stattdessen direkt auf den Speicher zu.
-
-
+Es ist des Weiteren zu bemerken, dass die Fetch"=Engine nur über einen Cache verfügt, wenn ein Cache konfiguriert wird. In der Standardkonfiguration ist kein Cache für Instruktionen konfiguriert, wie in der Abbildung \ref{fig:NEORV32_Architecture} dargestellt. Die Fetch"=Engine greift stattdessen direkt auf den Speicher zu.
 
 
-\section{CPU--Control und Execution-Engine} \label{sec:neorv32-execution-engine}
 
-Bei einigen CPU--Designs für FPGAs findet man eine Kontrolllogik vor, die abhängig von der momentan geladenen Anweisung Steuersignale für den Datenpfad erzeugt. Der Begriff Datenpfad beschreibt zusammenfassend alle Hardware-Komponenten, die die Anweisungen wirklich berechnen. Beispiele für Komponenten im Datenpfad sind die Arithmetisch--Logische--Einheit oder der Sign-Extender.
+
+\section{CPU"=Control und Execution"=Engine} \label{sec:neorv32-execution-engine}
+
+Bei einigen CPU"=Designs für FPGAs findet man eine Kontrolllogik vor, die abhängig von der momentan geladenen Anweisung Steuersignale für den Datenpfad erzeugt. Der Begriff Datenpfad beschreibt zusammenfassend alle Hardware-Komponenten, die die Anweisungen wirklich berechnen. Beispiele für Komponenten im Datenpfad sind die Arithmetisch"=Logische"=Einheit oder der Sign-Extender.
 
 Die Kontrolllogik besteht oft aus kombinatorischer Logik und gibt damit direkt Signale aus, die ohne Speicherelemente direkt aus den Eingabesignalen berechnet werden. Ein Beispiel ist das Design aus \cite{Harris2021DigitalDA}. Es ist in Abbildung \ref{fig:PipelinedDesign} dargestellt. In dieser Abbildung ist die Kontrolllogik in blauer Farbe oberhalb des Datenpfad abgebildet, welcher in schwarzer Farbe gezeichnet ist.
 
@@ -60,30 +64,30 @@ Allgemein wird die Kontrolllogik Einfluss auf den Datenpfad haben und Teile des 
 
 Sehr häufig kommen Pipelines zum Einsatz. Eine Instruktion durchläuft nacheinander die Stages der Pipeline. Die freien Stages können für andere Instruktionen verwendet werden. Damit erhöht sich der Durchsatz des Systems und die Auslastung der vorhandenen Hardware im Datenpfad erhöht sich.
 
-Die NEORV32 CPU ist an dieser Stelle eine Ausnahme. Sie besitzt anstelle einer Pipeline eine State--Machine, die Execution--Engine genannt wird, um den Datepfad zu kontrollieren.
+Die NEORV32 CPU ist an dieser Stelle eine Ausnahme. Sie besitzt anstelle einer Pipeline eine State"=Machine, die Execution"=Engine genannt wird, um den Datepfad zu kontrollieren.
 
 %Statt einer Fetch-Stage gibt es das separate Frontend, welches Instruktionen lädt.
 
-Die Entität ``CPU--Control'' enthält die Kontrolllogik der NEORV32 CPU, also die Execution--Engine. Die CPU--Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
+Die Entität ``CPU"=Control'' enthält die Kontrolllogik der NEORV32 CPU, also die Execution"=Engine. Die CPU"=Control enthält den Program Counter der auf die nächste Anweisung zeigt, die ``Control and Status Register'' (\gls{CSR}) und Funktionen für Interrupts und Exceptions.
 
-Die Execution--Engine ist im Inneren eines VHDL-Prozesses definiert. Die allermeisten Prozesse enthalten das Reset--Signal und das Clock--Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution--Engine ist anders. Hier befindet sich kein Clock--Signal in der Sensitivitätsliste sondern alle Signale, die die Execution--Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution--Engine später erweitert wird. Beispielsweise muss die Execution--Engine, nachdem sie einen Request nach außen gibt, auch wieder auf dessen Response warten. Das Response--Signal muss in die Sensitivitätsliste aufgenommen werden.
+Die Execution"=Engine ist im Inneren eines VHDL-Prozesses definiert. Die allermeisten Prozesse enthalten das Reset"=Signal und das Clock"=Signal in ihrer Sensitivitätsliste. Der Prozess für die Execution"=Engine ist anders. Hier befindet sich kein Clock"=Signal in der Sensitivitätsliste, sondern alle Signale, die die Execution"=Engine beeinflussen, müssen explizit aufgelistet werden! Dies wird wichtig, wenn die Execution"=Engine später erweitert wird. Beispielsweise muss die Execution"=Engine, nachdem sie einen Request nach außen gibt, auch wieder auf dessen Response warten. Das Response"=Signal muss in die Sensitivitätsliste aufgenommen werden.
 
-Die Struktur der Execution--Engine ist in Abbildung \ref{fig:ExEngineStateMachine} dargestellt. Der Startzustand wird in roter und zentrale Zustände werden in blauer Farbe dargestellt. Die Zustände, die in dieser Arbeit neu hinzugefügt werden, sind mit grüner Farbe markiert.
+Die Struktur der Execution"=Engine ist in Abbildung \ref{fig:ExEngineStateMachine} dargestellt. Der Startzustand wird in roter und zentrale Zustände werden in blauer Farbe dargestellt. Die Zustände, die in dieser Arbeit neu hinzugefügt werden, sind mit grüner Farbe markiert.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.48]{"StateMachine.pdf"}
-\caption{Struktur der Execution--Engine}
+\caption{Struktur der Execution"=Engine}
 \label{fig:ExEngineStateMachine}
 \end{figure}
 
-Der Start-Zustand ist der EX\_RESTART state und wird nach dem Reset eingenommen. Aus dem Reset und aus EX\_RESTART geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
+Der Start-Zustand ist der EX\_RESTART"=Zustand und wird nach dem Reset eingenommen. Aus dem Reset und aus EX\_RESTART geht die State-Machine in EX\_BRANCHED und erst dann in den EX\_DISPATCH Leerlaufzustand über. Der Umweg über EX\_BRANCHED erlaubt es auf ein Instruction Fetch zu warten.
 
-Im Leerlaufzustand EX\_DISPATCH, wartet die Execution Engine bis ein Trap oder eine Exception eintritt oder bis das Frontend eine gültige Instruktion meldet, die dann abgearbeitet werden muss. Für normale Anweisungen wird der Zustand EX\_EXECUTE betreten.
+Im Leerlaufzustand EX\_DISPATCH wartet die Execution"=Engine, bis ein Trap oder eine Exception eintritt oder bis das Frontend eine gültige Instruktion meldet, die dann abgearbeitet werden muss. Für normale Anweisungen wird der Zustand EX\_EXECUTE betreten.
 
-In EX\_EXECUTE wird der nächste Zustand abhängig von der Art der Anweisung gewählt. Das heißt EX\_EXECUTE ist ein Switch-State der in mehrere Äste der State--Machine verzweigen kann. Es gibt Zweige für ALU-Operationen, Sprünge und Speicherzugriffe (Load und Store).
+In EX\_EXECUTE wird der nächste Zustand abhängig von der Art der Anweisung gewählt. Das heißt EX\_EXECUTE ist ein Switch-State, der in mehrere Äste der State"=Machine verzweigen kann. Es gibt Zweige für ALU-Operationen, Sprünge und Speicherzugriffe (Load und Store).
 
-Für länger laufende Befehle muss die Execution--Engine auf den Abschluss der Operation warten. Daher sind lange laufende Operationen jewils durch ein Paar aus Request und Response Zuständen modelliert. Der Request Zustand wird direkt in Richtung Response--Zustand verlassen. Der Response--Zustand wird erst in Richtung EX\_DISPATCH verlasssen, wenn das eingehende Response--Signal aus der Sensitivitätsliste aktiviert worden ist. Im Response--Zustand werden die erzeugte Daten betrachtet und Signale zurückgesetzt.
+Für länger laufende Befehle muss die Execution"=Engine auf den Abschluss der Operation warten. Daher sind lange laufende Operationen jeweils durch ein Paar aus Request- und Response-Zuständen modelliert. Der Request Zustand wird direkt in Richtung Response"=Zustand verlassen. Der Response"=Zustand wird erst in Richtung EX\_DISPATCH verlassen, wenn das eingehende Response"=Signal aus der Sensitivitätsliste aktiviert worden ist. Im Response"=Zustand werden die erzeugten Daten betrachtet und Signale zurückgesetzt.
 
 
 
@@ -91,30 +95,30 @@ Für länger laufende Befehle muss die Execution--Engine auf den Abschluss der O
 
 \section{Die Load-Store-Unit} \label{sec:neorv32-load-store-engine}
 
-Die State--Machine der Execution--Engine produziert eine Vielzahl an Signalen, die andere Entitäten des VHDL--Designs aktivieren und mit Eingabedaten versorgen. Ein wichtiger Teil des Designs ist die sogenannte Load--Store--Unit.
+Die State"=Machine der Execution"=Engine produziert eine Vielzahl an Signalen, die andere Entitäten des VHDL"=Designs aktivieren und mit Eingabedaten versorgen. Ein wichtiger Teil des Designs ist die sogenannte Load"=Store"=Unit.
 
-Die Load--Store--Unit bildet das Bindeglied zwischen der Execution--Engine und dem Datenspeicher. Sie hat zur Aufgabe Bus--Requests zu erstellen und Bus--Responses zu verarbeiten. Diese Bus--Requests sind mit der Adresse des Datenspeichers versehen. Die Abbildung \ref{fig:LoadStoreUnitAndBus} stellt die Load--Store--Unit im Gesamtkontext dar.
+Die Load"=Store"=Unit bildet das Bindeglied zwischen der Execution"=Engine und dem Datenspeicher. Sie hat zur Aufgabe Bus"=Requests zu erstellen und Bus"=Responses zu verarbeiten. Diese Bus"=Requests sind mit der Adresse des Datenspeichers versehen. Die Abbildung \ref{fig:LoadStoreUnitAndBus} stellt die Load"=Store"=Unit im Gesamtkontext dar.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.0]{"LoadStoreUnitAndBus.pdf"}
-\caption{Die Load--Store--Unit und ihre Schnittstellen}
+\caption{Die Load"=Store"=Unit und ihre Schnittstellen}
 \label{fig:LoadStoreUnitAndBus}
 \end{figure}
 
-Die Bus--Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load--Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store--Anweisungen geschrieben. Die Aufgabe der Load--Store--Unit besteht darin die Signale der Execution--Engine in passende Bus--Requests für Load-- oder Store Anweisungen zu übersetzen.
+Die Bus"=Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load"=Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store"=Anweisungen geschrieben. Die Aufgabe der Load"=Store"=Unit besteht darin die Signale der Execution"=Engine in passende Bus"=Requests für Load"= oder Store Anweisungen zu übersetzen.
 
-Dabei ist folgende Besonderheit zu beachten. Die Bus--Requests, die von der Load--Store--Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data--Cache verbunden. Damit unterstützt die NEORV32 CPU eine Cache--Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load--Store--Unit immer zunächst in den Cache. Wenn ein Cache--Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.
+Dabei ist folgende Besonderheit zu beachten. Die Bus"=Requests, die von der Load"=Store"=Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data"=Cache verbunden. Damit unterstützt die NEORV32 CPU eine Cache"=Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load"=Store"=Unit immer zunächst in den Cache. Wenn ein Cache"=Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.
 
 
 
 
 \section{Zusammenfassung} \label{sec:summary_analysis}
 
-In diesem Abschnitt wurde das Zielsystem, die NEORV32 CPU analysiert. Das Ziel war es die Komponenten kennenzulernen, die erweitert werden müssen um die Matrixmultiplikation hinzuzufügen.
+In diesem Abschnitt wurde das Zielsystem, die NEORV32 CPU, analysiert. Das Ziel war es die Komponenten kennenzulernen, die erweitert werden müssen um die Matrixmultiplikation hinzuzufügen.
 
 Die NEORV32 CPU weicht von einem traditionellen Design mit Kontrolllogik, Datenpfad und Pipeline ab. Das spezielle Design wurde beschrieben. Es besteht aus einem Frontend und einem Backend. Die geplanten Änderungen finden im Backend statt.
 
 Das Backend wurde anhand seiner relevanten Bestandteile Execution-Engine, Load-Store-Unit, Datenbus, Cache und RAM-Speicher beschrieben. Die einzelnen Bestandteile wurden besprochen.
 
-Gerüstet mit dem Wissen um den inneren Aufbau des Backend kann nun im nächsten Kapitel definiert werden, welche neue Hardware für die Matrixmultiplikation ergänzt werden muss.
+Gerüstet mit dem Wissen um den inneren Aufbau des Backend, kann nun im nächsten Kapitel definiert werden, welche neue Hardware für die Matrixmultiplikation ergänzt werden muss.

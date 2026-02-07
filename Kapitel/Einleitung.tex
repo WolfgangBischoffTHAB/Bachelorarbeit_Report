@@ -1,6 +1,6 @@
 \chapter{Einleitung} \label{chpt:Einleitung_Main}
 
-Die Matrixmultiplikation findet in Gebieten Anwendung, die auf massive Datenverarbeitung und linearer Algebra basieren. Beispiele sind Neuronale Netze und Large Language Models (\gls{LLM}) als eine Anwendung von neuronalen Netzen, sowie die 3D-Computergrafik. Dadurch sind sie ein extrem relevantes Leistungsmerkmal für moderne CPU Architekturen.
+Die Matrixmultiplikation findet in Gebieten Anwendung, die auf massiver Datenverarbeitung und linearer Algebra basieren. Beispiele sind Neuronale Netze und Large Language Models (\gls{LLM}) als eine Anwendung von neuronalen Netzen, sowie die 3D-Computergrafik. Dadurch sind sie ein extrem relevantes Leistungsmerkmal für moderne CPU Architekturen.
 
 In dieser Arbeit soll ein bestehendes RISC-V CPU Design um Anweisungen zur Berechnung der Matrixmultiplikation erweitert werden.
 
@@ -13,11 +13,11 @@ Zunächst wird vertieft dargestellt, weshalb die RISC-V Architektur und die Matr
 
 In dieser Arbeit soll eine bestehende RISC-V CPU um Anweisungen zur Durchführung von Matrixmultiplikationen erweitert werden.
 
-RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, die der Prozessor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant sowohl für den akademischen als auch für den kommerziellen Einsatz.
+RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, die der Prozessor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant, sowohl für den akademischen als auch für den kommerziellen Einsatz.
 
 Die RISC-V Architektur ist die fünfte Iteration des Berkeley RISC Projekts der Universität von Kalifornien. Die Arbeit an RISC-V began im Jahre 2010 und ist inzwischen so ausgereift, dass seit einigen Jahre kommerzielle RISC-V Chips auf dem Markt verfügbar sind.
 
-Die ersten verfügbaren Chips waren aufgrund der fehlenden Linzenkosten und einfachen Umsetzbarkeit für wenige Cent verfügbar. Im Jahre 2025 gibt es RISC-V Chips, die erweiterte Funktionen bieten und daher sowohl Desktop-Betriebssysteme als auch LLMs ausführen können.
+Die ersten verfügbaren Chips waren aufgrund der fehlenden Lizenzkosten und einfachen Umsetzbarkeit für wenige Cent verfügbar. Im Jahre 2025 gibt es RISC-V Chips, die erweiterte Funktionen bieten und daher sowohl Desktop-Betriebssysteme als auch LLMs ausführen können.
 
 Die Firma Qualcomm beispielsweise, als eines der weltweit führenden Unternehmen auf dem Gebiet der Halbleiter und der Telekommunikation, hat eine RISC-V Erweiterung namens Xqci zu RISC-V und auch zu dem Compiler-Framework LLVM beigesteuert \cite{phoronix_xqci}. Qualcomm führt auch Käufe von Firmen mit RISC-V Expertise durch. Dies deutet daraufhin, dass Qualcomm den Einsatz von RISC-V in Produkten ernsthaft in Erwägung zieht.
 
@@ -32,7 +32,7 @@ Die Matrixmultiplikation ist die Grundlage für perspektivische Projektionen, Ro
 
 In Abbildung \ref{fig:ViewFrustum} aus \cite{RTR3} wird auf der linken Seite das Sichtfeld (View Frustum) einer Kamera in einer Szene dargestellt. Durch die Matrix \(P_{p}\) wird dieses Sichtfeld perspektivisch korrekt auf den Einheitswürfel auf der rechten Seite abgebildet. Durch das Umformen des Sichtfelds erscheinen weiter entfernte Objekte z.B. kleiner.
 
-Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Mathematisch werden also viele Punkte mit der Projektionsmatrix multipliziert um die transformierten Punkte zu erhalten, die später auf einem Computerbildschirm erscheinen sollen. Berücksichtigt man die modernen 4K oder 8K Auflösungen und die hohen Bildwiederholraten von bis zu 200 Hz, wird deutlich, dass die Matrixmultiplikation extrem schnell und womöglich stark parallelisiert ablaufen muss um eine hohe Bildgenerierungsrate zu erreichen. Die Projektionsmatrix ist in Abbildung \ref{fig:PerspectiveProjection} aus \cite{RTR3} dargestellt.
+Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Mathematisch werden also viele Punkte mit der Projektionsmatrix multipliziert um die transformierten Punkte zu erhalten, die später auf einem Computerbildschirm erscheinen sollen. Berücksichtigt man die modernen 4K- oder 8K-Auflösungen und die hohen Bildwiederholraten von bis zu 200 Hz, wird deutlich, dass die Matrixmultiplikation extrem schnell und womöglich stark parallelisiert ablaufen muss um eine hohe Bildgenerierungsrate zu erreichen. Die Projektionsmatrix ist in Abbildung \ref{fig:PerspectiveProjection} aus \cite{RTR3} dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -41,11 +41,11 @@ Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Mathematis
 \label{fig:PerspectiveProjection}
 \end{figure}
 
-Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem Alltag, aber auch aus vielen professionellen Bereichen wegzudenken. Man denke dabei an die Computerspiel- und Filmindustrie, sowie Modellierungssoftware für Ingenieursanwendungen aller Art.
+Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem Alltag, aber auch aus vielen professionellen Bereichen wegzudenken. Man denke dabei an die Computerspiel- und Film-Industrie sowie Modellierungssoftware für Ingenieursanwendungen aller Art.
 
-Seit Google im Jahr 2017 die Transformer-Architektur erfunden und daraufhin OpenAI ChatGPT 1 programmiert hat, setzt sich die Erfolgsgeschichte von Large Language Models bis heute fort. Generative künstliche Intelligenz wird als revolutionäre Erfindung betrachtet und führt schon jetzt dazu, dass sich Softwareentwickler Gedanken um ihren zukünftigen Wert auf dem Arbeitsmarkt machen. Es ist spätestens im Jahre 2026 klar, dass eine KI bestimmte Aufgaben bedeutend viel schneller erledigt als es ein Mensch jemals könnte.
+Seit Google im Jahr 2017 die Transformer-Architektur erfunden und daraufhin OpenAI ChatGPT 1 programmiert hat, setzt sich die Erfolgsgeschichte von Large Language Models bis heute fort. Generative künstliche Intelligenz wird als revolutionäre Erfindung betrachtet und führt schon jetzt dazu, dass sich Softwareentwickler Gedanken um ihren zukünftigen Wert auf dem Arbeitsmarkt machen. Es ist spätestens im Jahre 2026 klar, dass eine KI bestimmte Aufgaben bedeutend viel schneller erledigt, als es ein Mensch jemals könnte.
 
-Firmen haben diesen Vorteil der KI erkannt und haben vorallem die hohen Lohnkosten menschlicher Arbeit im Blick. Hardware, die \gls{LLM} berechnen kann, wird damit zum relevanten Posten in der Bilanz großer Unternehmen. Anstatt fortlaufende Personalkosten zu bezahlen, möchten Unternehmen KI-fähige Hardware einsetzen, die naiv betrachtet nur einmalige Anschaffungskosten verursacht.
+Firmen haben diesen Vorteil der KI erkannt und haben vor allem die hohen Lohnkosten menschlicher Arbeit im Blick. Hardware, die \gls{LLM} berechnen kann, wird damit zum relevanten Posten in der Bilanz großer Unternehmen. Anstatt fortlaufende Personalkosten zu bezahlen, möchten Unternehmen KI-fähige Hardware einsetzen, die naiv betrachtet nur einmalige Anschaffungskosten verursacht.
 
 Es soll verdeutlicht werden, welcher Zusammenhang zwischen der Matrixmultiplikation und Neuronalen Netzen bzw. \gls{LLM}s besteht.
 
@@ -69,29 +69,29 @@ Ein Neuronales Netz lässt sich als Matrix beschreiben. Eingaben an ein Neuronal
 \label{fig:InputBatching}
 \end{figure}
 
-Die rasante Verbreitung von LLMs hat Auswirkungen auf die Hardwarehersteller und den Handel der Hardware. Die Firma Micron hat beispielsweiße einen Rückzug aus dem Endkundengeschäft vollzogen und verkauft RAM-Bausteine nur noch an Firmenkunden, die den RAM-Speicher dann bevorzugt für die Berechnung in Rechenzentren einsetzen. Es liegt nahe, dass LLMs in den Rechenzentren trainiert und betrieben werden. Die RAM-Preise für Endkunden sind aus diesem Grund innerhalb des Jahres 2025 um ein vielfaches angestiegen.
+Die rasante Verbreitung von LLMs hat Auswirkungen auf die Hardwarehersteller und den Handel der Hardware. Die Firma Micron hat beispielsweise einen Rückzug aus dem Endkundengeschäft vollzogen und verkauft RAM-Bausteine nur noch an Firmenkunden, die den RAM-Speicher dann bevorzugt für die Berechnung in Rechenzentren einsetzen. Es liegt nahe, dass LLMs in den Rechenzentren trainiert und betrieben werden. Die RAM-Preise für Endkunden sind aus diesem Grund innerhalb des Jahres 2025 um ein Vielfaches angestiegen.
 
-Gleiches gilt für Grafikbeschleuniger der Firma NVIDIA. Auch hier konkuriert der Endkunde mit dem Firmenkunden. NVIDIA kann die Preise beinahe beliebig festlegen. Das Top-Produkt für Endkunden der Firma NVIDIA ist eine 5090 RTX Grafikkarte. Sie ist im Januar 2026 für etwa 3600 Euro erhältlich und kostet damit mehr als der gesamte Rest eines Computers. Eine Grafikkarte ist in der Lage Matrixmultiplikationen in großer Parallelität und extrem schnell zu berechnen. Grafikkarten werden auch zum Training von LLMs verwendet.
+Gleiches gilt für Grafikbeschleuniger der Firma NVIDIA. Auch hier konkurriert der Endkunde mit dem Firmenkunden. NVIDIA kann die Preise beinahe beliebig festlegen. Das Top-Produkt für Endkunden der Firma NVIDIA ist eine 5090 RTX Grafikkarte. Sie ist im Januar 2026 für etwa 3600 Euro erhältlich und kostet damit mehr als der gesamte Rest eines Computers. Eine Grafikkarte ist in der Lage Matrixmultiplikationen in großer Parallelität und extrem schnell zu berechnen. Grafikkarten werden auch zum Training von LLMs verwendet.
 
-Getrieben durch den Erfolg von LLMs kann sich eine Spezifikation für CPUs, wie z.B. RISC-V nicht mehr durchsetzen, wenn Sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. Die Endkunden werden Produkte, die nicht in der Lage sind Matrizen hardwarebeschleunigt zu berechnen nicht mehr kaufen z.B. aus Gründen der Computergrafik. Das gleiche gilt für Firmenkunden, die den Betrieb eines LLM planen. Ohne beschleunigte Matrixberechnung kann sich eine CPU nicht mehr auf dem Markt behaupten.
+Getrieben durch den Erfolg von LLMs kann sich eine Spezifikation für CPUs, wie z.B. RISC-V, nicht mehr durchsetzen, wenn sie keine Anweisungen für den effizienten Umgang mit Vektoren und Matrizen besitzt. Die Endkunden werden Produkte, die nicht in der Lage sind, Matrizen hardwarebeschleunigt zu berechnen, nicht mehr kaufen, z.B. aus Gründen der Computergrafik. Das gleiche gilt für Firmenkunden, die den Betrieb eines LLM planen. Ohne beschleunigte Matrixberechnung kann sich eine CPU nicht mehr auf dem Markt behaupten.
 
 Die CPUs der Firmen AMD und Intel besitzen bereits die Erweiterungen AVX2 (Advanced Vector Extensions 2), AMX (Advanced Matrix Extensions) und FMA (Fused Multiply Add) zum Rechnen mit Vektoren und Matrizen.
 % https://de.wikipedia.org/wiki/FMA_x86
 
-All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsatz von RISC-V und den Einsatz von Matrixmultiplikation innerhalb einer RISC-V CPU.
+All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsatz von RISC-V und den Einsatz von Matrixmultiplikation innerhalb einer RISC-V-CPU.
 
 
 
 
 \section{Aufgabenstellung} \label{sec:Einleitung_Aufgabenstellung}
 
-Die NEORV32 CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Die NEORV32 CPU liegt in Form einer textuellen Beschreibung vor. Diese Beschreibung wird ergänzt, durch ein Werkzeug übersetzt und kann dann auf einem FPGA ausgeführt werden. Ein Field Programmable Gate Array (FPGA) ist ein Chip, dessen Inneres programmiert werden kann. Damit kann ein FPGA unterschiedliche Hardware abbilden, je nachdem was die textuelle Beschreibung vorgibt.
+Die NEORV32-CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Die NEORV32 CPU liegt in Form einer textuellen Beschreibung vor. Diese Beschreibung wird ergänzt, durch ein Werkzeug übersetzt und kann dann auf einem FPGA ausgeführt werden. Ein Field Programmable Gate Array (FPGA) ist ein Chip, dessen Inneres programmiert werden kann. Damit kann ein FPGA unterschiedliche Hardware abbilden, je nachdem was die textuelle Beschreibung vorgibt.
 
-Die neu hinzugefügten Anweisungen orientieren sich von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension in RISC-V spezifiziert worden sind. Die Vektor-Extension wird im Abschnitt \ref{sec:Stand_der_Technik_Main} beschrieben. Im Speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die die CPU, aufgrund von begrenzter Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als Ganzes gelöst ist.
+Die neu hinzugefügten Anweisungen orientieren sich von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension in RISC-V spezifiziert worden sind. Die Vektor-Extension wird im Abschnitt \ref{sec:Stand_der_Technik_Main} beschrieben. Im Speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die der CPU, aufgrund von begrenzten Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als Ganzes gelöst ist.
 
-Die Erweiterung soll mit dem Wissenstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Die Matrizenberechnungen erfolgt daher lediglich auf Matrizen deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
+Die Erweiterung soll mit dem Wissensstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Die Matrizenberechnungen erfolgt daher lediglich auf Matrizen, deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
 
-Da es viele Ansätze gibt Matrizen zu multiplizieren, wirde eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer-Produkt Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
+Da es viele Ansätze gibt Matrizen zu multiplizieren, wirde eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer-Produkt-Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
 
 
 
@@ -110,7 +110,7 @@ Die Matrixmultiplikation wird im Kapitel ``Theoretische Grundlagen'' beschrieben
 
 %Nachdem die Matrixmultiplikation beschrieben ist, wird ihre Relevanz in den Anwendungsbegieten der Neuronalen Netze und der 3D-Computergrafik dargestellt.
 
-Danach werden die momentan ablaufenden Anstrengungen des RISC-V Gremiums zur Erstellung einer Extension zur Matrixmultiplikation beschrieben. Dabei gibt es drei Ansätze. Der in dieser Bachelorarbeit untersuchte Ansatz wird zusammen mit den anderen Ansätzen vorgestellt. Dabei wird der Strip-Mining Ansatz erläutert und es wird eine Softwareanwendung besprochen, die diesen Ansatz als Computerprogramm implementiert.
+Danach werden die momentan ablaufenden Anstrengungen des RISC-V Gremiums zur Erstellung einer Extension zur Matrixmultiplikation beschrieben. Dabei gibt es drei Ansätze. Der in dieser Bachelorarbeit untersuchte Ansatz wird zusammen mit den anderen Ansätzen vorgestellt. Dabei wird der Strip-Mining-Ansatz erläutert und es wird eine Softwareanwendung besprochen, die diesen Ansatz als Computerprogramm implementiert.
 
 Es folgt eine Beschreibung des Vorgehens bei der Erstellung dieser Bachelor-Arbeit.
 

@@ -9,25 +9,25 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Literatur/Literatur.bib
 Warning--entry type for "phoronix_xqci" isn't style-file defined
---line 35 of file Literatur/Literatur.bib
+--line 69 of file Literatur/Literatur.bib
 Warning--entry type for "rvv_specification" isn't style-file defined
---line 43 of file Literatur/Literatur.bib
+--line 85 of file Literatur/Literatur.bib
 Warning--entry type for "design_VME" isn't style-file defined
---line 64 of file Literatur/Literatur.bib
+--line 127 of file Literatur/Literatur.bib
 Warning--entry type for "RISCV_StateOfTheUnion" isn't style-file defined
---line 96 of file Literatur/Literatur.bib
+--line 191 of file Literatur/Literatur.bib
 Warning--entry type for "RISCV_IntegratedMatrixExtension" isn't style-file defined
---line 104 of file Literatur/Literatur.bib
+--line 207 of file Literatur/Literatur.bib
 Warning--entry type for "NEORV32_DataSheet" isn't style-file defined
---line 112 of file Literatur/Literatur.bib
+--line 223 of file Literatur/Literatur.bib
 Warning--entry type for "NEORV32_github" isn't style-file defined
---line 120 of file Literatur/Literatur.bib
+--line 239 of file Literatur/Literatur.bib
 Warning--entry type for "basic-neural-network-matrix-maths-part-1" isn't style-file defined
---line 202 of file Literatur/Literatur.bib
+--line 403 of file Literatur/Literatur.bib
 Warning--entry type for "stream_computing_risc_v_matrix" isn't style-file defined
---line 218 of file Literatur/Literatur.bib
+--line 435 of file Literatur/Literatur.bib
 Warning--entry type for "intro_rvv" isn't style-file defined
---line 226 of file Literatur/Literatur.bib
+--line 451 of file Literatur/Literatur.bib
 You've used 20 entries,
             4728 wiz_defined-function locations,
             997 strings with 10419 characters,
