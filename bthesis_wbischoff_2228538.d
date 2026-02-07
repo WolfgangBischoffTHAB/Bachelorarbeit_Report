@@ -2,6 +2,7 @@
 out/bthesis_wbischoff_2228538.pdf :\
     ./Literatur/Literatur.bib\
     Bilder/CombiningVectorRegisters.png\
+    Bilder/Date_Location_2.png\
     Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png\
     Bilder/LLM_1.png\
     Bilder/LLM_2.png\
@@ -18,6 +19,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/Process.pdf\
     Bilder/SISD_SIMD.pdf\
     Bilder/Sample_WaveForm.png\
+    Bilder/Signature.png\
     Bilder/StateMachine.pdf\
     Bilder/StripMining.pdf\
     Bilder/VHDL_Entities.png\
@@ -301,6 +303,8 @@ out/bthesis_wbischoff_2228538.pdf :\
 
 Bilder/CombiningVectorRegisters.png :
 
+Bilder/Date_Location_2.png :
+
 Bilder/KrsteAsanovic_RISCV_StateOfTheUnion.png :
 
 Bilder/LLM_1.png :
@@ -332,6 +336,8 @@ Bilder/Process.pdf :
 Bilder/SISD_SIMD.pdf :
 
 Bilder/Sample_WaveForm.png :
+
+Bilder/Signature.png :
 
 Bilder/StateMachine.pdf :
 
