@@ -527,11 +527,11 @@ INPUT ./Bilder/LLM_1.png
 INPUT ./Bilder/LLM_1.png
 INPUT ./Bilder/LLM_1.png
 INPUT ./Bilder/LLM_1.png
-INPUT ./Bilder/LLM_2.png
-INPUT ./Bilder/LLM_2.png
-INPUT ./Bilder/LLM_2.png
-INPUT ./Bilder/LLM_2.png
 INPUT c:/texlive/2025/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
+INPUT ./Bilder/LLM_2.png
+INPUT ./Bilder/LLM_2.png
+INPUT ./Bilder/LLM_2.png
+INPUT ./Bilder/LLM_2.png
 INPUT ./Kapitel/StandTechnik.tex
 INPUT ./Kapitel/StandTechnik.tex
 INPUT ./Kapitel/StandTechnik.tex

@@ -15,9 +15,9 @@ In dieser Arbeit soll eine bestehende RISC-V CPU um Anweisungen zur Durchführun
 
 RISC-V ist eine lizenzfreie Beschreibung eines Prozessors und der Anweisungen, die der Prozessor verarbeiten können muss. Durch diese Lizenzfreiheit ist die RISC-V Architektur sehr interessant, sowohl für den akademischen als auch für den kommerziellen Einsatz.
 
-Die RISC-V Architektur ist die fünfte Iteration des Berkeley RISC Projekts der Universität von Kalifornien. Die Arbeit an RISC-V began im Jahre 2010 und ist inzwischen so ausgereift, dass seit einigen Jahre kommerzielle RISC-V Chips auf dem Markt verfügbar sind.
+Die RISC-V Architektur ist die fünfte Iteration des Berkeley RISC Projekts der Universität von Kalifornien. Die Arbeit an RISC-V began im Jahre 2010 und ist inzwischen so ausgereift, dass seit einigen Jahren kommerzielle RISC-V Chips auf dem Markt verfügbar sind.
 
-Die ersten verfügbaren Chips waren aufgrund der fehlenden Lizenzkosten und einfachen Umsetzbarkeit für wenige Cent verfügbar. Im Jahre 2025 gibt es RISC-V Chips, die erweiterte Funktionen bieten und daher sowohl Desktop-Betriebssysteme als auch LLMs ausführen können.
+Die ersten verfügbaren Chips waren aufgrund der fehlenden Lizenzkosten und einfachen Umsetzbarkeit für wenige Cent verfügbar. Im Jahre 2026 gibt es RISC-V Chips, die erweiterte Funktionen bieten und daher sowohl Desktop-Betriebssysteme als auch LLMs ausführen können.
 
 Die Firma Qualcomm beispielsweise, als eines der weltweit führenden Unternehmen auf dem Gebiet der Halbleiter und der Telekommunikation, hat eine RISC-V Erweiterung namens Xqci zu RISC-V und auch zu dem Compiler-Framework LLVM beigesteuert \cite{phoronix_xqci}. Qualcomm führt auch Käufe von Firmen mit RISC-V Expertise durch. Dies deutet daraufhin, dass Qualcomm den Einsatz von RISC-V in Produkten ernsthaft in Erwägung zieht.
 
@@ -32,7 +32,11 @@ Die Matrixmultiplikation ist die Grundlage für perspektivische Projektionen, Ro
 
 In Abbildung \ref{fig:ViewFrustum} aus \cite{RTR3} wird auf der linken Seite das Sichtfeld (View Frustum) einer Kamera in einer Szene dargestellt. Durch die Matrix \(P_{p}\) wird dieses Sichtfeld perspektivisch korrekt auf den Einheitswürfel auf der rechten Seite abgebildet. Durch das Umformen des Sichtfelds erscheinen weiter entfernte Objekte z.B. kleiner.
 
-Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Mathematisch werden also viele Punkte mit der Projektionsmatrix multipliziert um die transformierten Punkte zu erhalten, die später auf einem Computerbildschirm erscheinen sollen. Berücksichtigt man die modernen 4K- oder 8K-Auflösungen und die hohen Bildwiederholraten von bis zu 200 Hz, wird deutlich, dass die Matrixmultiplikation extrem schnell und womöglich stark parallelisiert ablaufen muss um eine hohe Bildgenerierungsrate zu erreichen. Die Projektionsmatrix ist in Abbildung \ref{fig:PerspectiveProjection} aus \cite{RTR3} dargestellt.
+Diese Projektion muss auf jedes Objekt einer Szene angewendet werden. Aus mathematischer Sicht werden also viele Vektoren mit der Projektionsmatrix multipliziert um die transformierten Punkte zu erhalten, die später auf einem Computerbildschirm erscheinen sollen.
+
+Berücksichtigt man die modernen 4K- oder 8K-Auflösungen und die hohen Bildwiederholraten von bis zu 200 Hz, wird deutlich, dass die Matrixmultiplikation extrem schnell und womöglich stark parallelisiert ablaufen muss um eine hohe Bildgenerierungsrate zu erreichen.
+
+Die Projektionsmatrix ist in Abbildung \ref{fig:PerspectiveProjection} aus \cite{RTR3} dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -69,7 +73,7 @@ Ein Neuronales Netz lässt sich als Matrix beschreiben. Eingaben an ein Neuronal
 \label{fig:InputBatching}
 \end{figure}
 
-Die rasante Verbreitung von LLMs hat Auswirkungen auf die Hardwarehersteller und den Handel der Hardware. Die Firma Micron hat beispielsweise einen Rückzug aus dem Endkundengeschäft vollzogen und verkauft RAM-Bausteine nur noch an Firmenkunden, die den RAM-Speicher dann bevorzugt für die Berechnung in Rechenzentren einsetzen. Es liegt nahe, dass LLMs in den Rechenzentren trainiert und betrieben werden. Die RAM-Preise für Endkunden sind aus diesem Grund innerhalb des Jahres 2025 um ein Vielfaches angestiegen.
+Die rasante Verbreitung von LLMs hat Auswirkungen auf die Hardwarehersteller und den Handel der Hardware. Die Firma Micron hat beispielsweise einen Rückzug aus dem Endkundengeschäft vollzogen und verkauft RAM-Bausteine nur noch an Firmenkunden, die den RAM-Speicher dann bevorzugt für die Berechnung in Rechenzentren einsetzen. Es liegt nahe, dass LLMs in den Rechenzentren trainiert und betrieben werden. Die RAM-Preise für Endkunden sind aus diesem Grund innerhalb der Jahre 2025 und 2026 um ein Vielfaches angestiegen.
 
 Gleiches gilt für Grafikbeschleuniger der Firma NVIDIA. Auch hier konkurriert der Endkunde mit dem Firmenkunden. NVIDIA kann die Preise beinahe beliebig festlegen. Das Top-Produkt für Endkunden der Firma NVIDIA ist eine 5090 RTX Grafikkarte. Sie ist im Januar 2026 für etwa 3600 Euro erhältlich und kostet damit mehr als der gesamte Rest eines Computers. Eine Grafikkarte ist in der Lage Matrixmultiplikationen in großer Parallelität und extrem schnell zu berechnen. Grafikkarten werden auch zum Training von LLMs verwendet.
 
@@ -89,9 +93,9 @@ Die NEORV32-CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Mat
 
 Die neu hinzugefügten Anweisungen orientieren sich von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension in RISC-V spezifiziert worden sind. Die Vektor-Extension wird im Abschnitt \ref{sec:Stand_der_Technik_Main} beschrieben. Im Speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die der CPU, aufgrund von begrenzten Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als Ganzes gelöst ist.
 
-Die Erweiterung soll mit dem Wissensstand eines Beginners in der Hardware-Beschreibung vorgenommen werden können. Die Matrizenberechnungen erfolgt daher lediglich auf Matrizen, deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
+Die Erweiterung soll durch Entwickler mit moderater Erfahrung auf dem Feld der Hardware"=Beschreibung durchgeführt werden können. Die Matrizenberechnungen erfolgen daher lediglich auf Matrizen, deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
 
-Da es viele Ansätze gibt Matrizen zu multiplizieren, wirde eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer-Produkt-Ansatz, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
+Da es viele Ansätze gibt Matrizen zu multiplizieren, wird eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer Product, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
 
 
 

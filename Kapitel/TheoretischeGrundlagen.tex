@@ -175,7 +175,7 @@ Die Verwendung der Vektor-Extension erfolgt durch ein Hardware-Software-Co-Desig
 
 Moderne, optimierende Compiler wie der GCC oder die LLVM-Infrastruktur wurden um das Wissen um die RISC-V-Vektor-Extension erweitert und können den Anwendungsfall automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren.
 
-Dies lässt sich testen, indem man den naiven Matrix-Multiplikationsalgorithmus mit der neuesten Version des GCC für RISC-V übersetzt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder. Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
+Dies lässt sich testen, indem man den naiven Matrix"=Multiplikationsalgorithmus mit der neuesten Version des GCC für RISC-V übersetzt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder. Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
 
 % \footnote{https://godbolt.org/}
 
@@ -343,7 +343,7 @@ Für die offizielle Ratifizierung einer RISC-V Matrix-Extension ist zum jetzigen
 
 In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured State her am ehesten an der Attached Matrix Extension \gls{AME} orientiert. Die Entscheidung fiel zugunsten der \gls{AME} orientierten Lösung, da die NEORV32 CPU im jetzigen Zustand keine \gls{RVV}-Extension implementiert und daher zunächst \gls{RVV} Register erstellt werden müssten um \gls{IME} oder \gls{VME} zu implementieren.
 
-Ein weiterer Grund ist, dass sich die zusätzliche Matrix-Hardware der \gls{AME} sehr logisch aus der Berechnung des Outer-Produkts ergibt und daher ein einfaches Verständnis der zu erledigenden Aufgaben möglich ist. Im begrenzten Zeitrahmen dieser Bachelorarbeit wurde daher zugunsten einer Lösung entschieden, die intellektuell auch unter Kontrolle gehalten werden kann und für die ein Abschluss der Arbeit absehbar ist.
+Ein weiterer Grund ist, dass sich die zusätzliche Matrix-Hardware der \gls{AME} sehr logisch aus der Berechnung des Outer Product ergibt und daher ein einfaches Verständnis der zu erledigenden Aufgaben möglich ist. Im begrenzten Zeitrahmen dieser Bachelorarbeit wurde daher zugunsten einer Lösung entschieden, die intellektuell auch unter Kontrolle gehalten werden kann und für die ein Abschluss der Arbeit absehbar ist.
 
 Es werden Instruktionen für die Matrixberechnung vorgesehen, wie sie auch bei der Vektor-Extension zu finden sind. Damit ist gemeint, dass die hinzugefügten Instruktionen den Strip-Mining Ansatz ermöglichen. Daher werden Load- und Store-Anweisungen und eine Anweisung für die Operation der Matrixmultiplikation vorgesehen. Damit kann eine Matrixmultiplikation auch für sehr große Matrixen, die nicht als Ganzes in die CPU-Register passen, erfolgen. Außerdem können so auch Kernel in der blis-Bibliothek implementiert werden.
 
@@ -431,7 +431,7 @@ Mit dem Wissen über die blockweise Aufteilung ist es nun möglich per SIMD zu p
 
 Es ist noch zu klären, wie die einzelnen, inneren Blöcke miteinander multipliziert und addiert werden. Die Instruktionen, die im Rahmen dieser Arbeit in die NEORV32 CPU eingebracht werden, ermöglichen genau die Berechnung dieser inneren Blöcke. Der Rest muss durch ein Hardware-Software Co-Design organisiert werden.
 
-Die inneren Blöcke werden durch die wiederholte Anwendung des Outer-Product berechnet. Das Outer-Product wird im folgenden Abschnitt definiert.
+Die inneren Blöcke werden durch die wiederholte Anwendung des Outer Product berechnet. Das Outer Product wird im folgenden Abschnitt definiert.
 
 
 
@@ -440,7 +440,7 @@ Die inneren Blöcke werden durch die wiederholte Anwendung des Outer-Product ber
 
 Das Outer Product wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer Product nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung von Additionen und Mutliplikationen in einer gleichförmigen Form reduziert. Damit lässt sich das Verfahren einfach in einer Hardwarebeschreibungssprache formulieren. Die Synthese-Werkzeuge können dann parallelisierte Hardware zur Berechnung generieren.
 
-Das Outer Product-Verfahren erhöht auch die Parallelität im Vergleich zur Berechnung einzelner Zellen der Ergebnismatrix über einzelne Skalarprodukte. Beim Outerprodukt wird ein gesamtes Feld pro Durchgang berechnet. Nach allen Durchgängen enthält das Feld dann die Ergebnismatrix der Matrixmultiplikation.
+Das Outer Product"=Verfahren erhöht auch die Parallelität im Vergleich zur Berechnung einzelner Zellen der Ergebnismatrix über einzelne Skalarprodukte. Beim Outer Product wird ein gesamtes Feld pro Durchgang berechnet. Nach allen Durchgängen enthält das Feld dann die Ergebnismatrix der Matrixmultiplikation.
 
 In der Übersicht \cite{design_VME} von Earl A. Killian wird das Outer Product auf Seite 53 beschrieben.
 
@@ -497,6 +497,6 @@ Da die streng mathematische Multiplikation auf einem Load"=Store"=Computersystem
 
 Ausgehend von diesem Standpunkt sind die drei großen Strömungen IME, VME und AME der RISC-V-Charter zur Handhabung der Matrixberechnung vorgestellt worden. Es wurde erläutert, welche Überlegungen zur Entscheidung zugunsten der AME für diese Bachelorarbeit zugrunde liegen.
 
-Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des Outer-Produkt-Ansatzes geschlossen. Damit ist das Strip-Mining auch für Matrizen möglich.
+Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des Outer Product"=Ansatzes geschlossen. Damit ist das Strip-Mining auch für Matrizen möglich.
 
 Gerüstet mit einem dokumentierten Zielbild kann als nächstes eine Implementierung methodisch geplant und dann durchgeführt werden.

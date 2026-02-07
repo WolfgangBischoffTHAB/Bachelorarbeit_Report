@@ -206,7 +206,7 @@ Zunächst wird über den WaveForm"=Viewer visuell geprüft, ob die korrekten Ste
 \label{fig:Waveforms-Matrix-Mult}
 \end{figure}
 
-In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer-Produkt multipliziert und auf die Accumulator"=Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
+In Abbildung \ref{fig:Waveforms-Matrix-Mult} ist zu sehen, dass sich über die Zeit hinweg neue Daten in den Registern a und b befinden. Es ist auch zu sehen, dass die Matrix-Engine die Werte aus den Registern a und b über das Outer Product multipliziert und auf die Accumulator"=Register c aufaddiert. Schließlich ist nach den vier Schritten zu sehen, dass das korrekte Ergebnis in den Accumulator Registern c steht und dort auch für einige Zeit stehen bleibt, so dass die Daten weiterverarbeitet werden können und nicht direkt gelöscht werden.
 
 Abschließend lässt sich sagen, dass die hardwarebeschleunigte Matrixmultiplikation mit dem erstellten Design wie geplant funktioniert.
 
@@ -339,16 +339,16 @@ Für die nicht hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
 Es werden 10385 Zyklen notiert.
 
-Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplikation zweier 4x4, vorzeichenloser Integer-Matrizen unter Ausführung der Matrix-Extension um einen Faktor von etwa 56 beschleunigt.
+Laut gemessenen Werten und rein mathematisch betrachtet wird die Matrixmultiplikation zweier 4x4, vorzeichenloser Integer"=Matrizen unter Ausführung der Matrix"=Extension um einen Faktor von etwa 56 beschleunigt.
 
-Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix-Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implemenentierung sicherlich stark vereinfachen.
+Die Messung vergleicht im Grunde zwei Testanwendungen. Die Testanwendung mit den Anweisungen aus der Matrix"=Extension lässt sich nicht mehr stark optimieren. Das Vergleichsprogramm mit der herkömmlichen Multiplikation ließe sich durch eine bessere Implementierung sicherlich stark vereinfachen.
 
 Optimiert man die gewählten Testprogramme weiter oder wählt man komplett andere Testprogramme, so ergibt sich ein anderes Verhältnis zwischen den Zyklen, die die Testprogramme verbrauchen. Es ist jedoch nicht abzusehen, dass sich das Verhältnis zugunsten einer herkömmlichen Implementierung ohne Hardwarebeschleunigung wendet, auch wenn das Testprogramm stark optimiert wird.
 
-Es lässt sich abschließend konstatieren, dass die Hardware-Beschleunigung einen positiven Einfluss auf die Laufzeit hat.
+Es lässt sich abschließend konstatieren, dass die Hardware"=Beschleunigung einen positiven Einfluss auf die Laufzeit hat.
 
-Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU-RAM und dem Prozess-RAM der Matrix-Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix-Engine übertragen und dies geschieht, ohne dass die Execution-Engine 16 einzelne Load- und Store"=Befehle ausführen muss.
+Dies ist hauptsächlich auf die effiziente Übertragung der Elemente zwischen CPU"=RAM und dem Prozess-RAM der Matrix"=Engine zurückzuführen. Die 16 Datenelemente werden als Stream zwischen dem Speicher und der Matrix"=Engine übertragen und dies geschieht, ohne dass die Execution"=Engine 16 einzelne Load- und Store"=Befehle ausführen muss.
 
-Anstatt die Matrixmultiplikation durch eine iterative Anwendung steuern zu lassen, bei der alle Instruktionen für die Schleifen durch die Execution-Engine geschleust werden, ist die NEORV32 CPU jetzt in der Lage die Matrixmultiplikation ohne äußere Einflüsse intern zu berechnen. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert.
+Anstatt die Matrixmultiplikation durch eine iterative Anwendung steuern zu lassen, bei der alle Instruktionen für die Schleifen durch die Execution"=Engine geschleust werden, ist die NEORV32 CPU jetzt in der Lage die Matrixmultiplikation ohne äußere Einflüsse intern zu berechnen. Der zusätzliche Aufwand wird damit gegenüber einer naiven Implementierung um ein Vielfaches reduziert.
 
 %Der Geschwindigkeitszuwachs ist hauptsächlich auf diesen Effekt zurückzuführen.

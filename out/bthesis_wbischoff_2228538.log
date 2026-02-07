@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  7 FEB 2026 12:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  7 FEB 2026 13:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1402,39 +1402,35 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 <Bilder/PerspectiveProjection.png, id=285, 325.71687pt x 143.03438pt>
 File: Bilder/PerspectiveProjection.png Graphic file (type png)
 <use Bilder/PerspectiveProjection.png>
-Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 3
-9.
+Package pdftex.def Info: Bilder/PerspectiveProjection.png  used on input line 4
+3.
 (pdftex.def)             Requested size: 228.00024pt x 100.12337pt.
 Package babel Info: 'ngerman' activates 'ngerman' shorthands.
-(babel)             Reported on input line 47.
+(babel)             Reported on input line 49.
  [2 <./Bilder/ViewFrustum.png> <./Bilder/PerspectiveProjection.png>]
 <Bilder/LLM_1.png, id=300, 342.78062pt x 195.73125pt>
 File: Bilder/LLM_1.png Graphic file (type png)
 <use Bilder/LLM_1.png>
-Package pdftex.def Info: Bilder/LLM_1.png  used on input line 58.
+Package pdftex.def Info: Bilder/LLM_1.png  used on input line 62.
 (pdftex.def)             Requested size: 308.4997pt x 176.15648pt.
-<Bilder/LLM_2.png, id=303, 556.57938pt x 71.26625pt>
+
+[3 <./Bilder/LLM_1.png>]
+<Bilder/LLM_2.png, id=310, 556.57938pt x 71.26625pt>
 File: Bilder/LLM_2.png Graphic file (type png)
 <use Bilder/LLM_2.png>
-Package pdftex.def Info: Bilder/LLM_2.png  used on input line 67.
+Package pdftex.def Info: Bilder/LLM_2.png  used on input line 71.
 (pdftex.def)             Requested size: 306.1196pt x 39.19653pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3 <./Bilder/LLM_1.png>] [4 <./Bilder/LLM_2.png>]
-Overfull \hbox (0.56708pt too wide) in paragraph at lines 92--93
-[]\T1/Roboto-LF/regular/n/10 Die Er-wei-te-rung soll mit dem Wis-sens-stand ei-
-nes Be-gin-ners in der Hardware-|
- []
-
-(./Kapitel/StandTechnik.tex
+ [4 <./Bilder/LLM_2.png>] (./Kapitel/StandTechnik.tex
 <Bilder/strip_mining_2.png, id=324, 877.77937pt x 367.87437pt>
 File: Bilder/strip_mining_2.png Graphic file (type png)
 <use Bilder/strip_mining_2.png>
 Package pdftex.def Info: Bilder/strip_mining_2.png  used on input line 11.
 (pdftex.def)             Requested size: 307.22739pt x 128.75795pt.
- [5 <./Bilder/strip_mining_2.png>] [6]) [7])
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] [6 <./Bilder/strip_mining_2.png>]) [7])
 (./Kapitel/TheoretischeGrundlagen.tex [8]
 chapter 2.
 [9
@@ -1497,17 +1493,12 @@ n er-wei-tert und
  []
 
 [13 <./Bilder/CombiningVectorRegisters.png>]
-Overfull \hbox (14.02391pt too wide) in paragraph at lines 178--179
-[]\T1/Roboto-LF/regular/n/10 Dies lässt sich tes-ten, in-dem man den nai-ven Ma
-trix-Multiplikationsalgorithmus|
- []
-
 <Bilder/StripMining.pdf, id=431, 347.37779pt x 505.89pt>
 File: Bilder/StripMining.pdf Graphic file (type pdf)
 <use Bilder/StripMining.pdf>
 Package pdftex.def Info: Bilder/StripMining.pdf  used on input line 188.
 (pdftex.def)             Requested size: 277.9026pt x 404.71254pt.
-[14 <./Bilder/StripMining.pdf>]
+ [14 <./Bilder/StripMining.pdf>]
 Underfull \hbox (badness 5302) in paragraph at lines 227--228
 []\T1/Roboto-LF/regular/n/10 Die Vector-Engine ver-ar-bei-tet die Vector-Load-A
 nweisungen und
@@ -1583,12 +1574,6 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Underfull \hbox (badness 1331) in paragraph at lines 500--501
 []\T1/Roboto-LF/regular/n/10 Das Ka-pi-tel wur-de mit der Be-schrei-bung der bl
 ock-wei-sen Be-rech-nung
- []
-
-
-Underfull \hbox (badness 1377) in paragraph at lines 500--501
-\T1/Roboto-LF/regular/n/10 der Ma-trix-mul-ti-pli-ka-ti-on un-ter Ver-wen-dung 
-des Outer-Produkt-Ansatzes
  []
 
 ) (./Kapitel/DurchfuehrungArbeit.tex [23 <./Bilder/MAC_MatrixAccumulator.png>]
@@ -1695,17 +1680,11 @@ LaTeX Font Info:    Font shape `T1/Roboto-LF/bold/n' will be
 
 
 ]
-Overfull \hbox (9.82878pt too wide) in paragraph at lines 35--36
-\T1/Roboto-LF/regular/n/10 hin-zu-ge-fügt. Da-bei ist mle32 die Load-Operation,
- mmul32 die SIMD-Instruktion|
- []
-
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-[39{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-[40]
+ [39{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [40]
 <Bilder/VHDL_Entities.png, id=834, 874.26625pt x 573.14125pt>
 File: Bilder/VHDL_Entities.png Graphic file (type png)
 <use Bilder/VHDL_Entities.png>
@@ -1805,8 +1784,8 @@ er-kar-ten, die für High-
  []
 
 [61]
-Underfull \hbox (badness 1946) in paragraph at lines 53--54
-\T1/Roboto-LF/regular/n/10 System-Verilog bei-s-peils-wei-se bie-tet weit-re-ch
+Underfull \hbox (badness 1210) in paragraph at lines 53--54
+\T1/Roboto-LF/regular/n/10 System-Verilog bei-spiels-wei-se bie-tet weit-rei-ch
 en-de-re Mög-lich-kei-ten zur
  []
 
@@ -3002,7 +2981,7 @@ athpazo/fplmr.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0
 texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/pal
 atino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (176 pages, 1935187 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (176 pages, 1935042 bytes).
 
 PDF statistics:
  7788 PDF objects out of 8907 (max. 8388607)

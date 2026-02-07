@@ -30,11 +30,11 @@ Um die Matrixmultiplikation durchzuführen sollen neue Instruktionen hinzugefüg
 
 Bei der Diskussion des Strip"=Mining bei der \gls{RVV}-Extension wurde die Instruktion set(i)vli besprochen, mit der die Vektor-Engine für Datentypen und gewünschte Datenlängen konfiguriert wird. Des Weiteren wurden die Instruktionen vle32.v, vadd.vv und vse32.v im Rahmen eines Beispiels verwendet.
 
-vle32.v lädt Daten aus dem Daten-Speicher in die Vector-Register (Load-Operation), vadd.vv ist die SIMD"=Instruktion, die zwei Vektoren elementweise parallel miteinander addiert hat und vse32.v speichert die Daten schließlich in den Daten-Speicher zurück (Store-Operation)
+vle32.v lädt Daten aus dem Daten-Speicher in die Vector-Register (Load"=Operation), vadd.vv ist die SIMD"=Instruktion, die zwei Vektoren elementweise parallel miteinander addiert hat und vse32.v speichert die Daten schließlich in den Daten-Speicher zurück (Store"=Operation)
 
-Für die Matrix-Extension werden die Instruktion mle32, mmul32 und mse32 hinzugefügt. Dabei ist mle32 die Load-Operation, mmul32 die SIMD-Instruktion und mse32 die Store-Operation. Ein Äquivalent zur set(i)vli ist nicht vorgesehen, da die Matrix-Engine zum jetzigen Stand keine Konfigurationsmöglichkeiten anbietet.
+Für die Matrix-Extension werden die Instruktion mle32, mmul32 und mse32 hinzugefügt. Dabei ist mle32 die Load"=Operation, mmul32 die SIMD"=Instruktion und mse32 die Store"=Operation. Ein Äquivalent zur set(i)vli ist nicht vorgesehen, da die Matrix-Engine zum jetzigen Stand keine Konfigurationsmöglichkeiten anbietet.
 
-Die NEORV32 CPU besitzt eine Menge an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
+Die NEORV32 CPU besitzt eine Vielzahl an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
 
 Ein Beispiel dafür sind die Intrinsics the X-Window Systems \cite{XToolkitIntrinsics}. Hier wird eine einfach zu verwendende Schnittstelle zur Softwareentwicklung mit dem X-Window System für die Programmiersprache erstellt.
 
@@ -314,7 +314,7 @@ Die Matrix-Engine ist schematisch in Abbildung \ref{fig:MatrixEngine} dargestell
 \label{fig:MatrixEngine}
 \end{figure}
 
-Auf der linken Seite und am oberen Bildrand befinden sich die beiden Matrixregister für die Matrizen A und B. Genau in der Mitte der Abbildung befindet sich die MAC-Einheit, in der die Outer-Products aufaddiert werden und in der sich das Ergebnis, also die Matrix C bildet. Zwischen den Matrix-Registern und der MAC-Einheit befinden sich die Arbeitsregister.
+Auf der linken Seite und am oberen Bildrand befinden sich die beiden Matrixregister für die Matrizen A und B. Genau in der Mitte der Abbildung befindet sich die MAC-Einheit, in der die Outer Product"=Berechnungen aufaddiert werden und in der sich das Ergebnis, also die Matrix C bildet. Zwischen den Matrix-Registern und der MAC-Einheit befinden sich die Arbeitsregister.
 
 Um die Matrix-Engine zu verwenden, sind folgende Schritte notwendig:
 
@@ -326,7 +326,7 @@ Um die Matrix-Engine zu verwenden, sind folgende Schritte notwendig:
 
     \item Die Arbeitsregister müssen mit einer Spalte der Matrix A und einer Zeile der Matrix B gefüllt werden.
 
-    \item Die MAC-Einheit wird verwendet um das Outer-Product zu berechnen und zu speichern.
+    \item Die MAC-Einheit wird verwendet um das Outer Product zu berechnen und zu speichern.
 
     \item Die vorhergehenden drei Schritte müssen insgesamt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
 
@@ -386,7 +386,7 @@ Dieser Prozess hat die Aufgabe die Matrixregister zu speichern und zu laden und 
 
 Wenn die \gls{LSU} Daten über den Bus aus dem RAM bzw. dem Cache erhält, dann wird gleichzeitig dazu das entsprechende Element im Register geschrieben oder gelesen. Die Synchronisation der \gls{LSU} mit dem PROC\_RAM Prozess geschieht über die Signale head und tail.
 
-Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer-Product. Dazu sind bei 16 Elementen pro Matrixregister und damit mit 4x4 Matrizen vier Schritte notwendig. In den vier Schritten werden Zeilen aus der Matrix A und Spalten aus der Matrix B miteinander verrechnet. Mit vier Zeilen und vier Spalten müssen also vier Berechnungen pro Schritt ausgeführt werden.
+Der zweite Teil der Matrix-Engine besteht aus der Berechnung des Outer Product. Dazu sind bei 16 Elementen pro Matrixregister und damit mit 4x4 Matrizen vier Schritte notwendig. In den vier Schritten werden Zeilen aus der Matrix A und Spalten aus der Matrix B miteinander verrechnet. Mit vier Zeilen und vier Spalten müssen also vier Berechnungen pro Schritt ausgeführt werden.
 
 Um die Berechnung auszuführen wird eine State"=Machine verwendet. Die State"=Machine durchläuft die Zustände MM\_RESET, MM\_INIT\_1, und MM\_PROCESS\_1, bis MM\_INIT\_4, MM\_PROCESS\_4 und endet mit MM \_STORE, MM \_DONE.
 
@@ -411,7 +411,7 @@ when MM_INIT_1 =>
   mat_mul_engine_state <= MM_PROCESS_1;
 \end{lstlisting}
 
-Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply - Accumulate - Operation. Mit Multiply-Accumulate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird, aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer-Produkten zusammengesetzt. Die Outer-Produkte werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
+Im folgenden MM\_PROCESS Schritt erfolgt die sogenannte Multiply"=Accumulate"=Operation. Mit Multiply"=Accumulate ist gemeint, dass eine Multiplikation als Kernoperation ausgeführt wird, aber das Ergebnis dieser Multiplikation nur ein Teilinkrement einer größeren Operation darstellt. In diesem Fall ist die größere Operation die Matrixmultiplikation, die sich aus vier addierten (kummulierten) Outer Product"=Ergebnissen zusammensetzt. Die Outer Product"=Ergebnisse werden in den Akkumlator-Speichern c11 bis c44 aufgenommen.
 
 \begin{lstlisting}[style=VHDLStyle,caption={Multiply Accumulate Schritt},captionpos=b]
 when MM_PROCESS_1 =>
@@ -450,7 +450,7 @@ when MM_STORE =>
 
 Das \glqq{transfer}\grqq{}"=Signal wird im PROC\_RAM Prozess gelesen und führt dort dazu, dass die MAC - Speicherzellen c11 bis c44 in das Ziel-Matrixregister kopiert werden. Dieser Sachverhalt wurde bereits weiter oben bei der Beschreibung des PROC\_RAM Prozesses beschrieben.
 
-Es soll an dieser Stelle kurz bewertet werden, ob die Berechnung der vier Outer-Produkte auf diese Weise sinnvoll ist oder nicht. Als erstes ist diese Lösung funktional und diese Qualität ist sicherlich sehr wichtig. Ein VHDL Design zu erstellen, dass auch wirklich nach der Synthese auf einem FPGA funktioniert ist speziell für Anfänger immer ein großer Erfolg.
+Es soll an dieser Stelle kurz bewertet werden, ob die Berechnung der vier Outer Product"=Ergebnisse auf diese Weise sinnvoll ist oder nicht. Als erstes ist diese Lösung funktional und diese Qualität ist sicherlich sehr wichtig. Ein VHDL Design zu erstellen, dass auch wirklich nach der Synthese auf einem FPGA funktioniert ist speziell für Anfänger immer ein großer Erfolg.
 
 Als zweites ist der Quellcode vom Standpunkt der VHDL-Synthese aus zu betrachten. Aus Sicht einer höheren Programmiersprache ist die Implementierung nicht sehr sinnvoll, da man beispielsweise durch das Strassen-Verfahren einen Geschwindigkeitsvorteil erzielen kann. VHDL ist aber keine höhere Programmiersprache, sondern eine Hardwarebeschreibungssprache. Dinge können in Hardware tatsächlich parallel ablaufen, wenn Elemente mehrfach synthetisiert werden.
 
