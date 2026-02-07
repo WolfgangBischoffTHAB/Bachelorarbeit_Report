@@ -96,7 +96,7 @@ Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.55]{"floorplan_1.png"}
-\caption{Implementierung}
+\caption{Floorplan}
 \label{fig:floorplan_1}
 \end{figure}
 
@@ -125,7 +125,7 @@ Der erste Ansatz an ein lauffähiges Programm zu kommen, war es, einen C-Compile
 
 Zum anderen lassen sich in den Compiler dann auch neue Anweisungen einpflegen, die im RISC-V-Standard noch nicht definiert sind. Zwangsweise kennt ein GCC Compiler diese Anweisungen folglich auch nicht. Die Erweiterung des GCC Compiler ist um ein Vielfaches komplizierter als die Erweiterung eines simplen, selbsterstellten Compilers. Die Unterstützung eigener Anweisungen wird in dieser Arbeit benötigt um die Matrix-Anweisungen verwenden zu können, die im Zuge dieser Arbeit hinzugefügt werden und daher von GCC nicht unterstützt werden.
 
-Da die C-Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Unterstützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen, aber keine if-Anweisung, da für eine Matrixmultiplikation mit dem Outer Product keine if-Anweisung benötigt wird. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp. Es gibt außerdem einen einfachen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann.
+Da die C-Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Unterstützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen, aber keine if-Anweisung, da für eine Matrixmultiplikation mit dem dyadischen Produkt keine if-Anweisung benötigt wird. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp. Es gibt außerdem einen einfachen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann.
 
 Der Compiler erzeugt ein Listing aus Assembler-Befehlen, die dann von einem Assembler in Maschinen-Code übersetzt werden müssen. Es gibt keine Ausgabe von Objekt-Dateien und keine Linker-Infrastruktur und damit auch keine Bibliotheken. Alle Programme müssen komplett in Form von Quellcode vorliegen und können nicht aus vorübersetzten Bibliotheken stammen.
 

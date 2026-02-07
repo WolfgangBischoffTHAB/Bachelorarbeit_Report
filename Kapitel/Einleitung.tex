@@ -1,6 +1,6 @@
 \chapter{Einleitung} \label{chpt:Einleitung_Main}
 
-Die Matrixmultiplikation findet in Gebieten Anwendung, die auf massiver Datenverarbeitung und linearer Algebra basieren. Beispiele sind Neuronale Netze und Large Language Models (\gls{LLM}) als eine Anwendung von neuronalen Netzen, sowie die 3D-Computergrafik. Dadurch sind sie ein extrem relevantes Leistungsmerkmal für moderne CPU Architekturen.
+Die Matrixmultiplikation findet in Gebieten Anwendung, die auf massiver Datenverarbeitung und linearer Algebra basieren. Beispiele sind Neuronale Netze und Large Language Models (\gls{LLM}) als eine Anwendung von neuronalen Netzen, sowie die 3D-Computergrafik. Dadurch sind Matrixmultiplikationen ein extrem relevantes Leistungsmerkmal für moderne CPU Architekturen.
 
 In dieser Arbeit soll ein bestehendes RISC-V CPU Design um Anweisungen zur Berechnung der Matrixmultiplikation erweitert werden.
 
@@ -49,7 +49,7 @@ Der Einsatz von 3D-Computergrafik ist seit mehreren Jahren nicht mehr aus dem Al
 
 Seit Google im Jahr 2017 die Transformer-Architektur erfunden und daraufhin OpenAI ChatGPT 1 programmiert hat, setzt sich die Erfolgsgeschichte von Large Language Models bis heute fort. Generative künstliche Intelligenz wird als revolutionäre Erfindung betrachtet und führt schon jetzt dazu, dass sich Softwareentwickler Gedanken um ihren zukünftigen Wert auf dem Arbeitsmarkt machen. Es ist spätestens im Jahre 2026 klar, dass eine KI bestimmte Aufgaben bedeutend viel schneller erledigt, als es ein Mensch jemals könnte.
 
-Firmen haben diesen Vorteil der KI erkannt und haben vor allem die hohen Lohnkosten menschlicher Arbeit im Blick. Hardware, die \gls{LLM} berechnen kann, wird damit zum relevanten Posten in der Bilanz großer Unternehmen. Anstatt fortlaufende Personalkosten zu bezahlen, möchten Unternehmen KI-fähige Hardware einsetzen, die naiv betrachtet nur einmalige Anschaffungskosten verursacht.
+Firmen haben diesen Vorteil der KI erkannt und haben vor allem die hohen Lohnkosten menschlicher Arbeit im Blick. Hardware, die \gls{LLM}s trainieren und ausführen kann, wird damit zum relevanten Posten in der Bilanz großer Unternehmen. Anstatt fortlaufende Personalkosten zu bezahlen, möchten Unternehmen KI-fähige Hardware einsetzen, die naiv betrachtet nur einmalige Anschaffungskosten verursacht.
 
 Es soll verdeutlicht werden, welcher Zusammenhang zwischen der Matrixmultiplikation und Neuronalen Netzen bzw. \gls{LLM}s besteht.
 
@@ -89,13 +89,15 @@ All diese Punkte zusammengenommen ergeben eine große Motivation für den Einsat
 
 \section{Aufgabenstellung} \label{sec:Einleitung_Aufgabenstellung}
 
-Die NEORV32-CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Die NEORV32 CPU liegt in Form einer textuellen Beschreibung vor. Diese Beschreibung wird ergänzt, durch ein Werkzeug übersetzt und kann dann auf einem FPGA ausgeführt werden. Ein Field Programmable Gate Array (FPGA) ist ein Chip, dessen Inneres programmiert werden kann. Damit kann ein FPGA unterschiedliche Hardware abbilden, je nachdem was die textuelle Beschreibung vorgibt.
+Die NEORV32-CPU wird um Anweisungen erweitert, die die hardwarebeschleunigte Matrixmultiplikation ermöglichen. Die NEORV32 CPU liegt in Form einer textuellen Beschreibung vor. Diese Beschreibung wird ergänzt, durch ein Werkzeug übersetzt und kann dann auf einem FPGA ausgeführt werden.
+
+Ein Field Programmable Gate Array (FPGA) ist ein Chip, der eine große Menge an logischen Gattern bereitstellt, die zunächst nicht miteinander verbunden sind, also zunächst keine Funktion ausführen. Das Innere des FPGA muss programmiert werden. Damit kann ein FPGA unterschiedliche Hardware abbilden, je nachdem was die textuelle Beschreibung vorgibt.
 
 Die neu hinzugefügten Anweisungen orientieren sich von der Kleinteiligkeit her an den Anweisungen, wie sie bereits für die \gls{RVV}-Vektor-Extension in RISC-V spezifiziert worden sind. Die Vektor-Extension wird im Abschnitt \ref{sec:Stand_der_Technik_Main} beschrieben. Im Speziellen wird das Konzept des Strip-Mining ermöglicht. Dabei handelt es sich um die Aufteilung des Problems in Teile, die der CPU, aufgrund von begrenzten Ressourcen, schrittweise zugeführt werden, bis die Aufgabe als Ganzes gelöst ist.
 
-Die Erweiterung soll durch Entwickler mit moderater Erfahrung auf dem Feld der Hardware"=Beschreibung durchgeführt werden können. Die Matrizenberechnungen erfolgen daher lediglich auf Matrizen, deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
+Die Erweiterung soll durch Entwickler mit geringer Erfahrung auf dem Feld der Hardware"=Beschreibung durchgeführt werden können. Die Matrizenberechnungen erfolgen daher lediglich auf Matrizen, deren Dimensionen ein Vielfaches der Zahl vier sind (also z.B. 4x4, 8x8, 16x16) und es werden nur ganzzahlige Multiplikationen ohne Vorzeichen durchgeführt. Ohne Beschränkung der Allgemeinheit lässt sich eine Matrix an den Rändern mit Nullen auffüllen um auf ein Vielfaches der Dimension vier zu kommen, ohne das Ergebnis der Multiplikation zu verändern.
 
-Da es viele Ansätze gibt Matrizen zu multiplizieren, wird eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer Product, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}.
+Da es viele Ansätze gibt Matrizen zu multiplizieren, wird eine Einschränkung vorgegeben. Die Multiplikation erfolgt mit dem Outer Product, da dieser Ansatz auch in dem maßgebenden Dokument zu dieser Arbeit beschrieben ist \cite{design_VME}. Der deutsche Begriff für das Outer Product ist das dyadische Produkt.
 
 
 

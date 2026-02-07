@@ -13,9 +13,9 @@ Der in dieser Arbeit gewählte Ansatz wird beschrieben.
 
 \section{Vektoren und Matrizen} \label{sec:vectors_and_matrices}
 
-Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen stattfindet.
+Eine einzelne Zahl wird als Skalar bezeichnet. Ein Vektor ist eine eindimensionale Gruppierung von skalaren Werten. Es handelt sich dabei um eine Fortführung von Skalaren zu neuen Objekten der Mathematik, wie sie auch z.B. bei komplexen Zahlen stattfindet.
 
-Auf Vektoren sind mathematische Operationen wie Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert, die aus Vektoren wieder Skalare erzeugen.
+Auf Vektoren sind mathematische Operationen wie die Addition definiert, die wiederum Vektoren erzeugen. Es sind auch Operationen wie das Skalarprodukt oder der Betrag definiert, die aus Vektoren wieder Skalare erzeugen.
 
 Eine Matrix wird in \cite{Mathematik_Arens} als rechteckiges Zahlenschema mit m Zeilen und n Spalten beschrieben.
 
@@ -95,7 +95,7 @@ Ganz abgesehen von einer Komplexität von $\mathcal{O}(n^3)$ ist der Nachteil di
 
 %Diese Implementierung beschränkt sich auf \gls{SISD} (Single Instruction Single Data) Anweisungen.
 
-Wenn der Compiler das Optimierungspotential für Hardwarebeschleunigte Instruktionen nicht erkennt, generiert er \gls{SISD} (Single Instruction Single Data)-Anweisungen, die jede Multiplikation und Addition einzeln ausführen. Im ungünstigsten Fall besteht der generierte Code aus einer langen Folge aus einer Load-Anweisung, gefolgt von einer Operation, gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
+Wenn der Compiler das Optimierungspotential für den Einsatz hardwarebeschleunigter Instruktionen nicht erkennt oder die CPU keine speziellen Anweisungen anbietet, generiert er \gls{SISD} (Single Instruction Single Data)-Anweisungen, die jede Multiplikation und Addition einzeln ausführen. Im ungünstigsten Fall besteht der generierte Code aus einer langen Folge aus einer Load-Anweisung, gefolgt von einer Operation, gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
 
 In den beiden Architekturen Van-Neumann und Harvard gilt gleichermaßen, dass eine Berechnung nicht im Speicher, sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen, muss also immer zunächst eine Übertragung zwischen Speicher und CPU erfolgen. Danach kann die Berechnung innerhalb der CPU durchgeführt werden und abschließend muss das Ergebnis zurück in den Speicher übertragen werden. Man nennt dies die Load-Store-Architektur. Dabei sind die beiden Schritte Load und Store aufwändig, da sie im schlimmsten Fall durch die gesamte Speicherhierarchie kaskadieren, wenn die Daten nicht im Cache vorliegen.
 
@@ -131,7 +131,7 @@ Beim Strip-Mining wird von einer Ressourcen-Hierarchie ausgegangen. Die Ressourc
 
 Die Vektor- oder Matrix-Daten kommen aus dem Speicher und müssen der CPU in Form seiner Register zugeführt werden. Die Addition zweier Vektoren beispielsweise kann nur durchgeführt werden, wenn Vektordaten in den Registern der CPU stehen. Die Kunst besteht also darin, die Daten in effizienter Form an den CPU heranzuführen. Beispielsweise ist es ineffizient ständig im Speicher hin- und herzuspringen. Ein lineares Laden ist effizienter um die Lokalität der Daten innerhalb des Cache auszunutzen.
 
-Eine Cache-Hierarchie legt nahe, Vektoren blockweise zu laden, so dass ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schneller Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
+Eine Cache-Hierarchie legt nahe, Vektoren blockweise in den Speicher zu legen und von dort auch wieder blockweise zu laden, so dass ein Block jeweils genau in den verfügbaren Cache passt. Einmal geladen, dient der Cache dem CPU als schneller Speicher und ein Durchgriff auf den langsameren RAM-Speicher erfolgt nur, wenn die Daten im Cache verarbeitet worden sind.
 
 Die Register innerhalb der CPU sind von begrenzter Größe. Eine sinnvolle Annahme ist etwa 1024 bit Registerbreite. Damit passen dort dann 32 Elemente eines Vektors hinein, wenn jedes Element eine 32-Bit Zahl darstellt.
 
@@ -153,11 +153,11 @@ Die \gls{RVV} erweitert eine RISC-V CPU um zusätzliche Vektorregister v0 bis v3
 
 ``The number of bits in a single vector register, \(VLEN \geq ELEN\), which must be a power of 2, and must be no greater than \(2^{16}\)''.
 
-Das besondere an den Vektorregistern ist, dass sie konfiguriert werden können. Es lässt sich festlegen, welcher Datentyp in den Registern erwartet wird, also 8-bit Bytes, 16-bit Halbwörter oder 32- oder 64-bit Wörter. Zusätzlich lassen sich die Vektorregister gruppieren, also aneinander hängen, um noch größere Register zu bilden.
+Das Besondere an den Vektorregistern ist, dass sie konfiguriert werden können. Es lässt sich festlegen, welcher Datentyp in den Registern erwartet wird, also 8-bit Bytes, 16-bit Halbwörter oder 32- oder 64-bit Wörter. Zusätzlich lassen sich die Vektorregister gruppieren, also aneinander hängen, um noch größere Register zu bilden.
 
 Der Vorteil ist, dass man beispielsweise 8-bit Bytes als Datentyp festlegen kann und dann vier Vektorregister gruppieren kann. Unter der Annahme, dass ein RISC-V Chip mit einer VLEN von \(2^{16}\) synthetisiert worden ist, ergibt sich damit Speicher für beispielsweise 262144 bytes. Werden zwei Vektoren dieser Länge in den CPU geladen, kann eine Vektoraddition all dieser Elemente mit nur einer einzigen Instruktion erfolgen. Dies ergibt einen Speedup um den Faktor 262144 gegenüber einem naiven Load-Store-Ansatz, bei dem jedes 8-Bit Elementpaar einzeln geladen und verrechnet wird.
 
-Die Abbildung \ref{fig:rvv_register} aus \cite{intro_rvv} zeigt zwei mögliche Konfigurationen. Beide Konfigurationen gruppieren die vier Vektorregister V4 bis V7. Die obere Konfiguration addiert 64 Bit Datentypen, während die untere Konfiguration 32 Bit Datentypen addiert. Die Vektor-Engine wird basierend auf der aktuellen Konfiguration automatisch die korrekten Stellen der Register auslesen und miteinander addieren.
+Die Abbildung \ref{fig:rvv_register} aus \cite{intro_rvv} zeigt zwei mögliche Konfigurationen. Beide Konfigurationen verwenden die drei Vektorregister V4 bis V6. Die obere Konfiguration addiert 64 Bit Datentypen, während die untere Konfiguration 32 Bit Datentypen addiert. Die Vektor-Engine wird basierend auf der aktuellen Konfiguration automatisch die korrekten Stellen der Register auslesen, miteinander addieren und die Ergebnisse an die richtigen Stellen in das Zielregister ablegen.
 
 \begin{figure}[h]
 \centering
@@ -343,7 +343,7 @@ Für die offizielle Ratifizierung einer RISC-V Matrix-Extension ist zum jetzigen
 
 In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured State her am ehesten an der Attached Matrix Extension \gls{AME} orientiert. Die Entscheidung fiel zugunsten der \gls{AME} orientierten Lösung, da die NEORV32 CPU im jetzigen Zustand keine \gls{RVV}-Extension implementiert und daher zunächst \gls{RVV} Register erstellt werden müssten um \gls{IME} oder \gls{VME} zu implementieren.
 
-Ein weiterer Grund ist, dass sich die zusätzliche Matrix-Hardware der \gls{AME} sehr logisch aus der Berechnung des Outer Product ergibt und daher ein einfaches Verständnis der zu erledigenden Aufgaben möglich ist. Im begrenzten Zeitrahmen dieser Bachelorarbeit wurde daher zugunsten einer Lösung entschieden, die intellektuell auch unter Kontrolle gehalten werden kann und für die ein Abschluss der Arbeit absehbar ist.
+Ein weiterer Grund ist, dass sich die zusätzliche Matrix-Hardware der \gls{AME} sehr logisch aus der Berechnung des dyadischen Produkts ergibt und daher ein einfaches Verständnis der zu erledigenden Aufgaben möglich ist. Im begrenzten Zeitrahmen dieser Bachelorarbeit wurde daher zugunsten einer Lösung entschieden, die intellektuell auch unter Kontrolle gehalten werden kann und für die ein Abschluss der Arbeit absehbar ist.
 
 Es werden Instruktionen für die Matrixberechnung vorgesehen, wie sie auch bei der Vektor-Extension zu finden sind. Damit ist gemeint, dass die hinzugefügten Instruktionen den Strip-Mining Ansatz ermöglichen. Daher werden Load- und Store-Anweisungen und eine Anweisung für die Operation der Matrixmultiplikation vorgesehen. Damit kann eine Matrixmultiplikation auch für sehr große Matrixen, die nicht als Ganzes in die CPU-Register passen, erfolgen. Außerdem können so auch Kernel in der blis-Bibliothek implementiert werden.
 
@@ -431,22 +431,22 @@ Mit dem Wissen über die blockweise Aufteilung ist es nun möglich per SIMD zu p
 
 Es ist noch zu klären, wie die einzelnen, inneren Blöcke miteinander multipliziert und addiert werden. Die Instruktionen, die im Rahmen dieser Arbeit in die NEORV32 CPU eingebracht werden, ermöglichen genau die Berechnung dieser inneren Blöcke. Der Rest muss durch ein Hardware-Software Co-Design organisiert werden.
 
-Die inneren Blöcke werden durch die wiederholte Anwendung des Outer Product berechnet. Das Outer Product wird im folgenden Abschnitt definiert.
+Die inneren Blöcke werden durch die wiederholte Anwendung des dyadischen Produkts berechnet. Das dyadische Produkt wird im folgenden Abschnitt definiert.
 
 
 
 
-\section{Outer Product} \label{sec:outer-product}
+\section{Dyadisches Produkt} \label{sec:outer-product}
 
-Das Outer Product wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das Outer Product nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung von Additionen und Mutliplikationen in einer gleichförmigen Form reduziert. Damit lässt sich das Verfahren einfach in einer Hardwarebeschreibungssprache formulieren. Die Synthese-Werkzeuge können dann parallelisierte Hardware zur Berechnung generieren.
+Das Outer Product, oder auch dyadisches Produkt, wird verwendet um die Matrixmultiplikation von Blöcken auszuführen. Die Eigenschaft, die das dyadische Produkt nützlich macht ist, dass es die Matrixmultiplikation auf die Berechnung von Additionen und Mutliplikationen in einer gleichförmigen Form reduziert. Damit lässt sich das Verfahren einfach in einer Hardwarebeschreibungssprache formulieren. Die Synthese-Werkzeuge können dann parallelisierte Hardware zur Berechnung generieren.
 
-Das Outer Product"=Verfahren erhöht auch die Parallelität im Vergleich zur Berechnung einzelner Zellen der Ergebnismatrix über einzelne Skalarprodukte. Beim Outer Product wird ein gesamtes Feld pro Durchgang berechnet. Nach allen Durchgängen enthält das Feld dann die Ergebnismatrix der Matrixmultiplikation.
+Das dyadische Produkt erhöht auch die Parallelität im Vergleich zur Berechnung einzelner Zellen der Ergebnismatrix über einzelne Skalarprodukte. Beim dyadischen Produkt wird ein gesamtes Feld pro Durchgang berechnet. Nach allen Durchgängen enthält das Feld dann die Ergebnismatrix der Matrixmultiplikation.
 
-In der Übersicht \cite{design_VME} von Earl A. Killian wird das Outer Product auf Seite 53 beschrieben.
+In der Übersicht \cite{design_VME} von Earl A. Killian wird das dyadische Produkt auf Seite 53 beschrieben.
 
 ``The outer product is a fully parallel computation of mn multiplications."
 
-Das Outer Product wird aus zwei Vektoren u und v berechnet.
+Das dyadische Produkt wird aus zwei Vektoren u und v berechnet.
 
 \[ u = \begin{bmatrix} u_{1} \\ u_{2} \\ \vdots \\ u_{m} \end{bmatrix}, v = \begin{bmatrix} v_{1} \\ v_{2} \\ \vdots \\ v_{n} \end{bmatrix} \]
 
@@ -462,7 +462,7 @@ Das Symbol ist $\otimes$ und das Ergebnis ist eine m x n Matrix C. Die Rechenvor
     \end{equation}
 
 
-Nachdem das Outer Product definiert ist, lässt sich das Outer Product aufaddieren, um die Matrixmultiplikation zu beschreiben.
+Nachdem das dyadische Produkt definiert ist, lässt sich das dyadische Produkt aufaddieren, um die Matrixmultiplikation zu beschreiben.
 
 ``Using this formulation, the matrix product can be expressed as the sum of K outer products of the
 columns of A with the rows of B''
@@ -482,9 +482,9 @@ Der ``Matrix-Kern'' aus Speicherzellen für die Multiplikation ist in Abbildung 
 \label{fig:MAC_MatrixAccumulator}
 \end{figure}
 
-Wenn zwei Vektoren außen an den \gls{MAC} angelegt werden, dann berechnet er ein Zwischenergebnis für das Outer Product aus den beiden Vektoren (siehe Formel (\ref{outerproduct})) und akkumuliert das Zwischenergebnis zum Rest auf (siehe Formel (\ref{outerproductsum})). Wenn alle Vektoren angelegt worden sind, enthält der \gls{MAC} somit das komplette Ergebnis der Multiplikation.
+Wenn zwei Vektoren außen an den \gls{MAC} angelegt werden, dann berechnet er ein Zwischenergebnis durch das dyadische Produkt aus den beiden Vektoren (siehe Formel (\ref{outerproduct})) und akkumuliert das Zwischenergebnis zum Rest auf (siehe Formel (\ref{outerproductsum})). Wenn alle Vektoren angelegt worden sind, enthält der \gls{MAC} somit das komplette Ergebnis der Multiplikation.
 
-Die Kombination aus dem blockweisen Ansatz und dem Outer Product mittels \gls{MAC} ermöglicht es ein Design zu erstellen, das dem angestrebten RISC-V \gls{AME} Ansatz entspricht.
+Die Kombination aus dem blockweisen Ansatz und dem dyadischen Produkt mittels \gls{MAC} ermöglicht es ein Design zu erstellen, das dem angestrebten RISC-V \gls{AME} Ansatz entspricht.
 
 
 
@@ -497,6 +497,6 @@ Da die streng mathematische Multiplikation auf einem Load"=Store"=Computersystem
 
 Ausgehend von diesem Standpunkt sind die drei großen Strömungen IME, VME und AME der RISC-V-Charter zur Handhabung der Matrixberechnung vorgestellt worden. Es wurde erläutert, welche Überlegungen zur Entscheidung zugunsten der AME für diese Bachelorarbeit zugrunde liegen.
 
-Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des Outer Product"=Ansatzes geschlossen. Damit ist das Strip-Mining auch für Matrizen möglich.
+Das Kapitel wurde mit der Beschreibung der blockweisen Berechnung der Matrixmultiplikation unter Verwendung des dyadischen Produkts geschlossen. Damit ist das Strip-Mining auch für Matrizen möglich.
 
 Gerüstet mit einem dokumentierten Zielbild kann als nächstes eine Implementierung methodisch geplant und dann durchgeführt werden.
