@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.7">
+  <diagram name="Seite-1" id="M206xRh3nsdFvEcyAZ2h">
+    <mxGraphModel dx="983" dy="580" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="RVV für die Aufgabe&amp;nbsp;&lt;div&gt;verwenden?&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="250" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-2" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="350" y="70" as="sourcePoint" />
+            <mxPoint x="320" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-7" parent="1" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;targetShapes=umlLifeline;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="148.5" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-14" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-1" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="Um4Dra8bMq10NfMAVsTw-15" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="164" y="140" />
+            </Array>
+            <mxPoint x="110" y="330" as="sourcePoint" />
+            <mxPoint x="163.5" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-16" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-15" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points" />
+            <mxPoint x="163.5" y="240" as="sourcePoint" />
+            <mxPoint x="163.5" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arZ8FZV_RT8OMGQ_2WcB-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Daten &amp;amp; Vektoroperation" vertex="1">
+          <mxGeometry height="60" width="173" x="263.5" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="XBoBFG11MnCPPhUFSPL1-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Nein" vertex="1">
+          <mxGeometry height="30" width="60" x="196" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-13" edge="1" parent="1" source="arZ8FZV_RT8OMGQ_2WcB-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Um4Dra8bMq10NfMAVsTw-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XBoBFG11MnCPPhUFSPL1-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Ja" vertex="1">
+          <mxGeometry height="30" width="60" x="420" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Elementanzahl (AVL) bestimmen" vertex="1">
+          <mxGeometry height="60" width="173" x="490" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Vektorengine konfigurieren mit&amp;nbsp;set(i)vli (SEW, LMUL)" vertex="1">
+          <mxGeometry height="60" width="173" x="490" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Batchgröße lesen (VL, Vectorlength)&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="173" x="490" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Load (#VL Elemente werden in Vektorregister geladen)" vertex="1">
+          <mxGeometry height="60" width="173" x="700" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="SIMD Operation ausführen" vertex="1">
+          <mxGeometry height="60" width="173" x="700" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Store (#VL Elemente werden aus Vektorregister gelesen)" vertex="1">
+          <mxGeometry height="60" width="173" x="700" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-7" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="Um4Dra8bMq10NfMAVsTw-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="496.5" y="140" as="sourcePoint" />
+            <mxPoint x="496.5" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-8" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-2" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Um4Dra8bMq10NfMAVsTw-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="556.5" y="210" as="sourcePoint" />
+            <mxPoint x="556.5" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-9" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-3" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Um4Dra8bMq10NfMAVsTw-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="576" y="270" />
+              <mxPoint x="680" y="270" />
+              <mxPoint x="680" y="10" />
+              <mxPoint x="786" y="10" />
+            </Array>
+            <mxPoint x="566.5" y="270" as="sourcePoint" />
+            <mxPoint x="566.5" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-10" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-4" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="786.5" y="170" as="sourcePoint" />
+            <mxPoint x="786.5" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-11" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-5" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Um4Dra8bMq10NfMAVsTw-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="656.5" y="100" as="sourcePoint" />
+            <mxPoint x="656.5" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-14" edge="1" parent="1" source="Um4Dra8bMq10NfMAVsTw-6" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="arZ8FZV_RT8OMGQ_2WcB-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="787" y="300" />
+              <mxPoint x="350" y="300" />
+            </Array>
+            <mxPoint x="470" y="300" as="sourcePoint" />
+            <mxPoint x="520" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Um4Dra8bMq10NfMAVsTw-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Operation ohne RVV auf&lt;br&gt;den Rest anwenden" vertex="1">
+          <mxGeometry height="60" width="152" x="87.5" y="176" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

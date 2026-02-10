@@ -4,16 +4,16 @@ Ein RISC-V-Komitee hat im Jahre 2015 mit der ersten Version der RISC-V Vector Ex
 
 %Diese führte dazu, dass bereits Versuche unternommen worden sind, kleine lokale Large-Language-Modelle auf RISC-V CPUs auszuführen. Dabei zeigt sich, dass sich kleine LLMs tatsächlich mit ? Token pro Sekunde unterhalten können.
 
-In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das Konzept des Strip-Mining beschrieben und hervorgehoben. Eine grafische Darstellung ist in Abbildung \ref{fig:strip_mining} aus \cite{Colfax_Optimization_Techniques_2_3} zu sehen.
+In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das Konzept des Strip-Mining beschrieben und hervorgehoben. Eine grafische Darstellung ist in Abbildung \ref{fig:strip_mining_colfax} aus \cite{Colfax_Optimization_Techniques_2_3} zu sehen.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.35]{"strip_mining_2.png"}
 \caption{Strip Mining}
-\label{fig:strip_mining}
+\label{fig:strip_mining_colfax}
 \end{figure}
 
-Die Software lädt den Cache mit einem Teil einer oder mehrerer Vektoren voll und beginnt den Cache dann abzuarbeiten. Dabei wird ein Teil der Vektoren dann wiederum teilweise aus dem Cache in die CPU geladen, verarbeitet und danach wieder aus der CPU zurück in den Cache bzw. den Speicher übertragen. In Abbildung \ref{fig:strip_mining} aus \cite{Colfax_Optimization_Techniques_2_3} wird einer dieser Schritte als ``vector iteration'' bezeichnet.
+Die Software lädt den Cache mit einem Teil einer oder mehrerer Vektoren voll und beginnt den Cache dann abzuarbeiten. Dabei wird ein Teil der Vektoren dann wiederum teilweise aus dem Cache in die CPU geladen, verarbeitet und danach wieder aus der CPU zurück in den Cache bzw. den Speicher übertragen. In Abbildung \ref{fig:strip_mining_colfax} aus \cite{Colfax_Optimization_Techniques_2_3} wird einer dieser Schritte als ``vector iteration'' bezeichnet.
 
 Das Strip-Mining wiederholt diese Einzelschritte, bis die Gesamtaufgabe erledigt ist, also alle Elemente der Vektoren bearbeitet sind. Das Beispiel in Kapitel 6.4. namens ``Example of stripmining and changes to SEW'' aus \cite{rvv_specification} verdeutlicht dieses Vorgehen.
 

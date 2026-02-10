@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  7 FEB 2026 19:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.10)  10 FEB 2026 19:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1066,9 +1066,6 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 (out/bthesis_wbischoff_2228538.aux
 Package babel Info: 'ngerman' activates 'ngerman' shorthands.
 (babel)             Reported on input line 14.
-
-
-LaTeX Warning: Label `fig:strip_mining' multiply defined.
 
 
 LaTeX Warning: Label `fig:Matrix-Extension-Optionen' multiply defined.
@@ -2978,10 +2975,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 49890 strings out of 467538
- 992135 string characters out of 5423725
- 2311320 words of memory out of 5000000
- 72658 multiletter control sequences out of 15000+600000
+ 49891 strings out of 467538
+ 992160 string characters out of 5423725
+ 2311365 words of memory out of 5000000
+ 72659 multiletter control sequences out of 15000+600000
  745867 words of font info for 190 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  112i,20n,125p,11246b,2883s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2997,7 +2994,7 @@ athpazo/fplmr.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt0
 texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2025/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb><c:/texlive/2025/texmf-dist/fonts/type1/urw/pal
 atino/uplri8a.pfb>
-Output written on out/bthesis_wbischoff_2228538.pdf (179 pages, 1991970 bytes).
+Output written on out/bthesis_wbischoff_2228538.pdf (179 pages, 1991956 bytes).
 
 PDF statistics:
  7804 PDF objects out of 8907 (max. 8388607)
