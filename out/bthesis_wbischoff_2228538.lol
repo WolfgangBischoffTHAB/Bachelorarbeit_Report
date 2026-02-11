@@ -25,8 +25,8 @@
 \contentsline {lstlisting}{\numberline {6.1}{\ignorespaces Verwendung der Timing-Register}}{54}{lstlisting.416}%
 \contentsline {lstlisting}{\numberline {6.2}{\ignorespaces Verwendung der Intrinsics}}{56}{lstlisting.444}%
 \contentsline {lstlisting}{\numberline {6.3}{\ignorespaces Matrixmultiplikation ohne Hardwarebeschleunigung}}{57}{lstlisting.480}%
-\contentsline {lstlisting}{\numberline {6.4}{\ignorespaces Ausgabe der Zyklen, einfache Multiplikation}}{59}{lstlisting.568}%
-\contentsline {lstlisting}{\numberline {6.5}{\ignorespaces Ausgabe der Zyklen, beschleunigte Multiplikation}}{59}{lstlisting.575}%
+\contentsline {lstlisting}{\numberline {6.4}{\ignorespaces Ausgabe der Zyklen, beschleunigte Multiplikation}}{59}{lstlisting.568}%
+\contentsline {lstlisting}{\numberline {6.5}{\ignorespaces Ausgabe der Zyklen, einfache Multiplikation}}{59}{lstlisting.575}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \def \@chapapp {\appendixname }

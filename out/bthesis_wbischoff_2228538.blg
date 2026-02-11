@@ -23,50 +23,50 @@ Warning--entry type for "NEORV32_DataSheet" isn't style-file defined
 Warning--entry type for "NEORV32_github" isn't style-file defined
 --line 239 of file Literatur/Literatur.bib
 Warning--entry type for "basic-neural-network-matrix-maths-part-1" isn't style-file defined
---line 403 of file Literatur/Literatur.bib
+--line 401 of file Literatur/Literatur.bib
 Warning--entry type for "stream_computing_risc_v_matrix" isn't style-file defined
---line 435 of file Literatur/Literatur.bib
+--line 433 of file Literatur/Literatur.bib
 Warning--entry type for "intro_rvv" isn't style-file defined
---line 451 of file Literatur/Literatur.bib
+--line 449 of file Literatur/Literatur.bib
 You've used 20 entries,
             4728 wiz_defined-function locations,
-            997 strings with 10419 characters,
-and the built_in function-call counts, 13352 in all, are:
-= -- 1282
+            996 strings with 10350 characters,
+and the built_in function-call counts, 13565 in all, are:
+= -- 1308
 > -- 437
-< -- 472
+< -- 473
 + -- 576
 - -- 161
-* -- 907
-:= -- 2414
+* -- 928
+:= -- 2441
 add.period$ -- 34
 call.type$ -- 20
 change.case$ -- 108
 chr.to.int$ -- 19
 cite$ -- 20
-duplicate$ -- 368
-empty$ -- 809
+duplicate$ -- 366
+empty$ -- 829
 format.name$ -- 264
-if$ -- 2483
+if$ -- 2526
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 104
+missing$ -- 101
 newline$ -- 131
 num.names$ -- 80
-pop$ -- 170
+pop$ -- 169
 preamble$ -- 1
 purify$ -- 148
 quote$ -- 0
-skip$ -- 816
+skip$ -- 818
 stack$ -- 0
-substring$ -- 761
-swap$ -- 74
-text.length$ -- 51
+substring$ -- 839
+swap$ -- 73
+text.length$ -- 52
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 240
 warning$ -- 0
-while$ -- 111
+while$ -- 112
 width$ -- 0
 write$ -- 288
 (There were 10 warnings)

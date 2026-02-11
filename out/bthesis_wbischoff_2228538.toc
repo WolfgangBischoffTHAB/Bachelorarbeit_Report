@@ -21,9 +21,9 @@
 \contentsline {chapter}{\numberline {3}Durchführung und Methodik}{25}{chapter.127}%
 \contentsline {section}{\numberline {3.1}Schrittweises Vorgehen}{25}{section.128}%
 \contentsline {section}{\numberline {3.2}Der NEORV32 Core und dessen Einsatz}{26}{section.137}%
-\contentsline {section}{\numberline {3.3}Test-Software}{29}{section.142}%
+\contentsline {section}{\numberline {3.3}Test-Software}{30}{section.142}%
 \contentsline {section}{\numberline {3.4}Evaluierung der Performance}{31}{section.143}%
-\contentsline {section}{\numberline {3.5}Zusammenfassung}{31}{section.144}%
+\contentsline {section}{\numberline {3.5}Zusammenfassung}{32}{section.144}%
 \contentsline {chapter}{\numberline {4}Analyse der NEORV32 CPU}{33}{chapter.145}%
 \contentsline {section}{\numberline {4.1}Architektur des NEORV32 Core}{33}{section.146}%
 \contentsline {section}{\numberline {4.2}Die Fetch"=Engine}{34}{section.148}%

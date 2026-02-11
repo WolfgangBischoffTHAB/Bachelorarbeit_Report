@@ -44,6 +44,10 @@ Es gibt drei große Phasen, die in einem Wasserfallprozess streng linear abgearb
 
 Links des Kreisels ist der Name des Vorgehens aufgeführt, das den Quellcode in den kompilierten Zustand überführt, also der Compiler, das Evaluieren oder Synthetisieren. Unterhalb des Kreisels ist das Werkzeug aufgelistet, mit dem das Kompilat ausgeführt wird. Rechts des Kreisels ist das Mittel aufgelistet, über das die Ausführung bewertet wird.
 
+Im ersten Schritt, bei der Ausführung auf dem Emulator, kann der Quellcode debugged werden, oder es können printf()-Ausgaben bewertet werden. Im Simulator wird die WaveForm über einen WaveForm Viewer ausgewertet. Wenn das Design im letzten Schritt auf dem FPGA läuft, gibt es keinen Debugger mehr für das Design, es werden auch keine Waveforms mehr aufgezeichnet. Es lassen sich lediglich indirekte Schlüsse über die Funktion ziehen, indem man die printf()-Ausgaben bewertet, die ein Programm macht, das auf dem Design ausgeführt wird.
+
+Wie bei jeder Softwareentwicklung ist ein Fehler umso kostspieliger, je später er in der Entwicklung entdeckt wird. Fehler im letzten Schritt bei der Synthese zu finden ist extrem zeitintensiv, da es wenig Werkzeugunterstützung gibt um den Fehler zu lokalisieren.
+
 Der Quellcode wird bearbeitet und getestet, bis er das gewünschte Ergebnis erzielt. In diesem Fall wird in die nächste Phase übergegangen. Dies wird durch die Pfeile zwischen den Phasen verdeutlicht.
 
 
@@ -61,7 +65,9 @@ Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschie
 
 Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Dieser Schritt ist in Abbildung \ref{fig:process} mittig dargestellt. Das Anwendungsprogramm aus dem ersten Schritt wird in den VHDL-Quellcode in Form eines Speicherdumps eingebettet, damit der Simulator die Testanwendungen ausführt. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
 
-Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet dann die eingehenden Signale und der Simulator speichert die Signaländerungen in Value Change Dump (VCD)-Dateien. Ein sogenannter Waveform-Viewer kann die VCD-Dateien laden und die Signale dann anzeigen, wie es in \ref{fig:sample_waveform} dargestellt ist.
+Die Simulation verwendet Signale, die das Design ``stimulieren''. Dabei werden die Signale so gewählt, dass ein bestimmter Ablauf provoziert wird. Dieser Ablauf kann dann durch die Simulation getestet werden. Das Design verarbeitet die eingehenden Signale und produziert Ausgabesignale. Der Simulator speichert alle Signaländerungen, sowohl die Eingaben an das Design, als auch dessen Ausgaben, in Value Change Dump (VCD)-Dateien. Diese VCD-Dateien können dann in einem separaten Schritt ausgewertet werden.
+
+Ein sogenannter Waveform-Viewer kann die VCD-Dateien laden und die Signale dann anzeigen, wie es in \ref{fig:sample_waveform} dargestellt ist.
 
 \begin{figure}[h]
 \centering
@@ -70,7 +76,7 @@ Die Simulation wird mit Eingangssignalen ``stimuliert''. Das Design verarbeitet 
 \label{fig:sample_waveform}
 \end{figure}
 
-In \ref{fig:sample_waveform} lässt sich erkennen, dass die Load-Store-Unit aktiviert wird, da das Signal lsu\_en\_i auf einen neuen Zustand wechselt. Dann werden Daten geladen und man sieht die 16 einzelnen Rückmeldungen des Datenbus. Durch diese einzelnen Ereignisse kann ein Rückschluss auf die Funktion des Designs gezogen werden.
+In Abbildung \ref{fig:sample_waveform} lässt sich erkennen, dass die Load-Store-Unit aktiviert wird, da das Signal lsu\_en\_i auf einen neuen Zustand wechselt. Dann werden Daten geladen und man sieht die 16 einzelnen Rückmeldungen des Datenbus. Durch diese einzelnen Ereignisse kann ein Rückschluss auf die Funktion des Designs gezogen werden.
 
 Durch visuelle Inspektion der Waveform kann nun geprüft werden, ob das Design so auf die Eingabedaten reagiert wie vom Designer erwartet. Das wichtigste Signal ist die Clocksource, die die CPU taktet, damit die sequentielle Logik Schritte ausführt.
 

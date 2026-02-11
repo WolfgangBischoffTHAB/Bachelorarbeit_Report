@@ -12,7 +12,7 @@ Der NEORV32 besitzt den in Abbildung \ref{fig:NEORV32_Architecture} dargestellte
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.39]{"neorv32_cpu_architecture.png"}
-\caption{NEORV32-Architektur}
+\caption[NEORV32-Architektur]{NEORV32-Architektur (Quelle: \cite{NEORV32_DataSheet})}
 \label{fig:NEORV32_Architecture}
 \end{figure}
 
@@ -58,7 +58,7 @@ Allgemein wird die Kontrolllogik Einfluss auf den Datenpfad haben und Teile des 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.32]{"PipelinedDesign.png"}
-\caption{Design eines RISC-V CPU mit Pipeline}
+\caption[Design eines RISC-V CPU mit Pipeline]{Design eines RISC-V CPU mit Pipeline (Quelle: \cite{Harris2021DigitalDA}, S. 444)}
 \label{fig:PipelinedDesign}
 \end{figure}
 
@@ -106,7 +106,9 @@ Die Load"=Store"=Unit bildet das Bindeglied zwischen der Execution"=Engine und d
 \label{fig:LoadStoreUnitAndBus}
 \end{figure}
 
-Die Bus"=Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält. Der Datenspeicher wird über Load"=Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store"=Anweisungen geschrieben. Die Aufgabe der Load"=Store"=Unit besteht darin die Signale der Execution"=Engine in passende Bus"=Requests für Load"= oder Store Anweisungen zu übersetzen.
+Die Bus"=Requests werden auf dem Bus innerhalb der NEORV32 CPU ausgeführt. Ein Teilnehmer am Bus ist z.B. der Datenspeicher. Mit Datenspeicher ist der Teil des Speichers gemeint, der die Werte der Variablen speichert, also konkret keinen Quellcode sondern eben Daten enthält.
+
+Der Datenspeicher wird über Load"=Anweisungen gelesen und produziert damit Daten für die Register oder er wird durch Store"=Anweisungen geschrieben. Die Aufgabe der Load"=Store"=Unit besteht darin die Signale der Execution"=Engine in passende Bus"=Requests für Load"= oder Store Anweisungen zu übersetzen.
 
 Dabei ist folgende Besonderheit zu beachten. Die Bus"=Requests, die von der Load"=Store"=Unit erzeugt werden sind in der Datei neorv32\_top.vhd mit dem Data"=Cache verbunden. Damit unterstützt die NEORV32 CPU eine Cache"=Hierarchie für Daten. Anstatt direkt auf den Speicher zuzugreifen, greift die Load"=Store"=Unit immer zunächst in den Cache. Wenn ein Cache"=Hit stattfindet, ergibt sich ein Geschwindigkeitszuwachs.
 

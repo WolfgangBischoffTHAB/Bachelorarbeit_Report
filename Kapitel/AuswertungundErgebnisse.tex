@@ -79,7 +79,7 @@ Um Anweisungsfolgen miteinander zu vergleichen, muss zunächst eine Skala gewäh
 
 Als Skala wird die Zahl der Clock-Ticks gewählt, die die CPU zur Ausführung der Anweisungsfolge benötigt. Die Abbildung erfolgt über ein Feature, das die NEORV32 CPU liefert. Es handelt sich hier um Register, die die Clock-Ticks zählen. Die Qualität auf der Skala ist dadurch bestimmt, dass weniger Clock-Zyklen besser sind. Die CPU löst eine Aufgabe dann schneller.
 
-Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V"=Terminologie gibt es sogennante \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie deren Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
+Es wird nun das Zählen der Clock-Ticks beschrieben. In RISC-V"=Terminologie gibt es sogenannte \gls{CSR}. CSR steht für Control- und Statusregister. Diese Register werden nicht bei der Abarbeitung von Anweisungen direkt verwendet. Sie können indirekt Einfluss auf die Arbeitsweise der CPU haben, da sie deren Zustand enthalten. Über bestimmte Befehle lassen sich die CSR ändern und damit lässt sich der Zustand der CPU konfigurieren.
 
 Ein Paar von CSR, das bei der Zählung der Clock-Zyklen verwendet wird, sind die Register CSR\_MCYCLE und CSR\_MCYCLEH. Das erste Register (CSR\_MCYCLE) speichert das Low-Word und das zweite Register (CSR\_MCYCLEH) speichert das High-Word des Clock-Cycle-Zählers.
 
@@ -123,7 +123,7 @@ Das Vorgehen ist das Folgende:
 
 \begin{enumerate}
 
-    \item In Vivado wird das Design synthetisiert. Dabei wird der Bootloader als erstes Anwendungsprogramm direkt in das Design synthetisiert. Damit ist der Bootloader-Maschinencode direkt im internen Instruktionsspeicher der CPU enthalten und wird damit direkt beim Systemstart ausgeführt.
+    \item In Vivado 2025.1 wird das Design synthetisiert. Dabei wird der Bootloader als erstes Anwendungsprogramm direkt in das Design synthetisiert. Damit ist der Bootloader-Maschinencode direkt im internen Instruktionsspeicher der CPU enthalten und wird damit direkt beim Systemstart ausgeführt.
 
     \item Der Bitstream wird über den in Vivado integrierten Hardware-Manager auf das FPGA-Board übertragen und dort ausgeführt. Der Bootloader ist jetzt über eine UART-Schnittstelle erreichbar.
 
@@ -131,9 +131,9 @@ Das Vorgehen ist das Folgende:
 
     \item Die Ausgabe des ``image\_gen'' Werkzeugs wird dem Bootloader über die UART-Schnittstelle zugeführt. Dazu wurde ein eigener Uploader erstellt. Die Firmware könnte aber auch über jeden beliebigen Terminal-Emulator übertragen werden.
 
-    \item Der Bootloader speichert das übertragene Programm im NEORV32 CPU und führt es aus, sobald der Uploader den Befehl zur Ausführung gibt.
+    \item Der Bootloader speichert das übertragene Programm in der NEORV32 CPU und diese führt das Programm aus, sobald der Uploader den Befehl zur Ausführung gibt.
 
-    \item Über die UART-Schnittstelle wird die gemessene Anzahl an Clock-Zyklen gelesen und notiert.
+    \item In alle Testprogramme wird die Messung der Zyklen und die Ausgabe über einen UART eingefügt. Über die UART-Schnittstelle wird die gemessene Anzahl an Clock-Zyklen gelesen und notiert.
 
     \item Die Ausgaben aller Testprogramme werden verglichen und bewertet.
 
@@ -315,7 +315,7 @@ Der C-Quellcode ist sehr außergewöhnlich gestaltet, einzig und alleine, weil d
 
 Für die hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, einfache Multiplikation},captionpos=b]
+\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, beschleunigte Multiplikation},captionpos=b]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"
@@ -328,7 +328,7 @@ Es werden 185 Zyklen notiert.
 
 Für die nicht hardwarebeschleunigte Variante erfolgt folgende Ausgabe:
 
-\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, beschleunigte Multiplikation},captionpos=b]
+\begin{lstlisting}[style=PseudoLang,caption={Ausgabe der Zyklen, einfache Multiplikation},captionpos=b]
 "\nBooting from 0x00000000...\r"
 "\n\r"
 "\nMatrix Multiplication Sample \r\r"

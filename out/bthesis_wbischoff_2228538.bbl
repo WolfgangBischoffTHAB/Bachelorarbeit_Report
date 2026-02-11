@@ -66,10 +66,9 @@
 \bibitem[Harris u. Harris(2021)]{Harris2021DigitalDA}
 \dinatlabel{Harris u. Harris 2021} \textsc{Harris}, Sarah~L. ; \textsc{Harris},
   David:
-\newblock Digital Design and RISC-V Computer Architecture Textbook.
-\newblock {In: }\emph{2021 ACM/IEEE Workshop on Computer Architecture Education
-  (WCAE)}  (2021), 1-5.
-\newblock \url{https://api.semanticscholar.org/CorpusID:246872104}
+\newblock Digital Design and Computer Architecture, RISC-V Edition.
+\newblock   (2021).
+\newblock ISBN 0128200642, 97801282006430
 
 \bibitem[Ibáñez(2022)]{intro_rvv}
 \dinatlabel{Ibáñez 2022} \textsc{Ibáñez}, Roger~F.:
