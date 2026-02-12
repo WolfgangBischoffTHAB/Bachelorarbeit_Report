@@ -28,45 +28,47 @@ Warning--entry type for "stream_computing_risc_v_matrix" isn't style-file define
 --line 433 of file Literatur/Literatur.bib
 Warning--entry type for "intro_rvv" isn't style-file defined
 --line 449 of file Literatur/Literatur.bib
-You've used 20 entries,
+Warning--entry type for "heise_matrix_rechenwerke" isn't style-file defined
+--line 465 of file Literatur/Literatur.bib
+You've used 21 entries,
             4728 wiz_defined-function locations,
-            996 strings with 10350 characters,
-and the built_in function-call counts, 13565 in all, are:
-= -- 1308
-> -- 437
-< -- 473
-+ -- 576
-- -- 161
-* -- 928
-:= -- 2441
-add.period$ -- 34
-call.type$ -- 20
-change.case$ -- 108
-chr.to.int$ -- 19
-cite$ -- 20
-duplicate$ -- 366
-empty$ -- 829
-format.name$ -- 264
-if$ -- 2526
+            1000 strings with 10577 characters,
+and the built_in function-call counts, 14033 in all, are:
+= -- 1353
+> -- 447
+< -- 484
++ -- 589
+- -- 164
+* -- 954
+:= -- 2522
+add.period$ -- 36
+call.type$ -- 21
+change.case$ -- 112
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 382
+empty$ -- 866
+format.name$ -- 270
+if$ -- 2622
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 101
-newline$ -- 131
-num.names$ -- 80
-pop$ -- 169
+missing$ -- 107
+newline$ -- 137
+num.names$ -- 84
+pop$ -- 176
 preamble$ -- 1
-purify$ -- 148
+purify$ -- 154
 quote$ -- 0
-skip$ -- 818
+skip$ -- 848
 stack$ -- 0
-substring$ -- 839
-swap$ -- 73
-text.length$ -- 52
+substring$ -- 861
+swap$ -- 75
+text.length$ -- 53
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 240
+type$ -- 253
 warning$ -- 0
-while$ -- 112
+while$ -- 116
 width$ -- 0
-write$ -- 288
-(There were 10 warnings)
+write$ -- 302
+(There were 11 warnings)

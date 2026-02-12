@@ -87,7 +87,9 @@ Im Leerlaufzustand EX\_DISPATCH wartet die Execution"=Engine, bis ein Trap oder 
 
 In EX\_EXECUTE wird der nächste Zustand abhängig von der Art der Anweisung gewählt. Das heißt EX\_EXECUTE ist ein Switch-State, der in mehrere Äste der State"=Machine verzweigen kann. Es gibt Zweige für ALU-Operationen, Sprünge und Speicherzugriffe (Load und Store).
 
-Für länger laufende Befehle muss die Execution"=Engine auf den Abschluss der Operation warten. Daher sind lange laufende Operationen jeweils durch ein Paar aus Request- und Response-Zuständen modelliert. Der Request Zustand wird direkt in Richtung Response"=Zustand verlassen. Der Response"=Zustand wird erst in Richtung EX\_DISPATCH verlassen, wenn das eingehende Response"=Signal aus der Sensitivitätsliste aktiviert worden ist. Im Response"=Zustand werden die erzeugten Daten betrachtet und Signale zurückgesetzt.
+Für länger laufende Befehle muss die Execution"=Engine auf den Abschluss der Operation warten. Daher sind lange laufende Operationen jeweils durch ein Paar aus Request- und Response-Zuständen modelliert.
+
+Der Request Zustand wird direkt in Richtung Response"=Zustand verlassen. Der Response"=Zustand wird erst in Richtung EX\_DISPATCH verlassen, wenn das eingehende Response"=Signal aus der Sensitivitätsliste aktiviert worden ist. Im Response"=Zustand werden die erzeugten Daten betrachtet und Signale zurückgesetzt.
 
 
 

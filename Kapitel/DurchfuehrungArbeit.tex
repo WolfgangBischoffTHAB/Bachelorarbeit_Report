@@ -63,11 +63,13 @@ Die Entwicklung der Anwendungen erfolgt mit Hilfe eines eigenen Compilers und au
 
 Zunächst ist zu sagen, dass man den VHDL- oder Verilog-Quellcode auf unterschiedliche Arten nutzen kann. Dabei sind die unterschiedlichen Möglichkeiten interessant für unterschiedliche Phasen eines Projekts.
 
-Im Zuge der Durchführung dieser Arbeit wird der Quellcode zunächst durch einen Simulator evaluiert. Dieser Schritt ist in Abbildung \ref{fig:process} mittig dargestellt. Das Anwendungsprogramm aus dem ersten Schritt wird in den VHDL-Quellcode in Form eines Speicherdumps eingebettet, damit der Simulator die Testanwendungen ausführt. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für eine Millisekunde.
+Im Zuge der Durchführung dieser Arbeit wird der NEORV32 Quellcode zunächst durch einen Simulator evaluiert. Dieser Schritt ist in Abbildung \ref{fig:process} mittig dargestellt. Das Anwendungsprogramm aus dem ersten Schritt wird in den VHDL-Quellcode in Form eines Speicherdumps eingebettet, damit der Simulator die Testanwendungen ausführt. Als Simulator kommt GHDL in der Version 5.1.1 zum Einsatz. Die Evaluierung ermöglicht dann die Simulation des Designs für einen bestimmten Zeitschritt, beispielsweise für wenige Mikrosekunden.
 
-Die Simulation verwendet Signale, die das Design ``stimulieren''. Dabei werden die Signale so gewählt, dass ein bestimmter Ablauf provoziert wird. Dieser Ablauf kann dann durch die Simulation getestet werden. Das Design verarbeitet die eingehenden Signale und produziert Ausgabesignale. Der Simulator speichert alle Signaländerungen, sowohl die Eingaben an das Design, als auch dessen Ausgaben, in Value Change Dump (VCD)-Dateien. Diese VCD-Dateien können dann in einem separaten Schritt ausgewertet werden.
+Die Simulation verwendet Signale, die das Design ``stimulieren''. Dabei werden die Signale so gewählt, dass ein bestimmter Ablauf provoziert wird. Beispielsweiße wird eine Clock an das Design angelegt, damit die NEORV32 CPU mit jedem Clock-Tick einen Schritt ausführt. Der vorbereitete Ablauf kann dann durch die Simulation getestet werden.
 
-Ein sogenannter Waveform-Viewer kann die VCD-Dateien laden und die Signale dann anzeigen, wie es in \ref{fig:sample_waveform} dargestellt ist.
+Das Design verarbeitet die eingehenden Signale und produziert Ausgabesignale. Der Simulator speichert alle Signaländerungen, sowohl die Eingaben an das Design, als auch dessen Ausgaben, in Value Change Dump (VCD)-Dateien. Diese VCD-Dateien können dann in einem separaten Schritt ausgewertet werden.
+
+Ein sogenannter Waveform-Viewer kann die VCD-Dateien laden und die Signale dann grafisch darstellen, wie es der Abbildung \ref{fig:sample_waveform} zu entnehmen ist.
 
 \begin{figure}[h]
 \centering
@@ -97,7 +99,9 @@ Ein Ausschnitt aus dem Ergebnis der Synthese ist in Abbildung \ref{fig:schematic
 
 In Abbildung \ref{fig:schematic} sind einzelne Look-Up-Tables zu sehen, die mit LUT3 bzw. LUT4 beschrieben sind. Eine LUT ist eine Tabelle, die das gewünschte Ergebnis einer logischen Funktionen ausgibt, wenn man die passenden Eingangssignale anlegt. Die logischen Funktionen, aus denen das Design im Kern besteht, werden in diesen LUTs abgespeichert und so miteinander kombiniert, dass die Funktion des gesamten Designs realisiert wird. Es ergibt sich ein sehr großes Netz aus Elementen. Ein Mensch kann die Wirkungsweise des Designs auf dieser Detailebene nur sehr schwer verstehen.
 
-Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und alle anderen Objekte werden konkret in die Ressource eingebettet, die der FPGA bietet. Ein Floor-Plan entsteht. Das Vivado-Synthesewerkzeug kann also tatsächlich grafisch angeben, welche LUTs an welcher Stelle in den FPGA-Chip angeordnet worden sind. Die Implementierung ist exemplarisch in Abbildung \ref{fig:floorplan_1} dargestellt. Man sieht, dass nur ein Teil des FPGA durch das Design belegt ist. Der belegte Teil ist in türkiser Farbe dargestellt.
+Nach der Synthese folgt der Schritt der Implementierung. Die einzelnen LUTs und alle anderen Objekte werden konkret in die Ressourcen eingebettet, die der FPGA bietet. Wo möglich sollte die Toolchain Hardwareelemente nutzen, die der FPGA bereits bietet, anstatt Logikzellen für diese Aufgaben zu verschwenden. Wenn das Tool beispielsweiße RAM-Speicher im Design erkennt und der FPGA RAM-Speicher in hardwareform besitzt, kann der RAM-Speicher an das Design angebunden werden.
+
+Ein Floor-Plan entsteht. Das Vivado-Synthesewerkzeug kann also tatsächlich grafisch angeben, welche LUTs an welcher Stelle in den FPGA-Chip angeordnet worden sind. Die Implementierung ist exemplarisch in Abbildung \ref{fig:floorplan_1} dargestellt. Man sieht, dass nur ein Teil des FPGA durch das Design belegt ist. Der belegte Teil ist in türkiser Farbe dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -114,7 +118,9 @@ Dabei führt Vivado seine gesamte Synthese-Toolchain durch und führt damit das 
 
 %Das Vorgehen in dieser Arbeit ist es zunächst die Änderungen in das NEORV32"=Design einzubringen und zu simulieren, bis die Simulation laut Waveform-Diagram erfolgreich ist. Danach erfolgt die Synthese mit Vivado.
 
-Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan. Die Umgestaltung des Designs nach der Simulation bis zur korrekten Funktion nach der Synthese wird nochmals als eigener Arbeitsschritt bei der Durchführung dieser Arbeit antizipiert. In dieser Phase wird die Funktion über den UART des NEORV32 getestet, der verwendet wird, wenn die Testanwendung einen printf() Aufruf absetzt. Dies ist momentan die einfachste Möglichkeit die Extension zu testen.
+Erfahrungsgemäß verhält sich das synthetisierte Design anders als das simulierte. Die Arbeit ist also nach der Simulation nicht getan. Die Umgestaltung des Designs nach der Simulation bis zur korrekten Funktion nach der Synthese wird nochmals als eigener Arbeitsschritt bei der Durchführung dieser Arbeit antizipiert. In Abbildung \ref{fig:process} ist dieser Schritt auf der rechten Seite dargestellt. Auch hier müssen mehrere Zyklen durchgeführt werden, bis die Funktion hergestellt ist.
+
+In dieser Phase wird die Funktion über den UART des NEORV32 getestet, der verwendet wird, wenn die Testanwendung einen printf() Aufruf absetzt. Dies ist momentan die einfachste Möglichkeit die Extension zu testen.
 
 
 
@@ -131,7 +137,7 @@ Der erste Ansatz an ein lauffähiges Programm zu kommen, war es, einen C-Compile
 
 Zum anderen lassen sich in den Compiler dann auch neue Anweisungen einpflegen, die im RISC-V-Standard noch nicht definiert sind. Zwangsweise kennt ein GCC Compiler diese Anweisungen folglich auch nicht. Die Erweiterung des GCC Compiler ist um ein Vielfaches komplizierter als die Erweiterung eines simplen, selbsterstellten Compilers. Die Unterstützung eigener Anweisungen wird in dieser Arbeit benötigt um die Matrix-Anweisungen verwenden zu können, die im Zuge dieser Arbeit hinzugefügt werden und daher von GCC nicht unterstützt werden.
 
-Da die C-Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Unterstützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen, aber keine if-Anweisung, da für eine Matrixmultiplikation mit dem dyadischen Produkt keine if-Anweisung benötigt wird. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp. Es gibt außerdem einen einfachen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann.
+Da die C-Programmiersprache viele syntaktische Elemente und eine Vielzahl an Datentypen enthält, wurde der unterstützte Umfang der Sprache für den eigenen Compiler sehr stark eingeschränkt. Es gibt nur einen einzigen Datentyp, einen 32 bit Integer. Damit entfällt jegliche Prüfung von Datentypen. Unterstützt werden Funktionsdefinitionen mit Parametern und Aufrufe dieser Funktionen. Dies hat zur Folge, dass der Compiler Stack-Frames erzeugen und auch wieder entfernen können muss. Zusätzlich gibt es for-Schleifen, aber keine if-Anweisung, da für eine Matrixmultiplikation mit dem dyadischen Produkt keine if-Anweisung benötigt wird. Zur Beschreibung der Matrizen unterstützt der Compiler Arrays vom Integer-Datentyp. Es gibt außerdem einen einfachen Präprozessor, der Define-Anweisungen ersetzen und include-Anweisungen ausführen kann.
 
 Der Compiler erzeugt ein Listing aus Assembler-Befehlen, die dann von einem Assembler in Maschinen-Code übersetzt werden müssen. Es gibt keine Ausgabe von Objekt-Dateien und keine Linker-Infrastruktur und damit auch keine Bibliotheken. Alle Programme müssen komplett in Form von Quellcode vorliegen und können nicht aus vorübersetzten Bibliotheken stammen.
 
@@ -165,7 +171,7 @@ Die Voraussetzungen für dieses Vorgehen ist, dass sowohl Anwendung A als auch A
 
 \section{Zusammenfassung} \label{sec:process_summary}
 
-In diesem Abschnitt wurde beschrieben, welche Schritte zur Durchführung dieser Arbeit durchgeführt werden müssen. Die Planung und Durchführung der Änderungen am NEORV32-Design, das Erstellen von Testsoftware und das Messen des Ergebnisses wurden als wichtige Punkte identifiziert und beschrieben. Es wird zwischen Simulation und Synthese bzw. Ausführung auf dem FPGA unterschieden.
+In diesem Abschnitt wurde beschrieben, welche Schritte zur Durchführung dieser Arbeit ausgeführt werden müssen. Die Planung und Durchführung der Änderungen am NEORV32-Design, das Erstellen von Testsoftware und das Messen des Ergebnisses wurden als wichtige Punkte identifiziert und beschrieben. Es wird zwischen Simulation und Synthese bzw. Ausführung auf dem FPGA unterschieden.
 
 Zusätzlich wurden die Werkzeuge aufgelistet, mit denen die Entwicklung durchgeführt wird und welche Bedeutung diese Werkzeuge in den einzelnen Schritten haben.
 

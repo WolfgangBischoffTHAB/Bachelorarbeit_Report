@@ -9,30 +9,31 @@
 \addvspace {\baselineskip }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces SISD (links) und SIMD (rechts)}}{11}{figure.caption.35}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces RVV-Register}}{13}{figure.caption.37}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Strip-Mining Ablauf}}{15}{figure.caption.39}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Ansätze zur Matrix-Extension}}{18}{figure.caption.115}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Matrix in Blöcken}}{20}{figure.caption.117}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrixmultiplikation blockweise}}{20}{figure.caption.118}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Matrixmultiplikation Ergebnis}}{20}{figure.caption.119}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{21}{figure.caption.120}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{21}{figure.caption.121}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Matrix Accumulator (MAC)}}{23}{figure.caption.125}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Generierung der RVV-Anweisungen}}{14}{figure.caption.39}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Strip-Mining Ablauf}}{15}{figure.caption.40}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Ansätze zur Matrix-Extension}}{18}{figure.caption.116}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrix in Blöcken}}{20}{figure.caption.118}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Matrixmultiplikation blockweise}}{21}{figure.caption.119}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Matrixmultiplikation Ergebnis}}{21}{figure.caption.120}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Matrixmultiplikation Berechnungsvorschrift}}{21}{figure.caption.121}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Matrix Multiplikation Blöcke A, E, B und G}}{22}{figure.caption.122}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Matrix Accumulator (MAC)}}{23}{figure.caption.126}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Entwicklungsschritte}}{26}{figure.caption.136}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Waveforms}}{27}{figure.caption.139}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Schaltplan nach der Synthese}}{28}{figure.caption.140}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Floorplan}}{29}{figure.caption.141}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Entwicklungsschritte}}{26}{figure.caption.137}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Waveforms}}{27}{figure.caption.140}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Schaltplan nach der Synthese}}{28}{figure.caption.141}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Floorplan}}{29}{figure.caption.142}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32-Architektur}}{33}{figure.caption.147}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{34}{figure.caption.149}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Design eines RISC-V CPU mit Pipeline}}{35}{figure.caption.151}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Struktur der Execution"=Engine}}{36}{figure.caption.152}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Die Load"=Store"=Unit und ihre Schnittstellen}}{37}{figure.caption.154}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces NEORV32-Architektur}}{33}{figure.caption.148}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces NEORV32 Gültige Instruktion}}{34}{figure.caption.150}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Design eines RISC-V CPU mit Pipeline}}{35}{figure.caption.152}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Struktur der Execution"=Engine}}{36}{figure.caption.153}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Die Load"=Store"=Unit und ihre Schnittstellen}}{37}{figure.caption.155}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{42}{figure.caption.202}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Matrix Engine}}{47}{figure.caption.324}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces VHDL Entities}}{42}{figure.caption.203}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Matrix Engine}}{47}{figure.caption.325}%
 \addvspace {\baselineskip }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Waveforms der Matrixmultiplikation}}{57}{figure.caption.478}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Waveforms der Matrixmultiplikation}}{57}{figure.caption.479}%
 \addvspace {\baselineskip }
 \addvspace {\baselineskip }
 \def \@chapapp {\appendixname }

@@ -7,7 +7,9 @@ In diesem Kapitel werden die Erweiterungen an den Entitäten des vorgegebenen De
 
 \section{Die Matrix-Register} \label{sec:neorv32-matrix-registers}
 
-Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit-Elementen und sind nicht für andere Datentypen konfiguierbar und nicht für größere Längen miteinander kombinierbar, wie es bei der \gls{RVV} der Fall ist. Die Register sind wie folgt definiert.
+Die Matrixregister bestehen in der jetzigen Version aus 16 32-Bit-Elementen und sind nicht für andere Datentypen konfiguierbar und nicht für größere Längen miteinander kombinierbar, wie es bei der \gls{RVV} der Fall ist.
+
+Die Register sind wie folgt definiert.
 
 \begin{lstlisting}[style=VHDLStyle,caption={Die Matrix-Register},captionpos=b]
   type ram_type is array (0 to MLEN-1)
@@ -34,7 +36,9 @@ vle32.v lädt Daten aus dem Daten-Speicher in die Vector-Register (Load"=Operati
 
 Für die Matrix-Extension werden die Instruktion mle32, mmul32 und mse32 hinzugefügt. Dabei ist mle32 die Load"=Operation, mmul32 die SIMD"=Instruktion und mse32 die Store"=Operation. Ein Äquivalent zur set(i)vli ist nicht vorgesehen, da die Matrix-Engine zum jetzigen Stand keine Konfigurationsmöglichkeiten anbietet.
 
-Die NEORV32 CPU besitzt eine Vielzahl an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können. Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
+Die NEORV32 CPU besitzt eine Vielzahl an Beispielen, die sich im Software-Unterordner befinden. Jedes Beispiel kann von Funktionen Gebrauch machen, die über die neorv32.h Header-Datei eingebunden werden können.
+
+Teil dieser Funktionen sind sogenannte Intrinsics. Ein Intrinsic ist eine Funktion, die in der Programmiersprache C geschrieben ist und die Programmiersprache C damit um Funktionalität erweitert, die thematisch zu einem anderen Themengebiet gehört.
 
 Ein Beispiel dafür sind die Intrinsics the X-Window Systems \cite{XToolkitIntrinsics}. Hier wird eine einfach zu verwendende Schnittstelle zur Softwareentwicklung mit dem X-Window System für die Programmiersprache erstellt.
 
@@ -328,9 +332,9 @@ Um die Matrix-Engine zu verwenden, sind folgende Schritte notwendig:
 
     \item Die MAC-Einheit wird verwendet um das dyadische Produkt zu berechnen und zu speichern.
 
-    \item Die vorhergehenden drei Schritte müssen insgesamt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
+    \item Die vorhergehenden zwei Schritte müssen insgesamt viermal wiederholt werden um zwei 4x4 Matrizen zu multiplizieren.
 
-    \item Der Inhalt der MAC-Einheit muss zurück in den Speicher und den Cache übertragen werden, damit er dann der Softwareapplikation zur Verfügung steht.
+    \item Der Inhalt der MAC-Einheit muss zurück in den Speicher und den Cache übertragen werden, damit er dann der Applikation zur Verfügung steht.
 
 \end{enumerate}
 

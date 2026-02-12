@@ -95,7 +95,7 @@ Ganz abgesehen von einer Komplexität von $\mathcal{O}(n^3)$ ist der Nachteil di
 
 %Diese Implementierung beschränkt sich auf \gls{SISD} (Single Instruction Single Data) Anweisungen.
 
-Wenn der Compiler das Optimierungspotential für den Einsatz hardwarebeschleunigter Instruktionen nicht erkennt oder die CPU keine speziellen Anweisungen anbietet, generiert er \gls{SISD} (Single Instruction Single Data)-Anweisungen, die jede Multiplikation und Addition einzeln ausführen. Im ungünstigsten Fall besteht der generierte Code aus einer langen Folge aus einer Load-Anweisung, gefolgt von einer Operation, gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
+Wenn der Compiler das Optimierungspotential für den Einsatz hardwarebeschleunigter Instruktionen nicht erkennt oder die CPU keine speziellen Anweisungen anbietet, generiert der Compiler \gls{SISD} (Single Instruction Single Data)-Anweisungen, die jede Multiplikation und Addition einzeln ausführen. Im ungünstigsten Fall besteht der generierte Code aus einer langen Folge aus einer Load-Anweisung, gefolgt von einer Operation, gefolgt von einer Store-Anweisung. Dieses ständige Laden und Speichern führt zu einer langen Laufzeit.
 
 In den beiden Architekturen Van-Neumann und Harvard gilt gleichermaßen, dass eine Berechnung nicht im Speicher, sondern nur innerhalb der CPU ausgeführt wird. Da die Daten im Speicher stehen, muss also immer zunächst eine Übertragung zwischen Speicher und CPU erfolgen. Danach kann die Berechnung innerhalb der CPU durchgeführt werden und abschließend muss das Ergebnis zurück in den Speicher übertragen werden. Man nennt dies die Load-Store-Architektur. Dabei sind die beiden Schritte Load und Store aufwändig, da sie im schlimmsten Fall durch die gesamte Speicherhierarchie kaskadieren, wenn die Daten nicht im Cache vorliegen.
 
@@ -166,6 +166,7 @@ Die Abbildung \ref{fig:rvv_register} aus \cite{intro_rvv} zeigt zwei mögliche K
 \label{fig:rvv_register}
 \end{figure}
 
+Die Abbildung \ref{fig:rvv_register} bedarf einer Korrektur. Die Ergebnisse der Additionen, die jeweils in den Zielregistern V6 dargestellt sind, sind in der Abbildung nicht korrekt. Der Informationsgehalt der Abbildung ist aber trotzdem hilfreich für das Verständnis.
 
 
 
@@ -175,13 +176,22 @@ Die Verwendung der Vektor-Extension erfolgt durch ein Hardware-Software-Co-Desig
 
 Moderne, optimierende Compiler wie der GCC oder die LLVM-Infrastruktur wurden um das Wissen um die RISC-V-Vektor-Extension erweitert und können den Anwendungsfall automatisch erkennen und das gewünschte Hardware-Software Co-Design automatisch generieren.
 
-Dies lässt sich testen, indem man den naiven Matrix"=Multiplikationsalgorithmus mit der neuesten Version des GCC für RISC-V übersetzt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder. Der Compiler hat den Anwendungsfall erkannt und das Co-Design erstellt.
+Dies lässt sich testen, indem man Vektoroperationen mit der neuesten Version des GCC für RISC-V übersetzt. Im generierten Assembler-Code findet man die \gls{RVV}-Instruktionen wieder. Der Compiler hat den Anwendungsfall erkannt und die entsprechenden, hardware-beschleunigten Anweisungen ausgewählt.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.42]{"godbolt_compiler_explorer_rvv.png"}
+\caption{Generierung der RVV-Anweisungen}
+\label{fig:godbolt_compiler_explorer_rvv}
+\end{figure}
+
+In der Abbildung \ref{fig:godbolt_compiler_explorer_rvv} wird gezeigt, dass der GCC-Compiler für den 64-Bit RISC-V Target bereits für die RVV angepasst worden ist. Auf der linken Seite ist eine Vektoroperation dargestellt. Auf der rechten Seite der Abbildung ist der generierte Code dargestellt. Die speziellen Anweisungen aus der RVV-Extension sind mit einem roten Rahmen kenntlich gemacht. Der GCC-Compiler hat diese Anweisungen automatisch ausgewählt, da er das Optimierungspotential erkannt hat.
 
 % \footnote{https://godbolt.org/}
 
 Das Hardware-Software Co-Design sieht das iterative Vorgehen Strip-Mining vor, bei dem die Software die Hardware in jeder Iteration aufs neue konfiguriert und dann Daten zur parallelen Verarbeitung zuführt.
 
-Ein Ablaufdiagram ist in \ref{fig:strip_mining} dargestellt:
+Ein Ablaufdiagram ist in Abbildung \ref{fig:strip_mining} dargestellt:
 
 \begin{figure}[h]
 \centering
@@ -314,7 +324,7 @@ vvaddint32:
 		ret
 \end{lstlisting}
 
-\section{Übergang zur einer Matrix Extension} \label{sec:riscv_matrix_extension}
+\section{Übergang zu einer Matrix Extension} \label{sec:riscv_matrix_extension}
 
 Jetzt, da die Wirkungsweise der \gls{RVV}-Extension für Vektoren beschrieben worden ist, kann nachvollzogen werden, in welchem Spannungsfeld die RISC-V-Gremien Entscheidungen treffen müssen, wenn es um den nächsten Schritt hin zu einer Matrix-Extension geht.
 
@@ -341,7 +351,7 @@ Die Attached Matrix-Extension \gls{AME} geht noch einen Schritt weiter und verwe
 
 Für die offizielle Ratifizierung einer RISC-V Matrix-Extension ist zum jetzigen Zeitpunkt nicht klar, welcher Ansatz verwendet wird oder ob eventuell sogar mehr als eine Spezifikation ratifiziert werden wird.
 
-In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured State her am ehesten an der Attached Matrix Extension \gls{AME} orientiert. Die Entscheidung fiel zugunsten der \gls{AME} orientierten Lösung, da die NEORV32 CPU im jetzigen Zustand keine \gls{RVV}-Extension implementiert und daher zunächst \gls{RVV} Register erstellt werden müssten um \gls{IME} oder \gls{VME} zu implementieren.
+In dieser Bachelor-Arbeit wird ein Ansatz verfolgt, der sich vom Architectured State her am ehesten an der Attached Matrix Extension (\gls{AME}) orientiert. Die Entscheidung fiel zugunsten der \gls{AME} orientierten Lösung, da die NEORV32 CPU im jetzigen Zustand keine \gls{RVV}-Extension implementiert und daher zunächst \gls{RVV} Register erstellt werden müssten um \gls{IME} oder \gls{VME} zu implementieren.
 
 Ein weiterer Grund ist, dass sich die zusätzliche Matrix-Hardware der \gls{AME} sehr logisch aus der Berechnung des dyadischen Produkts ergibt und daher ein einfaches Verständnis der zu erledigenden Aufgaben möglich ist. Im begrenzten Zeitrahmen dieser Bachelorarbeit wurde daher zugunsten einer Lösung entschieden, die intellektuell auch unter Kontrolle gehalten werden kann und für die ein Abschluss der Arbeit absehbar ist.
 
@@ -381,11 +391,11 @@ Bei sehr großen Matrizen ist dies nicht zielführend, da die CPU die Matrix nur
 \label{fig:matrix_tiling}
 \end{figure}
 
-Die Matrizen müssen nicht mehr im Ganzen in die CPU oder den Cache passen sondern es kann nur ein Teil der Matrizen betrachtet werden.
+Um einen Teil der Matrix C zu berechnen, reicht es aus in mehreren Schritten nur entsprechende Teile der Matrix A und Teile der Matrix B zu betrachten. Die Matrizen müssen nicht mehr im Ganzen in die CPU oder den Cache passen sondern es können in jedem Schritt nur Teile der Matrizen betrachtet werden. Die Abbildung \ref{fig:matrix_tiling} zeigt einen Schritt in diesem Prozess.
 
 Zusätzlich eröffnet sich ebenfalls das Potential der parallelen Berechnung. Wie bei Vektoren ist es durch das blockweise Vorgehen auch für die Berechnung von Matrizen egal, in welcher Reihenfolge die einzelnen Ergebnisse berechnet werden. Damit ist auch eine vollkommene Parallelität denkbar.
 
-Als Ausblick würde das für ein RISC-V Design bedeuten, dass ein RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist, die Matrixmultiplikation  hardwarebeschleunigt zu berechnen. Dann wird eine große Matrix auf alle Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und zurück in den RAM-Speicher zu schreiben.
+Als Ausblick würde das für ein RISC-V Design bedeuten, dass eine RISC-V CPU aus mehreren Harts synthetisiert wird, wobei jeder Hart eine Matrix-Engine erhält, also in der Lage ist, die Matrixmultiplikation  hardwarebeschleunigt zu berechnen. Hart ist der RISC-V Begriff für CPU-Cores. Dann wird eine große Matrix auf mehrere Cores verteilt um das Ergebnis in einzelnen Blöcken zu berechnen und die Teilergebnisse zurück in den RAM-Speicher zu schreiben.
 
 Zunächst wird anhand eines Beispiels verdeutlicht, was es bedeutet, wenn von blockweiser Berechnung gesprochen wird:
 

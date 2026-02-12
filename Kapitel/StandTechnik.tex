@@ -9,7 +9,7 @@ In der RISC-V Vector Extension Spezifikation \cite{rvv_specification} wird das K
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.35]{"strip_mining_2.png"}
-\caption[Strip Mining]{Strip Mining (Quelle: \cite{Colfax_Optimization_Techniques_2_3})}
+\caption[Strip Mining]{Strip Mining (Quelle: \cite{Colfax_Optimization_Techniques_2_3}, S.10)}
 \label{fig:strip_mining_colfax}
 \end{figure}
 
@@ -51,9 +51,13 @@ Wie tragbar die Ergebnisse sind, lässt sich schwer einschätzen, ohne eine eing
 
 % TODO Verweis: https://riscv.org/blog/stream-computing-risc-v-matrix-extension-open-source-project-upgrades-to-version-0-5-supporting-vectormatrix-implementation/
 
+Die Onlinezeitung Heise berichtet jüngst über die Strategien, die die großen Player der Chip-Industrie bezüglich Matrix-Rechenwerken verfolgen um KI auf Ihren CPUs effizient ausführbar zu machen \cite{heise_matrix_rechenwerke}. Apple, als Vorreiter, hat bereits Matrixrechenwerke in die M-Prozessoren integriert. Die Firma Qualcomm möchte diesen Schritt im Jahre 2026 vollziehen, während AMD und Intel die Erweiterung um eine Matrixengine im Jahre 2027 angehen.
+
+In dem Heise-Bericht \cite{heise_matrix_rechenwerke} wird angesprochen, dass die grundlegende Operation der Matrixrechenwerke die Matrix-Matrix-Operation ist, also die Multiplikation von zwei Matrizen. Insbesondere sollen von den Matrixrechenwerken die speziellen, neuartigen Datentypen unterstützt werden, die von modernen Neuronalen Netzen verwendet werden und die sich von den traditionellen Datentypen herkömmlicher CPU-Designs unterscheiden.
+
 Innerhalb des NEORV32 CPU-Umfeldes gibt es eine Arbeit von Qizal Arsalan \cite{QArsalan_NEORV32_MATRIX_CFU}, bei der die NEORV32 CPU um Matrixberechnungen erweitert wird. Diese Bachelorarbeit unterscheidet sich allerdings hinsichtlich der Herangehensweise stark von der Arbeit aus \cite{QArsalan_NEORV32_MATRIX_CFU}.
 
-Die NEORV32 CPU besitzt im Design vorgesehene Erweiterungspunkte namens CFS und CFU. Das CFS (Custom Functions Subsystem) erlaubt es Hardware-Beschleuniger in den NEORV32 CPU einzubringen, die über Speicheradressen (Memory Mapping) aus einer Softwareanwendung mit Daten versorgt werden können. CFU (Custom Function Unit) erlaubt es einzelne Instruktionen zu ergänzen um den CPU um kleinschrittige Operationen zu erweitern.
+Die NEORV32 CPU besitzt im Design vorgesehene Erweiterungspunkte namens CFS und CFU. Das CFS (Custom Functions Subsystem) erlaubt es Hardware-Beschleuniger in die NEORV32 CPU einzubringen, die über Speicheradressen (Memory Mapping) aus einer Softwareanwendung mit Daten versorgt werden können. CFU (Custom Function Unit) erlaubt es einzelne Instruktionen zu ergänzen um die CPU um kleinschrittige Operationen zu erweitern.
 
 Qizal Arsalan untersucht den Ansatz der Matrixmultiplikation mit CFS und CFU. In dieser Bachelorarbeit werden Matrix-Instruktionen jedoch in den NEORV32-Chip eingebracht, die nicht über das CFS oder CFU Feature eingebunden werden, sondern über die Execution-Engine, also der State-Machine, des NEORV32-Chips. Der Grund ist, dass die Speicheradressabhängigkeit von CFS und CFU nicht konform mit einer Matrix-Extension-Spezifikation des RISC-V Gremiums sein können und nicht sein werden.
 

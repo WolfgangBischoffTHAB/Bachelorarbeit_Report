@@ -26,6 +26,7 @@ out/bthesis_wbischoff_2228538.pdf :\
     Bilder/ViewFrustum.png\
     Bilder/WaveFormsMatrixMultiplikation_2.png\
     Bilder/floorplan_1.png\
+    Bilder/godbolt_compiler_explorer_rvv.png\
     Bilder/neorv32_cpu_architecture.png\
     Bilder/neorv32_debugging_instructions_2.png\
     Bilder/schematic_cropped.pdf\
@@ -350,6 +351,8 @@ Bilder/ViewFrustum.png :
 Bilder/WaveFormsMatrixMultiplikation_2.png :
 
 Bilder/floorplan_1.png :
+
+Bilder/godbolt_compiler_explorer_rvv.png :
 
 Bilder/neorv32_cpu_architecture.png :
 
