@@ -23,7 +23,7 @@ Es wurde ein Vergleich zweier Testprogramme auf dem NEORV32 Chip durchgeführt. 
 
 \section{Ausblick} \label{sec:outlook}
 
-Am Ende dieser Arbeit drängt sich eine grundlegende Frage auf. In welchen Szenarion ist es sinnvoll Hardwarebeschleuniger in ein bestehendes RISC-V"=Design einzupflegen und ab wann sollte sich ein Unternehmen für die Erstellung eines komplett neuen Designs entscheiden. Diese Frage ist eng verknüpft mit der Frage, ob der in dieser Arbeit gewählte Ansatz richtig oder falsch ist.
+Am Ende dieser Arbeit drängt sich eine grundlegende Frage auf. In welchen Szenarien ist es sinnvoll Hardwarebeschleuniger in ein bestehendes RISC-V"=Design einzupflegen und ab wann sollte sich ein Unternehmen für die Erstellung eines komplett neuen Designs entscheiden. Diese Frage ist eng verknüpft mit der Frage, ob der in dieser Arbeit gewählte Ansatz richtig oder falsch ist.
 
 Im Zuge dieser Arbeit wurde ein bestehendes Design erweitert. Der Zugriffsweg auf den Speicher über die Load-Store-Unit und den am Bus angeschlossenen Speicher wurde wiederverwendet. Der Vorteil ist es sicherlich Kosten und Zeit sparen zu können, da existierende Komponenten wiederverwendet werden. Ein Nachteil ist eventuell, dass die wiederverwendeten Komponenten nicht optimal auf eine Matrixmultiplikation ausgelegt sind, da die NEORV32 CPU für die Lösung allgemeiner Aufgaben gedacht ist. Für diese Arbeit ist dieser Umstand nicht zu einem Problem geworden, wie die Auswertung gezeigt hat. Die Matrixmultiplikation wurde beschleunigt. Gleichzeitig kann die NEORV32 CPU immer noch allgemeine Probleme lösen.
 
